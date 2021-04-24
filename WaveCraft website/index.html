@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<script src="scripts/jquery-3.2.0.min.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-96920785-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script>
+function openTabpage(evt, tabPage) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabPage).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+ 
+</head>
+
+<body>
+
+<div class="headerBackground">
+<p class=MsoNormal><span style='mso-no-proof:yes'>
+<img width=684 height=135 src="images/title.png"></span></p>
+</div>
+
+<p class=MsoNormal style='margin-left:1.7in;text-indent:.5in;margin-bottom:15px;'><b
+style='mso-bidi-font-weight:normal'><span class="header-shadow" style='font-size:28.0pt;line-height:
+107%;font-family:Pristina'>Additive Synthesizer<o:p></o:p></span></b></p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTabpage(event, 'Home')">Home</button>
+  <button class="tablinks" onclick="openTabpage(event, 'Downloads')">Downloads</button>
+  <button class="tablinks" onclick="openTabpage(event, 'Tutorials')">Tutorial videos</button>
+  <button class="tablinks" onclick="openTabpage(event, 'Screenshots')">Screenshots</button>
+  <button class="tablinks" onclick="openTabpage(event, 'FAQ')">FAQ</button>
+  <button class="tablinks" onclick="openTabpage(event, 'Source')">Source code</button>
+  <button class="tablinks" onclick="openTabpage(event, 'Contact')">Contact</button>
+</div>
+
+<div id="Home" class="tabcontent" style="display: block;">
+	<h1>Welcome</h1>
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoNormal>Welcome to the home of Wavecraft. With this software you
+	can create your own unique sounds and save them as high quality .wav files. </p>
+
+	<p class=MsoNormal>You can use it for making musical instruments for a DAW or to create sound effects.</p>
+
+	<p class=MsoNormal>The full version of Wavecraft can be downloaded and used without any costs. Great for schools or at home!</p>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+	<p class=MsoNormal><i>Peter Popma, creator of Wavecraft</i></p>
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+	
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/qdXvluE5oUc" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div id="Downloads" class="tabcontent">
+	<h1>Downloads</h1>
+
+	<p class=MsoNormal style='margin-left:.5in'><o:p>&nbsp;</o:p></p>
+
+	<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+	 style='margin-left:.5in;border-collapse:collapse;border:none;mso-border-alt:
+	 solid windowtext .5pt;mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+	 <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+	  <td width=305 valign=top style='width:229.1pt;border:solid windowtext 1.0pt;
+	  mso-border-alt:solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:
+	  accent3;mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>File<o:p></o:p></b></p>
+	  </td>
+	  <td width=60 valign=top style='width:22.55pt;border:solid windowtext 1.0pt;
+	  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+	  solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:accent3;
+	  mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>Version<o:p></o:p></b></p>
+	  </td>
+	  <td width=60 valign=top style='width:62.55pt;border:solid windowtext 1.0pt;
+	  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+	  solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:accent3;
+	  mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>Release date<o:p></o:p></b></p>
+	  </td>
+	  <td width=60 valign=top style='width:22.55pt;border:solid windowtext 1.0pt;
+	  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+	  solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:accent3;
+	  mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>Size<o:p></o:p></b></p>
+	  </td>
+	  <td width=60 valign=top style='width:62.55pt;border:solid windowtext 1.0pt;
+	  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+	  solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:accent3;
+	  mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>OS<o:p></o:p></b></p>
+	  </td>
+	  <td width=208 valign=top style='width:155.85pt;border:solid windowtext 1.0pt;
+	  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+	  solid windowtext .5pt;background:#DBDBDB;mso-background-themecolor:accent3;
+	  mso-background-themetint:102;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><b style='mso-bidi-font-weight:normal'>Remarks<o:p></o:p></b></p>
+	  </td>
+	 </tr>
+	 <tr style='mso-yfti-irow:1'>
+	  <td width=305 valign=top style='width:229.1pt;border:solid windowtext 1.0pt;
+	  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+	  padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><a href="downloads/wavecraft64.msi" onclick="var that=this;ga('send', 'pageview', 'GravityOne64.msi');setTimeout(function(){location.href=that.href;},400);return false;" download>Wavecraft Windows Installer
+	  64-bits</a><span class=MsoHyperlink><o:p></o:p></span></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><o:p>&nbsp;</o:p></p>
+	  </td>
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>1.0</p>
+	  </td>
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>20/4/2021</p>
+	  </td>	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>5 MB</p>
+	  </td>
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>Windows</p>
+	  </td>
+	  <td width=208 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>Recommended download</p>
+	  </td>
+	 </tr>
+	 <tr style='mso-yfti-irow:2'>
+	  <td width=305 valign=top style='width:229.1pt;border:solid windowtext 1.0pt;
+	  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+	  padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><a href="downloads/Wavecraft.msi" onclick="var that=this;ga('send', 'pageview', 'GravityOne.msi');setTimeout(function(){location.href=that.href;},400);return false;" download>Wavecraft Windows Installer
+	  32-bits</a></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><o:p>&nbsp;</o:p></p>
+	  </td>
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>1.0</p>
+	  </td>  
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>20/4/2021</p>	  
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>5 MB<o:p></o:p></p>
+	  </td>
+	  <td width=110 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'>Windows</p>
+	  </td>
+	  <td width=208 valign=top style='border-top:none;border-left:
+	  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+	  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+	  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><o:p>&nbsp;</o:p></p>
+	  </td>
+	 </tr>
+	</table>
+<p class=MsoNormal style='color: gray; margin-top: 10px; margin-left:.5in'>** Note: you may receive a "this software cannot be trusted" notification. <br/>  That's because I didn't purchase a certificate to digitally sign this software.
+When downloading from gravityone.nl, you can safely ignore it.</p>
+
+	<p class=MsoNormal style='margin-left:.5in'><o:p>&nbsp;</o:p></p>
+
+	<h1>Additional files</h1>
+
+	<p class=MsoNormal style='margin-left:.5in'><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoNormal style='margin-left:.5in'>Required frameworks</p>
+
+	<p class=MsoNormal style='margin-left:.5in;text-indent:.5in'><a
+	href="downloads/dotNetFx45_Full_setup.exe" download>.NET Framework version 4.5 </a></p>
+	
+</div>
+<div id="Tutorials" class="tabcontent">
+
+	<h1>Tutorial videos</h1>
+
+	<table>
+
+	<tr>
+	  <td style='padding:10pt'>
+			<table><tr><td colspan="2">
+			<iframe width="280" height="158" src="https://www.youtube.com/embed/qdXvluE5oUc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</td></tr>
+			<tr><td style="vertical-align: top;font-size: 12.0pt; font-family: Calibri,sans-serif;">
+			<i>WaveCraft tutorial</i>
+			</td><td style="text-align: right;">
+			<img style="border-color: grey; border-style: solid; border-width: 1px;" src="images/flag_eng.png">
+			</td>
+			</tr></table>
+	  </td>
+	  <td style='padding:10pt'>
+			<table><tr><td colspan="2">
+			<iframe width="280" height="158" src="https://www.youtube.com/embed/y6J9k835L_w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</td></tr>
+			<tr><td style="vertical-align: top;font-size: 12.0pt; font-family: Calibri,sans-serif;">
+			<i>Creating instruments and a song</i>
+			</td><td style="text-align: right;">
+			<img style="border-color: grey; border-style: solid; border-width: 1px;" src="images/flag_eng.png">
+			</td>
+			</tr></table>
+	  </td>
+	</tr>
+	  
+	</table>
+
+	
+</div>
+<div id="Screenshots" class="tabcontent">
+	  
+	<h1>Screenshots<o:p></o:p></h1>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<table class=MsoTableGrid border=0 cellspacing=5 cellpadding=0
+	 style='mso-cellspacing:.05in;border:none;mso-yfti-tbllook:1184;mso-padding-alt:
+	 .05in 5.75pt 2.9pt 5.75pt;mso-border-insideh:none;mso-border-insidev:none'>
+	 <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+	  <td width=528 valign=top style='width:396.2pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><span style='mso-no-proof:yes'><img border=0 width=712 height=400
+	  src="images/screen1.jpg"></span></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'>Edit how the frequency changes over time</i></p>
+	  </td>
+	  <td width=530 valign=top style='width:397.75pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><span style='mso-no-proof:yes'><img border=0 width=712 height=400
+	  src="images/screen2.jpg"></span></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'>Analyze the frequency spectrum of your sound<o:p></o:p></i></p>
+	  </td>
+	 </tr>
+	 <tr style='mso-yfti-irow:1'>
+	  <td width=528 valign=top style='width:396.2pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'><o:p>&nbsp;</o:p></i></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'><o:p>&nbsp;</o:p></i></p>
+	  </td>
+	  <td width=530 valign=top style='width:397.75pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'><o:p>&nbsp;</o:p></i></p>
+	  </td>
+	 </tr>
+	 <tr style='mso-yfti-irow:2'>
+	  <td width=528 valign=top style='width:396.2pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><span style='mso-no-proof:yes'><img border=0 width=712 height=400
+	  src="images/screen3.jpg"></span></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'>Generate sine waves from existing .wav sounds</i></p>
+	  </td>
+	  <td width=530 valign=top style='width:397.75pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><span style='mso-no-proof:yes'><img border=0 width=712 height=400
+	  src="images/screen4.jpg"></span></p>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'>Save your result as HQ .wav file</i></p>
+	  </td>
+	 </tr>
+	 <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+	  <td width=528 valign=top style='width:396.2pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'><o:p>&nbsp;</o:p></i></p>
+	  </td>
+	  <td width=530 valign=top style='width:397.75pt;padding:.05in 5.75pt 2.9pt 5.75pt'>
+	  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+	  normal'><i style='mso-bidi-font-style:normal'><o:p>&nbsp;</o:p></i></p>
+	  </td>
+	 </tr>
+	</table>	
+
+</div>
+<div id="FAQ" class="tabcontent">
+
+	<h1>Frequently Asked Questions</h1>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoBold>How does Wavecraft create sounds</p>
+	<p class=MsoNormal>Wavecraft creates sound by combining data of sine waves. You can make any sound with sinewaves. Your computer translates them to vibration of your speakers.</p>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoBold>Is Wavecraft also available as VST plugin?</p>
+	<p class=MsoNormal>No. I made at attempt to use VST.NET, but got stuck on converting the graphs library. If you want to have a go, the project is still in the source tree..</p>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoBold>Why is Wavecraft only available for Windows?</p>
+	<p class=MsoNormal>Wavecraft currently relies heavily on Winforms. To make it available for MacOS or Linux would cost considerable effort at the moment.</p>
+
+	</div>
+<div id="Source" class="tabcontent">
+
+	<h1>Source code</h1>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+	<p class=MsoNormal>The source code (visual studio project) can be cloned here: <a href="https://github.com/PeterPopma/vst">https://github.com/PeterPopma/vst</a></p>
+	<p class=MsoNormal>If you have any suggestions for improvement, please let me know or send a pull request.</p>
+	<p class=MsoNormal>The goal is to create an easy-to-use program that helps people understand gravity and astro-physics.</p>
+	<p></p>
+	<img width=484 height=235 src="images/source.jpg"></span></p>
+
+</div>
+<div id="Contact" class="tabcontent">
+
+	<h1>Contact</h1>
+
+	<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+	<p class=MsoNormal>For feedback, questions, bug reporting and feature requests, you can contact me at the e-mail address below:</p>
+	<div style="margin-left: 100px;"><img src="images/email.png"></div>
+
+</div>
+
+</body>
+
+</html>

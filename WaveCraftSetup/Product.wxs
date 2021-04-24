@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="WaveCraft" Language="1033" Version="1.0.0.0" Manufacturer="Peter Popma" UpgradeCode="b51fb07a-de35-4c23-bd43-1d1360bcf65d">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of WaveCraft is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+    <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">  <!-- for x86 build -->
+      <!--Directory Id="ProgramFiles64Folder"-->  <!-- for x64 build -->
+        <Directory Id="SELECTEDINSTALLDIR" Name="WaveCraft">   
+            <Directory Id="APPLICATIONROOTDIRECTORY">
+              <Directory Id="WaveCraftID" Name="WaveCraft">
+                <Component Id="PresetsDir" Guid="e5976dea-0cd3-429a-af72-1aafd2f64635">
+                  <CreateFolder>
+                    <util:PermissionEx User="Users" GenericAll="yes" />
+                  </CreateFolder>
+                </Component>
+                <Component Id="WaveCraft.exe" Guid="7f89d7c4-7cd1-4d84-a857-65a9f7182bcb">
+                  <File Id="WaveCraft.exe" Source="$(var.WaveCraft.TargetPath)" Vital="yes" KeyPath="yes" />
+                </Component>
+                <Directory Id="PresetsDirID" Name="Presets">
+                <Component Id="Presets" Guid="51f7ff50-aa86-4783-8885-f9295d4a51bc">
+                  <File Id="Bass.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bass2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bass3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bell.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell.pst" Vital="no" KeyPath="no" />
+                  <File Id="Chime.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Chime.pst" Vital="no" KeyPath="no" />
+                  <File Id="ElectricGuitar.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\ElectricGuitar.pst" Vital="no" KeyPath="no" />
+                  <File Id="Flute.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute.pst" Vital="no" KeyPath="no" />
+                  <File Id="Funny.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Funny.pst" Vital="no" KeyPath="no" />
+                  <File Id="Hihat.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Hihat.pst" Vital="no" KeyPath="no" />
+                  <File Id="Kick.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick.pst" Vital="no" KeyPath="no" />
+                  <File Id="Kick2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Lead.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead.pst" Vital="no" KeyPath="no" />
+                  <File Id="Lead2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Lead3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Piano.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano.pst" Vital="no" KeyPath="no" />
+                  <File Id="Piano2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Shaker.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Shaker.pst" Vital="no" KeyPath="no" />
+                  <File Id="Snare.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare.pst" Vital="no" KeyPath="no" />
+                  <File Id="Snare2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Snare3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Snare4.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare4.pst" Vital="no" KeyPath="no" />
+                  <File Id="Toms.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Toms.pst" Vital="no" KeyPath="no" />
+                  <File Id="Violin.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Violin.pst" Vital="no" KeyPath="no" />
+                </Component>  			
+                </Directory>
+              </Directory>
+            </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="WaveCraft"/>
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="RegistryEntries" Guid="baa3234f-521c-4090-a5ba-4cb527ba2a9d">
+        <CreateFolder/>
+        <RegistryKey Root="HKCU"
+                     Key="Software\Peter Popma\WaveCraft">  
+        </RegistryKey>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="0ff80248-ac33-4145-a21b-ab25f83e1b0a">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="WaveCraft"
+                  Description="The versatile additive synthesizer"
+                  Target="[!WaveCraft.exe]"
+                  WorkingDirectory="WaveCraftID">
+          <Icon Id="WaveCraft.ico" SourceFile="WaveCraft.ico" />
+        </Shortcut>
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Peter Popma\WaveCraft" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="ProductFeature" Title="WaveCraft" Level="1">
+      <ComponentRef Id="WaveCraft.exe" />
+      <ComponentRef Id="Presets" />
+      <ComponentRef Id="RegistryEntries" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="PresetsDir" />
+    </Feature>
+
+    <!-- Step 2: Add UI to your installer / Step 4: Trigger the custom action -->
+    <Property Id="WIXUI_INSTALLDIR" Value="SELECTEDINSTALLDIR" />
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+      <!--UIRef Id="WixUI_Minimal" /-->
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Wavecraft" />
+    <!-- Step 3: Include the custom action -->
+    <Property Id="WixShellExecTarget" Value="[#WaveCraft.exe]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+
+  </Product>
+
+</Wix>
