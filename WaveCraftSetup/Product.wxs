@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Product Id="*" Name="WaveCraft" Language="1033" Version="1.0.0.0" Manufacturer="Peter Popma" UpgradeCode="b51fb07a-de35-4c23-bd43-1d1360bcf65d">
+  <Product Id="*" Name="WaveCraft" Language="1033" Version="1.1.0.0" Manufacturer="Peter Popma" UpgradeCode="b51fb07a-de35-4c23-bd43-1d1360bcf65d">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of WaveCraft is already installed." />
@@ -8,8 +8,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">  <!-- for x86 build -->
-      <!--Directory Id="ProgramFiles64Folder"-->  <!-- for x64 build -->
+      <!--Directory Id="ProgramFilesFolder"-->  <!-- for x86 build -->
+        <Directory Id="ProgramFiles64Folder">  <!-- for x64 build -->
         <Directory Id="SELECTEDINSTALLDIR" Name="WaveCraft">   
             <Directory Id="APPLICATIONROOTDIRECTORY">
               <Directory Id="WaveCraftID" Name="WaveCraft">
@@ -30,15 +30,17 @@
                   <File Id="Chime.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Chime.pst" Vital="no" KeyPath="no" />
                   <File Id="ElectricGuitar.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\ElectricGuitar.pst" Vital="no" KeyPath="no" />
                   <File Id="Flute.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute.pst" Vital="no" KeyPath="no" />
-                  <File Id="Funny.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Funny.pst" Vital="no" KeyPath="no" />
+                  <File Id="Flute2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute2.pst" Vital="no" KeyPath="no" />
                   <File Id="Hihat.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Hihat.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick2.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead2.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Lead4.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead4.pst" Vital="no" KeyPath="no" />
                   <File Id="Piano.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano.pst" Vital="no" KeyPath="no" />
                   <File Id="Piano2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Piano3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano3.pst" Vital="no" KeyPath="no" />
                   <File Id="Shaker.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Shaker.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare2.pst" Vital="no" KeyPath="no" />
