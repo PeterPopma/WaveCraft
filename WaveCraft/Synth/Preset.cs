@@ -29,16 +29,17 @@ namespace WaveCraft.Synth
                 {
                     WaveInfo waveInfo = synthGenerator.Waves[i];
                     file.WriteLine(waveInfo.Name);
-                    file.WriteLine(waveInfo.MinFrequency);
-                    file.WriteLine(waveInfo.MinVolume);
                     file.WriteLine(waveInfo.Channel);
-                    file.WriteLine(waveInfo.MaxFrequency);
-                    file.WriteLine(waveInfo.MaxVolume);
                     file.WriteLine(waveInfo.NumSamples());
                     file.WriteLine(waveInfo.StartPosition);
                     file.WriteLine(waveInfo.WaveFile);
                     file.WriteLine(waveInfo.WaveForm);
-                    file.WriteLine(waveInfo.Weight);
+                    file.WriteLine(waveInfo.MinFrequency);
+                    file.WriteLine(waveInfo.MaxFrequency);
+                    file.WriteLine(waveInfo.MinVolume);
+                    file.WriteLine(waveInfo.MaxVolume);
+                    file.WriteLine(waveInfo.MinWeight);
+                    file.WriteLine(waveInfo.MaxWeight);
                     file.WriteLine(waveInfo.ShapeWave.Length);
                     for (int j = 0; j < waveInfo.ShapeWave.Length; j++)
                     {
@@ -53,6 +54,11 @@ namespace WaveCraft.Synth
                     for (int j = 0; j < waveInfo.ShapeVolume.Length; j++)
                     {
                         file.WriteLine(waveInfo.ShapeVolume[j]);
+                    }
+                    file.WriteLine(waveInfo.ShapeWeight.Length);
+                    for (int j = 0; j < waveInfo.ShapeWeight.Length; j++)
+                    {
+                        file.WriteLine(waveInfo.ShapeWeight[j]);
                     }
                     file.WriteLine(waveInfo.WaveFileData.Length);
                     for (int j = 0; j < waveInfo.WaveFileData.Length; j++)
@@ -78,16 +84,18 @@ namespace WaveCraft.Synth
                 {
                     WaveInfo newWave = new WaveInfo(synthGenerator.SamplesPerSecond);
                     newWave.Name = srFile.ReadLine();
-                    newWave.MinFrequency = double.Parse(srFile.ReadLine());
-                    newWave.MinVolume = int.Parse(srFile.ReadLine());
                     newWave.Channel = int.Parse(srFile.ReadLine());
-                    newWave.MaxFrequency = double.Parse(srFile.ReadLine());
-                    newWave.MaxVolume = int.Parse(srFile.ReadLine());
                     newWave.WaveData = new double[int.Parse(srFile.ReadLine()) * 2];
                     newWave.StartPosition = int.Parse(srFile.ReadLine());
                     newWave.WaveFile = srFile.ReadLine();
                     newWave.WaveForm = srFile.ReadLine();
-                    newWave.Weight = int.Parse(srFile.ReadLine());
+                    newWave.MinFrequency = double.Parse(srFile.ReadLine());
+                    newWave.MaxFrequency = double.Parse(srFile.ReadLine());
+                    newWave.MinVolume = int.Parse(srFile.ReadLine());
+                    newWave.MaxVolume = int.Parse(srFile.ReadLine());
+                    newWave.MinWeight = int.Parse(srFile.ReadLine());
+                    newWave.MaxWeight = int.Parse(srFile.ReadLine());
+
                     int length = int.Parse(srFile.ReadLine());
                     newWave.ShapeWave = new int[length];
                     for (int j = 0; j < length; j++)
@@ -105,6 +113,12 @@ namespace WaveCraft.Synth
                     for (int j = 0; j < length; j++)
                     {
                         newWave.ShapeVolume[j] = int.Parse(srFile.ReadLine());
+                    }
+                    length = int.Parse(srFile.ReadLine());
+                    newWave.ShapeWeight = new int[length];
+                    for (int j = 0; j < length; j++)
+                    {
+                        newWave.ShapeWeight[j] = int.Parse(srFile.ReadLine());
                     }
                     length = int.Parse(srFile.ReadLine());
                     newWave.WaveFileData = new int[length];

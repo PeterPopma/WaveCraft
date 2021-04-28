@@ -42,6 +42,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
 
@@ -51,6 +52,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
 
@@ -60,6 +62,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
 
@@ -69,6 +72,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
 
@@ -78,6 +82,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
 
@@ -92,6 +97,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = true;
             Close();
         }
 
@@ -101,6 +107,7 @@ namespace WaveCraft
             myParent.UpdateWaveFormPicture();
             myParent.UpdateVisibility();
             myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = false;
             Close();
         }
     }

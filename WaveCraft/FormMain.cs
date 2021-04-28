@@ -90,7 +90,6 @@ namespace WaveCraft
 
             colorSliderDuration.Value = (decimal)(10000.0 * synthGenerator.CurrentWave.NumSamples() / synthGenerator.SamplesPerSecond);
             colorSliderDelay.Value = (decimal)(10000.0 * synthGenerator.CurrentWave.StartPosition / synthGenerator.SamplesPerSecond);
-            colorSliderWeight1.Value = synthGenerator.CurrentWave.Weight;
             textBoxDuration.Text = string.Format("{0:0.0000}", DurationSliderToText());
             textBoxDelay.Text = string.Format("{0:0.0000}", DelaySliderToText());
             UpdateChannelText();
@@ -112,6 +111,8 @@ namespace WaveCraft
             labelVolumeMax.Text = synthGenerator.CurrentWave.MaxVolume.ToString();
             labelFrequencyMin.Text = synthGenerator.CurrentWave.MinFrequency.ToString("0.00");
             labelFrequencyMax.Text = synthGenerator.CurrentWave.MaxFrequency.ToString("0.00");
+            labelWeightMin.Text = synthGenerator.CurrentWave.MinWeight.ToString();
+            labelWeightMax.Text = synthGenerator.CurrentWave.MaxWeight.ToString();
 
             UpdateVisibility();
 
@@ -232,12 +233,6 @@ namespace WaveCraft
             }
             UpdateChannelText();
             synthGenerator.UpdateCurrentWaveData();
-        }
-
-        private void colorSlider21_ValueChanged(object sender, EventArgs e)
-        {
-            labelWeight1.Text = string.Format("{0:0}", colorSliderWeight1.Value);
-            synthGenerator.CurrentWave.Weight = (int)colorSliderWeight1.Value;
         }
 
         private void colorSliderAttack_ValueChanged_1(object sender, EventArgs e)
@@ -404,6 +399,14 @@ namespace WaveCraft
             {
                 pictureBoxCustomWave.Visible = false;
             }
+            if(synthGenerator.CurrentWave.WaveForm.Equals("CustomShape"))
+            {
+                buttonChange.Visible = true;
+            }
+            else
+            {
+                buttonChange.Visible = false;
+            }
         }
 
         private void LoadWavFile()
@@ -431,10 +434,10 @@ namespace WaveCraft
 
         private void pictureBoxWaveForm_Click(object sender, EventArgs e)
         {
-            if (synthGenerator.CurrentWave.WaveForm.Equals("WavFile"))
-            {
-               LoadWavFile();
-            }
+            FormWaveForm formWaveForm = new FormWaveForm();
+            formWaveForm.MyParent = this;
+            formWaveForm.Location = new Point(this.Location.X + 600, this.Location.Y + 50);
+            formWaveForm.ShowDialog();
         }
 
         private void chartResultLeft_Click(object sender, EventArgs e)
@@ -1049,13 +1052,30 @@ namespace WaveCraft
 
                 if ((frequency_factor * synthGenerator.CurrentWave.MinFrequency) < SynthGenerator.MAX_FREQUENCY && (frequency_factor * synthGenerator.CurrentWave.MaxFrequency) < SynthGenerator.MAX_FREQUENCY)
                 {
-                    double amplitudeDecayFactor = 1 / Math.Pow(1 + ((double)numericUpDownVolumeDecay.Value / 100.0), inharmonic_number);
-                    if (checkBoxRandomDecay.Checked)
+                    WaveInfo newWave = synthGenerator.CloneWave(frequency_factor);
+
+                    // Note: this only works if the fundamental wave has a flat weight-shape and a max. weight of > 10
+                    if ((double)numericUpDownWeightChange.Value / 100.0 > 0)       // increase in weight
                     {
-                        double previousAmplitudeDecayFactor = 1 / Math.Pow(1 + ((double)numericUpDownVolumeDecay.Value / 100.0), inharmonic_number - 1);
-                        amplitudeDecayFactor = previousAmplitudeDecayFactor + random.NextDouble() * (amplitudeDecayFactor - previousAmplitudeDecayFactor);
+                        int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                        double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
+                        newWave.MinWeight = (int)(factor * newWave.MaxWeight);
+                        Shapes.IncreasingLineair(WaveData);
+                        newWave.ShapeWeight = WaveData;
                     }
-                    WaveInfo newWave = synthGenerator.CloneWave(frequency_factor, amplitudeDecayFactor);
+                    if ((double)numericUpDownWeightChange.Value / 100.0 < 0)       // decrease in weight
+                    {
+                        int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                        double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
+                        newWave.MinWeight = (int)(factor * newWave.MaxWeight);
+                        Shapes.DecreasingLineair(WaveData);
+                        newWave.ShapeWeight = WaveData;
+                    }
+
+                    double weightFactor = Math.Pow(((double)numericUpDownWeight.Value / 100.0), inharmonic_number);
+                    newWave.MinWeight = (int)(newWave.MinWeight * weightFactor);
+                    newWave.MaxWeight = (int)(newWave.MaxWeight * weightFactor);
+
                     newWave.SetNumSamples((int)(newWave.NumSamples() * durationFactor));
                     if (numericUpDownTimeShift.Value > 0)
                     {
@@ -1068,17 +1088,32 @@ namespace WaveCraft
 
         private void CreateHarmonic(int harmonic_number, double frequency_factor)
         {
-            double amplitudeFactor = Math.Pow(((double)numericUpDownVolume.Value / 100.0), harmonic_number);
             double durationFactor = Math.Pow(((double)numericUpDownDuration.Value / 100.0), harmonic_number);
-            double amplitudeDecayFactor = 1 / Math.Pow(1 + ((double)numericUpDownVolumeDecay.Value / 100.0), harmonic_number);
-            if (checkBoxRandomDecay.Checked)
+
+            WaveInfo newWave = synthGenerator.CloneWave(frequency_factor);
+
+            // Note: this only works if the fundamental wave has a flat weight-shape and a max. weight of > 10
+            if ((double)numericUpDownWeightChange.Value / 100.0 > 0)       // increase in weight
             {
-                double previousAmplitudeDecayFactor = 1 / Math.Pow(1 + ((double)numericUpDownVolumeDecay.Value / 100.0), harmonic_number - 1);
-                amplitudeDecayFactor = previousAmplitudeDecayFactor + random.NextDouble() * (amplitudeDecayFactor - previousAmplitudeDecayFactor);
+                int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
+                newWave.MinWeight = (int)(factor * newWave.MaxWeight);
+                Shapes.IncreasingLineair(WaveData);
+                newWave.ShapeWeight = WaveData;
             }
-            WaveInfo newWave = synthGenerator.CloneWave(frequency_factor, amplitudeFactor);
-            newWave.MinVolume = (int)(amplitudeDecayFactor * newWave.MinVolume);
-            newWave.MaxVolume = (int)(amplitudeDecayFactor * newWave.MaxVolume);
+            if ((double)numericUpDownWeightChange.Value / 100.0 < 0)       // decrease in weight
+            {
+                int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
+                newWave.MinWeight = (int)(factor * newWave.MaxWeight);
+                Shapes.DecreasingLineair(WaveData);
+                newWave.ShapeWeight = WaveData;
+            }
+
+            double weightFactor = Math.Pow(((double)numericUpDownWeight.Value / 100.0), harmonic_number);
+            newWave.MinWeight = (int)(newWave.MinWeight * weightFactor);
+            newWave.MaxWeight = (int)(newWave.MaxWeight * weightFactor);
+
             newWave.SetNumSamples((int)(newWave.NumSamples() * durationFactor));
             if(numericUpDownTimeShift.Value>0)
             {
@@ -1096,142 +1131,38 @@ namespace WaveCraft
             for (int harmonic_number=1; harmonic_number<=num_undertones; harmonic_number++)
             {
                 CreateHarmonic(harmonic_number, 1 / (double)harmonic_factor);
-                harmonic_factor += 2;
+                if (radioButtonEvenOddHarmonics.Checked == false)
+                {
+                    harmonic_factor += 2;
+                }
+                else
+                {
+                    harmonic_factor++;
+                }
             }
 
             harmonic_factor = startFactor;
             for (int harmonic_number = 1; harmonic_number <= num_overtones; harmonic_number++)
             {
                 CreateHarmonic(harmonic_number, (double)harmonic_factor);
-                harmonic_factor += 2;
-            }
-        }
-
-        private void CreateSplitMerge()
-        {
-            double min_frequency = synthGenerator.CurrentWave.MinFrequency;
-            double max_frequency = synthGenerator.CurrentWave.MinFrequency;
-            FadeCurrentWave(radioButtonSplit.Checked);
-            if (!radioButtonUnderTones.Checked)
-            {
-                CreateSplitMerge(min_frequency, max_frequency, false);
-            }
-            if (!radioButtonOverTones.Checked)
-            {
-                CreateSplitMerge(min_frequency, max_frequency, true);
-            }
-        }
-
-        private void FadeCurrentWave(bool fadeOut)
-        {
-            synthGenerator.CurrentWave.MinVolume = 0;
-            synthGenerator.CurrentWave.MaxVolume = SynthGenerator.MAX_VOLUME;
-            for (int i = 0; i < synthGenerator.CurrentWave.ShapeVolume.Length; i++)
-            {
-                if (fadeOut)
+                if (radioButtonEvenOddHarmonics.Checked == false)
                 {
-                    // fade out
-                    synthGenerator.CurrentWave.ShapeVolume[i] = (int)(SynthGenerator.SHAPE_MAX_VALUE - i / (double)SynthGenerator.SHAPE_NUMPOINTS * SynthGenerator.SHAPE_MAX_VALUE);
+                    harmonic_factor += 2;
                 }
                 else
                 {
-                    // fade in
-                    synthGenerator.CurrentWave.ShapeVolume[i] = (int)(SynthGenerator.SHAPE_MAX_VALUE - (SynthGenerator.SHAPE_NUMPOINTS - i) / (double)SynthGenerator.SHAPE_NUMPOINTS * SynthGenerator.SHAPE_MAX_VALUE);
+                    harmonic_factor++;
                 }
-            }
-        }
-
-        private void CreateSplitMerge(double min_frequency, double max_frequency, bool undertones)
-        {
-            double min_frequency_low;
-            if (undertones)
-            {
-                min_frequency_low = min_frequency - ((double)numericUpDownSpread.Value / 100.0) * min_frequency;
-            }
-            else
-            {
-                min_frequency_low = min_frequency;
-            }
-            if (min_frequency_low < 0.01)
-            {
-                min_frequency_low = 0.01;
-            }
-            double min_frequency_high;
-            if (!undertones)
-            {
-                min_frequency_high = min_frequency + ((double)numericUpDownSpread.Value / 100.0) * min_frequency;
-            }
-            else
-            {
-                min_frequency_high = min_frequency;
-            }
-            if (min_frequency_high > SynthGenerator.MAX_FREQUENCY)
-            {
-                min_frequency_high = SynthGenerator.MAX_FREQUENCY;
-            }
-            double max_frequency_low;
-            if (undertones)
-            {
-                max_frequency_low = max_frequency - ((double)numericUpDownSpread.Value / 100.0) * max_frequency;
-            }
-            else
-            {
-                max_frequency_low = max_frequency;
-            }
-            if (max_frequency_low < 0.01)
-            {
-                max_frequency_low = 0.01;
-            }
-            double max_frequency_high;
-            if (!undertones)
-            {
-                max_frequency_high = max_frequency + ((double)numericUpDownSpread.Value / 100.0) * max_frequency;
-            }
-            else
-            {
-                max_frequency_high = max_frequency;
-            }
-            if (max_frequency_high > SynthGenerator.MAX_FREQUENCY)
-            {
-                max_frequency_high = SynthGenerator.MAX_FREQUENCY;
-            }
-
-            for (int split_wave_number = 0; split_wave_number < numericUpDownAmount.Value; split_wave_number++)
-            {
-                synthGenerator.CurrentWave = synthGenerator.CloneWave();
-                if (numericUpDownTimeShift.Value > 0)
-                {
-                    synthGenerator.CurrentWave.StartPosition += (int)(synthGenerator.CurrentWave.NumSamples() * Convert.ToDouble((split_wave_number+1) * numericUpDownTimeShift.Value) / 100.0);
-                }
-                if (undertones)
-                {
-                    synthGenerator.CurrentWave.MinFrequency = min_frequency_low + (split_wave_number / (double)numericUpDownAmount.Value * (min_frequency_high - min_frequency_low));
-                    synthGenerator.CurrentWave.MaxFrequency = max_frequency_low + (split_wave_number / (double)numericUpDownAmount.Value * (max_frequency_high - max_frequency_low));
-                }
-                else
-                {
-                    synthGenerator.CurrentWave.MinFrequency = min_frequency_high - (split_wave_number / (double)numericUpDownAmount.Value * (min_frequency_high - min_frequency_low));
-                    synthGenerator.CurrentWave.MaxFrequency = max_frequency_high - (split_wave_number / (double)numericUpDownAmount.Value * (max_frequency_high - max_frequency_low));
-                }
-
-                // fade in/out this wave
-                FadeCurrentWave(radioButtonMerge.Checked);
-
-                AddWaveToLists(synthGenerator.CurrentWave);
             }
         }
 
         private void buttonCreatePartials_Click(object sender, EventArgs e)
         {
-            if (radioButtonMerge.Checked || radioButtonSplit.Checked)
-            {
-                CreateSplitMerge();
-            }
             if (radioButtonOddHarmonics.Checked)
             {
                 CreateHarmonics(3);
             }
-            if (radioButtonEvenHarmonics.Checked)
+            if (radioButtonEvenHarmonics.Checked || radioButtonEvenOddHarmonics.Checked)
             {
                 CreateHarmonics(2);
             }
@@ -1275,6 +1206,7 @@ namespace WaveCraft
                 pictureBoxCustomWave.Refresh();
                 pictureBoxFrequencyShape.Refresh();
                 pictureBoxVolumeShape.Refresh();
+                pictureBoxWeightShape.Refresh();
                 chartResultLeft.Refresh();
                 chartResultRight.Refresh();
                 UpdateWaveControls();
@@ -1444,12 +1376,19 @@ namespace WaveCraft
                     waveInfo.MinVolume = waveInfo.MaxVolume;
                     waveInfo.MaxVolume = temp;
                 }
+                waveInfo.MinWeight = random.Next(SynthGenerator.MAX_WEIGHT) + 1;
+                waveInfo.MaxWeight = (int)(random.Next(SynthGenerator.MAX_WEIGHT) / 2.0 + (SynthGenerator.MAX_WEIGHT / 2.0) + 1);
+                if (waveInfo.MinWeight > waveInfo.MaxWeight)
+                {
+                    int temp = waveInfo.MinWeight;
+                    waveInfo.MinWeight = waveInfo.MaxWeight;
+                    waveInfo.MaxWeight = temp;
+                }
                 waveInfo.WaveData = new double[(int)(SynthGenerator.SamplesPerSecond * (random.Next(20)+1) / 5.0)];       // duration 0.2 - 4 seconds
                 if (random.Next(10)<2)
                 {
                     waveInfo.StartPosition = (int)(SynthGenerator.SamplesPerSecond * (random.Next(30) / 30.0));       // startposition 0-3 seconds
                 }
-                waveInfo.Weight = random.Next(255) + 1;
                 int rand = random.Next(18);
                 switch(rand)
                 {
@@ -1475,6 +1414,7 @@ namespace WaveCraft
                 }
                 waveInfo.ShapeVolume = RandomShape();
                 waveInfo.ShapeFrequency = RandomShape();
+                waveInfo.ShapeWeight = RandomShape();
 
                 synthGenerator.Waves.Add(waveInfo);
                 if (waveInfo.WaveForm != "Noise")
@@ -1586,6 +1526,47 @@ namespace WaveCraft
         private void buttonSetAllDelays_Click(object sender, EventArgs e)
         {
             SetAllDelaysToCurrentWaveDuration();
+        }
+
+        private void pictureBoxWeightShape_Paint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.FromArgb(195, 195, 70),
+                                                                       Color.FromArgb(15, 0, 0),
+                                                                       90F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+            }
+            Pen pen = new Pen(Color.White);
+
+            if (synthGenerator.CurrentWave.ShapeWeight.Length == SynthGenerator.SHAPE_NUMPOINTS)
+            {
+                for (int x = 0; x < pictureBoxWeightShape.Width; x++)
+                {
+                    int position = (int)(x / (double)pictureBoxWeightShape.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    int next_position = (int)((x + 1) / (double)pictureBoxWeightShape.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    if (next_position < SynthGenerator.SHAPE_NUMPOINTS)
+                    {
+                        int value1 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapeWeight[position]) * (pictureBoxWeightShape.Height / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        int value2 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapeWeight[next_position]) * (pictureBoxWeightShape.Height / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        e.Graphics.DrawLine(pen, new Point(x, value1), new Point(x + 1, value2));
+                    }
+                }
+            }
+        }
+
+        private void pictureBoxWeightShape_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxWeightShape.Cursor = new Cursor(Properties.Resources.pencil.Handle);
+        }
+
+        private void pictureBoxWeightShape_Click(object sender, EventArgs e)
+        {
+            FormWeight formWeight = new FormWeight();
+            formWeight.MyParent = this;
+            formWeight.ShowDialog();
         }
     }
 }

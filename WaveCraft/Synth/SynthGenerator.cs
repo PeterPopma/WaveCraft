@@ -16,7 +16,8 @@ namespace WaveCraft.Synth
         public const int NUM_AUDIO_CHANNELS = 2;
         public const int SHAPE_NUMPOINTS = 1000;
         public const int SHAPE_MAX_VALUE = 500;
-        public const int MAX_VOLUME = 500;
+        public const int MAX_VOLUME = 1000;
+        public const int MAX_WEIGHT = 1000;
         public const int MAX_FREQUENCY = 22387;
         public const int MAX_AMPLITUDE = 32767;     // Max amplitude for 16-bit audio
         private const int GRAPH_POINTS_PLOTTED = 300;
@@ -131,6 +132,7 @@ namespace WaveCraft.Synth
             parentForm.pictureBoxCustomWave.Refresh();
             parentForm.pictureBoxFrequencyShape.Refresh();
             parentForm.pictureBoxVolumeShape.Refresh();
+            parentForm.pictureBoxWeightShape.Refresh();
         }
 
         public void UpdateMixedSound()
@@ -140,7 +142,7 @@ namespace WaveCraft.Synth
 
             MixWaves(tempData, waves);
             UpdateGraphs();
-            parentForm.labelDuration.Text = string.Format("{0:0.00} s", NumSamples()/SamplesPerSecond);
+            parentForm.labelDuration.Text = string.Format("{0:0.00} s", NumSamples()/(double)SamplesPerSecond);
         }
 
         private int findMaxNumSamples()
@@ -148,7 +150,7 @@ namespace WaveCraft.Synth
             int max_duration = 0;
             foreach (WaveInfo waveInfo in waves)
             {
-                if ((waveInfo.Weight>0) && waveInfo.NumSamples() + waveInfo.StartPosition > max_duration)
+                if (waveInfo.NumSamples() + waveInfo.StartPosition > max_duration)
                 {
                     max_duration = waveInfo.NumSamples() + waveInfo.StartPosition;
                 }
@@ -297,6 +299,17 @@ namespace WaveCraft.Synth
             return (waveInfo.MaxVolume * waveInfo.ShapeVolume[position] + (waveInfo.MinVolume * (SHAPE_MAX_VALUE - waveInfo.ShapeVolume[position]))) / (double)(SHAPE_MAX_VALUE * MAX_VOLUME);
         }
 
+        // Calculates the current weight
+        // currentPosition = current sample position regardless the number of channels
+        // returns the weight as a value between 0 and 1000
+        private double CalculateCurrentWeight(uint currentPosition, WaveInfo waveInfo)
+        {
+            int position = (int)(currentPosition / (double)waveInfo.NumSamples() * SHAPE_NUMPOINTS);
+
+            // a value of 0 means max. weight, a value of SHAPE_VOLUME_MAX_VALUE means min. weight.
+            return waveInfo.MaxWeight * waveInfo.ShapeWeight[position] + (waveInfo.MinWeight * (SHAPE_MAX_VALUE - waveInfo.ShapeWeight[position]));
+        }
+        
         // Apply [wave] volume to [waveData]
         private void ApplyVolume(WaveInfo wave, double[] waveData)
         {
@@ -325,12 +338,17 @@ namespace WaveCraft.Synth
                         {
                             if (samplePosition >= currentWave.StartPosition && samplePosition < currentWave.StartPosition + currentWave.NumSamples())
                             {
-                                mixed_value += currentWave.Weight * CalculateCurrentVolume((uint)(samplePosition - currentWave.StartPosition), currentWave) * currentWave.WaveData[(samplePosition - currentWave.StartPosition) * 2 + channel];
-                                total_weight += currentWave.Weight;
+                                double weight = CalculateCurrentWeight((uint)(samplePosition - currentWave.StartPosition), currentWave);
+                                mixed_value += weight * CalculateCurrentVolume((uint)(samplePosition - currentWave.StartPosition), currentWave) * currentWave.WaveData[(samplePosition - currentWave.StartPosition) * 2 + channel];
+                                total_weight += weight;
                             }
                         }
                     }
-                    destBuffer[samplePosition * 2 + channel] = mixed_value / total_weight;
+                    if (total_weight>0)
+                    {
+                        mixed_value /= total_weight;
+                    }
+                    destBuffer[samplePosition * 2 + channel] = mixed_value;
                 }
             }
 
@@ -843,14 +861,24 @@ namespace WaveCraft.Synth
         public WaveInfo CloneWave(double frequencyFactor = 1, double amplitudeFactor = 1)
         {
             WaveInfo newWave = new WaveInfo(CreateUniqueName(), currentWave.NumSamples(), currentWave.StartPosition,
-                currentWave.MinFrequency * frequencyFactor, currentWave.MaxFrequency * frequencyFactor, (int)(currentWave.MinVolume * amplitudeFactor), (int)(currentWave.MaxVolume * amplitudeFactor),
-                currentWave.Channel, currentWave.WaveForm, currentWave.WaveFile, currentWave.Weight);
+                currentWave.MinFrequency * frequencyFactor, currentWave.MaxFrequency * frequencyFactor, (int)(currentWave.MinVolume * amplitudeFactor), 
+                (int)(currentWave.MaxVolume * amplitudeFactor), currentWave.MinWeight, currentWave.MaxWeight,
+                currentWave.Channel, currentWave.WaveForm, currentWave.WaveFile);
+            if(currentWave.MinVolume>MAX_VOLUME)
+            {
+                currentWave.MinVolume = MAX_VOLUME;
+            }
+            if (currentWave.MaxVolume > MAX_VOLUME)
+            {
+                currentWave.MaxVolume = MAX_VOLUME;
+            }
             newWave.WaveData = new double[currentWave.WaveData.Length];
             newWave.WaveFileData = currentWave.WaveFileData.Clone() as int[];
             // note this can slow things down when we clone a wave with a lot of harmonics
             newWave.ShapeWave = currentWave.ShapeWave.Clone() as int[];
             newWave.ShapeVolume = currentWave.ShapeVolume.Clone() as int[];
             newWave.ShapeFrequency = currentWave.ShapeFrequency.Clone() as int[];
+            newWave.ShapeWeight = currentWave.ShapeWeight.Clone() as int[];
             Waves.Add(newWave);
             RefreshWaveData(newWave);
 

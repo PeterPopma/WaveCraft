@@ -519,7 +519,7 @@ namespace WaveCraft
             0});
             this.colorSliderVolume2.Location = new System.Drawing.Point(469, 579);
             this.colorSliderVolume2.Maximum = new decimal(new int[] {
-            500,
+            1000,
             0,
             0,
             0});
@@ -582,7 +582,7 @@ namespace WaveCraft
             0});
             this.colorSliderVolume1.Location = new System.Drawing.Point(469, 532);
             this.colorSliderVolume1.Maximum = new decimal(new int[] {
-            500,
+            1000,
             0,
             0,
             0});
