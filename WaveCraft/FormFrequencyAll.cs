@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WaveCraft
 {
-    public partial class FormFrequency2 : Form
+    public partial class FormFrequencyAll : Form
     {
         private const int SHAPE_NUM_POINTS = 1000;
         private const int SHAPE_MAX_VALUE = 500;
@@ -23,7 +23,7 @@ namespace WaveCraft
         int AdjustDataWidth = 0;
         Random random = new Random();
 
-        public FormFrequency2()
+        public FormFrequencyAll()
         {
             InitializeComponent();
             aTimer.Interval = 50;
@@ -62,37 +62,23 @@ namespace WaveCraft
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            int totalSamples = (int)myParent.SynthGenerator.NumSamples();
             double MinChange = Convert.ToDouble(labelChangeMin.Text);
             double MaxChange = Convert.ToDouble(labelChangeMax.Text);
 
-            foreach (WaveInfo wave in myParent.SynthGenerator.Waves)
+            if (myParent.listBoxWaves.SelectedItems.Count > 1)
             {
-                // change the freq. graph, so that it matches the desired pattern
-                // if min = 0.1 and max = 1.8, minfreq. and maxfrex must be multiplied by this
-                // every point in graph must be mapped to a point in desired pattern and 
-
-                double new_min = wave.MinFrequency * MinChange;
-                if(new_min > SynthGenerator.MAX_FREQUENCY)
+                foreach (string item in myParent.listBoxWaves.SelectedItems)
                 {
-                    new_min = SynthGenerator.MAX_FREQUENCY;
+                    WaveInfo wave = myParent.SynthGenerator.GetCurrentWaveByDisplayName(item);
+                    AdjustWaveFrequency(wave, MinChange, MaxChange);
                 }
-                double new_max = wave.MaxFrequency * MaxChange;
-                if (new_max > SynthGenerator.MAX_FREQUENCY)
+            }
+            else
+            {
+                foreach (WaveInfo wave in myParent.SynthGenerator.Waves)
                 {
-                    new_max = SynthGenerator.MAX_FREQUENCY;
+                    AdjustWaveFrequency(wave, MinChange, MaxChange);
                 }
-                for (int position = 0; position<wave.ShapeFrequency.Length;  position++)
-                {
-                    int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeFrequency.Length);
-                    int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / totalSamples;
-                    double factor = CalculateCurrentFactor(desired_pattern_position);
-                    double freq = CalculateCurrentFrequency(position, wave);
-                    freq *= factor;
-                    wave.ShapeFrequency[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((freq - new_min) / (new_max - new_min)));
-                }
-                wave.MinFrequency = new_min;
-                wave.MaxFrequency = new_max;
             }
 
             myParent.pictureBoxFrequencyShape.Refresh();
@@ -100,6 +86,32 @@ namespace WaveCraft
             myParent.SynthGenerator.UpdateAllWaveData();
 
             Close();
+        }
+
+        private void AdjustWaveFrequency(WaveInfo wave, double MinChange, double MaxChange)
+        {
+            double new_min = wave.MinFrequency * MinChange;
+            if (new_min > SynthGenerator.MAX_FREQUENCY)
+            {
+                new_min = SynthGenerator.MAX_FREQUENCY;
+            }
+            double new_max = wave.MaxFrequency * MaxChange;
+            if (new_max > SynthGenerator.MAX_FREQUENCY)
+            {
+                new_max = SynthGenerator.MAX_FREQUENCY;
+            }
+            // change the freq. graph, so that it matches the desired pattern
+            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
+            {
+                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeFrequency.Length);
+                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
+                double factor = CalculateCurrentFactor(desired_pattern_position);
+                double freq = CalculateCurrentFrequency(position, wave);
+                freq *= factor;
+                wave.ShapeFrequency[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((freq - new_min) / (new_max - new_min)));
+            }
+            wave.MinFrequency = new_min;
+            wave.MaxFrequency = new_max;
         }
 
         private void PictureBoxPaint(object sender, PaintEventArgs e)

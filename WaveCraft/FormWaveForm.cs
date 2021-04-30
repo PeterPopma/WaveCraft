@@ -110,5 +110,25 @@ namespace WaveCraft
             myParent.buttonChange.Visible = false;
             Close();
         }
+
+        private void pictureBoxCustomEnd_Click(object sender, EventArgs e)
+        {
+            myParent.SynthGenerator.CurrentWave.WaveForm = "CustomBeginEnd";
+            if (myParent.SynthGenerator.CurrentWave.ShapeWave.Length == 0)
+            {
+                myParent.SynthGenerator.CurrentWave.ShapeWave = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                ArrayUtils.Populate(myParent.SynthGenerator.CurrentWave.ShapeWave, SynthGenerator.SHAPE_MAX_VALUE / 2);
+            }
+            if (myParent.SynthGenerator.CurrentWave.ShapeWaveEnd.Length == 0)
+            {
+                myParent.SynthGenerator.CurrentWave.ShapeWaveEnd = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                ArrayUtils.Populate(myParent.SynthGenerator.CurrentWave.ShapeWaveEnd, SynthGenerator.SHAPE_MAX_VALUE / 2);
+            }
+            myParent.UpdateWaveFormPicture();
+            myParent.UpdateVisibility();
+            myParent.SynthGenerator.UpdateCurrentWaveData();
+            myParent.buttonChange.Visible = true;
+            Close();
+        }
     }
 }

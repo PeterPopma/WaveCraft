@@ -8,8 +8,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <!--Directory Id="ProgramFilesFolder"-->  <!-- for x86 build -->
-        <Directory Id="ProgramFiles64Folder">  <!-- for x64 build -->
+      <Directory Id="ProgramFilesFolder">  <!-- for x86 build -->
+        <!--Directory Id="ProgramFiles64Folder"-->  <!-- for x64 build -->
         <Directory Id="SELECTEDINSTALLDIR" Name="WaveCraft">   
             <Directory Id="APPLICATIONROOTDIRECTORY">
               <Directory Id="WaveCraftID" Name="WaveCraft">

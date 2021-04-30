@@ -49,7 +49,7 @@ namespace WaveCraft
             // 
             // pictureBoxCustomWave
             // 
-            this.pictureBoxCustomWave.Location = new System.Drawing.Point(96, 3);
+            this.pictureBoxCustomWave.Location = new System.Drawing.Point(96, 15);
             this.pictureBoxCustomWave.Name = "pictureBoxCustomWave";
             this.pictureBoxCustomWave.Size = new System.Drawing.Size(1000, 500);
             this.pictureBoxCustomWave.TabIndex = 0;
@@ -62,7 +62,7 @@ namespace WaveCraft
             // 
             this.pictureBoxSine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSine.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSine.Image = Resources.sine;
+            this.pictureBoxSine.Image = global::WaveCraft.Properties.Resources.sine;
             this.pictureBoxSine.InitialImage = null;
             this.pictureBoxSine.Location = new System.Drawing.Point(12, 24);
             this.pictureBoxSine.Name = "pictureBoxSine";
@@ -75,7 +75,7 @@ namespace WaveCraft
             // 
             this.pictureBoxSquare.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSquare.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSquare.Image = Resources.square;
+            this.pictureBoxSquare.Image = global::WaveCraft.Properties.Resources.square;
             this.pictureBoxSquare.InitialImage = null;
             this.pictureBoxSquare.Location = new System.Drawing.Point(12, 199);
             this.pictureBoxSquare.Name = "pictureBoxSquare";
@@ -88,7 +88,7 @@ namespace WaveCraft
             // 
             this.pictureBoxTriangle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxTriangle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxTriangle.Image = Resources.triangle;
+            this.pictureBoxTriangle.Image = global::WaveCraft.Properties.Resources.triangle;
             this.pictureBoxTriangle.InitialImage = null;
             this.pictureBoxTriangle.Location = new System.Drawing.Point(12, 113);
             this.pictureBoxTriangle.Name = "pictureBoxTriangle";
@@ -101,7 +101,7 @@ namespace WaveCraft
             // 
             this.pictureBoxSawtooth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSawtooth.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSawtooth.Image = Resources.sawtooth;
+            this.pictureBoxSawtooth.Image = global::WaveCraft.Properties.Resources.sawtooth;
             this.pictureBoxSawtooth.InitialImage = null;
             this.pictureBoxSawtooth.Location = new System.Drawing.Point(12, 284);
             this.pictureBoxSawtooth.Name = "pictureBoxSawtooth";
@@ -148,7 +148,7 @@ namespace WaveCraft
             // 
             this.pictureBoxFlat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxFlat.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxFlat.Image = Resources.flat;
+            this.pictureBoxFlat.Image = global::WaveCraft.Properties.Resources.flat;
             this.pictureBoxFlat.InitialImage = null;
             this.pictureBoxFlat.Location = new System.Drawing.Point(12, 369);
             this.pictureBoxFlat.Name = "pictureBoxFlat";
@@ -174,6 +174,7 @@ namespace WaveCraft
             this.Name = "FormCustomShape";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Wave Shape";
             this.Load += new System.EventHandler(this.FormCustomWave_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSine)).EndInit();

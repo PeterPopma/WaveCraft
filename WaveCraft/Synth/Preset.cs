@@ -65,6 +65,18 @@ namespace WaveCraft.Synth
                     {
                         file.WriteLine(waveInfo.WaveFileData[j]);
                     }
+                    if (waveInfo.WaveForm.Equals("CustomBeginEnd"))
+                    {
+                        file.WriteLine(waveInfo.ShapeWaveEnd.Length);
+                        for (int j = 0; j < waveInfo.ShapeWaveEnd.Length; j++)
+                        {
+                            file.WriteLine(waveInfo.ShapeWaveEnd[j]);
+                        }
+                    }
+                    else
+                    {
+                        file.WriteLine(0);          // end wave 0 length
+                    }
                 }
             }
         }
@@ -125,6 +137,12 @@ namespace WaveCraft.Synth
                     for (int j = 0; j < length; j++)
                     {
                         newWave.WaveFileData[j] = int.Parse(srFile.ReadLine());
+                    }
+                    length = int.Parse(srFile.ReadLine());
+                    newWave.ShapeWaveEnd = new int[length];
+                    for (int j = 0; j < length; j++)
+                    {
+                        newWave.ShapeWaveEnd[j] = int.Parse(srFile.ReadLine());
                     }
 
                     synthGenerator.Waves.Add(newWave);

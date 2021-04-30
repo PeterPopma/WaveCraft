@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WaveCraft.CustomControls
@@ -36,14 +33,14 @@ namespace WaveCraft.CustomControls
         {
             base.OnPaint(e);
 
-            Rectangle rect = new Rectangle(ClientRectangle.X+1, ClientRectangle.Y+1, ClientRectangle.Width-2, ClientRectangle.Height-2);
+            Rectangle rect = new Rectangle(ClientRectangle.X + 1, ClientRectangle.Y + 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2);
 
             if (isMouseClick)
             {
-                SolidBrush brush = new SolidBrush(Color.FromArgb(230, 230, 255)); 
+                SolidBrush brush = new SolidBrush(Color.FromArgb(230, 230, 255));
                 e.Graphics.FillRectangle(brush, rect);
             }
-            else if(isActive)
+            else if (isActive)
             {
                 LinearGradientBrush brush = new LinearGradientBrush(rect,
                                                                         Color.FromArgb(66, 116, 144),
@@ -83,7 +80,7 @@ namespace WaveCraft.CustomControls
                                                                         45F);
                 e.Graphics.FillRectangle(brush, rect);
             }
-            else 
+            else
             {
                 float angle = 45f;
                 if (horizontalGradient)
@@ -158,7 +155,7 @@ namespace WaveCraft.CustomControls
 
         private Image GrayscaleImage(Image original)
         {
-            if(greyScaleImage!=null)
+            if (greyScaleImage != null)
             {
                 return greyScaleImage;
             }
@@ -199,33 +196,31 @@ namespace WaveCraft.CustomControls
 
 
         protected override void OnMouseEnter(EventArgs e)
-                {
-                    isMouseOver = true;
-                    Invalidate();
-                    base.OnMouseEnter(e);
-                }
+        {
+            isMouseOver = true;
+            Invalidate();
+            base.OnMouseEnter(e);
+        }
 
-                protected override void OnMouseLeave(EventArgs e)
-                {
-                    isMouseOver = false;
-                    Invalidate();
-                    base.OnMouseLeave(e);
-                }
-        
-                protected override void OnMouseUp(MouseEventArgs mevent)
-                {
-                    isMouseClick = false;
-                    Invalidate();
-                    base.OnMouseUp(mevent);
-                }
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            isMouseOver = false;
+            Invalidate();
+            base.OnMouseLeave(e);
+        }
 
-                protected override void OnMouseDown(MouseEventArgs mevent)
-                {
-                    isMouseClick = true;
-                    Invalidate();
-                    base.OnMouseDown(mevent);
-                }
+        protected override void OnMouseUp(MouseEventArgs mevent)
+        {
+            isMouseClick = false;
+            Invalidate();
+            base.OnMouseUp(mevent);
+        }
 
-            
+        protected override void OnMouseDown(MouseEventArgs mevent)
+        {
+            isMouseClick = true;
+            Invalidate();
+            base.OnMouseDown(mevent);
+        }
     }
 }

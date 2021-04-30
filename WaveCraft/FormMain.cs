@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace WaveCraft
 {
@@ -13,7 +14,7 @@ namespace WaveCraft
         bool generatorEnabled = false;
         bool changedPresetData = false;
         bool isPlaying = false;
-        private int[] waveData;
+//        private int[] waveData;
 
         Random random = new Random();
         SynthGenerator synthGenerator;
@@ -22,6 +23,8 @@ namespace WaveCraft
 
         internal SynthGenerator SynthGenerator { get => synthGenerator; set => synthGenerator = value; }
         public bool ChangedPresetData { get => changedPresetData; set => changedPresetData = value; }
+        internal Preset Preset { get => preset; set => preset = value; }
+        public string CurrentPreset { get => currentPreset; set => currentPreset = value; }
 
         public FormMain()
         {
@@ -82,6 +85,9 @@ namespace WaveCraft
                 case "Custom":
                     pictureBoxWaveForm.Image = Properties.Resources.custom;
                     break;
+                case "CustomBeginEnd":
+                    pictureBoxWaveForm.Image = Properties.Resources.custom2;
+                    break;
             }
         }
         public void UpdateWaveControls()
@@ -121,7 +127,7 @@ namespace WaveCraft
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            waveData = new int[pictureBoxCustomWave.Width];
+//            waveData = new int[pictureBoxCustomWave.Width];
 
             groupBox1.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox1.Refresh();
@@ -391,21 +397,25 @@ namespace WaveCraft
                 labelFileName.Visible = false;
                 buttonConvertToWaves.Visible = false;
             }
-            if (synthGenerator.CurrentWave.WaveForm.Equals("Custom"))
+            if(synthGenerator.CurrentWave.WaveForm.Equals("Custom") || synthGenerator.CurrentWave.WaveForm.Equals("CustomBeginEnd"))
             {
+                buttonChange.Visible = true;
                 pictureBoxCustomWave.Visible = true;
             }
             else
             {
+                buttonChange.Visible = false;
                 pictureBoxCustomWave.Visible = false;
             }
-            if(synthGenerator.CurrentWave.WaveForm.Equals("CustomShape"))
+            if (synthGenerator.CurrentWave.WaveForm.Equals("CustomBeginEnd"))
             {
-                buttonChange.Visible = true;
+                pictureBoxCustomWave.Width = 178;
+                pictureBoxCustomWaveEnd.Visible = true;
             }
             else
             {
-                buttonChange.Visible = false;
+                pictureBoxCustomWave.Width = 360;
+                pictureBoxCustomWaveEnd.Visible = false;
             }
         }
 
@@ -504,14 +514,9 @@ namespace WaveCraft
 
         private void buttonAddPreset2_Click(object sender, EventArgs e)
         {
-            if (textBoxPresetName.Text.Length > 0 && !comboBoxPresets.Items.Contains(textBoxPresetName.Text))
-            {
-                preset.Save(synthGenerator, textBoxPresetName.Text);
-                comboBoxPresets.Items.Add(textBoxPresetName.Text);
-                comboBoxPresets.SelectedIndex = comboBoxPresets.FindStringExact(textBoxPresetName.Text);
-                currentPreset = comboBoxPresets.Text;
-                textBoxPresetName.Text = "";
-            }
+            FormAddPreset formAddPreset = new FormAddPreset();
+            formAddPreset.MyParent = this;
+            formAddPreset.ShowDialog();
         }
 
         public void RecreateWavesLists()
@@ -556,13 +561,16 @@ namespace WaveCraft
 
         private void buttonDeleteWave_Click(object sender, EventArgs e)
         {
-            if (listBoxWaves.Items.Count == 1)
-            {
-                return;
-            }
             int index = listBoxWaves.SelectedIndex;
-            RemoveWaveFromList(synthGenerator.CurrentWave);
-            synthGenerator.RemoveCurrentWave();
+
+            while (listBoxWaves.Items.Count > 1 && listBoxWaves.SelectedItems.Count>0)
+            {
+                String item = listBoxWaves.SelectedItems[0].ToString();
+                synthGenerator.SetCurrentWaveByDisplayName(item);
+                RemoveWaveFromList(synthGenerator.CurrentWave);
+                synthGenerator.RemoveCurrentWave();
+            }
+
             if (listBoxWaves.Items.Count > index)
             {
                 listBoxWaves.SelectedIndex = index;
@@ -635,6 +643,15 @@ namespace WaveCraft
         {
             FormCustomShape formCustomWave = new FormCustomShape();
             formCustomWave.MyParent = this;
+            if(synthGenerator.CurrentWave.WaveForm.Equals("Custom"))
+            {
+                formCustomWave.Text = "Wave Shape";
+            }
+            else
+            {
+                formCustomWave.Text = "Wave Shape Begin";
+            }
+
             formCustomWave.ShowDialog();
         }
 
@@ -1204,6 +1221,7 @@ namespace WaveCraft
                 synthGenerator.SetCurrentWaveByDisplayName(listBoxWaves.SelectedItem.ToString());
                 synthGenerator.UpdateWaveGraph();
                 pictureBoxCustomWave.Refresh();
+                pictureBoxCustomWaveEnd.Refresh();
                 pictureBoxFrequencyShape.Refresh();
                 pictureBoxVolumeShape.Refresh();
                 pictureBoxWeightShape.Refresh();
@@ -1304,7 +1322,7 @@ namespace WaveCraft
 
         private void buttonAdjustFrequencies_Click(object sender, EventArgs e)
         {
-            FormFrequency2 formFrequency2 = new FormFrequency2();
+            FormFrequencyAll formFrequency2 = new FormFrequencyAll();
             formFrequency2.MyParent = this;
             formFrequency2.ShowDialog();
         }
@@ -1322,32 +1340,69 @@ namespace WaveCraft
 
         }
 
-        private void SetAllDurationsToCurrentWaveDuration()
+        private void SetDuration(WaveInfo wave, int numSamples)
         {
-            int numSamples = synthGenerator.CurrentWave.NumSamples() + synthGenerator.CurrentWave.StartPosition;
-            foreach (WaveInfo wave in synthGenerator.Waves)
+            int newNumSamples = numSamples - wave.StartPosition;
+            if (newNumSamples < 0)
             {
-                int newNumSamples = numSamples - wave.StartPosition;
-                if (newNumSamples < 0)
-                {
-                    newNumSamples = 0;
-                }
-                wave.WaveData = new double[(newNumSamples) * 2];
+                newNumSamples = 0;
             }
-            synthGenerator.UpdateAllWaveData();
+            wave.WaveData = new double[(newNumSamples) * 2];
         }
-        private void SetAllDelaysToCurrentWaveDuration()
+
+        private void SetAllDurations()
         {
-            foreach (WaveInfo wave in synthGenerator.Waves)
+            int numSamples = (int)(synthGenerator.SamplesPerSecond * Convert.ToDouble(textBoxDurationAll.Text));
+            if (listBoxWaves.SelectedItems.Count > 1)
             {
-                wave.StartPosition = synthGenerator.CurrentWave.StartPosition;
+                foreach (string item in listBoxWaves.SelectedItems)
+                {
+                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
+                    SetDuration(wave, numSamples);
+                }
             }
-            synthGenerator.UpdateAllWaveData();
+            else
+            {
+
+                foreach (WaveInfo wave in synthGenerator.Waves)
+                {
+                    SetDuration(wave, numSamples);
+                }
+            }
+        }
+
+        private void SetAllDelays()
+        {
+            int startPosition = (int)(synthGenerator.SamplesPerSecond * Convert.ToDouble(textBoxDelayAll.Text));
+            if (listBoxWaves.SelectedItems.Count > 1)
+            {
+                foreach (string item in listBoxWaves.SelectedItems)
+                {
+                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
+                    wave.StartPosition = startPosition;
+                }
+            }
+            else
+            {
+                foreach (WaveInfo wave in synthGenerator.Waves)
+                {
+                    wave.StartPosition = startPosition;
+                }
+            }
         }
 
         private void buttonSetAllDurations_Click(object sender, EventArgs e)
         {
-            SetAllDurationsToCurrentWaveDuration();
+            try
+            {
+                SetAllDurations();
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
         }
 
         private void buttonLuckyPick_Click(object sender, EventArgs e)
@@ -1445,11 +1500,6 @@ namespace WaveCraft
             synthGenerator.EnvelopRelease = random.Next(4) / 10.0f;
             synthGenerator.EnvelopHold = 1 - synthGenerator.EnvelopRelease - synthGenerator.EnvelopAttack;
 
-            if (random.Next(4) ==0)
-            {
-                SetAllDurationsToCurrentWaveDuration();
-            }
-
             synthGenerator.UpdateAllWaveData();
             UpdateWaveControls();
         }
@@ -1525,7 +1575,16 @@ namespace WaveCraft
 
         private void buttonSetAllDelays_Click(object sender, EventArgs e)
         {
-            SetAllDelaysToCurrentWaveDuration();
+            try
+            {
+                SetAllDelays();
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
         }
 
         private void pictureBoxWeightShape_Paint(object sender, PaintEventArgs e)
@@ -1567,6 +1626,146 @@ namespace WaveCraft
             FormWeight formWeight = new FormWeight();
             formWeight.MyParent = this;
             formWeight.ShowDialog();
+        }
+
+        private void listBoxWaves_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxWaves.SelectedItems.Count > 1)
+            {
+                labelBulkEdit.Text = "Bulk edit selection";
+            }
+            else
+            {
+                labelBulkEdit.Text = "Bulk edit all";
+            }
+        }
+
+        private void buttonAddToVault_Click(object sender, EventArgs e)
+        {
+            int index = listBoxWaves.SelectedIndex;
+            while (listBoxWaves.Items.Count > 1 && listBoxWaves.SelectedItems.Count > 0)
+            {
+                String item = listBoxWaves.SelectedItems[0].ToString();
+                listBoxWaves.Items.RemoveAt(listBoxWaves.FindStringExact(item));
+                listBoxWavesVault.Items.Add(item);
+                synthGenerator.AddToVault(synthGenerator.GetCurrentWaveByDisplayName(item));
+            }
+
+            if (listBoxWaves.Items.Count > index)
+            {
+                listBoxWaves.SelectedIndex = index;
+            }
+            else
+            {
+                listBoxWaves.SelectedIndex = index - 1;
+            }
+            synthGenerator.SetCurrentWaveByDisplayName(listBoxWaves.SelectedItem.ToString());
+            synthGenerator.UpdateAllWaveData();
+            UpdateWaveControls();
+        }
+
+        private void buttonRemoveFromVault_Click(object sender, EventArgs e)
+        {
+            int index = listBoxWavesVault.SelectedIndex;
+            while (listBoxWavesVault.SelectedItems.Count > 0)
+            {
+                String item = listBoxWavesVault.SelectedItems[0].ToString();
+                listBoxWavesVault.Items.RemoveAt(listBoxWavesVault.FindStringExact(item));
+                listBoxWaves.Items.Add(item);
+                synthGenerator.RemoveFromVault(synthGenerator.GetVaultedWaveByDisplayName(item));
+            }
+
+            synthGenerator.UpdateAllWaveData();
+        }
+
+        private void gradientListBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Rectangle rect = new Rectangle(e.Bounds.Y - e.Bounds.Height, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+            // Draw the background of the ListBox control for each item.
+            using (LinearGradientBrush brush = new LinearGradientBrush(e.Bounds,
+                                               Color.FromArgb(70, 77, 95),
+                                               Color.Black,
+                                               0F))
+            {
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            // Define the default color of the brush as black.
+            Brush myBrush = Brushes.White;
+            // Draw the current item text based on the current Font 
+            // and the custom brush settings.
+            e.Graphics.DrawString(listBoxWaves.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+            // If the ListBox has focus, draw a focus rectangle around the selected item.
+            e.DrawFocusRectangle();
+        }
+
+        private void listBoxWaves_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Rectangle rect = new Rectangle(e.Bounds.Y - e.Bounds.Height, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+            // Draw the background of the ListBox control for each item.
+            using (LinearGradientBrush brush = new LinearGradientBrush(e.Bounds,
+                                               Color.FromArgb(70, 77, 95),
+                                               Color.Black,
+                                               0F))
+            {
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            // Define the default color of the brush as black.
+            Brush myBrush = Brushes.White;
+            // Draw the current item text based on the current Font 
+            // and the custom brush settings.
+            e.Graphics.DrawString(listBoxWaves.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+            // If the ListBox has focus, draw a focus rectangle around the selected item.
+            e.DrawFocusRectangle();
+        }
+
+        private void listBoxWaves_MouseUp_1(object sender, MouseEventArgs e)
+        {
+            UpdateSelectedWave();
+        }
+
+        private void pictureBoxCustomWaveEnd_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxCustomWaveEnd.Cursor = new Cursor(Properties.Resources.pencil.Handle);
+        }
+
+        private void pictureBoxCustomWaveEnd_Paint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.FromArgb(195, 70, 70),
+                                                                       Color.FromArgb(15, 0, 0),
+                                                                       90F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+            }
+
+            Pen pen = new Pen(Color.White);
+
+            if (synthGenerator.CurrentWave.ShapeWaveEnd.Length == SynthGenerator.SHAPE_NUMPOINTS)
+            {
+                for (int x = 0; x < pictureBoxCustomWaveEnd.Width; x++)
+                {
+                    int position = (int)(x / (double)pictureBoxCustomWaveEnd.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    int next_position = (int)((x + 1) / (double)pictureBoxCustomWaveEnd.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    if (next_position < SynthGenerator.SHAPE_NUMPOINTS)
+                    {
+                        int value1 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapeWaveEnd[position]) * (pictureBoxCustomWaveEnd.Height / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        int value2 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapeWaveEnd[next_position]) * (pictureBoxCustomWaveEnd.Height / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        e.Graphics.DrawLine(pen, new Point(x, value1), new Point(x + 1, value2));
+                    }
+                }
+            }
+        }
+
+        private void pictureBoxCustomWaveEnd_Click(object sender, EventArgs e)
+        {
+            FormCustomShape formCustomWave = new FormCustomShape();
+            formCustomWave.MyParent = this;
+            formCustomWave.Text = "Wave Shape End";
+            formCustomWave.ShowDialog();
         }
     }
 }

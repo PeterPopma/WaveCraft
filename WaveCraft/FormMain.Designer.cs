@@ -44,26 +44,16 @@ namespace WaveCraft
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCustomWaveEnd = new System.Windows.Forms.PictureBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.labelWeightMax = new System.Windows.Forms.Label();
             this.labelWeightMin = new System.Windows.Forms.Label();
             this.pictureBoxWeightShape = new System.Windows.Forms.PictureBox();
-            this.buttonConvertToWaves = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDelayMinus10 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDelayMinus1 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDelayPlus10 = new WaveCraft.CustomControls.GradientButton();
             this.pictureBoxCustomWave = new System.Windows.Forms.PictureBox();
-            this.buttonDelayPlus1 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDurationMinus10 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDurationMinus1 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDurationPlus10 = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDurationPlus1 = new WaveCraft.CustomControls.GradientButton();
             this.buttonChange = new System.Windows.Forms.Button();
-            this.colorSliderDelay = new ColorSlider.ColorSlider();
             this.textBoxDelay = new System.Windows.Forms.TextBox();
             this.textBoxDuration = new System.Windows.Forms.TextBox();
-            this.colorSliderDuration = new ColorSlider.ColorSlider();
             this.label14 = new System.Windows.Forms.Label();
             this.labelFrequencyTitle = new System.Windows.Forms.Label();
             this.labelFreqMaxTitle = new System.Windows.Forms.Label();
@@ -111,11 +101,6 @@ namespace WaveCraft
             this.chartResultRight = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartResultLeft = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colorSliderRelease = new ColorSlider.ColorSlider();
-            this.colorSliderSustain = new ColorSlider.ColorSlider();
-            this.colorSliderDecay = new ColorSlider.ColorSlider();
-            this.colorSliderHold = new ColorSlider.ColorSlider();
-            this.colorSliderAttack = new ColorSlider.ColorSlider();
             this.labelHold = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.chartAHDSR = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -130,22 +115,13 @@ namespace WaveCraft
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonDeletePreset = new WaveCraft.CustomControls.GradientButton();
-            this.buttonSavePreset = new WaveCraft.CustomControls.GradientButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonAddPreset = new WaveCraft.CustomControls.GradientButton();
-            this.textBoxPresetName = new System.Windows.Forms.TextBox();
-            this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.comboBoxPresets = new System.Windows.Forms.ComboBox();
             this.checkBoxRandomFrequency = new System.Windows.Forms.CheckBox();
             this.numericUpDownSpread = new System.Windows.Forms.NumericUpDown();
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ButtonDeleteAll = new WaveCraft.CustomControls.GradientButton();
-            this.buttonDelete = new WaveCraft.CustomControls.GradientButton();
-            this.buttonAdd = new WaveCraft.CustomControls.GradientButton();
-            this.listBoxWaves = new System.Windows.Forms.ListBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -156,7 +132,6 @@ namespace WaveCraft
             this.label12 = new System.Windows.Forms.Label();
             this.numericUpDownTimeShift = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.buttonCreatePartials = new WaveCraft.CustomControls.GradientButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.radioButtonEvenOddHarmonics = new System.Windows.Forms.RadioButton();
             this.radioButtonInharmonics = new System.Windows.Forms.RadioButton();
@@ -175,15 +150,47 @@ namespace WaveCraft
             this.numericUpDownAmount = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonSetAllDelays = new WaveCraft.CustomControls.GradientButton();
-            this.buttonSetAllDurations = new WaveCraft.CustomControls.GradientButton();
+            this.textBoxDurationAll = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.buttonAdjustFrequencies = new WaveCraft.CustomControls.GradientButton();
+            this.textBoxDelayAll = new System.Windows.Forms.TextBox();
+            this.labelBulkEdit = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.buttonLuckyPick = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
+            this.buttonSetAllDelays = new WaveCraft.CustomControls.GradientButton();
+            this.buttonSetAllDurations = new WaveCraft.CustomControls.GradientButton();
+            this.buttonAdjustFrequencies = new WaveCraft.CustomControls.GradientButton();
+            this.buttonCreatePartials = new WaveCraft.CustomControls.GradientButton();
+            this.listBoxWavesVault = new WaveCraft.Custom_Controls.GradientListBox();
+            this.listBoxWaves = new WaveCraft.Custom_Controls.GradientListBox();
+            this.buttonAddToVault = new WaveCraft.CustomControls.GradientButton();
+            this.buttonRemoveFromVault = new WaveCraft.CustomControls.GradientButton();
+            this.ButtonDeleteAll = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDelete = new WaveCraft.CustomControls.GradientButton();
+            this.buttonAdd = new WaveCraft.CustomControls.GradientButton();
+            this.buttonAddPreset = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDeletePreset = new WaveCraft.CustomControls.GradientButton();
+            this.buttonSavePreset = new WaveCraft.CustomControls.GradientButton();
+            this.colorSliderRelease = new ColorSlider.ColorSlider();
+            this.colorSliderSustain = new ColorSlider.ColorSlider();
+            this.colorSliderDecay = new ColorSlider.ColorSlider();
+            this.colorSliderHold = new ColorSlider.ColorSlider();
+            this.colorSliderAttack = new ColorSlider.ColorSlider();
+            this.buttonConvertToWaves = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDelayMinus10 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDelayMinus1 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDelayPlus10 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDelayPlus1 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDurationMinus10 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDurationMinus1 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDurationPlus10 = new WaveCraft.CustomControls.GradientButton();
+            this.buttonDurationPlus1 = new WaveCraft.CustomControls.GradientButton();
+            this.colorSliderDelay = new ColorSlider.ColorSlider();
+            this.colorSliderDuration = new ColorSlider.ColorSlider();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWaveEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWeightShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).BeginInit();
@@ -198,7 +205,6 @@ namespace WaveCraft
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartAHDSR)).BeginInit();
             this.groupBox6.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpread)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -217,6 +223,7 @@ namespace WaveCraft
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.pictureBoxCustomWaveEnd);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.labelWeightMax);
@@ -266,10 +273,23 @@ namespace WaveCraft
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
+            // pictureBoxCustomWaveEnd
+            // 
+            this.pictureBoxCustomWaveEnd.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxCustomWaveEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxCustomWaveEnd.Location = new System.Drawing.Point(309, 24);
+            this.pictureBoxCustomWaveEnd.Name = "pictureBoxCustomWaveEnd";
+            this.pictureBoxCustomWaveEnd.Size = new System.Drawing.Size(178, 82);
+            this.pictureBoxCustomWaveEnd.TabIndex = 164;
+            this.pictureBoxCustomWaveEnd.TabStop = false;
+            this.pictureBoxCustomWaveEnd.Click += new System.EventHandler(this.pictureBoxCustomWaveEnd_Click);
+            this.pictureBoxCustomWaveEnd.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxCustomWaveEnd_Paint);
+            this.pictureBoxCustomWaveEnd.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxCustomWaveEnd_MouseMove);
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(499, 301);
+            this.label19.Location = new System.Drawing.Point(492, 302);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(35, 13);
             this.label19.TabIndex = 163;
@@ -278,7 +298,7 @@ namespace WaveCraft
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(499, 324);
+            this.label24.Location = new System.Drawing.Point(492, 325);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(32, 13);
             this.label24.TabIndex = 162;
@@ -287,7 +307,7 @@ namespace WaveCraft
             // labelWeightMax
             // 
             this.labelWeightMax.AutoSize = true;
-            this.labelWeightMax.Location = new System.Drawing.Point(537, 301);
+            this.labelWeightMax.Location = new System.Drawing.Point(530, 302);
             this.labelWeightMax.Name = "labelWeightMax";
             this.labelWeightMax.Size = new System.Drawing.Size(25, 13);
             this.labelWeightMax.TabIndex = 161;
@@ -296,7 +316,7 @@ namespace WaveCraft
             // labelWeightMin
             // 
             this.labelWeightMin.AutoSize = true;
-            this.labelWeightMin.Location = new System.Drawing.Point(537, 324);
+            this.labelWeightMin.Location = new System.Drawing.Point(530, 325);
             this.labelWeightMin.Name = "labelWeightMin";
             this.labelWeightMin.Size = new System.Drawing.Size(25, 13);
             this.labelWeightMin.TabIndex = 160;
@@ -306,245 +326,39 @@ namespace WaveCraft
             // 
             this.pictureBoxWeightShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxWeightShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxWeightShape.Location = new System.Drawing.Point(131, 286);
+            this.pictureBoxWeightShape.Location = new System.Drawing.Point(127, 286);
             this.pictureBoxWeightShape.Name = "pictureBoxWeightShape";
-            this.pictureBoxWeightShape.Size = new System.Drawing.Size(355, 82);
+            this.pictureBoxWeightShape.Size = new System.Drawing.Size(360, 82);
             this.pictureBoxWeightShape.TabIndex = 159;
             this.pictureBoxWeightShape.TabStop = false;
             this.pictureBoxWeightShape.Click += new System.EventHandler(this.pictureBoxWeightShape_Click);
             this.pictureBoxWeightShape.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxWeightShape_Paint);
             this.pictureBoxWeightShape.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxWeightShape_MouseMove);
             // 
-            // buttonConvertToWaves
-            // 
-            this.buttonConvertToWaves.Active = false;
-            this.buttonConvertToWaves.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonConvertToWaves.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConvertToWaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonConvertToWaves.ForeColor = System.Drawing.Color.Black;
-            this.buttonConvertToWaves.HorizontalGradient = false;
-            this.buttonConvertToWaves.Location = new System.Drawing.Point(301, 98);
-            this.buttonConvertToWaves.Name = "buttonConvertToWaves";
-            this.buttonConvertToWaves.Size = new System.Drawing.Size(110, 23);
-            this.buttonConvertToWaves.TabIndex = 158;
-            this.buttonConvertToWaves.Text = "Convert to waves";
-            this.buttonConvertToWaves.UseVisualStyleBackColor = true;
-            this.buttonConvertToWaves.Click += new System.EventHandler(this.buttonConvertToWaves_Click);
-            // 
-            // buttonDelayMinus10
-            // 
-            this.buttonDelayMinus10.Active = false;
-            this.buttonDelayMinus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDelayMinus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelayMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelayMinus10.ForeColor = System.Drawing.Color.Black;
-            this.buttonDelayMinus10.HorizontalGradient = true;
-            this.buttonDelayMinus10.Location = new System.Drawing.Point(229, 477);
-            this.buttonDelayMinus10.Name = "buttonDelayMinus10";
-            this.buttonDelayMinus10.Size = new System.Drawing.Size(41, 22);
-            this.buttonDelayMinus10.TabIndex = 156;
-            this.buttonDelayMinus10.Text = "<<";
-            this.buttonDelayMinus10.UseVisualStyleBackColor = true;
-            this.buttonDelayMinus10.Click += new System.EventHandler(this.buttonDelayMinus10_Click);
-            // 
-            // buttonDelayMinus1
-            // 
-            this.buttonDelayMinus1.Active = false;
-            this.buttonDelayMinus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDelayMinus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelayMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelayMinus1.ForeColor = System.Drawing.Color.Black;
-            this.buttonDelayMinus1.HorizontalGradient = true;
-            this.buttonDelayMinus1.Location = new System.Drawing.Point(269, 477);
-            this.buttonDelayMinus1.Name = "buttonDelayMinus1";
-            this.buttonDelayMinus1.Size = new System.Drawing.Size(41, 22);
-            this.buttonDelayMinus1.TabIndex = 155;
-            this.buttonDelayMinus1.Text = "<";
-            this.buttonDelayMinus1.UseVisualStyleBackColor = true;
-            this.buttonDelayMinus1.Click += new System.EventHandler(this.buttonDelayMinus1_Click);
-            // 
-            // buttonDelayPlus10
-            // 
-            this.buttonDelayPlus10.Active = false;
-            this.buttonDelayPlus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDelayPlus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelayPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelayPlus10.ForeColor = System.Drawing.Color.Black;
-            this.buttonDelayPlus10.HorizontalGradient = true;
-            this.buttonDelayPlus10.Location = new System.Drawing.Point(376, 477);
-            this.buttonDelayPlus10.Name = "buttonDelayPlus10";
-            this.buttonDelayPlus10.Size = new System.Drawing.Size(41, 22);
-            this.buttonDelayPlus10.TabIndex = 154;
-            this.buttonDelayPlus10.Text = ">>";
-            this.buttonDelayPlus10.UseVisualStyleBackColor = true;
-            this.buttonDelayPlus10.Click += new System.EventHandler(this.buttonDelayPlus10_Click);
-            // 
             // pictureBoxCustomWave
             // 
             this.pictureBoxCustomWave.BackColor = System.Drawing.Color.Black;
             this.pictureBoxCustomWave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxCustomWave.Location = new System.Drawing.Point(131, 24);
+            this.pictureBoxCustomWave.Location = new System.Drawing.Point(127, 24);
             this.pictureBoxCustomWave.Name = "pictureBoxCustomWave";
-            this.pictureBoxCustomWave.Size = new System.Drawing.Size(355, 82);
+            this.pictureBoxCustomWave.Size = new System.Drawing.Size(178, 82);
             this.pictureBoxCustomWave.TabIndex = 106;
             this.pictureBoxCustomWave.TabStop = false;
             this.pictureBoxCustomWave.Click += new System.EventHandler(this.pictureBoxCustomWave_Click);
             this.pictureBoxCustomWave.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxCustomWave_Paint);
             this.pictureBoxCustomWave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxCustomWave_MouseMove);
             // 
-            // buttonDelayPlus1
-            // 
-            this.buttonDelayPlus1.Active = false;
-            this.buttonDelayPlus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDelayPlus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelayPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelayPlus1.ForeColor = System.Drawing.Color.Black;
-            this.buttonDelayPlus1.HorizontalGradient = true;
-            this.buttonDelayPlus1.Location = new System.Drawing.Point(336, 477);
-            this.buttonDelayPlus1.Name = "buttonDelayPlus1";
-            this.buttonDelayPlus1.Size = new System.Drawing.Size(41, 22);
-            this.buttonDelayPlus1.TabIndex = 153;
-            this.buttonDelayPlus1.Text = ">";
-            this.buttonDelayPlus1.UseVisualStyleBackColor = true;
-            this.buttonDelayPlus1.Click += new System.EventHandler(this.buttonDelayPlus1_Click);
-            // 
-            // buttonDurationMinus10
-            // 
-            this.buttonDurationMinus10.Active = false;
-            this.buttonDurationMinus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDurationMinus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDurationMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDurationMinus10.ForeColor = System.Drawing.Color.Black;
-            this.buttonDurationMinus10.HorizontalGradient = true;
-            this.buttonDurationMinus10.Location = new System.Drawing.Point(229, 411);
-            this.buttonDurationMinus10.Name = "buttonDurationMinus10";
-            this.buttonDurationMinus10.Size = new System.Drawing.Size(41, 22);
-            this.buttonDurationMinus10.TabIndex = 152;
-            this.buttonDurationMinus10.Text = "<<";
-            this.buttonDurationMinus10.UseVisualStyleBackColor = true;
-            this.buttonDurationMinus10.Click += new System.EventHandler(this.buttonDurationMinus10_Click);
-            // 
-            // buttonDurationMinus1
-            // 
-            this.buttonDurationMinus1.Active = false;
-            this.buttonDurationMinus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDurationMinus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDurationMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDurationMinus1.ForeColor = System.Drawing.Color.Black;
-            this.buttonDurationMinus1.HorizontalGradient = true;
-            this.buttonDurationMinus1.Location = new System.Drawing.Point(269, 411);
-            this.buttonDurationMinus1.Name = "buttonDurationMinus1";
-            this.buttonDurationMinus1.Size = new System.Drawing.Size(41, 22);
-            this.buttonDurationMinus1.TabIndex = 151;
-            this.buttonDurationMinus1.Text = "<";
-            this.buttonDurationMinus1.UseVisualStyleBackColor = true;
-            this.buttonDurationMinus1.Click += new System.EventHandler(this.buttonDurationMinus1_Click);
-            // 
-            // buttonDurationPlus10
-            // 
-            this.buttonDurationPlus10.Active = false;
-            this.buttonDurationPlus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDurationPlus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDurationPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDurationPlus10.ForeColor = System.Drawing.Color.Black;
-            this.buttonDurationPlus10.HorizontalGradient = true;
-            this.buttonDurationPlus10.Location = new System.Drawing.Point(376, 411);
-            this.buttonDurationPlus10.Name = "buttonDurationPlus10";
-            this.buttonDurationPlus10.Size = new System.Drawing.Size(41, 22);
-            this.buttonDurationPlus10.TabIndex = 150;
-            this.buttonDurationPlus10.Text = ">>";
-            this.buttonDurationPlus10.UseVisualStyleBackColor = true;
-            this.buttonDurationPlus10.Click += new System.EventHandler(this.buttonDurationPlus10_Click);
-            // 
-            // buttonDurationPlus1
-            // 
-            this.buttonDurationPlus1.Active = false;
-            this.buttonDurationPlus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDurationPlus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDurationPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDurationPlus1.ForeColor = System.Drawing.Color.Black;
-            this.buttonDurationPlus1.HorizontalGradient = true;
-            this.buttonDurationPlus1.Location = new System.Drawing.Point(336, 411);
-            this.buttonDurationPlus1.Name = "buttonDurationPlus1";
-            this.buttonDurationPlus1.Size = new System.Drawing.Size(41, 22);
-            this.buttonDurationPlus1.TabIndex = 149;
-            this.buttonDurationPlus1.Text = ">";
-            this.buttonDurationPlus1.UseVisualStyleBackColor = true;
-            this.buttonDurationPlus1.Click += new System.EventHandler(this.buttonDurationPlus1_Click);
-            // 
             // buttonChange
             // 
             this.buttonChange.FlatAppearance.BorderSize = 0;
             this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChange.Image = global::WaveCraft.Properties.Resources.change;
-            this.buttonChange.Location = new System.Drawing.Point(491, 36);
+            this.buttonChange.Location = new System.Drawing.Point(495, 36);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(52, 55);
             this.buttonChange.TabIndex = 147;
             this.buttonChange.UseVisualStyleBackColor = true;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
-            // 
-            // colorSliderDelay
-            // 
-            this.colorSliderDelay.BackColor = System.Drawing.Color.Transparent;
-            this.colorSliderDelay.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
-            this.colorSliderDelay.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
-            this.colorSliderDelay.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSliderDelay.ElapsedInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDelay.ElapsedPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(130)))), ((int)(((byte)(208)))));
-            this.colorSliderDelay.ElapsedPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(180)))));
-            this.colorSliderDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
-            this.colorSliderDelay.ForeColor = System.Drawing.Color.White;
-            this.colorSliderDelay.LargeChange = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.Location = new System.Drawing.Point(165, 450);
-            this.colorSliderDelay.Maximum = new decimal(new int[] {
-            200000,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.Name = "colorSliderDelay";
-            this.colorSliderDelay.ScaleDivisions = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.ScaleSubDivisions = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.ShowDivisionsText = false;
-            this.colorSliderDelay.ShowSmallScale = false;
-            this.colorSliderDelay.Size = new System.Drawing.Size(321, 39);
-            this.colorSliderDelay.SmallChange = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.TabIndex = 146;
-            this.colorSliderDelay.Text = "colorSlider2";
-            this.colorSliderDelay.ThumbInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDelay.ThumbPenColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDelay.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
-            this.colorSliderDelay.ThumbSize = new System.Drawing.Size(16, 16);
-            this.colorSliderDelay.TickAdd = 0F;
-            this.colorSliderDelay.TickColor = System.Drawing.Color.White;
-            this.colorSliderDelay.TickDivide = 0F;
-            this.colorSliderDelay.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.colorSliderDelay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorSliderDelay1_MouseUp);
             // 
             // textBoxDelay
             // 
@@ -566,83 +380,21 @@ namespace WaveCraft
             this.textBoxDuration.TabIndex = 72;
             this.textBoxDuration.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxDuration_KeyUp);
             // 
-            // colorSliderDuration
-            // 
-            this.colorSliderDuration.BackColor = System.Drawing.Color.Transparent;
-            this.colorSliderDuration.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
-            this.colorSliderDuration.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
-            this.colorSliderDuration.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSliderDuration.ElapsedInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDuration.ElapsedPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(130)))), ((int)(((byte)(208)))));
-            this.colorSliderDuration.ElapsedPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(180)))));
-            this.colorSliderDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
-            this.colorSliderDuration.ForeColor = System.Drawing.Color.White;
-            this.colorSliderDuration.LargeChange = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.Location = new System.Drawing.Point(160, 384);
-            this.colorSliderDuration.Maximum = new decimal(new int[] {
-            200000,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.Name = "colorSliderDuration";
-            this.colorSliderDuration.ScaleDivisions = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.ScaleSubDivisions = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.ShowDivisionsText = false;
-            this.colorSliderDuration.ShowSmallScale = false;
-            this.colorSliderDuration.Size = new System.Drawing.Size(321, 39);
-            this.colorSliderDuration.SmallChange = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.TabIndex = 145;
-            this.colorSliderDuration.Text = "colorSlider1";
-            this.colorSliderDuration.ThumbInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDuration.ThumbPenColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
-            this.colorSliderDuration.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
-            this.colorSliderDuration.ThumbSize = new System.Drawing.Size(16, 16);
-            this.colorSliderDuration.TickAdd = 0F;
-            this.colorSliderDuration.TickColor = System.Drawing.Color.White;
-            this.colorSliderDuration.TickDivide = 0F;
-            this.colorSliderDuration.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.colorSliderDuration.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorSliderDuration1_MouseUp);
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(35, 50);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(79, 20);
+            this.label14.Size = new System.Drawing.Size(93, 20);
             this.label14.TabIndex = 143;
-            this.label14.Text = "wave type";
+            this.label14.Text = "wave shape";
             // 
             // labelFrequencyTitle
             // 
             this.labelFrequencyTitle.AutoSize = true;
             this.labelFrequencyTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFrequencyTitle.Location = new System.Drawing.Point(33, 134);
+            this.labelFrequencyTitle.Location = new System.Drawing.Point(35, 139);
             this.labelFrequencyTitle.Name = "labelFrequencyTitle";
             this.labelFrequencyTitle.Size = new System.Drawing.Size(79, 20);
             this.labelFrequencyTitle.TabIndex = 142;
@@ -651,7 +403,7 @@ namespace WaveCraft
             // labelFreqMaxTitle
             // 
             this.labelFreqMaxTitle.AutoSize = true;
-            this.labelFreqMaxTitle.Location = new System.Drawing.Point(500, 132);
+            this.labelFreqMaxTitle.Location = new System.Drawing.Point(493, 133);
             this.labelFreqMaxTitle.Name = "labelFreqMaxTitle";
             this.labelFreqMaxTitle.Size = new System.Drawing.Size(35, 13);
             this.labelFreqMaxTitle.TabIndex = 141;
@@ -660,7 +412,7 @@ namespace WaveCraft
             // labelFreqMinTitle
             // 
             this.labelFreqMinTitle.AutoSize = true;
-            this.labelFreqMinTitle.Location = new System.Drawing.Point(500, 155);
+            this.labelFreqMinTitle.Location = new System.Drawing.Point(493, 156);
             this.labelFreqMinTitle.Name = "labelFreqMinTitle";
             this.labelFreqMinTitle.Size = new System.Drawing.Size(32, 13);
             this.labelFreqMinTitle.TabIndex = 140;
@@ -669,7 +421,7 @@ namespace WaveCraft
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(499, 216);
+            this.label4.Location = new System.Drawing.Point(492, 217);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 139;
@@ -678,7 +430,7 @@ namespace WaveCraft
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(499, 239);
+            this.label2.Location = new System.Drawing.Point(492, 240);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 138;
@@ -688,9 +440,9 @@ namespace WaveCraft
             // 
             this.pictureBoxFrequencyShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxFrequencyShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxFrequencyShape.Location = new System.Drawing.Point(131, 111);
+            this.pictureBoxFrequencyShape.Location = new System.Drawing.Point(127, 111);
             this.pictureBoxFrequencyShape.Name = "pictureBoxFrequencyShape";
-            this.pictureBoxFrequencyShape.Size = new System.Drawing.Size(355, 82);
+            this.pictureBoxFrequencyShape.Size = new System.Drawing.Size(360, 82);
             this.pictureBoxFrequencyShape.TabIndex = 137;
             this.pictureBoxFrequencyShape.TabStop = false;
             this.pictureBoxFrequencyShape.Click += new System.EventHandler(this.pictureBoxFrequencyShape_Click);
@@ -701,9 +453,9 @@ namespace WaveCraft
             // 
             this.pictureBoxVolumeShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxVolumeShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxVolumeShape.Location = new System.Drawing.Point(131, 198);
+            this.pictureBoxVolumeShape.Location = new System.Drawing.Point(127, 198);
             this.pictureBoxVolumeShape.Name = "pictureBoxVolumeShape";
-            this.pictureBoxVolumeShape.Size = new System.Drawing.Size(355, 82);
+            this.pictureBoxVolumeShape.Size = new System.Drawing.Size(360, 82);
             this.pictureBoxVolumeShape.TabIndex = 136;
             this.pictureBoxVolumeShape.TabStop = false;
             this.pictureBoxVolumeShape.Click += new System.EventHandler(this.pictureBoxVolumeShape_Click);
@@ -753,7 +505,7 @@ namespace WaveCraft
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(57, 306);
+            this.label1.Location = new System.Drawing.Point(59, 308);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 58;
@@ -812,7 +564,7 @@ namespace WaveCraft
             // labelFrequencyMin
             // 
             this.labelFrequencyMin.AutoSize = true;
-            this.labelFrequencyMin.Location = new System.Drawing.Point(537, 157);
+            this.labelFrequencyMin.Location = new System.Drawing.Point(530, 158);
             this.labelFrequencyMin.Name = "labelFrequencyMin";
             this.labelFrequencyMin.Size = new System.Drawing.Size(52, 13);
             this.labelFrequencyMin.TabIndex = 39;
@@ -821,7 +573,7 @@ namespace WaveCraft
             // labelFrequencyMax
             // 
             this.labelFrequencyMax.AutoSize = true;
-            this.labelFrequencyMax.Location = new System.Drawing.Point(537, 133);
+            this.labelFrequencyMax.Location = new System.Drawing.Point(530, 134);
             this.labelFrequencyMax.Name = "labelFrequencyMax";
             this.labelFrequencyMax.Size = new System.Drawing.Size(52, 13);
             this.labelFrequencyMax.TabIndex = 38;
@@ -830,7 +582,7 @@ namespace WaveCraft
             // labelVolumeMax
             // 
             this.labelVolumeMax.AutoSize = true;
-            this.labelVolumeMax.Location = new System.Drawing.Point(537, 216);
+            this.labelVolumeMax.Location = new System.Drawing.Point(530, 217);
             this.labelVolumeMax.Name = "labelVolumeMax";
             this.labelVolumeMax.Size = new System.Drawing.Size(25, 13);
             this.labelVolumeMax.TabIndex = 33;
@@ -839,7 +591,7 @@ namespace WaveCraft
             // labelVolumeMin
             // 
             this.labelVolumeMin.AutoSize = true;
-            this.labelVolumeMin.Location = new System.Drawing.Point(537, 239);
+            this.labelVolumeMin.Location = new System.Drawing.Point(530, 240);
             this.labelVolumeMin.Name = "labelVolumeMin";
             this.labelVolumeMin.Size = new System.Drawing.Size(25, 13);
             this.labelVolumeMin.TabIndex = 31;
@@ -849,7 +601,7 @@ namespace WaveCraft
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(53, 223);
+            this.label11.Location = new System.Drawing.Point(55, 221);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 20);
             this.label11.TabIndex = 24;
@@ -1266,6 +1018,952 @@ namespace WaveCraft
             this.panel1.Size = new System.Drawing.Size(337, 259);
             this.panel1.TabIndex = 71;
             // 
+            // labelHold
+            // 
+            this.labelHold.AutoSize = true;
+            this.labelHold.Location = new System.Drawing.Point(288, 42);
+            this.labelHold.Name = "labelHold";
+            this.labelHold.Size = new System.Drawing.Size(25, 13);
+            this.labelHold.TabIndex = 86;
+            this.labelHold.Text = "440";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 46);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 85;
+            this.label8.Text = "Hold";
+            // 
+            // chartAHDSR
+            // 
+            this.chartAHDSR.BackColor = System.Drawing.Color.Transparent;
+            chartArea6.AxisX.LabelStyle.Enabled = false;
+            chartArea6.AxisX.LineColor = System.Drawing.Color.Transparent;
+            chartArea6.AxisX.MajorGrid.Enabled = false;
+            chartArea6.AxisX.MajorTickMark.Enabled = false;
+            chartArea6.AxisY.LabelStyle.Enabled = false;
+            chartArea6.AxisY.LineColor = System.Drawing.Color.DimGray;
+            chartArea6.AxisY.MajorGrid.Enabled = false;
+            chartArea6.AxisY.MajorTickMark.Enabled = false;
+            chartArea6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            chartArea6.BackSecondaryColor = System.Drawing.Color.Silver;
+            chartArea6.Name = "ChartArea1";
+            this.chartAHDSR.ChartAreas.Add(chartArea6);
+            this.chartAHDSR.Location = new System.Drawing.Point(68, 174);
+            this.chartAHDSR.Name = "chartAHDSR";
+            series6.BorderWidth = 2;
+            series6.ChartArea = "ChartArea1";
+            series6.Color = System.Drawing.Color.IndianRed;
+            series6.MarkerBorderWidth = 2;
+            series6.MarkerSize = 10;
+            series6.Name = "Series1";
+            this.chartAHDSR.Series.Add(series6);
+            this.chartAHDSR.Size = new System.Drawing.Size(190, 71);
+            this.chartAHDSR.TabIndex = 83;
+            this.chartAHDSR.Text = "chartADSR";
+            // 
+            // labelRelease
+            // 
+            this.labelRelease.AutoSize = true;
+            this.labelRelease.Location = new System.Drawing.Point(288, 140);
+            this.labelRelease.Name = "labelRelease";
+            this.labelRelease.Size = new System.Drawing.Size(25, 13);
+            this.labelRelease.TabIndex = 78;
+            this.labelRelease.Text = "440";
+            // 
+            // labelSustain
+            // 
+            this.labelSustain.AutoSize = true;
+            this.labelSustain.Location = new System.Drawing.Point(288, 107);
+            this.labelSustain.Name = "labelSustain";
+            this.labelSustain.Size = new System.Drawing.Size(25, 13);
+            this.labelSustain.TabIndex = 77;
+            this.labelSustain.Text = "100";
+            // 
+            // labelDecay
+            // 
+            this.labelDecay.AutoSize = true;
+            this.labelDecay.Location = new System.Drawing.Point(288, 74);
+            this.labelDecay.Name = "labelDecay";
+            this.labelDecay.Size = new System.Drawing.Size(25, 13);
+            this.labelDecay.TabIndex = 76;
+            this.labelDecay.Text = "440";
+            // 
+            // labelAttack
+            // 
+            this.labelAttack.AutoSize = true;
+            this.labelAttack.Location = new System.Drawing.Point(289, 11);
+            this.labelAttack.Name = "labelAttack";
+            this.labelAttack.Size = new System.Drawing.Size(25, 13);
+            this.labelAttack.TabIndex = 75;
+            this.labelAttack.Text = "440";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(11, 76);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(38, 13);
+            this.label43.TabIndex = 74;
+            this.label43.Text = "Decay";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(11, 108);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(42, 13);
+            this.label39.TabIndex = 73;
+            this.label39.Text = "Sustain";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(11, 141);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(46, 13);
+            this.label38.TabIndex = 72;
+            this.label38.Text = "Release";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(11, 14);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(38, 13);
+            this.label37.TabIndex = 71;
+            this.label37.Text = "Attack";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(65, 170);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(196, 79);
+            this.panel3.TabIndex = 87;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox6.Controls.Add(this.buttonAddPreset);
+            this.groupBox6.Controls.Add(this.button1);
+            this.groupBox6.Controls.Add(this.buttonDeletePreset);
+            this.groupBox6.Controls.Add(this.buttonSavePreset);
+            this.groupBox6.Controls.Add(this.label48);
+            this.groupBox6.Controls.Add(this.comboBoxPresets);
+            this.groupBox6.ForeColor = System.Drawing.Color.White;
+            this.groupBox6.Location = new System.Drawing.Point(3, 5);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(336, 108);
+            this.groupBox6.TabIndex = 68;
+            this.groupBox6.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::WaveCraft.Properties.Resources.cogwheel;
+            this.button1.Location = new System.Drawing.Point(8, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(52, 55);
+            this.button1.TabIndex = 148;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.Location = new System.Drawing.Point(91, 21);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(54, 20);
+            this.label48.TabIndex = 48;
+            this.label48.Text = "preset";
+            // 
+            // comboBoxPresets
+            // 
+            this.comboBoxPresets.BackColor = System.Drawing.Color.DimGray;
+            this.comboBoxPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPresets.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxPresets.ForeColor = System.Drawing.Color.White;
+            this.comboBoxPresets.FormattingEnabled = true;
+            this.comboBoxPresets.Location = new System.Drawing.Point(153, 18);
+            this.comboBoxPresets.Name = "comboBoxPresets";
+            this.comboBoxPresets.Size = new System.Drawing.Size(158, 28);
+            this.comboBoxPresets.Sorted = true;
+            this.comboBoxPresets.TabIndex = 44;
+            this.comboBoxPresets.TabStop = false;
+            this.comboBoxPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxPresets_SelectedIndexChanged);
+            this.comboBoxPresets.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxPresets_KeyPress);
+            // 
+            // checkBoxRandomFrequency
+            // 
+            this.checkBoxRandomFrequency.AutoSize = true;
+            this.checkBoxRandomFrequency.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxRandomFrequency.Enabled = false;
+            this.checkBoxRandomFrequency.Location = new System.Drawing.Point(39, 301);
+            this.checkBoxRandomFrequency.Name = "checkBoxRandomFrequency";
+            this.checkBoxRandomFrequency.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxRandomFrequency.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxRandomFrequency.TabIndex = 98;
+            this.checkBoxRandomFrequency.Text = "random frequency";
+            this.checkBoxRandomFrequency.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDownSpread
+            // 
+            this.numericUpDownSpread.DecimalPlaces = 2;
+            this.numericUpDownSpread.Enabled = false;
+            this.numericUpDownSpread.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDownSpread.Location = new System.Drawing.Point(291, 306);
+            this.numericUpDownSpread.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownSpread.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDownSpread.Name = "numericUpDownSpread";
+            this.numericUpDownSpread.Size = new System.Drawing.Size(58, 20);
+            this.numericUpDownSpread.TabIndex = 95;
+            this.numericUpDownSpread.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.BackColor = System.Drawing.Color.Transparent;
+            this.label50.Location = new System.Drawing.Point(209, 308);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(75, 13);
+            this.label50.TabIndex = 94;
+            this.label50.Text = "max. spread %";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.listBoxWavesVault);
+            this.groupBox3.Controls.Add(this.listBoxWaves);
+            this.groupBox3.Controls.Add(this.buttonAddToVault);
+            this.groupBox3.Controls.Add(this.buttonRemoveFromVault);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.ButtonDeleteAll);
+            this.groupBox3.Controls.Add(this.buttonDelete);
+            this.groupBox3.Controls.Add(this.buttonAdd);
+            this.groupBox3.Location = new System.Drawing.Point(3, 117);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(336, 512);
+            this.groupBox3.TabIndex = 70;
+            this.groupBox3.TabStop = false;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(13, 372);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(42, 20);
+            this.label25.TabIndex = 150;
+            this.label25.Text = "vault";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.numericUpDownTimeShift);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.buttonCreatePartials);
+            this.groupBox4.Controls.Add(this.panel5);
+            this.groupBox4.Controls.Add(this.panel4);
+            this.groupBox4.Controls.Add(this.checkBoxRandomFrequency);
+            this.groupBox4.Controls.Add(this.numericUpDownWeight);
+            this.groupBox4.Controls.Add(this.numericUpDownDuration);
+            this.groupBox4.Controls.Add(this.label50);
+            this.groupBox4.Controls.Add(this.numericUpDownSpread);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.numericUpDownWeightChange);
+            this.groupBox4.Controls.Add(this.label45);
+            this.groupBox4.Controls.Add(this.numericUpDownAmount);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
+            this.groupBox4.Location = new System.Drawing.Point(996, 5);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(400, 471);
+            this.groupBox4.TabIndex = 71;
+            this.groupBox4.TabStop = false;
+            // 
+            // label23
+            // 
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.ForeColor = System.Drawing.Color.Gray;
+            this.label23.Location = new System.Drawing.Point(212, 191);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(151, 40);
+            this.label23.TabIndex = 155;
+            this.label23.Text = "delay between each subsequent harmonic (0..99)";
+            // 
+            // label22
+            // 
+            this.label22.BackColor = System.Drawing.Color.Transparent;
+            this.label22.ForeColor = System.Drawing.Color.Gray;
+            this.label22.Location = new System.Drawing.Point(209, 264);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(173, 40);
+            this.label22.TabIndex = 154;
+            this.label22.Text = "the duration of each subsequent harmonic compared to the previous (1..200)";
+            // 
+            // label21
+            // 
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.ForeColor = System.Drawing.Color.Gray;
+            this.label21.Location = new System.Drawing.Point(209, 330);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(140, 49);
+            this.label21.TabIndex = 153;
+            this.label21.Text = "the difference between the fundamental and last harmonic (0.01..10000)";
+            // 
+            // label20
+            // 
+            this.label20.BackColor = System.Drawing.Color.Transparent;
+            this.label20.ForeColor = System.Drawing.Color.Gray;
+            this.label20.Location = new System.Drawing.Point(38, 321);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(140, 55);
+            this.label20.TabIndex = 152;
+            this.label20.Text = "indicates that the frequency is not stable, but somewhere between last and next h" +
+    "armonic.";
+            // 
+            // label18
+            // 
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.ForeColor = System.Drawing.Color.Gray;
+            this.label18.Location = new System.Drawing.Point(38, 265);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(165, 31);
+            this.label18.TabIndex = 150;
+            this.label18.Text = "the % the weight increases or decreases over time (-100..100)";
+            // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.ForeColor = System.Drawing.Color.Gray;
+            this.label16.Location = new System.Drawing.Point(38, 200);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(168, 31);
+            this.label16.TabIndex = 149;
+            this.label16.Text = "the % of weight for each subsequent harmonic (1..200).";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(213, 172);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 13);
+            this.label12.TabIndex = 148;
+            this.label12.Text = "time shift %";
+            // 
+            // numericUpDownTimeShift
+            // 
+            this.numericUpDownTimeShift.DecimalPlaces = 2;
+            this.numericUpDownTimeShift.Location = new System.Drawing.Point(275, 169);
+            this.numericUpDownTimeShift.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericUpDownTimeShift.Name = "numericUpDownTimeShift";
+            this.numericUpDownTimeShift.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownTimeShift.TabIndex = 147;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(5, 14);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(112, 20);
+            this.label10.TabIndex = 146;
+            this.label10.Text = "Create partials";
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Transparent;
+            this.panel5.Controls.Add(this.radioButtonEvenOddHarmonics);
+            this.panel5.Controls.Add(this.radioButtonInharmonics);
+            this.panel5.Controls.Add(this.radioButtonOddHarmonics);
+            this.panel5.Controls.Add(this.radioButtonEvenHarmonics);
+            this.panel5.Location = new System.Drawing.Point(50, 69);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(132, 85);
+            this.panel5.TabIndex = 115;
+            // 
+            // radioButtonEvenOddHarmonics
+            // 
+            this.radioButtonEvenOddHarmonics.AutoSize = true;
+            this.radioButtonEvenOddHarmonics.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonEvenOddHarmonics.Checked = true;
+            this.radioButtonEvenOddHarmonics.Location = new System.Drawing.Point(6, 3);
+            this.radioButtonEvenOddHarmonics.Name = "radioButtonEvenOddHarmonics";
+            this.radioButtonEvenOddHarmonics.Size = new System.Drawing.Size(124, 17);
+            this.radioButtonEvenOddHarmonics.TabIndex = 116;
+            this.radioButtonEvenOddHarmonics.TabStop = true;
+            this.radioButtonEvenOddHarmonics.Text = "even+odd harmonics";
+            this.radioButtonEvenOddHarmonics.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonInharmonics
+            // 
+            this.radioButtonInharmonics.AutoSize = true;
+            this.radioButtonInharmonics.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonInharmonics.Location = new System.Drawing.Point(6, 61);
+            this.radioButtonInharmonics.Name = "radioButtonInharmonics";
+            this.radioButtonInharmonics.Size = new System.Drawing.Size(112, 17);
+            this.radioButtonInharmonics.TabIndex = 115;
+            this.radioButtonInharmonics.Text = "inharmonic partials";
+            this.radioButtonInharmonics.UseVisualStyleBackColor = false;
+            this.radioButtonInharmonics.CheckedChanged += new System.EventHandler(this.radioButtonInharmonics_CheckedChanged);
+            // 
+            // radioButtonOddHarmonics
+            // 
+            this.radioButtonOddHarmonics.AutoSize = true;
+            this.radioButtonOddHarmonics.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonOddHarmonics.Location = new System.Drawing.Point(6, 41);
+            this.radioButtonOddHarmonics.Name = "radioButtonOddHarmonics";
+            this.radioButtonOddHarmonics.Size = new System.Drawing.Size(94, 17);
+            this.radioButtonOddHarmonics.TabIndex = 114;
+            this.radioButtonOddHarmonics.Text = "odd harmonics";
+            this.radioButtonOddHarmonics.UseVisualStyleBackColor = false;
+            this.radioButtonOddHarmonics.CheckedChanged += new System.EventHandler(this.radioButtonOddHarmonics_CheckedChanged);
+            // 
+            // radioButtonEvenHarmonics
+            // 
+            this.radioButtonEvenHarmonics.AutoSize = true;
+            this.radioButtonEvenHarmonics.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonEvenHarmonics.Location = new System.Drawing.Point(6, 21);
+            this.radioButtonEvenHarmonics.Name = "radioButtonEvenHarmonics";
+            this.radioButtonEvenHarmonics.Size = new System.Drawing.Size(100, 17);
+            this.radioButtonEvenHarmonics.TabIndex = 113;
+            this.radioButtonEvenHarmonics.Text = "even harmonics";
+            this.radioButtonEvenHarmonics.UseVisualStyleBackColor = false;
+            this.radioButtonEvenHarmonics.CheckedChanged += new System.EventHandler(this.radioButtonEvenHarmonics_CheckedChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Controls.Add(this.radioButtonOverTones);
+            this.panel4.Controls.Add(this.radioButtonUnderTones);
+            this.panel4.Controls.Add(this.radioButtonBothTones);
+            this.panel4.Location = new System.Drawing.Point(207, 71);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(86, 65);
+            this.panel4.TabIndex = 114;
+            // 
+            // radioButtonOverTones
+            // 
+            this.radioButtonOverTones.AutoSize = true;
+            this.radioButtonOverTones.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonOverTones.Checked = true;
+            this.radioButtonOverTones.Location = new System.Drawing.Point(3, 0);
+            this.radioButtonOverTones.Name = "radioButtonOverTones";
+            this.radioButtonOverTones.Size = new System.Drawing.Size(72, 17);
+            this.radioButtonOverTones.TabIndex = 112;
+            this.radioButtonOverTones.TabStop = true;
+            this.radioButtonOverTones.Text = "overtones";
+            this.radioButtonOverTones.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonUnderTones
+            // 
+            this.radioButtonUnderTones.AutoSize = true;
+            this.radioButtonUnderTones.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonUnderTones.Location = new System.Drawing.Point(3, 20);
+            this.radioButtonUnderTones.Name = "radioButtonUnderTones";
+            this.radioButtonUnderTones.Size = new System.Drawing.Size(78, 17);
+            this.radioButtonUnderTones.TabIndex = 111;
+            this.radioButtonUnderTones.Text = "undertones";
+            this.radioButtonUnderTones.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonBothTones
+            // 
+            this.radioButtonBothTones.AutoSize = true;
+            this.radioButtonBothTones.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonBothTones.Location = new System.Drawing.Point(3, 39);
+            this.radioButtonBothTones.Name = "radioButtonBothTones";
+            this.radioButtonBothTones.Size = new System.Drawing.Size(46, 17);
+            this.radioButtonBothTones.TabIndex = 110;
+            this.radioButtonBothTones.Text = "both";
+            this.radioButtonBothTones.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDownWeight
+            // 
+            this.numericUpDownWeight.Location = new System.Drawing.Point(94, 175);
+            this.numericUpDownWeight.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDownWeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownWeight.Name = "numericUpDownWeight";
+            this.numericUpDownWeight.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownWeight.TabIndex = 111;
+            this.numericUpDownWeight.Value = new decimal(new int[] {
+            95,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownDuration
+            // 
+            this.numericUpDownDuration.Location = new System.Drawing.Point(270, 240);
+            this.numericUpDownDuration.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDownDuration.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownDuration.Name = "numericUpDownDuration";
+            this.numericUpDownDuration.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownDuration.TabIndex = 110;
+            this.numericUpDownDuration.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Location = new System.Drawing.Point(37, 179);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 106;
+            this.label7.Text = "weight %";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(210, 242);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 105;
+            this.label6.Text = "duration %";
+            // 
+            // numericUpDownWeightChange
+            // 
+            this.numericUpDownWeightChange.Location = new System.Drawing.Point(130, 241);
+            this.numericUpDownWeightChange.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownWeightChange.Name = "numericUpDownWeightChange";
+            this.numericUpDownWeightChange.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownWeightChange.TabIndex = 103;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.Transparent;
+            this.label45.Location = new System.Drawing.Point(37, 245);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(88, 13);
+            this.label45.TabIndex = 102;
+            this.label45.Text = "weight change %";
+            // 
+            // numericUpDownAmount
+            // 
+            this.numericUpDownAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownAmount.Location = new System.Drawing.Point(310, 23);
+            this.numericUpDownAmount.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownAmount.Name = "numericUpDownAmount";
+            this.numericUpDownAmount.Size = new System.Drawing.Size(54, 26);
+            this.numericUpDownAmount.TabIndex = 100;
+            this.numericUpDownAmount.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(239, 24);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 20);
+            this.label17.TabIndex = 101;
+            this.label17.Text = "amount";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.textBoxDurationAll);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.textBoxDelayAll);
+            this.groupBox2.Controls.Add(this.buttonSetAllDelays);
+            this.groupBox2.Controls.Add(this.buttonSetAllDurations);
+            this.groupBox2.Controls.Add(this.labelBulkEdit);
+            this.groupBox2.Controls.Add(this.buttonAdjustFrequencies);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(996, 480);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(275, 149);
+            this.groupBox2.TabIndex = 72;
+            this.groupBox2.TabStop = false;
+            // 
+            // textBoxDurationAll
+            // 
+            this.textBoxDurationAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxDurationAll.ForeColor = System.Drawing.Color.White;
+            this.textBoxDurationAll.Location = new System.Drawing.Point(114, 47);
+            this.textBoxDurationAll.Name = "textBoxDurationAll";
+            this.textBoxDurationAll.Size = new System.Drawing.Size(56, 20);
+            this.textBoxDurationAll.TabIndex = 152;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(31, 49);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(81, 17);
+            this.label26.TabIndex = 151;
+            this.label26.Text = "duration (s)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(48, 76);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(63, 17);
+            this.label15.TabIndex = 150;
+            this.label15.Text = "delay (s)";
+            // 
+            // textBoxDelayAll
+            // 
+            this.textBoxDelayAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxDelayAll.ForeColor = System.Drawing.Color.White;
+            this.textBoxDelayAll.Location = new System.Drawing.Point(114, 77);
+            this.textBoxDelayAll.Name = "textBoxDelayAll";
+            this.textBoxDelayAll.Size = new System.Drawing.Size(56, 20);
+            this.textBoxDelayAll.TabIndex = 149;
+            // 
+            // labelBulkEdit
+            // 
+            this.labelBulkEdit.AutoSize = true;
+            this.labelBulkEdit.BackColor = System.Drawing.Color.Transparent;
+            this.labelBulkEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBulkEdit.Location = new System.Drawing.Point(5, 12);
+            this.labelBulkEdit.Name = "labelBulkEdit";
+            this.labelBulkEdit.Size = new System.Drawing.Size(89, 20);
+            this.labelBulkEdit.TabIndex = 146;
+            this.labelBulkEdit.Text = "Bulk edit all";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.panel6);
+            this.groupBox7.Controls.Add(this.label13);
+            this.groupBox7.Location = new System.Drawing.Point(1277, 480);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(119, 149);
+            this.groupBox7.TabIndex = 73;
+            this.groupBox7.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.Black;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.buttonLuckyPick);
+            this.panel6.Location = new System.Drawing.Point(32, 58);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(52, 52);
+            this.panel6.TabIndex = 152;
+            // 
+            // buttonLuckyPick
+            // 
+            this.buttonLuckyPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonLuckyPick.FlatAppearance.BorderSize = 0;
+            this.buttonLuckyPick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLuckyPick.Image = global::WaveCraft.Properties.Resources.luckypick;
+            this.buttonLuckyPick.Location = new System.Drawing.Point(2, 3);
+            this.buttonLuckyPick.Name = "buttonLuckyPick";
+            this.buttonLuckyPick.Size = new System.Drawing.Size(47, 45);
+            this.buttonLuckyPick.TabIndex = 152;
+            this.buttonLuckyPick.UseVisualStyleBackColor = false;
+            this.buttonLuckyPick.Click += new System.EventHandler(this.buttonLuckyPick_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(6, 13);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(83, 20);
+            this.label13.TabIndex = 149;
+            this.label13.Text = "Lucky Pick";
+            // 
+            // buttonSetAllDelays
+            // 
+            this.buttonSetAllDelays.Active = false;
+            this.buttonSetAllDelays.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSetAllDelays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetAllDelays.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetAllDelays.ForeColor = System.Drawing.Color.Black;
+            this.buttonSetAllDelays.HorizontalGradient = false;
+            this.buttonSetAllDelays.Location = new System.Drawing.Point(178, 76);
+            this.buttonSetAllDelays.Name = "buttonSetAllDelays";
+            this.buttonSetAllDelays.Size = new System.Drawing.Size(59, 22);
+            this.buttonSetAllDelays.TabIndex = 148;
+            this.buttonSetAllDelays.Text = "set";
+            this.buttonSetAllDelays.UseVisualStyleBackColor = true;
+            this.buttonSetAllDelays.Click += new System.EventHandler(this.buttonSetAllDelays_Click);
+            // 
+            // buttonSetAllDurations
+            // 
+            this.buttonSetAllDurations.Active = false;
+            this.buttonSetAllDurations.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSetAllDurations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetAllDurations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetAllDurations.ForeColor = System.Drawing.Color.Black;
+            this.buttonSetAllDurations.HorizontalGradient = false;
+            this.buttonSetAllDurations.Location = new System.Drawing.Point(178, 46);
+            this.buttonSetAllDurations.Name = "buttonSetAllDurations";
+            this.buttonSetAllDurations.Size = new System.Drawing.Size(59, 22);
+            this.buttonSetAllDurations.TabIndex = 147;
+            this.buttonSetAllDurations.Text = "set";
+            this.buttonSetAllDurations.UseVisualStyleBackColor = true;
+            this.buttonSetAllDurations.Click += new System.EventHandler(this.buttonSetAllDurations_Click);
+            // 
+            // buttonAdjustFrequencies
+            // 
+            this.buttonAdjustFrequencies.Active = false;
+            this.buttonAdjustFrequencies.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonAdjustFrequencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdjustFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdjustFrequencies.ForeColor = System.Drawing.Color.Black;
+            this.buttonAdjustFrequencies.HorizontalGradient = false;
+            this.buttonAdjustFrequencies.Location = new System.Drawing.Point(50, 110);
+            this.buttonAdjustFrequencies.Name = "buttonAdjustFrequencies";
+            this.buttonAdjustFrequencies.Size = new System.Drawing.Size(121, 24);
+            this.buttonAdjustFrequencies.TabIndex = 145;
+            this.buttonAdjustFrequencies.Text = "frequencies";
+            this.buttonAdjustFrequencies.UseVisualStyleBackColor = true;
+            this.buttonAdjustFrequencies.Click += new System.EventHandler(this.buttonAdjustFrequencies_Click);
+            // 
+            // buttonCreatePartials
+            // 
+            this.buttonCreatePartials.Active = false;
+            this.buttonCreatePartials.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonCreatePartials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCreatePartials.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreatePartials.ForeColor = System.Drawing.Color.Black;
+            this.buttonCreatePartials.HorizontalGradient = false;
+            this.buttonCreatePartials.Location = new System.Drawing.Point(284, 432);
+            this.buttonCreatePartials.Name = "buttonCreatePartials";
+            this.buttonCreatePartials.Size = new System.Drawing.Size(93, 24);
+            this.buttonCreatePartials.TabIndex = 145;
+            this.buttonCreatePartials.Text = "Create";
+            this.buttonCreatePartials.UseVisualStyleBackColor = true;
+            this.buttonCreatePartials.Click += new System.EventHandler(this.buttonCreatePartials_Click);
+            // 
+            // listBoxWavesVault
+            // 
+            this.listBoxWavesVault.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxWavesVault.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBoxWavesVault.FormattingEnabled = true;
+            this.listBoxWavesVault.Location = new System.Drawing.Point(13, 398);
+            this.listBoxWavesVault.Name = "listBoxWavesVault";
+            this.listBoxWavesVault.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxWavesVault.Size = new System.Drawing.Size(311, 106);
+            this.listBoxWavesVault.TabIndex = 165;
+            // 
+            // listBoxWaves
+            // 
+            this.listBoxWaves.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxWaves.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBoxWaves.FormattingEnabled = true;
+            this.listBoxWaves.Location = new System.Drawing.Point(12, 54);
+            this.listBoxWaves.Name = "listBoxWaves";
+            this.listBoxWaves.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxWaves.Size = new System.Drawing.Size(312, 301);
+            this.listBoxWaves.TabIndex = 164;
+            this.listBoxWaves.TabStop = false;
+            this.listBoxWaves.SelectedIndexChanged += new System.EventHandler(this.listBoxWaves_SelectedIndexChanged);
+            this.listBoxWaves.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxWaves_KeyUp);
+            this.listBoxWaves.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBoxWaves_MouseUp_1);
+            // 
+            // buttonAddToVault
+            // 
+            this.buttonAddToVault.Active = false;
+            this.buttonAddToVault.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonAddToVault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddToVault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddToVault.ForeColor = System.Drawing.Color.Black;
+            this.buttonAddToVault.HorizontalGradient = true;
+            this.buttonAddToVault.Location = new System.Drawing.Point(180, 366);
+            this.buttonAddToVault.Name = "buttonAddToVault";
+            this.buttonAddToVault.Size = new System.Drawing.Size(41, 22);
+            this.buttonAddToVault.TabIndex = 158;
+            this.buttonAddToVault.Text = "↓";
+            this.buttonAddToVault.UseVisualStyleBackColor = true;
+            this.buttonAddToVault.Click += new System.EventHandler(this.buttonAddToVault_Click);
+            // 
+            // buttonRemoveFromVault
+            // 
+            this.buttonRemoveFromVault.Active = false;
+            this.buttonRemoveFromVault.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonRemoveFromVault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveFromVault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRemoveFromVault.ForeColor = System.Drawing.Color.Black;
+            this.buttonRemoveFromVault.HorizontalGradient = true;
+            this.buttonRemoveFromVault.Location = new System.Drawing.Point(115, 366);
+            this.buttonRemoveFromVault.Name = "buttonRemoveFromVault";
+            this.buttonRemoveFromVault.Size = new System.Drawing.Size(41, 22);
+            this.buttonRemoveFromVault.TabIndex = 157;
+            this.buttonRemoveFromVault.Text = "↑";
+            this.buttonRemoveFromVault.UseVisualStyleBackColor = true;
+            this.buttonRemoveFromVault.Click += new System.EventHandler(this.buttonRemoveFromVault_Click);
+            // 
+            // ButtonDeleteAll
+            // 
+            this.ButtonDeleteAll.Active = false;
+            this.ButtonDeleteAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ButtonDeleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonDeleteAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonDeleteAll.ForeColor = System.Drawing.Color.Black;
+            this.ButtonDeleteAll.HorizontalGradient = false;
+            this.ButtonDeleteAll.Location = new System.Drawing.Point(207, 20);
+            this.ButtonDeleteAll.Name = "ButtonDeleteAll";
+            this.ButtonDeleteAll.Size = new System.Drawing.Size(70, 22);
+            this.ButtonDeleteAll.TabIndex = 148;
+            this.ButtonDeleteAll.Text = "Delete All";
+            this.ButtonDeleteAll.UseVisualStyleBackColor = true;
+            this.ButtonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Active = false;
+            this.buttonDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelete.HorizontalGradient = false;
+            this.buttonDelete.Location = new System.Drawing.Point(127, 20);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(70, 22);
+            this.buttonDelete.TabIndex = 147;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDeleteWave_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Active = false;
+            this.buttonAdd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdd.ForeColor = System.Drawing.Color.Black;
+            this.buttonAdd.HorizontalGradient = false;
+            this.buttonAdd.Location = new System.Drawing.Point(13, 20);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(70, 22);
+            this.buttonAdd.TabIndex = 146;
+            this.buttonAdd.Text = "Clone";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAddNewWave_Click);
+            // 
+            // buttonAddPreset
+            // 
+            this.buttonAddPreset.Active = false;
+            this.buttonAddPreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonAddPreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddPreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddPreset.ForeColor = System.Drawing.Color.Black;
+            this.buttonAddPreset.HorizontalGradient = false;
+            this.buttonAddPreset.Location = new System.Drawing.Point(187, 64);
+            this.buttonAddPreset.Name = "buttonAddPreset";
+            this.buttonAddPreset.Size = new System.Drawing.Size(60, 22);
+            this.buttonAddPreset.TabIndex = 147;
+            this.buttonAddPreset.Text = "Add";
+            this.buttonAddPreset.UseVisualStyleBackColor = true;
+            this.buttonAddPreset.Click += new System.EventHandler(this.buttonAddPreset2_Click);
+            // 
+            // buttonDeletePreset
+            // 
+            this.buttonDeletePreset.Active = false;
+            this.buttonDeletePreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDeletePreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeletePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeletePreset.ForeColor = System.Drawing.Color.Black;
+            this.buttonDeletePreset.HorizontalGradient = false;
+            this.buttonDeletePreset.Location = new System.Drawing.Point(257, 64);
+            this.buttonDeletePreset.Name = "buttonDeletePreset";
+            this.buttonDeletePreset.Size = new System.Drawing.Size(60, 22);
+            this.buttonDeletePreset.TabIndex = 148;
+            this.buttonDeletePreset.Text = "Delete";
+            this.buttonDeletePreset.UseVisualStyleBackColor = true;
+            this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset2_Click);
+            // 
+            // buttonSavePreset
+            // 
+            this.buttonSavePreset.Active = false;
+            this.buttonSavePreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSavePreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSavePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSavePreset.ForeColor = System.Drawing.Color.Black;
+            this.buttonSavePreset.HorizontalGradient = false;
+            this.buttonSavePreset.Location = new System.Drawing.Point(116, 64);
+            this.buttonSavePreset.Name = "buttonSavePreset";
+            this.buttonSavePreset.Size = new System.Drawing.Size(60, 22);
+            this.buttonSavePreset.TabIndex = 147;
+            this.buttonSavePreset.Text = "Save";
+            this.buttonSavePreset.UseVisualStyleBackColor = true;
+            this.buttonSavePreset.Click += new System.EventHandler(this.buttonSavePreset2_Click);
+            // 
             // colorSliderRelease
             // 
             this.colorSliderRelease.BackColor = System.Drawing.Color.Transparent;
@@ -1581,878 +2279,273 @@ namespace WaveCraft
             this.colorSliderAttack.ValueChanged += new System.EventHandler(this.colorSliderAttack_ValueChanged_1);
             this.colorSliderAttack.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorSliderAttack_MouseUp);
             // 
-            // labelHold
+            // buttonConvertToWaves
             // 
-            this.labelHold.AutoSize = true;
-            this.labelHold.Location = new System.Drawing.Point(288, 42);
-            this.labelHold.Name = "labelHold";
-            this.labelHold.Size = new System.Drawing.Size(25, 13);
-            this.labelHold.TabIndex = 86;
-            this.labelHold.Text = "440";
+            this.buttonConvertToWaves.Active = false;
+            this.buttonConvertToWaves.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonConvertToWaves.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConvertToWaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonConvertToWaves.ForeColor = System.Drawing.Color.Black;
+            this.buttonConvertToWaves.HorizontalGradient = false;
+            this.buttonConvertToWaves.Location = new System.Drawing.Point(301, 98);
+            this.buttonConvertToWaves.Name = "buttonConvertToWaves";
+            this.buttonConvertToWaves.Size = new System.Drawing.Size(110, 23);
+            this.buttonConvertToWaves.TabIndex = 158;
+            this.buttonConvertToWaves.Text = "Convert to waves";
+            this.buttonConvertToWaves.UseVisualStyleBackColor = true;
+            this.buttonConvertToWaves.Click += new System.EventHandler(this.buttonConvertToWaves_Click);
             // 
-            // label8
+            // buttonDelayMinus10
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 46);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 13);
-            this.label8.TabIndex = 85;
-            this.label8.Text = "Hold";
+            this.buttonDelayMinus10.Active = false;
+            this.buttonDelayMinus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDelayMinus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelayMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelayMinus10.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelayMinus10.HorizontalGradient = true;
+            this.buttonDelayMinus10.Location = new System.Drawing.Point(229, 477);
+            this.buttonDelayMinus10.Name = "buttonDelayMinus10";
+            this.buttonDelayMinus10.Size = new System.Drawing.Size(41, 22);
+            this.buttonDelayMinus10.TabIndex = 156;
+            this.buttonDelayMinus10.Text = "<<";
+            this.buttonDelayMinus10.UseVisualStyleBackColor = true;
+            this.buttonDelayMinus10.Click += new System.EventHandler(this.buttonDelayMinus10_Click);
             // 
-            // chartAHDSR
+            // buttonDelayMinus1
             // 
-            this.chartAHDSR.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.AxisX.LabelStyle.Enabled = false;
-            chartArea6.AxisX.LineColor = System.Drawing.Color.Transparent;
-            chartArea6.AxisX.MajorGrid.Enabled = false;
-            chartArea6.AxisX.MajorTickMark.Enabled = false;
-            chartArea6.AxisY.LabelStyle.Enabled = false;
-            chartArea6.AxisY.LineColor = System.Drawing.Color.DimGray;
-            chartArea6.AxisY.MajorGrid.Enabled = false;
-            chartArea6.AxisY.MajorTickMark.Enabled = false;
-            chartArea6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            chartArea6.BackSecondaryColor = System.Drawing.Color.Silver;
-            chartArea6.Name = "ChartArea1";
-            this.chartAHDSR.ChartAreas.Add(chartArea6);
-            this.chartAHDSR.Location = new System.Drawing.Point(68, 174);
-            this.chartAHDSR.Name = "chartAHDSR";
-            series6.BorderWidth = 2;
-            series6.ChartArea = "ChartArea1";
-            series6.Color = System.Drawing.Color.IndianRed;
-            series6.MarkerBorderWidth = 2;
-            series6.MarkerSize = 10;
-            series6.Name = "Series1";
-            this.chartAHDSR.Series.Add(series6);
-            this.chartAHDSR.Size = new System.Drawing.Size(190, 71);
-            this.chartAHDSR.TabIndex = 83;
-            this.chartAHDSR.Text = "chartADSR";
+            this.buttonDelayMinus1.Active = false;
+            this.buttonDelayMinus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDelayMinus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelayMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelayMinus1.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelayMinus1.HorizontalGradient = true;
+            this.buttonDelayMinus1.Location = new System.Drawing.Point(269, 477);
+            this.buttonDelayMinus1.Name = "buttonDelayMinus1";
+            this.buttonDelayMinus1.Size = new System.Drawing.Size(41, 22);
+            this.buttonDelayMinus1.TabIndex = 155;
+            this.buttonDelayMinus1.Text = "<";
+            this.buttonDelayMinus1.UseVisualStyleBackColor = true;
+            this.buttonDelayMinus1.Click += new System.EventHandler(this.buttonDelayMinus1_Click);
             // 
-            // labelRelease
+            // buttonDelayPlus10
             // 
-            this.labelRelease.AutoSize = true;
-            this.labelRelease.Location = new System.Drawing.Point(288, 140);
-            this.labelRelease.Name = "labelRelease";
-            this.labelRelease.Size = new System.Drawing.Size(25, 13);
-            this.labelRelease.TabIndex = 78;
-            this.labelRelease.Text = "440";
+            this.buttonDelayPlus10.Active = false;
+            this.buttonDelayPlus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDelayPlus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelayPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelayPlus10.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelayPlus10.HorizontalGradient = true;
+            this.buttonDelayPlus10.Location = new System.Drawing.Point(376, 477);
+            this.buttonDelayPlus10.Name = "buttonDelayPlus10";
+            this.buttonDelayPlus10.Size = new System.Drawing.Size(41, 22);
+            this.buttonDelayPlus10.TabIndex = 154;
+            this.buttonDelayPlus10.Text = ">>";
+            this.buttonDelayPlus10.UseVisualStyleBackColor = true;
+            this.buttonDelayPlus10.Click += new System.EventHandler(this.buttonDelayPlus10_Click);
             // 
-            // labelSustain
+            // buttonDelayPlus1
             // 
-            this.labelSustain.AutoSize = true;
-            this.labelSustain.Location = new System.Drawing.Point(288, 107);
-            this.labelSustain.Name = "labelSustain";
-            this.labelSustain.Size = new System.Drawing.Size(25, 13);
-            this.labelSustain.TabIndex = 77;
-            this.labelSustain.Text = "100";
+            this.buttonDelayPlus1.Active = false;
+            this.buttonDelayPlus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDelayPlus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelayPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelayPlus1.ForeColor = System.Drawing.Color.Black;
+            this.buttonDelayPlus1.HorizontalGradient = true;
+            this.buttonDelayPlus1.Location = new System.Drawing.Point(336, 477);
+            this.buttonDelayPlus1.Name = "buttonDelayPlus1";
+            this.buttonDelayPlus1.Size = new System.Drawing.Size(41, 22);
+            this.buttonDelayPlus1.TabIndex = 153;
+            this.buttonDelayPlus1.Text = ">";
+            this.buttonDelayPlus1.UseVisualStyleBackColor = true;
+            this.buttonDelayPlus1.Click += new System.EventHandler(this.buttonDelayPlus1_Click);
             // 
-            // labelDecay
+            // buttonDurationMinus10
             // 
-            this.labelDecay.AutoSize = true;
-            this.labelDecay.Location = new System.Drawing.Point(288, 74);
-            this.labelDecay.Name = "labelDecay";
-            this.labelDecay.Size = new System.Drawing.Size(25, 13);
-            this.labelDecay.TabIndex = 76;
-            this.labelDecay.Text = "440";
+            this.buttonDurationMinus10.Active = false;
+            this.buttonDurationMinus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDurationMinus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDurationMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDurationMinus10.ForeColor = System.Drawing.Color.Black;
+            this.buttonDurationMinus10.HorizontalGradient = true;
+            this.buttonDurationMinus10.Location = new System.Drawing.Point(229, 411);
+            this.buttonDurationMinus10.Name = "buttonDurationMinus10";
+            this.buttonDurationMinus10.Size = new System.Drawing.Size(41, 22);
+            this.buttonDurationMinus10.TabIndex = 152;
+            this.buttonDurationMinus10.Text = "<<";
+            this.buttonDurationMinus10.UseVisualStyleBackColor = true;
+            this.buttonDurationMinus10.Click += new System.EventHandler(this.buttonDurationMinus10_Click);
             // 
-            // labelAttack
+            // buttonDurationMinus1
             // 
-            this.labelAttack.AutoSize = true;
-            this.labelAttack.Location = new System.Drawing.Point(289, 11);
-            this.labelAttack.Name = "labelAttack";
-            this.labelAttack.Size = new System.Drawing.Size(25, 13);
-            this.labelAttack.TabIndex = 75;
-            this.labelAttack.Text = "440";
+            this.buttonDurationMinus1.Active = false;
+            this.buttonDurationMinus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDurationMinus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDurationMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDurationMinus1.ForeColor = System.Drawing.Color.Black;
+            this.buttonDurationMinus1.HorizontalGradient = true;
+            this.buttonDurationMinus1.Location = new System.Drawing.Point(269, 411);
+            this.buttonDurationMinus1.Name = "buttonDurationMinus1";
+            this.buttonDurationMinus1.Size = new System.Drawing.Size(41, 22);
+            this.buttonDurationMinus1.TabIndex = 151;
+            this.buttonDurationMinus1.Text = "<";
+            this.buttonDurationMinus1.UseVisualStyleBackColor = true;
+            this.buttonDurationMinus1.Click += new System.EventHandler(this.buttonDurationMinus1_Click);
             // 
-            // label43
+            // buttonDurationPlus10
             // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(11, 76);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(38, 13);
-            this.label43.TabIndex = 74;
-            this.label43.Text = "Decay";
+            this.buttonDurationPlus10.Active = false;
+            this.buttonDurationPlus10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDurationPlus10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDurationPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDurationPlus10.ForeColor = System.Drawing.Color.Black;
+            this.buttonDurationPlus10.HorizontalGradient = true;
+            this.buttonDurationPlus10.Location = new System.Drawing.Point(376, 411);
+            this.buttonDurationPlus10.Name = "buttonDurationPlus10";
+            this.buttonDurationPlus10.Size = new System.Drawing.Size(41, 22);
+            this.buttonDurationPlus10.TabIndex = 150;
+            this.buttonDurationPlus10.Text = ">>";
+            this.buttonDurationPlus10.UseVisualStyleBackColor = true;
+            this.buttonDurationPlus10.Click += new System.EventHandler(this.buttonDurationPlus10_Click);
             // 
-            // label39
+            // buttonDurationPlus1
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(11, 108);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(42, 13);
-            this.label39.TabIndex = 73;
-            this.label39.Text = "Sustain";
+            this.buttonDurationPlus1.Active = false;
+            this.buttonDurationPlus1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonDurationPlus1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDurationPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDurationPlus1.ForeColor = System.Drawing.Color.Black;
+            this.buttonDurationPlus1.HorizontalGradient = true;
+            this.buttonDurationPlus1.Location = new System.Drawing.Point(336, 411);
+            this.buttonDurationPlus1.Name = "buttonDurationPlus1";
+            this.buttonDurationPlus1.Size = new System.Drawing.Size(41, 22);
+            this.buttonDurationPlus1.TabIndex = 149;
+            this.buttonDurationPlus1.Text = ">";
+            this.buttonDurationPlus1.UseVisualStyleBackColor = true;
+            this.buttonDurationPlus1.Click += new System.EventHandler(this.buttonDurationPlus1_Click);
             // 
-            // label38
+            // colorSliderDelay
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(11, 141);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(46, 13);
-            this.label38.TabIndex = 72;
-            this.label38.Text = "Release";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(11, 14);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(38, 13);
-            this.label37.TabIndex = 71;
-            this.label37.Text = "Attack";
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(65, 170);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(196, 79);
-            this.panel3.TabIndex = 87;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox6.Controls.Add(this.button1);
-            this.groupBox6.Controls.Add(this.buttonDeletePreset);
-            this.groupBox6.Controls.Add(this.buttonSavePreset);
-            this.groupBox6.Controls.Add(this.panel2);
-            this.groupBox6.Controls.Add(this.label48);
-            this.groupBox6.Controls.Add(this.comboBoxPresets);
-            this.groupBox6.ForeColor = System.Drawing.Color.White;
-            this.groupBox6.Location = new System.Drawing.Point(3, 5);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(336, 172);
-            this.groupBox6.TabIndex = 68;
-            this.groupBox6.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::WaveCraft.Properties.Resources.cogwheel;
-            this.button1.Location = new System.Drawing.Point(8, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 55);
-            this.button1.TabIndex = 148;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonDeletePreset
-            // 
-            this.buttonDeletePreset.Active = false;
-            this.buttonDeletePreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDeletePreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDeletePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeletePreset.ForeColor = System.Drawing.Color.Black;
-            this.buttonDeletePreset.HorizontalGradient = false;
-            this.buttonDeletePreset.Location = new System.Drawing.Point(244, 66);
-            this.buttonDeletePreset.Name = "buttonDeletePreset";
-            this.buttonDeletePreset.Size = new System.Drawing.Size(67, 24);
-            this.buttonDeletePreset.TabIndex = 148;
-            this.buttonDeletePreset.Text = "Delete";
-            this.buttonDeletePreset.UseVisualStyleBackColor = true;
-            this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset2_Click);
-            // 
-            // buttonSavePreset
-            // 
-            this.buttonSavePreset.Active = false;
-            this.buttonSavePreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSavePreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSavePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSavePreset.ForeColor = System.Drawing.Color.Black;
-            this.buttonSavePreset.HorizontalGradient = false;
-            this.buttonSavePreset.Location = new System.Drawing.Point(153, 66);
-            this.buttonSavePreset.Name = "buttonSavePreset";
-            this.buttonSavePreset.Size = new System.Drawing.Size(66, 24);
-            this.buttonSavePreset.TabIndex = 147;
-            this.buttonSavePreset.Text = "Save";
-            this.buttonSavePreset.UseVisualStyleBackColor = true;
-            this.buttonSavePreset.Click += new System.EventHandler(this.buttonSavePreset2_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.buttonAddPreset);
-            this.panel2.Controls.Add(this.textBoxPresetName);
-            this.panel2.Controls.Add(this.label47);
-            this.panel2.Location = new System.Drawing.Point(11, 107);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(303, 46);
-            this.panel2.TabIndex = 51;
-            // 
-            // buttonAddPreset
-            // 
-            this.buttonAddPreset.Active = false;
-            this.buttonAddPreset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonAddPreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAddPreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddPreset.ForeColor = System.Drawing.Color.Black;
-            this.buttonAddPreset.HorizontalGradient = false;
-            this.buttonAddPreset.Location = new System.Drawing.Point(206, 12);
-            this.buttonAddPreset.Name = "buttonAddPreset";
-            this.buttonAddPreset.Size = new System.Drawing.Size(70, 22);
-            this.buttonAddPreset.TabIndex = 147;
-            this.buttonAddPreset.Text = "Add";
-            this.buttonAddPreset.UseVisualStyleBackColor = true;
-            this.buttonAddPreset.Click += new System.EventHandler(this.buttonAddPreset2_Click);
-            // 
-            // textBoxPresetName
-            // 
-            this.textBoxPresetName.BackColor = System.Drawing.Color.Silver;
-            this.textBoxPresetName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxPresetName.ForeColor = System.Drawing.Color.Black;
-            this.textBoxPresetName.Location = new System.Drawing.Point(45, 13);
-            this.textBoxPresetName.Name = "textBoxPresetName";
-            this.textBoxPresetName.Size = new System.Drawing.Size(140, 20);
-            this.textBoxPresetName.TabIndex = 50;
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(9, 15);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(33, 13);
-            this.label47.TabIndex = 48;
-            this.label47.Text = "name";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(91, 28);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(54, 20);
-            this.label48.TabIndex = 48;
-            this.label48.Text = "preset";
-            // 
-            // comboBoxPresets
-            // 
-            this.comboBoxPresets.BackColor = System.Drawing.Color.DimGray;
-            this.comboBoxPresets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPresets.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxPresets.ForeColor = System.Drawing.Color.White;
-            this.comboBoxPresets.FormattingEnabled = true;
-            this.comboBoxPresets.Location = new System.Drawing.Point(153, 25);
-            this.comboBoxPresets.Name = "comboBoxPresets";
-            this.comboBoxPresets.Size = new System.Drawing.Size(158, 28);
-            this.comboBoxPresets.Sorted = true;
-            this.comboBoxPresets.TabIndex = 44;
-            this.comboBoxPresets.TabStop = false;
-            this.comboBoxPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxPresets_SelectedIndexChanged);
-            this.comboBoxPresets.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxPresets_KeyPress);
-            // 
-            // checkBoxRandomFrequency
-            // 
-            this.checkBoxRandomFrequency.AutoSize = true;
-            this.checkBoxRandomFrequency.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxRandomFrequency.Enabled = false;
-            this.checkBoxRandomFrequency.Location = new System.Drawing.Point(39, 301);
-            this.checkBoxRandomFrequency.Name = "checkBoxRandomFrequency";
-            this.checkBoxRandomFrequency.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxRandomFrequency.Size = new System.Drawing.Size(111, 17);
-            this.checkBoxRandomFrequency.TabIndex = 98;
-            this.checkBoxRandomFrequency.Text = "random frequency";
-            this.checkBoxRandomFrequency.UseVisualStyleBackColor = false;
-            // 
-            // numericUpDownSpread
-            // 
-            this.numericUpDownSpread.DecimalPlaces = 2;
-            this.numericUpDownSpread.Enabled = false;
-            this.numericUpDownSpread.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.numericUpDownSpread.Location = new System.Drawing.Point(291, 306);
-            this.numericUpDownSpread.Maximum = new decimal(new int[] {
-            10000,
+            this.colorSliderDelay.BackColor = System.Drawing.Color.Transparent;
+            this.colorSliderDelay.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
+            this.colorSliderDelay.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
+            this.colorSliderDelay.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.colorSliderDelay.ElapsedInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDelay.ElapsedPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(130)))), ((int)(((byte)(208)))));
+            this.colorSliderDelay.ElapsedPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(180)))));
+            this.colorSliderDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.colorSliderDelay.ForeColor = System.Drawing.Color.White;
+            this.colorSliderDelay.LargeChange = new decimal(new int[] {
+            5,
             0,
             0,
             0});
-            this.numericUpDownSpread.Minimum = new decimal(new int[] {
-            1,
+            this.colorSliderDelay.Location = new System.Drawing.Point(165, 450);
+            this.colorSliderDelay.Maximum = new decimal(new int[] {
+            200000,
             0,
             0,
-            131072});
-            this.numericUpDownSpread.Name = "numericUpDownSpread";
-            this.numericUpDownSpread.Size = new System.Drawing.Size(58, 20);
-            this.numericUpDownSpread.TabIndex = 95;
-            this.numericUpDownSpread.Value = new decimal(new int[] {
+            0});
+            this.colorSliderDelay.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.colorSliderDelay.Name = "colorSliderDelay";
+            this.colorSliderDelay.ScaleDivisions = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.colorSliderDelay.ScaleSubDivisions = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.colorSliderDelay.ShowDivisionsText = false;
+            this.colorSliderDelay.ShowSmallScale = false;
+            this.colorSliderDelay.Size = new System.Drawing.Size(321, 39);
+            this.colorSliderDelay.SmallChange = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.BackColor = System.Drawing.Color.Transparent;
-            this.label50.Location = new System.Drawing.Point(209, 308);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(75, 13);
-            this.label50.TabIndex = 94;
-            this.label50.Text = "max. spread %";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.ButtonDeleteAll);
-            this.groupBox3.Controls.Add(this.buttonDelete);
-            this.groupBox3.Controls.Add(this.buttonAdd);
-            this.groupBox3.Controls.Add(this.listBoxWaves);
-            this.groupBox3.Location = new System.Drawing.Point(3, 181);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(336, 448);
-            this.groupBox3.TabIndex = 70;
-            this.groupBox3.TabStop = false;
-            // 
-            // ButtonDeleteAll
-            // 
-            this.ButtonDeleteAll.Active = false;
-            this.ButtonDeleteAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ButtonDeleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonDeleteAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonDeleteAll.ForeColor = System.Drawing.Color.Black;
-            this.ButtonDeleteAll.HorizontalGradient = false;
-            this.ButtonDeleteAll.Location = new System.Drawing.Point(207, 20);
-            this.ButtonDeleteAll.Name = "ButtonDeleteAll";
-            this.ButtonDeleteAll.Size = new System.Drawing.Size(70, 22);
-            this.ButtonDeleteAll.TabIndex = 148;
-            this.ButtonDeleteAll.Text = "Delete All";
-            this.ButtonDeleteAll.UseVisualStyleBackColor = true;
-            this.ButtonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Active = false;
-            this.buttonDelete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.ForeColor = System.Drawing.Color.Black;
-            this.buttonDelete.HorizontalGradient = false;
-            this.buttonDelete.Location = new System.Drawing.Point(127, 20);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(70, 22);
-            this.buttonDelete.TabIndex = 147;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDeleteWave_Click);
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Active = false;
-            this.buttonAdd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAdd.ForeColor = System.Drawing.Color.Black;
-            this.buttonAdd.HorizontalGradient = false;
-            this.buttonAdd.Location = new System.Drawing.Point(13, 20);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(70, 22);
-            this.buttonAdd.TabIndex = 146;
-            this.buttonAdd.Text = "Clone";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAddNewWave_Click);
-            // 
-            // listBoxWaves
-            // 
-            this.listBoxWaves.BackColor = System.Drawing.Color.DimGray;
-            this.listBoxWaves.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBoxWaves.ForeColor = System.Drawing.Color.White;
-            this.listBoxWaves.FormattingEnabled = true;
-            this.listBoxWaves.Location = new System.Drawing.Point(12, 57);
-            this.listBoxWaves.Name = "listBoxWaves";
-            this.listBoxWaves.Size = new System.Drawing.Size(312, 379);
-            this.listBoxWaves.TabIndex = 71;
-            this.listBoxWaves.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxWaves_KeyUp);
-            this.listBoxWaves.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBoxWaves_MouseUp);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label23);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Controls.Add(this.label18);
-            this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.numericUpDownTimeShift);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.buttonCreatePartials);
-            this.groupBox4.Controls.Add(this.panel5);
-            this.groupBox4.Controls.Add(this.panel4);
-            this.groupBox4.Controls.Add(this.checkBoxRandomFrequency);
-            this.groupBox4.Controls.Add(this.numericUpDownWeight);
-            this.groupBox4.Controls.Add(this.numericUpDownDuration);
-            this.groupBox4.Controls.Add(this.label50);
-            this.groupBox4.Controls.Add(this.numericUpDownSpread);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.numericUpDownWeightChange);
-            this.groupBox4.Controls.Add(this.label45);
-            this.groupBox4.Controls.Add(this.numericUpDownAmount);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(996, 5);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(400, 503);
-            this.groupBox4.TabIndex = 71;
-            this.groupBox4.TabStop = false;
-            // 
-            // label23
-            // 
-            this.label23.BackColor = System.Drawing.Color.Transparent;
-            this.label23.ForeColor = System.Drawing.Color.Gray;
-            this.label23.Location = new System.Drawing.Point(212, 191);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(151, 40);
-            this.label23.TabIndex = 155;
-            this.label23.Text = "delay between each subsequent harmonic (0..99)";
-            // 
-            // label22
-            // 
-            this.label22.BackColor = System.Drawing.Color.Transparent;
-            this.label22.ForeColor = System.Drawing.Color.Gray;
-            this.label22.Location = new System.Drawing.Point(209, 264);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(173, 40);
-            this.label22.TabIndex = 154;
-            this.label22.Text = "the duration of each subsequent harmonic compared to the previous (1..200)";
-            // 
-            // label21
-            // 
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.ForeColor = System.Drawing.Color.Gray;
-            this.label21.Location = new System.Drawing.Point(209, 330);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(140, 49);
-            this.label21.TabIndex = 153;
-            this.label21.Text = "the difference between the fundamental and last harmonic (0.01..10000)";
-            // 
-            // label20
-            // 
-            this.label20.BackColor = System.Drawing.Color.Transparent;
-            this.label20.ForeColor = System.Drawing.Color.Gray;
-            this.label20.Location = new System.Drawing.Point(38, 321);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(140, 55);
-            this.label20.TabIndex = 152;
-            this.label20.Text = "indicates that the frequency is not stable, but somewhere between last and next d" +
-    "ecay.";
-            // 
-            // label18
-            // 
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.ForeColor = System.Drawing.Color.Gray;
-            this.label18.Location = new System.Drawing.Point(38, 265);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(165, 31);
-            this.label18.TabIndex = 150;
-            this.label18.Text = "the % the weight increases or decreases over time (-100..100)";
-            // 
-            // label16
-            // 
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.ForeColor = System.Drawing.Color.Gray;
-            this.label16.Location = new System.Drawing.Point(38, 200);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(168, 31);
-            this.label16.TabIndex = 149;
-            this.label16.Text = "the % of weight for each subsequent harmonic (1..200).";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Location = new System.Drawing.Point(213, 172);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 13);
-            this.label12.TabIndex = 148;
-            this.label12.Text = "time shift %";
-            // 
-            // numericUpDownTimeShift
-            // 
-            this.numericUpDownTimeShift.DecimalPlaces = 2;
-            this.numericUpDownTimeShift.Location = new System.Drawing.Point(275, 169);
-            this.numericUpDownTimeShift.Maximum = new decimal(new int[] {
-            99,
+            this.colorSliderDelay.TabIndex = 146;
+            this.colorSliderDelay.Text = "colorSlider2";
+            this.colorSliderDelay.ThumbInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDelay.ThumbPenColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDelay.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.colorSliderDelay.ThumbSize = new System.Drawing.Size(16, 16);
+            this.colorSliderDelay.TickAdd = 0F;
+            this.colorSliderDelay.TickColor = System.Drawing.Color.White;
+            this.colorSliderDelay.TickDivide = 0F;
+            this.colorSliderDelay.Value = new decimal(new int[] {
+            30,
             0,
             0,
             0});
-            this.numericUpDownTimeShift.Name = "numericUpDownTimeShift";
-            this.numericUpDownTimeShift.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownTimeShift.TabIndex = 147;
+            this.colorSliderDelay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorSliderDelay1_MouseUp);
             // 
-            // label10
+            // colorSliderDuration
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(5, 14);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(112, 20);
-            this.label10.TabIndex = 146;
-            this.label10.Text = "Create partials";
-            // 
-            // buttonCreatePartials
-            // 
-            this.buttonCreatePartials.Active = false;
-            this.buttonCreatePartials.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonCreatePartials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCreatePartials.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreatePartials.ForeColor = System.Drawing.Color.Black;
-            this.buttonCreatePartials.HorizontalGradient = false;
-            this.buttonCreatePartials.Location = new System.Drawing.Point(284, 432);
-            this.buttonCreatePartials.Name = "buttonCreatePartials";
-            this.buttonCreatePartials.Size = new System.Drawing.Size(93, 24);
-            this.buttonCreatePartials.TabIndex = 145;
-            this.buttonCreatePartials.Text = "Create";
-            this.buttonCreatePartials.UseVisualStyleBackColor = true;
-            this.buttonCreatePartials.Click += new System.EventHandler(this.buttonCreatePartials_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Transparent;
-            this.panel5.Controls.Add(this.radioButtonEvenOddHarmonics);
-            this.panel5.Controls.Add(this.radioButtonInharmonics);
-            this.panel5.Controls.Add(this.radioButtonOddHarmonics);
-            this.panel5.Controls.Add(this.radioButtonEvenHarmonics);
-            this.panel5.Location = new System.Drawing.Point(50, 69);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(132, 85);
-            this.panel5.TabIndex = 115;
-            // 
-            // radioButtonEvenOddHarmonics
-            // 
-            this.radioButtonEvenOddHarmonics.AutoSize = true;
-            this.radioButtonEvenOddHarmonics.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonEvenOddHarmonics.Checked = true;
-            this.radioButtonEvenOddHarmonics.Location = new System.Drawing.Point(6, 3);
-            this.radioButtonEvenOddHarmonics.Name = "radioButtonEvenOddHarmonics";
-            this.radioButtonEvenOddHarmonics.Size = new System.Drawing.Size(124, 17);
-            this.radioButtonEvenOddHarmonics.TabIndex = 116;
-            this.radioButtonEvenOddHarmonics.TabStop = true;
-            this.radioButtonEvenOddHarmonics.Text = "even+odd harmonics";
-            this.radioButtonEvenOddHarmonics.UseVisualStyleBackColor = false;
-            // 
-            // radioButtonInharmonics
-            // 
-            this.radioButtonInharmonics.AutoSize = true;
-            this.radioButtonInharmonics.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonInharmonics.Location = new System.Drawing.Point(6, 61);
-            this.radioButtonInharmonics.Name = "radioButtonInharmonics";
-            this.radioButtonInharmonics.Size = new System.Drawing.Size(112, 17);
-            this.radioButtonInharmonics.TabIndex = 115;
-            this.radioButtonInharmonics.Text = "inharmonic partials";
-            this.radioButtonInharmonics.UseVisualStyleBackColor = false;
-            this.radioButtonInharmonics.CheckedChanged += new System.EventHandler(this.radioButtonInharmonics_CheckedChanged);
-            // 
-            // radioButtonOddHarmonics
-            // 
-            this.radioButtonOddHarmonics.AutoSize = true;
-            this.radioButtonOddHarmonics.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonOddHarmonics.Location = new System.Drawing.Point(6, 41);
-            this.radioButtonOddHarmonics.Name = "radioButtonOddHarmonics";
-            this.radioButtonOddHarmonics.Size = new System.Drawing.Size(94, 17);
-            this.radioButtonOddHarmonics.TabIndex = 114;
-            this.radioButtonOddHarmonics.Text = "odd harmonics";
-            this.radioButtonOddHarmonics.UseVisualStyleBackColor = false;
-            this.radioButtonOddHarmonics.CheckedChanged += new System.EventHandler(this.radioButtonOddHarmonics_CheckedChanged);
-            // 
-            // radioButtonEvenHarmonics
-            // 
-            this.radioButtonEvenHarmonics.AutoSize = true;
-            this.radioButtonEvenHarmonics.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonEvenHarmonics.Checked = true;
-            this.radioButtonEvenHarmonics.Location = new System.Drawing.Point(6, 21);
-            this.radioButtonEvenHarmonics.Name = "radioButtonEvenHarmonics";
-            this.radioButtonEvenHarmonics.Size = new System.Drawing.Size(100, 17);
-            this.radioButtonEvenHarmonics.TabIndex = 113;
-            this.radioButtonEvenHarmonics.TabStop = true;
-            this.radioButtonEvenHarmonics.Text = "even harmonics";
-            this.radioButtonEvenHarmonics.UseVisualStyleBackColor = false;
-            this.radioButtonEvenHarmonics.CheckedChanged += new System.EventHandler(this.radioButtonEvenHarmonics_CheckedChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Transparent;
-            this.panel4.Controls.Add(this.radioButtonOverTones);
-            this.panel4.Controls.Add(this.radioButtonUnderTones);
-            this.panel4.Controls.Add(this.radioButtonBothTones);
-            this.panel4.Location = new System.Drawing.Point(207, 71);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(86, 65);
-            this.panel4.TabIndex = 114;
-            // 
-            // radioButtonOverTones
-            // 
-            this.radioButtonOverTones.AutoSize = true;
-            this.radioButtonOverTones.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonOverTones.Checked = true;
-            this.radioButtonOverTones.Location = new System.Drawing.Point(3, 0);
-            this.radioButtonOverTones.Name = "radioButtonOverTones";
-            this.radioButtonOverTones.Size = new System.Drawing.Size(72, 17);
-            this.radioButtonOverTones.TabIndex = 112;
-            this.radioButtonOverTones.TabStop = true;
-            this.radioButtonOverTones.Text = "overtones";
-            this.radioButtonOverTones.UseVisualStyleBackColor = false;
-            // 
-            // radioButtonUnderTones
-            // 
-            this.radioButtonUnderTones.AutoSize = true;
-            this.radioButtonUnderTones.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonUnderTones.Location = new System.Drawing.Point(3, 20);
-            this.radioButtonUnderTones.Name = "radioButtonUnderTones";
-            this.radioButtonUnderTones.Size = new System.Drawing.Size(78, 17);
-            this.radioButtonUnderTones.TabIndex = 111;
-            this.radioButtonUnderTones.Text = "undertones";
-            this.radioButtonUnderTones.UseVisualStyleBackColor = false;
-            // 
-            // radioButtonBothTones
-            // 
-            this.radioButtonBothTones.AutoSize = true;
-            this.radioButtonBothTones.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonBothTones.Location = new System.Drawing.Point(3, 39);
-            this.radioButtonBothTones.Name = "radioButtonBothTones";
-            this.radioButtonBothTones.Size = new System.Drawing.Size(46, 17);
-            this.radioButtonBothTones.TabIndex = 110;
-            this.radioButtonBothTones.Text = "both";
-            this.radioButtonBothTones.UseVisualStyleBackColor = false;
-            // 
-            // numericUpDownWeight
-            // 
-            this.numericUpDownWeight.Location = new System.Drawing.Point(94, 175);
-            this.numericUpDownWeight.Maximum = new decimal(new int[] {
-            200,
+            this.colorSliderDuration.BackColor = System.Drawing.Color.Transparent;
+            this.colorSliderDuration.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
+            this.colorSliderDuration.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
+            this.colorSliderDuration.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.colorSliderDuration.ElapsedInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDuration.ElapsedPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(130)))), ((int)(((byte)(208)))));
+            this.colorSliderDuration.ElapsedPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(180)))));
+            this.colorSliderDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.colorSliderDuration.ForeColor = System.Drawing.Color.White;
+            this.colorSliderDuration.LargeChange = new decimal(new int[] {
+            5,
             0,
             0,
             0});
-            this.numericUpDownWeight.Minimum = new decimal(new int[] {
+            this.colorSliderDuration.Location = new System.Drawing.Point(160, 384);
+            this.colorSliderDuration.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
+            this.colorSliderDuration.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.colorSliderDuration.Name = "colorSliderDuration";
+            this.colorSliderDuration.ScaleDivisions = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.colorSliderDuration.ScaleSubDivisions = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.colorSliderDuration.ShowDivisionsText = false;
+            this.colorSliderDuration.ShowSmallScale = false;
+            this.colorSliderDuration.Size = new System.Drawing.Size(321, 39);
+            this.colorSliderDuration.SmallChange = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownWeight.Name = "numericUpDownWeight";
-            this.numericUpDownWeight.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownWeight.TabIndex = 111;
-            this.numericUpDownWeight.Value = new decimal(new int[] {
-            95,
+            this.colorSliderDuration.TabIndex = 145;
+            this.colorSliderDuration.Text = "colorSlider1";
+            this.colorSliderDuration.ThumbInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDuration.ThumbPenColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(56)))), ((int)(((byte)(152)))));
+            this.colorSliderDuration.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.colorSliderDuration.ThumbSize = new System.Drawing.Size(16, 16);
+            this.colorSliderDuration.TickAdd = 0F;
+            this.colorSliderDuration.TickColor = System.Drawing.Color.White;
+            this.colorSliderDuration.TickDivide = 0F;
+            this.colorSliderDuration.Value = new decimal(new int[] {
+            30,
             0,
             0,
             0});
-            // 
-            // numericUpDownDuration
-            // 
-            this.numericUpDownDuration.Location = new System.Drawing.Point(270, 240);
-            this.numericUpDownDuration.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.numericUpDownDuration.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownDuration.Name = "numericUpDownDuration";
-            this.numericUpDownDuration.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownDuration.TabIndex = 110;
-            this.numericUpDownDuration.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(37, 179);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
-            this.label7.TabIndex = 106;
-            this.label7.Text = "weight %";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(210, 242);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 105;
-            this.label6.Text = "duration %";
-            // 
-            // numericUpDownWeightChange
-            // 
-            this.numericUpDownWeightChange.Location = new System.Drawing.Point(130, 241);
-            this.numericUpDownWeightChange.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownWeightChange.Name = "numericUpDownWeightChange";
-            this.numericUpDownWeightChange.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownWeightChange.TabIndex = 103;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.Location = new System.Drawing.Point(37, 245);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(88, 13);
-            this.label45.TabIndex = 102;
-            this.label45.Text = "weight change %";
-            // 
-            // numericUpDownAmount
-            // 
-            this.numericUpDownAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownAmount.Location = new System.Drawing.Point(310, 23);
-            this.numericUpDownAmount.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownAmount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownAmount.Name = "numericUpDownAmount";
-            this.numericUpDownAmount.Size = new System.Drawing.Size(54, 26);
-            this.numericUpDownAmount.TabIndex = 100;
-            this.numericUpDownAmount.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(239, 24);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(63, 20);
-            this.label17.TabIndex = 101;
-            this.label17.Text = "amount";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonSetAllDelays);
-            this.groupBox2.Controls.Add(this.buttonSetAllDurations);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.buttonAdjustFrequencies);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(996, 514);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(275, 115);
-            this.groupBox2.TabIndex = 72;
-            this.groupBox2.TabStop = false;
-            // 
-            // buttonSetAllDelays
-            // 
-            this.buttonSetAllDelays.Active = false;
-            this.buttonSetAllDelays.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSetAllDelays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSetAllDelays.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetAllDelays.ForeColor = System.Drawing.Color.Black;
-            this.buttonSetAllDelays.HorizontalGradient = false;
-            this.buttonSetAllDelays.Location = new System.Drawing.Point(142, 75);
-            this.buttonSetAllDelays.Name = "buttonSetAllDelays";
-            this.buttonSetAllDelays.Size = new System.Drawing.Size(121, 24);
-            this.buttonSetAllDelays.TabIndex = 148;
-            this.buttonSetAllDelays.Text = "all delays to this";
-            this.buttonSetAllDelays.UseVisualStyleBackColor = true;
-            this.buttonSetAllDelays.Click += new System.EventHandler(this.buttonSetAllDelays_Click);
-            // 
-            // buttonSetAllDurations
-            // 
-            this.buttonSetAllDurations.Active = false;
-            this.buttonSetAllDurations.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSetAllDurations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSetAllDurations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetAllDurations.ForeColor = System.Drawing.Color.Black;
-            this.buttonSetAllDurations.HorizontalGradient = false;
-            this.buttonSetAllDurations.Location = new System.Drawing.Point(14, 75);
-            this.buttonSetAllDurations.Name = "buttonSetAllDurations";
-            this.buttonSetAllDurations.Size = new System.Drawing.Size(121, 24);
-            this.buttonSetAllDurations.TabIndex = 147;
-            this.buttonSetAllDurations.Text = "all durations to this";
-            this.buttonSetAllDurations.UseVisualStyleBackColor = true;
-            this.buttonSetAllDurations.Click += new System.EventHandler(this.buttonSetAllDurations_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 12);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(70, 20);
-            this.label15.TabIndex = 146;
-            this.label15.Text = "Bulk edit";
-            // 
-            // buttonAdjustFrequencies
-            // 
-            this.buttonAdjustFrequencies.Active = false;
-            this.buttonAdjustFrequencies.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonAdjustFrequencies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdjustFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAdjustFrequencies.ForeColor = System.Drawing.Color.Black;
-            this.buttonAdjustFrequencies.HorizontalGradient = false;
-            this.buttonAdjustFrequencies.Location = new System.Drawing.Point(14, 42);
-            this.buttonAdjustFrequencies.Name = "buttonAdjustFrequencies";
-            this.buttonAdjustFrequencies.Size = new System.Drawing.Size(121, 24);
-            this.buttonAdjustFrequencies.TabIndex = 145;
-            this.buttonAdjustFrequencies.Text = "frequencies";
-            this.buttonAdjustFrequencies.UseVisualStyleBackColor = true;
-            this.buttonAdjustFrequencies.Click += new System.EventHandler(this.buttonAdjustFrequencies_Click);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.panel6);
-            this.groupBox7.Controls.Add(this.label13);
-            this.groupBox7.Location = new System.Drawing.Point(1277, 514);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(119, 115);
-            this.groupBox7.TabIndex = 73;
-            this.groupBox7.TabStop = false;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.Black;
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.buttonLuckyPick);
-            this.panel6.Location = new System.Drawing.Point(32, 47);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(52, 52);
-            this.panel6.TabIndex = 152;
-            // 
-            // buttonLuckyPick
-            // 
-            this.buttonLuckyPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonLuckyPick.FlatAppearance.BorderSize = 0;
-            this.buttonLuckyPick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLuckyPick.Image = global::WaveCraft.Properties.Resources.luckypick;
-            this.buttonLuckyPick.Location = new System.Drawing.Point(2, 3);
-            this.buttonLuckyPick.Name = "buttonLuckyPick";
-            this.buttonLuckyPick.Size = new System.Drawing.Size(47, 45);
-            this.buttonLuckyPick.TabIndex = 152;
-            this.buttonLuckyPick.UseVisualStyleBackColor = false;
-            this.buttonLuckyPick.Click += new System.EventHandler(this.buttonLuckyPick_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(6, 13);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(83, 20);
-            this.label13.TabIndex = 149;
-            this.label13.Text = "Lucky Pick";
+            this.colorSliderDuration.MouseUp += new System.Windows.Forms.MouseEventHandler(this.colorSliderDuration1_MouseUp);
             // 
             // FormMain
             // 
@@ -2479,6 +2572,7 @@ namespace WaveCraft
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWaveEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWeightShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).EndInit();
@@ -2496,10 +2590,9 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.chartAHDSR)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpread)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeShift)).EndInit();
@@ -2549,11 +2642,7 @@ namespace WaveCraft
         public System.Windows.Forms.DataVisualization.Charting.Chart chartAHDSR;
         internal System.Windows.Forms.Label labelDuration;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBoxPresetName;
-        private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.ComboBox comboBoxPresets;
         private System.Windows.Forms.Label labelHold;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel3;
@@ -2564,7 +2653,6 @@ namespace WaveCraft
         public System.Windows.Forms.DataVisualization.Charting.Chart chartFFTLeft;
         private System.Windows.Forms.GroupBox groupBox3;
         internal System.Windows.Forms.Label labelFileName;
-        private System.Windows.Forms.ListBox listBoxWaves;
         private System.Windows.Forms.CheckBox checkBoxRandomFrequency;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown numericUpDownWeightChange;
@@ -2641,7 +2729,7 @@ namespace WaveCraft
         private System.Windows.Forms.Button button1;
         private CustomControls.GradientButton buttonConvertToWaves;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label labelBulkEdit;
         private CustomControls.GradientButton buttonAdjustFrequencies;
         private CustomControls.GradientButton buttonSetAllDurations;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -2662,6 +2750,17 @@ namespace WaveCraft
         internal System.Windows.Forms.PictureBox pictureBoxWeightShape;
         internal System.Windows.Forms.Button buttonChange;
         private System.Windows.Forms.RadioButton radioButtonEvenOddHarmonics;
+        private System.Windows.Forms.Label label25;
+        private CustomControls.GradientButton buttonAddToVault;
+        private System.Windows.Forms.TextBox textBoxDurationAll;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxDelayAll;
+        private CustomControls.GradientButton buttonRemoveFromVault;
+        internal System.Windows.Forms.ComboBox comboBoxPresets;
+        private Custom_Controls.GradientListBox listBoxWavesVault;
+        internal Custom_Controls.GradientListBox listBoxWaves;
+        internal System.Windows.Forms.PictureBox pictureBoxCustomWaveEnd;
     }
 }
 

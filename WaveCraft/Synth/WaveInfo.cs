@@ -22,10 +22,11 @@ namespace WaveCraft.Synth
         string waveFile;            // .wav file data
         double[] waveData;          // resulting data after applying all properties (freq, vol, waveshape, etc.)
         int[] waveFileData = new int[0];            // data read from .wav file
-        int[] shapeWave = new int[0];               // shape of the custom waveform. this consists of 1000 items with value between -327 and 327
-        int[] shapeFrequency = new int[0];          // shape of the frequency. this consists of 1000 items with value between 0 and 1000
-        int[] shapeVolume = new int[0];             // shape of the volume. this consists of 1000 items with value between 0 and 1000
-        int[] shapeWeight = new int[0];             // shape of the weight. this consists of 1000 items with value between 0 and 1000
+        int[] shapeWave = new int[0];               // shape of the custom waveform. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapeWaveEnd = new int[0];            // end shape of the custom waveform. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapeFrequency = new int[0];          // shape of the frequency. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapeVolume = new int[0];             // shape of the volume. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapeWeight = new int[0];             // shape of the weight. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
 
         public double MinFrequency { get => minFrequency; set => minFrequency = value; }
         public double MaxFrequency { get => maxFrequency; set => maxFrequency = value; }
@@ -45,6 +46,7 @@ namespace WaveCraft.Synth
         public int MinWeight { get => minWeight; set => minWeight = value; }
         public int MaxWeight { get => maxWeight; set => maxWeight = value; }
         public int[] ShapeWeight { get => shapeWeight; set => shapeWeight = value; }
+        public int[] ShapeWaveEnd { get => shapeWaveEnd; set => shapeWaveEnd = value; }
 
         public WaveInfo(int samplesPerSecond)
         {

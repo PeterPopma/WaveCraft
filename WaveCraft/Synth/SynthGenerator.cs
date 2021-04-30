@@ -37,6 +37,7 @@ namespace WaveCraft.Synth
         WaveDataChunk finalData = new WaveDataChunk();
         double[] tempData;
         List<WaveInfo> waves = new List<WaveInfo>();
+        List<WaveInfo> wavesVault = new List<WaveInfo>();
         WaveInfo currentWave;
 
         // FFT stuff
@@ -481,14 +482,14 @@ namespace WaveCraft.Synth
         }
 
         // returns a value between -1 and 1
-        private double GetWaveFormData(WaveInfo waveInfo, double phase, double frequency)
+        private double GetWaveFormData(int[] shapeWave, double phase, double frequency)
         {
             double position = (phase / (2 * Math.PI)) * SHAPE_NUMPOINTS;
             int int_position = (int)position;
             int int_next_position = (int)position + 1;
             double value = 0;
 
-            if (waveInfo.ShapeWave.Length <= int_position)     // no data
+            if (shapeWave.Length <= int_position)     // no data
             {
                 return 0;
             }
@@ -499,12 +500,12 @@ namespace WaveCraft.Synth
             {
                 if (int_next_position == SHAPE_NUMPOINTS)
                 {
-                    value = waveInfo.ShapeWave[int_position] / (double)SHAPE_MAX_VALUE;
+                    value = shapeWave[int_position] / (double)SHAPE_MAX_VALUE;
                 }
                 else
                 {
                     // interpolate between points from custom graph
-                    value = (waveInfo.ShapeWave[int_position] * Math.Abs(int_position - position) + waveInfo.ShapeWave[int_next_position] * Math.Abs(int_next_position - position)) / SHAPE_MAX_VALUE;
+                    value = (shapeWave[int_position] * Math.Abs(int_position - position) + shapeWave[int_next_position] * Math.Abs(int_next_position - position)) / SHAPE_MAX_VALUE;
                 }
             }
             else        // there is multiple waveformdata for this part of the wave; take the average of all values
@@ -513,7 +514,7 @@ namespace WaveCraft.Synth
                 int count = 0;
                 while (int_position < next_phase_position)
                 {
-                    value += waveInfo.ShapeWave[int_position % SHAPE_NUMPOINTS] / (double)SHAPE_MAX_VALUE;
+                    value += shapeWave[int_position % SHAPE_NUMPOINTS] / (double)SHAPE_MAX_VALUE;
                     count++;
                     int_position++;
                 }
@@ -566,7 +567,7 @@ namespace WaveCraft.Synth
             }
         }
 
-        private void CreateWaveData(WaveInfo generator, double frequency, uint current_sample)
+        private void CreateWaveData(WaveInfo waveInfo, double frequency, uint current_sample)
         {
             if (frequency<0)
             {
@@ -577,9 +578,9 @@ namespace WaveCraft.Synth
 
             for (int channel = 0; channel < NUM_AUDIO_CHANNELS; channel++)
             {
-                if (generator.Channel == 2 || generator.Channel == channel)
+                if (waveInfo.Channel == 2 || waveInfo.Channel == channel)
                 {
-                    generator.WaveData[current_sample * 2 + channel] = Convert.ToDouble(MAX_AMPLITUDE * WaveFunction(generator, (wavePhase + deltaT)%(2*Math.PI), frequency));
+                    waveInfo.WaveData[current_sample * 2 + channel] = Convert.ToDouble(MAX_AMPLITUDE * WaveFunction(waveInfo, (wavePhase + deltaT)%(2*Math.PI), frequency, current_sample));
                 }
             }
             wavePhase += deltaT;
@@ -587,12 +588,14 @@ namespace WaveCraft.Synth
 
         // input: phase 0..2PI
         // output: a value between -1 and 1
-        private double WaveFunction(WaveInfo waveInfo, double phase, double frequency)
+        private double WaveFunction(WaveInfo waveInfo, double phase, double frequency, uint current_sample)
         {
             switch (waveInfo.WaveForm)
             {
                 case "Custom":
-                    return GetWaveFormData(waveInfo, phase, frequency);
+                    return GetWaveFormData(waveInfo.ShapeWave, phase, frequency);
+                case "CustomBeginEnd":
+                    return WaveFunctionBeginEnd(waveInfo, phase, frequency, current_sample);
                 case "Sine":
                     return Math.Sin(phase);
                 case "Square":
@@ -608,18 +611,15 @@ namespace WaveCraft.Synth
             return 0.0;
         }
 
-        public double CalculateHarmonics(List<Harmonic> harmonics, double phase)
+        // output: a value between -1 and 1
+        private double WaveFunctionBeginEnd(WaveInfo waveInfo, double phase, double frequency, uint current_sample)
         {
-            double result = 0;
+            double position = current_sample / (double)waveInfo.NumSamples();
+            double beginPart = GetWaveFormData(waveInfo.ShapeWave, phase, frequency);
+            double endPart = GetWaveFormData(waveInfo.ShapeWaveEnd, phase, frequency);
 
-            foreach (Harmonic harmonic in harmonics)
-            {
-                result += Math.Sin(phase*harmonic.Number) * harmonic.Volume;
-            }
-
-            return result;
+            return (endPart * position) + (beginPart * (1 - position));
         }
-
 
         // load a .wav file. Supported is PCM, mono/stereo, 8/16/24 bits, all samplerates.
         // loaded file is transformed into a 44100 Kz 16 bits stereo stream. 
@@ -874,8 +874,8 @@ namespace WaveCraft.Synth
             }
             newWave.WaveData = new double[currentWave.WaveData.Length];
             newWave.WaveFileData = currentWave.WaveFileData.Clone() as int[];
-            // note this can slow things down when we clone a wave with a lot of harmonics
             newWave.ShapeWave = currentWave.ShapeWave.Clone() as int[];
+            newWave.ShapeWaveEnd = currentWave.ShapeWaveEnd.Clone() as int[];
             newWave.ShapeVolume = currentWave.ShapeVolume.Clone() as int[];
             newWave.ShapeFrequency = currentWave.ShapeFrequency.Clone() as int[];
             newWave.ShapeWeight = currentWave.ShapeWeight.Clone() as int[];
@@ -891,9 +891,34 @@ namespace WaveCraft.Synth
             CurrentWave = Waves.Find(o => o.Name.Equals(name_part));
         }
 
+        public WaveInfo GetCurrentWaveByDisplayName(string name)
+        {
+            string name_part = name.Substring(0, name.IndexOf(" "));
+
+            return Waves.Find(o => o.Name.Equals(name_part));
+        }
+
+        public WaveInfo GetVaultedWaveByDisplayName(string name)
+        {
+            string name_part = name.Substring(0, name.IndexOf(" "));
+
+            return wavesVault.Find(o => o.Name.Equals(name_part));
+        }
+
         public void RemoveCurrentWave()
         {
             Waves.Remove(currentWave);
+        }
+
+        public void AddToVault(WaveInfo wave)
+        {
+            wavesVault.Add(wave);
+            waves.Remove(wave);
+        }
+        public void RemoveFromVault(WaveInfo wave)
+        {
+            waves.Add(wave);
+            wavesVault.Remove(wave);
         }
 
     }

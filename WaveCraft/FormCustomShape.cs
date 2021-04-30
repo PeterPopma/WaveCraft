@@ -115,7 +115,13 @@ namespace WaveCraft
 
         private void FormCustomWave_Load(object sender, EventArgs e)
         {
-            if (myParent.SynthGenerator.CurrentWave.ShapeWave.Length < SynthGenerator.SHAPE_NUMPOINTS)
+            int[] shape = myParent.SynthGenerator.CurrentWave.ShapeWave;
+            if (Text.Equals("Wave Shape End"))
+            {
+                shape = myParent.SynthGenerator.CurrentWave.ShapeWaveEnd;
+            }
+
+            if (shape.Length < SynthGenerator.SHAPE_NUMPOINTS)
             {
                 for (int i = 0; i < WaveData.Length; i++)
                 {
@@ -126,7 +132,7 @@ namespace WaveCraft
             {
                 for (int i = 0; i < WaveData.Length; i++)
                 {
-                    WaveData[i] = SynthGenerator.SHAPE_MAX_VALUE - myParent.SynthGenerator.CurrentWave.ShapeWave[i];
+                    WaveData[i] = SynthGenerator.SHAPE_MAX_VALUE - shape[i];
                 }
             }
 
@@ -141,13 +147,24 @@ namespace WaveCraft
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            myParent.SynthGenerator.CurrentWave.ShapeWave = new int[SynthGenerator.SHAPE_NUMPOINTS];
+            int[] shape = new int[SynthGenerator.SHAPE_NUMPOINTS];
+
             for (int i = 0; i < WaveData.Length; i++)
             {
                 // Note that graph is upside-down
-                myParent.SynthGenerator.CurrentWave.ShapeWave[i] = SynthGenerator.SHAPE_MAX_VALUE - WaveData[i];
+                shape[i] = SynthGenerator.SHAPE_MAX_VALUE - WaveData[i];
             }
-            myParent.pictureBoxCustomWave.Refresh();
+            if (Text.Equals("Wave Shape End"))
+            {
+                myParent.SynthGenerator.CurrentWave.ShapeWaveEnd = shape;
+                myParent.pictureBoxCustomWaveEnd.Refresh();
+            }
+            else
+            {
+                myParent.SynthGenerator.CurrentWave.ShapeWave = shape;
+                myParent.pictureBoxCustomWave.Refresh();
+            }
+
             myParent.SynthGenerator.UpdateCurrentWaveData();
 
             Close();

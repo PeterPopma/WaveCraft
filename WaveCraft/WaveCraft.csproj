@@ -30,10 +30,10 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -87,6 +87,15 @@
     <Compile Include="Custom Controls\GradientButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Custom Controls\GradientListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormAddPreset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddPreset.Designer.cs">
+      <DependentUpon>FormAddPreset.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFileToWaves.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,11 +120,11 @@
     <Compile Include="FormFFTChart.Designer.cs">
       <DependentUpon>FormFFTChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFrequency2.cs">
+    <Compile Include="FormFrequencyAll.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFrequency2.Designer.cs">
-      <DependentUpon>FormFrequency2.cs</DependentUpon>
+    <Compile Include="FormFrequencyAll.Designer.cs">
+      <DependentUpon>FormFrequencyAll.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFrequency.cs">
       <SubType>Form</SubType>
@@ -175,6 +184,9 @@
       <DependentUpon>ColorSlider2.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAddPreset.resx">
+      <DependentUpon>FormAddPreset.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAmplitudeChart.resx">
       <DependentUpon>FormAmplitudeChart.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,8 +199,8 @@
     <EmbeddedResource Include="FormFileToWaves.resx">
       <DependentUpon>FormFileToWaves.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFrequency2.resx">
-      <DependentUpon>FormFrequency2.cs</DependentUpon>
+    <EmbeddedResource Include="FormFrequencyAll.resx">
+      <DependentUpon>FormFrequencyAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFrequency.resx">
       <DependentUpon>FormFrequency.cs</DependentUpon>
@@ -258,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\pencil.ico" />
+    <None Include="Images\custom2.png" />
     <None Include="Images\luckypick.png" />
     <None Include="Images\decinc.png" />
     <None Include="Images\dec.png" />

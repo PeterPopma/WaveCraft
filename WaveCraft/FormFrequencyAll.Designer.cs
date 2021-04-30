@@ -3,7 +3,7 @@ using WaveCraft.Properties;
 
 namespace WaveCraft
 {
-    partial class FormFrequency2
+    partial class FormFrequencyAll
     {
         /// <summary>
         /// Required designer variable.

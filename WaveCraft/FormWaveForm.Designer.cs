@@ -39,6 +39,7 @@ namespace WaveCraft
             this.pictureBoxCustom = new System.Windows.Forms.PictureBox();
             this.pictureBoxWav = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBoxCustomEnd = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquare)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSawtooth)).BeginInit();
@@ -47,13 +48,14 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWav)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomEnd)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxSine
             // 
             this.pictureBoxSine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSine.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSine.Image = Resources.sine;
+            this.pictureBoxSine.Image = global::WaveCraft.Properties.Resources.sine;
             this.pictureBoxSine.InitialImage = null;
             this.pictureBoxSine.Location = new System.Drawing.Point(22, 21);
             this.pictureBoxSine.Name = "pictureBoxSine";
@@ -66,7 +68,7 @@ namespace WaveCraft
             // 
             this.pictureBoxSquare.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSquare.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSquare.Image = Resources.square;
+            this.pictureBoxSquare.Image = global::WaveCraft.Properties.Resources.square;
             this.pictureBoxSquare.InitialImage = null;
             this.pictureBoxSquare.Location = new System.Drawing.Point(129, 21);
             this.pictureBoxSquare.Name = "pictureBoxSquare";
@@ -79,7 +81,7 @@ namespace WaveCraft
             // 
             this.pictureBoxSawtooth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxSawtooth.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSawtooth.Image = Resources.sawtooth;
+            this.pictureBoxSawtooth.Image = global::WaveCraft.Properties.Resources.sawtooth;
             this.pictureBoxSawtooth.InitialImage = null;
             this.pictureBoxSawtooth.Location = new System.Drawing.Point(336, 21);
             this.pictureBoxSawtooth.Name = "pictureBoxSawtooth";
@@ -92,9 +94,9 @@ namespace WaveCraft
             // 
             this.pictureBoxRandom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxRandom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxRandom.Image = Resources.random;
+            this.pictureBoxRandom.Image = global::WaveCraft.Properties.Resources.random;
             this.pictureBoxRandom.InitialImage = null;
-            this.pictureBoxRandom.Location = new System.Drawing.Point(27, 125);
+            this.pictureBoxRandom.Location = new System.Drawing.Point(234, 119);
             this.pictureBoxRandom.Name = "pictureBoxRandom";
             this.pictureBoxRandom.Size = new System.Drawing.Size(70, 70);
             this.pictureBoxRandom.TabIndex = 95;
@@ -105,7 +107,7 @@ namespace WaveCraft
             // 
             this.pictureBoxTriangle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxTriangle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxTriangle.Image = Resources.triangle;
+            this.pictureBoxTriangle.Image = global::WaveCraft.Properties.Resources.triangle;
             this.pictureBoxTriangle.InitialImage = null;
             this.pictureBoxTriangle.Location = new System.Drawing.Point(234, 21);
             this.pictureBoxTriangle.Name = "pictureBoxTriangle";
@@ -118,9 +120,9 @@ namespace WaveCraft
             // 
             this.pictureBoxCustom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxCustom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCustom.Image = Resources.custom;
+            this.pictureBoxCustom.Image = global::WaveCraft.Properties.Resources.custom;
             this.pictureBoxCustom.InitialImage = null;
-            this.pictureBoxCustom.Location = new System.Drawing.Point(134, 125);
+            this.pictureBoxCustom.Location = new System.Drawing.Point(22, 119);
             this.pictureBoxCustom.Name = "pictureBoxCustom";
             this.pictureBoxCustom.Size = new System.Drawing.Size(70, 70);
             this.pictureBoxCustom.TabIndex = 97;
@@ -131,9 +133,9 @@ namespace WaveCraft
             // 
             this.pictureBoxWav.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxWav.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxWav.Image = Resources.wav;
+            this.pictureBoxWav.Image = global::WaveCraft.Properties.Resources.wav;
             this.pictureBoxWav.InitialImage = null;
-            this.pictureBoxWav.Location = new System.Drawing.Point(239, 125);
+            this.pictureBoxWav.Location = new System.Drawing.Point(336, 119);
             this.pictureBoxWav.Name = "pictureBoxWav";
             this.pictureBoxWav.Size = new System.Drawing.Size(70, 70);
             this.pictureBoxWav.TabIndex = 98;
@@ -144,6 +146,10 @@ namespace WaveCraft
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.pictureBoxCustom);
+            this.panel1.Controls.Add(this.pictureBoxCustomEnd);
+            this.panel1.Controls.Add(this.pictureBoxRandom);
+            this.panel1.Controls.Add(this.pictureBoxWav);
             this.panel1.Controls.Add(this.pictureBoxTriangle);
             this.panel1.Controls.Add(this.pictureBoxSquare);
             this.panel1.Controls.Add(this.pictureBoxSine);
@@ -154,12 +160,22 @@ namespace WaveCraft
             this.panel1.Size = new System.Drawing.Size(428, 210);
             this.panel1.TabIndex = 99;
             // 
+            // pictureBoxCustomEnd
+            // 
+            this.pictureBoxCustomEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxCustomEnd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCustomEnd.Image = global::WaveCraft.Properties.Resources.custom2;
+            this.pictureBoxCustomEnd.InitialImage = null;
+            this.pictureBoxCustomEnd.Location = new System.Drawing.Point(129, 119);
+            this.pictureBoxCustomEnd.Name = "pictureBoxCustomEnd";
+            this.pictureBoxCustomEnd.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxCustomEnd.TabIndex = 99;
+            this.pictureBoxCustomEnd.TabStop = false;
+            this.pictureBoxCustomEnd.Click += new System.EventHandler(this.pictureBoxCustomEnd_Click);
+            // 
             // FormWaveForm
             // 
             this.ClientSize = new System.Drawing.Size(436, 222);
-            this.Controls.Add(this.pictureBoxWav);
-            this.Controls.Add(this.pictureBoxCustom);
-            this.Controls.Add(this.pictureBoxRandom);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
@@ -174,6 +190,7 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWav)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomEnd)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,5 +205,6 @@ namespace WaveCraft
         private System.Windows.Forms.PictureBox pictureBoxCustom;
         private System.Windows.Forms.PictureBox pictureBoxWav;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBoxCustomEnd;
     }
 }

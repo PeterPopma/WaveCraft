@@ -103,6 +103,16 @@ namespace WaveCraft.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap custom2 {
+            get {
+                object obj = ResourceManager.GetObject("custom2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap dec {
             get {
                 object obj = ResourceManager.GetObject("dec", resourceCulture);
