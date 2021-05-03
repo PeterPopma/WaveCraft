@@ -47,6 +47,11 @@ namespace WaveCraft.Synth
         Complex[] frequencySpectrumRight;
         double[] frequenciesRight;
 
+        int[] shapeBulkCreate = new int[SHAPE_NUMPOINTS];             // shape of the bulk create. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        double minFrequencyBulkCreate = 10;
+        double maxFrequencyBulkCreate = 20000;
+        int amountBulkCreate = 10;
+
         Random random = new Random();
 
         double wavePhase;
@@ -55,6 +60,7 @@ namespace WaveCraft.Synth
 
         public SynthGenerator(FormMain parentForm)
         {
+            ArrayUtils.Populate(ShapeBulkCreate, SynthGenerator.SHAPE_MAX_VALUE / 2);
             this.parentForm = parentForm;
         }
 
@@ -69,6 +75,10 @@ namespace WaveCraft.Synth
         public double[] TempData { get => tempData; set => tempData = value; }
         public int SamplesPerSecond { get => samplesPerSecond; set => samplesPerSecond = value; }
         public int BitsPerSample { get => bitsPerSample; set => bitsPerSample = value; }
+        public int[] ShapeBulkCreate { get => shapeBulkCreate; set => shapeBulkCreate = value; }
+        public double MinFrequencyBulkCreate { get => minFrequencyBulkCreate; set => minFrequencyBulkCreate = value; }
+        public double MaxFrequencyBulkCreate { get => maxFrequencyBulkCreate; set => maxFrequencyBulkCreate = value; }
+        public int AmountBulkCreate { get => amountBulkCreate; set => amountBulkCreate = value; }
 
         public int NumSamples()
         {

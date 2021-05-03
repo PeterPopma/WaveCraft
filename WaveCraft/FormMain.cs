@@ -149,7 +149,10 @@ namespace WaveCraft
 
             groupBox7.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox7.Refresh();
-           
+
+            groupBox8.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox8.Refresh();
+            
             synthGenerator = new SynthGenerator(this);
 
             // Init generators
@@ -541,12 +544,12 @@ namespace WaveCraft
             */
         }
 
-        private void AddWaveToLists(WaveInfo newWave)
+        private void AddToListBoxWaves(WaveInfo newWave)
         {
             listBoxWaves.Items.Add(newWave.DisplayName());
         }
 
-        private void RemoveWaveFromList(WaveInfo waveInfo)
+        private void RemoveFromListBoxWaves(WaveInfo waveInfo)
         {
             listBoxWaves.Items.RemoveAt(listBoxWaves.FindStringExact(waveInfo.DisplayName()));
         }
@@ -554,7 +557,7 @@ namespace WaveCraft
         private void buttonAddNewWave_Click(object sender, EventArgs e)
         {
             synthGenerator.CurrentWave = synthGenerator.CloneWave();
-            AddWaveToLists(synthGenerator.CurrentWave);
+            AddToListBoxWaves(synthGenerator.CurrentWave);
             listBoxWaves.SelectedIndex = listBoxWaves.FindStringExact(synthGenerator.CurrentWave.DisplayName());
             UpdateMixedSound();
         }
@@ -567,7 +570,7 @@ namespace WaveCraft
             {
                 String item = listBoxWaves.SelectedItems[0].ToString();
                 synthGenerator.SetCurrentWaveByDisplayName(item);
-                RemoveWaveFromList(synthGenerator.CurrentWave);
+                RemoveFromListBoxWaves(synthGenerator.CurrentWave);
                 synthGenerator.RemoveCurrentWave();
             }
 
@@ -1098,7 +1101,7 @@ namespace WaveCraft
                     {
                         newWave.StartPosition += (int)(newWave.NumSamples() * Convert.ToDouble(inharmonic_number * numericUpDownTimeShift.Value) / 100.0);
                     }
-                    AddWaveToLists(newWave);
+                    AddToListBoxWaves(newWave);
                 }
             }
         }
@@ -1136,7 +1139,7 @@ namespace WaveCraft
             {
                 newWave.StartPosition += (int)(newWave.NumSamples()* Convert.ToDouble(harmonic_number*numericUpDownTimeShift.Value)/100.0);
             }
-            AddWaveToLists(newWave);
+            AddToListBoxWaves(newWave);
         }
 
         private void CreateHarmonics(int startFactor)
@@ -1766,6 +1769,13 @@ namespace WaveCraft
             formCustomWave.MyParent = this;
             formCustomWave.Text = "Wave Shape End";
             formCustomWave.ShowDialog();
+        }
+
+        private void buttonBulkCreate_Click(object sender, EventArgs e)
+        {
+            FormBulkCreate formBulkCreate = new FormBulkCreate();
+            formBulkCreate.MyParent = this;
+            formBulkCreate.ShowDialog();
         }
     }
 }
