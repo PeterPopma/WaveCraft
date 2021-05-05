@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Product Id="*" Name="WaveCraft" Language="1033" Version="1.1.0.0" Manufacturer="Peter Popma" UpgradeCode="b51fb07a-de35-4c23-bd43-1d1360bcf65d">
+  <Product Id="*" Name="WaveCraft" Language="1033" Version="1.2.0.0" Manufacturer="Peter Popma" UpgradeCode="b51fb07a-de35-4c23-bd43-1d1360bcf65d">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of WaveCraft is already installed." />
@@ -27,6 +27,7 @@
                   <File Id="Bass2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass2.pst" Vital="no" KeyPath="no" />
                   <File Id="Bass3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass3.pst" Vital="no" KeyPath="no" />
                   <File Id="Bell.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bell2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell2.pst" Vital="no" KeyPath="no" />
                   <File Id="Chime.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Chime.pst" Vital="no" KeyPath="no" />
                   <File Id="ElectricGuitar.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\ElectricGuitar.pst" Vital="no" KeyPath="no" />
                   <File Id="Flute.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute.pst" Vital="no" KeyPath="no" />
@@ -75,7 +76,7 @@
                   Description="The versatile additive synthesizer"
                   Target="[!WaveCraft.exe]"
                   WorkingDirectory="WaveCraftID">
-          <Icon Id="WaveCraft.ico" SourceFile="WaveCraft.ico" />
+          <Icon Id="WaveCraft.ico" SourceFile="..\WaveCraft\Icons\WaveCraft.ico" />
         </Shortcut>
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\Peter Popma\WaveCraft" Name="installed" Type="integer" Value="1" KeyPath="yes"/>

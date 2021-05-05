@@ -32,15 +32,20 @@ namespace WaveCraft.Custom_Controls
                 e.Graphics.FillRegion(brush, iRegion);
             }
 
-
-            for (int i = 0; i < this.Items.Count; ++i)
+            try
             {
-                Rectangle irect = this.GetItemRectangle(i);
-                OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font, irect, i, DrawItemState.Default, this.ForeColor, this.BackColor));
+                for (int i = 0; i < this.Items.Count; ++i)
+                {
+                    Rectangle irect = this.GetItemRectangle(i);
+                    OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font, irect, i, DrawItemState.Default, this.ForeColor, this.BackColor));
+                }
+            }
+            catch(ArgumentException)
+            {
+                // sometime the rectangle is not defined
             }
 
-//            base.OnPaint(e);
-
+            base.OnPaint(e);
         }
 
         protected override void OnSelectedIndexChanged(EventArgs e)
@@ -70,7 +75,7 @@ namespace WaveCraft.Custom_Controls
                 }
             }
 
-            //            base.OnDrawItem(e);
+            base.OnDrawItem(e);
         }
 
     }

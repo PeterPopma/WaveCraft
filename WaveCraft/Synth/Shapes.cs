@@ -24,6 +24,21 @@ namespace WaveCraft.Synth
             }
         }
 
+        public static void Square(int[] waveData)
+        {
+            for (int i = 0; i < waveData.Length; i++)
+            {
+                if (i < waveData.Length / 2)
+                {
+                    waveData[i] = 0;
+                }
+                else
+                {
+                    waveData[i] = 2 * SynthGenerator.SHAPE_MAX_VALUE;
+                }
+            }
+        }
+
         public static void IncreasingLogarithmic(int[] waveData)
         {
             double factor = Math.Pow(SynthGenerator.SHAPE_MAX_VALUE, 1.0 / SynthGenerator.SHAPE_NUMPOINTS);

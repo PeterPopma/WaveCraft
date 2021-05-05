@@ -46,7 +46,7 @@ namespace WaveCraft
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.Black;
             this.buttonCancel.HorizontalGradient = false;
-            this.buttonCancel.Location = new System.Drawing.Point(428, 188);
+            this.buttonCancel.Location = new System.Drawing.Point(338, 185);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(87, 22);
             this.buttonCancel.TabIndex = 162;
@@ -63,7 +63,7 @@ namespace WaveCraft
             this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonApply.ForeColor = System.Drawing.Color.Black;
             this.buttonApply.HorizontalGradient = false;
-            this.buttonApply.Location = new System.Drawing.Point(203, 188);
+            this.buttonApply.Location = new System.Drawing.Point(113, 185);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(87, 22);
             this.buttonApply.TabIndex = 161;
@@ -87,7 +87,7 @@ namespace WaveCraft
             "144000",
             "176400",
             "192000"});
-            this.comboBoxSamplesPerSecond.Location = new System.Drawing.Point(327, 36);
+            this.comboBoxSamplesPerSecond.Location = new System.Drawing.Point(237, 33);
             this.comboBoxSamplesPerSecond.Name = "comboBoxSamplesPerSecond";
             this.comboBoxSamplesPerSecond.Size = new System.Drawing.Size(158, 24);
             this.comboBoxSamplesPerSecond.TabIndex = 163;
@@ -99,7 +99,7 @@ namespace WaveCraft
             this.label48.BackColor = System.Drawing.Color.Transparent;
             this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label48.ForeColor = System.Drawing.Color.White;
-            this.label48.Location = new System.Drawing.Point(183, 39);
+            this.label48.Location = new System.Drawing.Point(93, 36);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(137, 17);
             this.label48.TabIndex = 164;
@@ -115,7 +115,7 @@ namespace WaveCraft
             this.comboBoxBitsPerSample.Items.AddRange(new object[] {
             "16",
             "32"});
-            this.comboBoxBitsPerSample.Location = new System.Drawing.Point(327, 79);
+            this.comboBoxBitsPerSample.Location = new System.Drawing.Point(237, 76);
             this.comboBoxBitsPerSample.Name = "comboBoxBitsPerSample";
             this.comboBoxBitsPerSample.Size = new System.Drawing.Size(158, 24);
             this.comboBoxBitsPerSample.TabIndex = 165;
@@ -127,7 +127,7 @@ namespace WaveCraft
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(215, 82);
+            this.label1.Location = new System.Drawing.Point(125, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 17);
             this.label1.TabIndex = 166;
@@ -135,7 +135,7 @@ namespace WaveCraft
             // 
             // FormSettings
             // 
-            this.ClientSize = new System.Drawing.Size(754, 240);
+            this.ClientSize = new System.Drawing.Size(509, 240);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxBitsPerSample);
             this.Controls.Add(this.label48);

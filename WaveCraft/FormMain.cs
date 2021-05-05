@@ -1410,6 +1410,7 @@ namespace WaveCraft
 
         private void buttonLuckyPick_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor; 
             synthGenerator.Waves.Clear();
             for(int k=0; k<random.Next(12)+1; k++)
             {
@@ -1447,7 +1448,7 @@ namespace WaveCraft
                 {
                     waveInfo.StartPosition = (int)(SynthGenerator.SamplesPerSecond * (random.Next(30) / 30.0));       // startposition 0-3 seconds
                 }
-                int rand = random.Next(18);
+                int rand = random.Next(16);
                 switch(rand)
                 {
                     case 0:
@@ -1465,6 +1466,15 @@ namespace WaveCraft
                     case 6:
                         waveInfo.WaveForm = "Noise";
                         break;
+                    case 7:
+                        waveInfo.WaveForm = "Custom";
+                        waveInfo.ShapeWave = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                        break;
+                    case 8:
+                        waveInfo.WaveForm = "CustomBeginEnd";
+                        waveInfo.ShapeWave = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                        waveInfo.ShapeWaveEnd = new int[SynthGenerator.SHAPE_NUMPOINTS];
+                        break;
 
                     default:
                         waveInfo.WaveForm = "Sine";
@@ -1473,6 +1483,46 @@ namespace WaveCraft
                 waveInfo.ShapeVolume = RandomShape();
                 waveInfo.ShapeFrequency = RandomShape();
                 waveInfo.ShapeWeight = RandomShape();
+                if(waveInfo.WaveForm.Equals("Custom") || waveInfo.WaveForm.Equals("CustomBeginEnd"))
+                {
+                    rand = random.Next(4);
+                    switch (rand)
+                    {
+                        default:
+                        case 0:
+                            Shapes.Sines(waveInfo.ShapeWave);
+                            break;
+                        case 1:
+                            Shapes.IncDec(waveInfo.ShapeWave);
+                            break;
+                        case 2:
+                            Shapes.Square(waveInfo.ShapeWave);
+                            break;
+                        case 3:
+                            Shapes.IncreasingLineair(waveInfo.ShapeWave);
+                            break;
+                    }
+                }
+                if (waveInfo.WaveForm.Equals("CustomBeginEnd"))
+                {
+                    rand = random.Next(4);
+                    switch (rand)
+                    {
+                        default:
+                        case 0:
+                            Shapes.Sines(waveInfo.ShapeWaveEnd);
+                            break;
+                        case 1:
+                            Shapes.IncDec(waveInfo.ShapeWaveEnd);
+                            break;
+                        case 2:
+                            Shapes.Square(waveInfo.ShapeWaveEnd);
+                            break;
+                        case 3:
+                            Shapes.IncreasingLineair(waveInfo.ShapeWaveEnd);
+                            break;
+                    }
+                }
 
                 synthGenerator.Waves.Add(waveInfo);
                 if (waveInfo.WaveForm != "Noise")
@@ -1497,6 +1547,18 @@ namespace WaveCraft
                     }
                 }
             }
+            if(random.Next(8)==0)
+            {
+                synthGenerator.AmountBulkCreate = random.Next(30) + 1;
+                synthGenerator.MinFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
+                synthGenerator.MaxFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
+                for(int k=0; k<SynthGenerator.SHAPE_NUMPOINTS; k++)
+                {
+                    synthGenerator.ShapeBulkCreate[k] = random.Next(SynthGenerator.SHAPE_MAX_VALUE);
+                }
+                synthGenerator.CreateBulkWaves();
+            }
+
             synthGenerator.CurrentWave = synthGenerator.Waves[0];
 
             synthGenerator.EnvelopAttack = random.Next(3) * 5 / 100.0f;
@@ -1505,6 +1567,7 @@ namespace WaveCraft
 
             synthGenerator.UpdateAllWaveData();
             UpdateWaveControls();
+            Cursor = Cursors.Default;
         }
 
         private void RandomToneMode()
@@ -1674,8 +1737,9 @@ namespace WaveCraft
             {
                 String item = listBoxWavesVault.SelectedItems[0].ToString();
                 listBoxWavesVault.Items.RemoveAt(listBoxWavesVault.FindStringExact(item));
-                listBoxWaves.Items.Add(item);
-                synthGenerator.RemoveFromVault(synthGenerator.GetVaultedWaveByDisplayName(item));
+                WaveInfo wave = synthGenerator.GetVaultedWaveByDisplayName(item);
+                synthGenerator.RemoveFromVault(wave);
+                listBoxWaves.Items.Add(wave.DisplayName());
             }
 
             synthGenerator.UpdateAllWaveData();

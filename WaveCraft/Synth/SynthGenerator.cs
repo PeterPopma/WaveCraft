@@ -204,7 +204,7 @@ namespace WaveCraft.Synth
 
         private void CalcFFT()
         {
-            int numSamples = tempData.Length;
+            int numSamples = tempData.Length / 2;
             frequencySpectrumLeft = new Complex[fftWindow];
             frequencySpectrumRight = new Complex[fftWindow];
             for (int i = 0; i < fftWindow * 2; i++)
@@ -218,7 +218,7 @@ namespace WaveCraft.Synth
                     }
                     else
                     {
-                        frequencySpectrumLeft[i / 2] = new Complex(tempData[i], 0);
+                        frequencySpectrumLeft[i / 2] = new Complex(tempData[2*i], 0);
                     }
                 }
                 else
@@ -229,7 +229,7 @@ namespace WaveCraft.Synth
                     }
                     else
                     {
-                        frequencySpectrumRight[i / 2] = new Complex(tempData[i], 0);
+                        frequencySpectrumRight[i / 2] = new Complex(tempData[2*i+1], 0);
                     }
                 }
 
@@ -868,6 +868,11 @@ namespace WaveCraft.Synth
             return name;
         }
 
+        public bool WaveNameExists(string name)
+        {
+            return Waves.FindIndex(o => o.Name.Equals(name)) != -1;
+        }
+
         public WaveInfo CloneWave(double frequencyFactor = 1, double amplitudeFactor = 1)
         {
             WaveInfo newWave = new WaveInfo(CreateUniqueName(), currentWave.NumSamples(), currentWave.StartPosition,
@@ -893,6 +898,41 @@ namespace WaveCraft.Synth
             RefreshWaveData(newWave);
 
             return newWave;
+        }
+        public double BulkGraphToFrequency(int graphX)
+        {
+            double baseValue = Math.Pow(MaxFrequencyBulkCreate / MinFrequencyBulkCreate, 1 / (double)SHAPE_NUMPOINTS);
+
+            return MinFrequencyBulkCreate * Math.Pow(baseValue, graphX);
+        }
+
+        public void CreateBulkWaves()
+        {
+            for (int k = 0; k < AmountBulkCreate; k++)
+            {
+                int graph_x;
+                if (AmountBulkCreate==1)
+                {
+                    graph_x = SHAPE_NUMPOINTS/2;
+                }
+                else
+                {
+                    graph_x = (int)((k / (double)(AmountBulkCreate - 1)) * ((double)SHAPE_NUMPOINTS - 1));
+                }
+                double frequency = BulkGraphToFrequency(graph_x);
+
+                // Note that graph is upside-down
+                int weight = 2 * (SynthGenerator.SHAPE_MAX_VALUE - ShapeBulkCreate[graph_x]);
+
+                if (weight > 0)
+                {
+                    WaveInfo wave = CloneWave();
+                    wave.MinFrequency = wave.MaxFrequency = frequency;
+                    Shapes.Flat(wave.ShapeFrequency);
+                    wave.MinWeight = wave.MaxWeight = weight;
+                    Shapes.Flat(wave.ShapeWeight);
+                }
+            }
         }
 
         public void SetCurrentWaveByDisplayName(string name)
@@ -927,8 +967,12 @@ namespace WaveCraft.Synth
         }
         public void RemoveFromVault(WaveInfo wave)
         {
-            waves.Add(wave);
             wavesVault.Remove(wave);
+            if (WaveNameExists(wave.Name))
+            {
+                wave.Name = CreateUniqueName();
+            }
+            waves.Add(wave);
         }
 
     }

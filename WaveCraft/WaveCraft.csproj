@@ -300,6 +300,7 @@
     <None Include="Images\buttonsave.png" />
     <None Include="Images\change.png" />
     <None Include="Images\cogwheel.png" />
+    <Content Include="Icons\WaveCraft.ico" />
     <Content Include="Images\custom.png" />
     <None Include="Images\pausebutton.png" />
     <None Include="Images\playbutton.png" />

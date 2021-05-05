@@ -48,10 +48,19 @@ namespace WaveCraft
         {
             if (!isMouseButtonDown && e.X >= 0 && e.X < SynthGenerator.SHAPE_NUMPOINTS)
             {
-                WaveData[e.X] = e.Y;
+                int mouseY = e.Y;
+                if(mouseY>SynthGenerator.SHAPE_MAX_VALUE)
+                {
+                    mouseY = SynthGenerator.SHAPE_MAX_VALUE;
+                }
+                if (mouseY < 0)
+                {
+                    mouseY = 0;
+                }
+                WaveData[e.X] = mouseY;
                 Refresh();
                 previousPoint.X = e.X;
-                previousPoint.Y = e.Y;
+                previousPoint.Y = mouseY;
                 isMouseButtonDown = true;
                 AdjustDataWidth = 1;
                 aTimer.Enabled = true;
@@ -62,9 +71,18 @@ namespace WaveCraft
         {
             if (isMouseButtonDown && e.X != previousPoint.X && e.X >= 0 && e.X < SynthGenerator.SHAPE_NUMPOINTS)
             {
-                EditData(e.X, e.Y);
+                int mouseY = e.Y;
+                if (mouseY > SynthGenerator.SHAPE_MAX_VALUE)
+                {
+                    mouseY = SynthGenerator.SHAPE_MAX_VALUE;
+                }
+                if (mouseY < 0)
+                {
+                    mouseY = 0;
+                }
+                EditData(e.X, mouseY);
                 previousPoint.X = e.X;
-                previousPoint.Y = e.Y;
+                previousPoint.Y = mouseY;
                 Refresh();
             }
         }
@@ -77,57 +95,16 @@ namespace WaveCraft
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            try
-            {
-                double value = Convert.ToDouble(textBoxFrequency1.Text);
-                if (value >= 1 && value <= 22000)
-                    myParent.SynthGenerator.MinFrequencyBulkCreate = value;
-            }
-            catch (Exception) { };
-            try
-            {
-                double value = Convert.ToDouble(textBoxFrequency2.Text);
-                if (value >= 1 && value <= 22000)
-                    myParent.SynthGenerator.MaxFrequencyBulkCreate = value;
-            }
-            catch (Exception) { };
-            try
-            {
-                int value = Convert.ToInt32(textBoxAmount.Text);
-                if (value > 0 && value <= 1000)
-                    myParent.SynthGenerator.AmountBulkCreate = value;
-            }
-            catch (Exception) { };
+            Cursor = Cursors.WaitCursor;
 
-            CreateWaves();
+            myParent.SynthGenerator.CreateBulkWaves();
 
             myParent.UpdateWaveControls();
             myParent.SynthGenerator.UpdateAllWaveData();
 
-            Close();
-        }
+            Cursor = Cursors.Default;
 
-        private void CreateWaves()
-        {
-            List<int> lotteryPot = new List<int>();
-            for( int k=0; k<WaveData.Length;  k++)
-            {
-                // Note that graph is upside-down
-                int amount = SynthGenerator.SHAPE_MAX_VALUE - WaveData[k];
-                for (int i = 0; i < amount; i++)
-                {
-                    lotteryPot.Add(k);
-                }
-            }
-            for (int k = 0; k < myParent.SynthGenerator.AmountBulkCreate; k++)
-            {
-                int value = lotteryPot[random.Next(lotteryPot.Count)];
-                double frequency = (value * myParent.SynthGenerator.MaxFrequencyBulkCreate) + ((SynthGenerator.SHAPE_NUMPOINTS - value) * myParent.SynthGenerator.MinFrequencyBulkCreate);
-                frequency /= (double)SynthGenerator.SHAPE_NUMPOINTS;
-                WaveInfo wave = myParent.SynthGenerator.CloneWave();
-                wave.MinFrequency = wave.MaxFrequency = frequency;
-                Shapes.Flat(wave.ShapeFrequency);
-            }
+            Close();
         }
 
         private void PictureBoxPaint(object sender, PaintEventArgs e)
@@ -185,7 +162,6 @@ namespace WaveCraft
                 WaveData[x_position] = (WaveData[x_position] + interpolated_value) / 2;
                 x_position++;
             }
-
             Refresh();
         }
 
@@ -226,6 +202,7 @@ namespace WaveCraft
             textBoxFrequency1.Text = myParent.SynthGenerator.MinFrequencyBulkCreate.ToString();
             textBoxFrequency2.Text = myParent.SynthGenerator.MaxFrequencyBulkCreate.ToString();
             textBoxAmount.Text = myParent.SynthGenerator.AmountBulkCreate.ToString();
+            UpdateFrequencyLabels();
 
             pictureBoxCustomWave.Paint += new PaintEventHandler(PictureBoxPaint);
             pictureBoxCustomWave.Refresh();
@@ -236,5 +213,68 @@ namespace WaveCraft
             Close();
         }
 
+        private void textBoxFrequency2_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                UpdateFrequencyLabels();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFrequency1_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                UpdateFrequencyLabels();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateFrequencyLabels()
+        {
+            double freq1 = Convert.ToDouble(textBoxFrequency1.Text);
+            double freq2 = Convert.ToDouble(textBoxFrequency2.Text);
+            if (freq1 > freq2)
+            {
+                myParent.SynthGenerator.MinFrequencyBulkCreate = freq2;
+                myParent.SynthGenerator.MaxFrequencyBulkCreate = freq1;
+            }
+            else
+            {
+                myParent.SynthGenerator.MinFrequencyBulkCreate = freq1;
+                myParent.SynthGenerator.MaxFrequencyBulkCreate = freq2;
+            }
+            labelXAxis1.Text = myParent.SynthGenerator.MinFrequencyBulkCreate.ToString("0");
+            labelXAxis2.Text = myParent.SynthGenerator.BulkGraphToFrequency(100).ToString("0");
+            labelXAxis3.Text = myParent.SynthGenerator.BulkGraphToFrequency(200).ToString("0");
+            labelXAxis4.Text = myParent.SynthGenerator.BulkGraphToFrequency(300).ToString("0");
+            labelXAxis5.Text = myParent.SynthGenerator.BulkGraphToFrequency(400).ToString("0");
+            labelXAxis6.Text = myParent.SynthGenerator.BulkGraphToFrequency(500).ToString("0");
+            labelXAxis7.Text = myParent.SynthGenerator.BulkGraphToFrequency(600).ToString("0");
+            labelXAxis8.Text = myParent.SynthGenerator.BulkGraphToFrequency(700).ToString("0");
+            labelXAxis9.Text = myParent.SynthGenerator.BulkGraphToFrequency(800).ToString("0");
+            labelXAxis10.Text = myParent.SynthGenerator.BulkGraphToFrequency(900).ToString("0");
+            labelXAxis11.Text = myParent.SynthGenerator.MaxFrequencyBulkCreate.ToString("0");
+        }
+
+        private void textBoxAmount_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                double amount = Convert.ToInt32(textBoxAmount.Text);
+                if(amount>=0 && amount<=1000)
+                {
+                    myParent.SynthGenerator.AmountBulkCreate = Convert.ToInt32(textBoxAmount.Text);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

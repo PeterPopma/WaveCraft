@@ -226,10 +226,19 @@ namespace WaveCraft
         {
             if (!isMouseButtonDown && e.X >= 0 && e.X < SynthGenerator.SHAPE_NUMPOINTS)
             {
-                waveData[e.X] = e.Y;
+                int mouseY = e.Y;
+                if (mouseY > SynthGenerator.SHAPE_MAX_VALUE)
+                {
+                    mouseY = SynthGenerator.SHAPE_MAX_VALUE;
+                }
+                if (mouseY < 0)
+                {
+                    mouseY = 0;
+                }
+                waveData[e.X] = mouseY;
                 Refresh();
                 previousPoint.X = e.X;
-                previousPoint.Y = e.Y;
+                previousPoint.Y = mouseY;
                 isMouseButtonDown = true;
                 AdjustDataWidth = 1;
                 aTimer.Enabled = true;
@@ -240,9 +249,18 @@ namespace WaveCraft
         {
             if (isMouseButtonDown && e.X != previousPoint.X && e.X >= 0 && e.X < SynthGenerator.SHAPE_NUMPOINTS)
             {
-                EditData(e.X, e.Y);
+                int mouseY = e.Y;
+                if (mouseY > SynthGenerator.SHAPE_MAX_VALUE)
+                {
+                    mouseY = SynthGenerator.SHAPE_MAX_VALUE;
+                }
+                if (mouseY < 0)
+                {
+                    mouseY = 0;
+                }
+                EditData(e.X, mouseY);
                 previousPoint.X = e.X;
-                previousPoint.Y = e.Y;
+                previousPoint.Y = mouseY;
                 Refresh();
             }
         }
