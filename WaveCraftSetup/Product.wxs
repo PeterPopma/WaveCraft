@@ -8,8 +8,8 @@
     <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">  <!-- for x86 build -->
-        <!--Directory Id="ProgramFiles64Folder"-->  <!-- for x64 build -->
+      <!--Directory Id="ProgramFilesFolder"-->  <!-- for x86 build -->
+        <Directory Id="ProgramFiles64Folder">  <!-- for x64 build -->
         <Directory Id="SELECTEDINSTALLDIR" Name="WaveCraft">   
             <Directory Id="APPLICATIONROOTDIRECTORY">
               <Directory Id="WaveCraftID" Name="WaveCraft">
@@ -26,6 +26,7 @@
                   <File Id="Bass.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass.pst" Vital="no" KeyPath="no" />
                   <File Id="Bass2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass2.pst" Vital="no" KeyPath="no" />
                   <File Id="Bass3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bassdrum.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bassdrum.pst" Vital="no" KeyPath="no" />
                   <File Id="Bell.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell.pst" Vital="no" KeyPath="no" />
                   <File Id="Bell2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell2.pst" Vital="no" KeyPath="no" />
                   <File Id="Chime.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Chime.pst" Vital="no" KeyPath="no" />
@@ -39,14 +40,13 @@
                   <File Id="Lead2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead2.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead3.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead4.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead4.pst" Vital="no" KeyPath="no" />
+                  <File Id="Organ.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Organ.pst" Vital="no" KeyPath="no" />
                   <File Id="Piano.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano.pst" Vital="no" KeyPath="no" />
                   <File Id="Piano2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano2.pst" Vital="no" KeyPath="no" />
-                  <File Id="Piano3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano3.pst" Vital="no" KeyPath="no" />
                   <File Id="Shaker.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Shaker.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare2.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare3.pst" Vital="no" KeyPath="no" />
-                  <File Id="Snare4.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare4.pst" Vital="no" KeyPath="no" />
                   <File Id="Toms.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Toms.pst" Vital="no" KeyPath="no" />
                   <File Id="Violin.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Violin.pst" Vital="no" KeyPath="no" />
                 </Component>  			

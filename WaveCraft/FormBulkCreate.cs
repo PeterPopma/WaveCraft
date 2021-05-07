@@ -97,7 +97,18 @@ namespace WaveCraft
         {
             Cursor = Cursors.WaitCursor;
 
-            myParent.SynthGenerator.CreateBulkWaves();
+            try
+            {
+                double otherFrequency = myParent.SynthGenerator.BulkOtherFrequency = Convert.ToDouble(textBoxTargetFrequency.Text);
+                if(otherFrequency<10 || otherFrequency>22000)
+                {
+                    myParent.SynthGenerator.BulkOtherFrequency = otherFrequency;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            myParent.SynthGenerator.CreateBulkWaves(checkBoxStartFrequency.Checked, checkBoxEndFrequency.Checked);
 
             myParent.UpdateWaveControls();
             myParent.SynthGenerator.UpdateAllWaveData();
@@ -202,6 +213,7 @@ namespace WaveCraft
             textBoxFrequency1.Text = myParent.SynthGenerator.MinFrequencyBulkCreate.ToString();
             textBoxFrequency2.Text = myParent.SynthGenerator.MaxFrequencyBulkCreate.ToString();
             textBoxAmount.Text = myParent.SynthGenerator.AmountBulkCreate.ToString();
+            textBoxTargetFrequency.Text = myParent.SynthGenerator.BulkOtherFrequency.ToString();
             UpdateFrequencyLabels();
 
             pictureBoxCustomWave.Paint += new PaintEventHandler(PictureBoxPaint);
@@ -274,6 +286,32 @@ namespace WaveCraft
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void checkBoxStartFrequency_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxStartFrequency.Checked)
+            {
+                textBoxTargetFrequency.Visible = true;
+                checkBoxEndFrequency.Checked = false;
+            }
+            if (!checkBoxStartFrequency.Checked && !checkBoxEndFrequency.Checked)
+            {
+                textBoxTargetFrequency.Visible = false;
+            }
+        }
+
+        private void checkBoxEndFrequency_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxEndFrequency.Checked)
+            {
+                textBoxTargetFrequency.Visible = true;
+                checkBoxStartFrequency.Checked = false;
+            }
+            if (!checkBoxStartFrequency.Checked && !checkBoxEndFrequency.Checked)
+            {
+                textBoxTargetFrequency.Visible = false;
             }
         }
     }

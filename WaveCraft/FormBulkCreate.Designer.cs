@@ -52,6 +52,10 @@ namespace WaveCraft
             this.labelXAxis11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBoxTargetFrequency = new System.Windows.Forms.TextBox();
+            this.checkBoxStartFrequency = new System.Windows.Forms.CheckBox();
+            this.checkBoxEndFrequency = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.buttonCancel = new WaveCraft.CustomControls.GradientButton();
             this.buttonCreate = new WaveCraft.CustomControls.GradientButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).BeginInit();
@@ -73,7 +77,7 @@ namespace WaveCraft
             this.textBoxFrequency1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxFrequency1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxFrequency1.ForeColor = System.Drawing.Color.White;
-            this.textBoxFrequency1.Location = new System.Drawing.Point(291, 547);
+            this.textBoxFrequency1.Location = new System.Drawing.Point(263, 547);
             this.textBoxFrequency1.Name = "textBoxFrequency1";
             this.textBoxFrequency1.Size = new System.Drawing.Size(63, 23);
             this.textBoxFrequency1.TabIndex = 163;
@@ -84,7 +88,7 @@ namespace WaveCraft
             this.textBoxFrequency2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxFrequency2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxFrequency2.ForeColor = System.Drawing.Color.White;
-            this.textBoxFrequency2.Location = new System.Drawing.Point(291, 575);
+            this.textBoxFrequency2.Location = new System.Drawing.Point(263, 575);
             this.textBoxFrequency2.Name = "textBoxFrequency2";
             this.textBoxFrequency2.Size = new System.Drawing.Size(63, 23);
             this.textBoxFrequency2.TabIndex = 164;
@@ -104,11 +108,11 @@ namespace WaveCraft
             // textBoxAmount
             // 
             this.textBoxAmount.BackColor = System.Drawing.Color.DimGray;
-            this.textBoxAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAmount.ForeColor = System.Drawing.Color.White;
-            this.textBoxAmount.Location = new System.Drawing.Point(534, 560);
+            this.textBoxAmount.Location = new System.Drawing.Point(506, 560);
             this.textBoxAmount.Name = "textBoxAmount";
-            this.textBoxAmount.Size = new System.Drawing.Size(84, 38);
+            this.textBoxAmount.Size = new System.Drawing.Size(84, 32);
             this.textBoxAmount.TabIndex = 166;
             this.textBoxAmount.Text = "10";
             this.textBoxAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxAmount_KeyUp);
@@ -117,10 +121,10 @@ namespace WaveCraft
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(424, 560);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(418, 560);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 31);
+            this.label3.Size = new System.Drawing.Size(85, 26);
             this.label3.TabIndex = 167;
             this.label3.Text = "amount";
             // 
@@ -129,7 +133,7 @@ namespace WaveCraft
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(197, 579);
+            this.label1.Location = new System.Drawing.Point(169, 579);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 17);
             this.label1.TabIndex = 168;
@@ -140,7 +144,7 @@ namespace WaveCraft
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(197, 550);
+            this.label4.Location = new System.Drawing.Point(169, 550);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 17);
             this.label4.TabIndex = 169;
@@ -289,6 +293,55 @@ namespace WaveCraft
             this.label6.TabIndex = 182;
             this.label6.Text = "max. frequency";
             // 
+            // textBoxTargetFrequency
+            // 
+            this.textBoxTargetFrequency.BackColor = System.Drawing.Color.DimGray;
+            this.textBoxTargetFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTargetFrequency.ForeColor = System.Drawing.Color.White;
+            this.textBoxTargetFrequency.Location = new System.Drawing.Point(958, 562);
+            this.textBoxTargetFrequency.Name = "textBoxTargetFrequency";
+            this.textBoxTargetFrequency.Size = new System.Drawing.Size(101, 32);
+            this.textBoxTargetFrequency.TabIndex = 183;
+            this.textBoxTargetFrequency.Text = "440";
+            this.textBoxTargetFrequency.Visible = false;
+            // 
+            // checkBoxStartFrequency
+            // 
+            this.checkBoxStartFrequency.AutoSize = true;
+            this.checkBoxStartFrequency.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.checkBoxStartFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxStartFrequency.Location = new System.Drawing.Point(697, 561);
+            this.checkBoxStartFrequency.Name = "checkBoxStartFrequency";
+            this.checkBoxStartFrequency.Size = new System.Drawing.Size(73, 30);
+            this.checkBoxStartFrequency.TabIndex = 184;
+            this.checkBoxStartFrequency.Text = "start";
+            this.checkBoxStartFrequency.UseVisualStyleBackColor = false;
+            this.checkBoxStartFrequency.CheckedChanged += new System.EventHandler(this.checkBoxStartFrequency_CheckedChanged);
+            // 
+            // checkBoxEndFrequency
+            // 
+            this.checkBoxEndFrequency.AutoSize = true;
+            this.checkBoxEndFrequency.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.checkBoxEndFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxEndFrequency.Location = new System.Drawing.Point(780, 562);
+            this.checkBoxEndFrequency.Name = "checkBoxEndFrequency";
+            this.checkBoxEndFrequency.Size = new System.Drawing.Size(67, 30);
+            this.checkBoxEndFrequency.TabIndex = 185;
+            this.checkBoxEndFrequency.Text = "end";
+            this.checkBoxEndFrequency.UseVisualStyleBackColor = false;
+            this.checkBoxEndFrequency.CheckedChanged += new System.EventHandler(this.checkBoxEndFrequency_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(852, 562);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 26);
+            this.label7.TabIndex = 186;
+            this.label7.Text = "frequency";
+            // 
             // buttonCancel
             // 
             this.buttonCancel.Active = false;
@@ -327,6 +380,10 @@ namespace WaveCraft
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1134, 673);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.checkBoxEndFrequency);
+            this.Controls.Add(this.checkBoxStartFrequency);
+            this.Controls.Add(this.textBoxTargetFrequency);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.labelXAxis11);
@@ -388,5 +445,9 @@ namespace WaveCraft
         private System.Windows.Forms.Label labelXAxis11;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxTargetFrequency;
+        private System.Windows.Forms.CheckBox checkBoxStartFrequency;
+        private System.Windows.Forms.CheckBox checkBoxEndFrequency;
+        private System.Windows.Forms.Label label7;
     }
 }

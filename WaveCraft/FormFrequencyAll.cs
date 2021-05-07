@@ -47,12 +47,10 @@ namespace WaveCraft
             }
         }
 
-        public double CalculateCurrentFactor(int position)
+        public double CalculateCurrentFactor(int position, double MinChange, double MaxChange)
         {
-            double min_change = Convert.ToDouble(textBoxChange1.Text);
-            double max_change = Convert.ToDouble(textBoxChange2.Text);
             // note that graph is upside down
-            return (max_change * (SHAPE_MAX_VALUE-waveData[position]) + min_change * waveData[position]) / SHAPE_MAX_VALUE;
+            return (MaxChange * (SHAPE_MAX_VALUE-waveData[position]) + MinChange * waveData[position]) / SHAPE_MAX_VALUE;
         }
 
         private double CalculateCurrentFrequency(int position, WaveInfo waveInfo)
@@ -105,7 +103,7 @@ namespace WaveCraft
             {
                 int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeFrequency.Length);
                 int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
-                double factor = CalculateCurrentFactor(desired_pattern_position);
+                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
                 double freq = CalculateCurrentFrequency(position, wave);
                 freq *= factor;
                 wave.ShapeFrequency[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((freq - new_min) / (new_max - new_min)));

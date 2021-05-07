@@ -51,6 +51,7 @@ namespace WaveCraft.Synth
         double minFrequencyBulkCreate = 10;
         double maxFrequencyBulkCreate = 20000;
         int amountBulkCreate = 10;
+        double bulkOtherFrequency = 440;
 
         Random random = new Random();
 
@@ -79,6 +80,7 @@ namespace WaveCraft.Synth
         public double MinFrequencyBulkCreate { get => minFrequencyBulkCreate; set => minFrequencyBulkCreate = value; }
         public double MaxFrequencyBulkCreate { get => maxFrequencyBulkCreate; set => maxFrequencyBulkCreate = value; }
         public int AmountBulkCreate { get => amountBulkCreate; set => amountBulkCreate = value; }
+        public double BulkOtherFrequency { get => bulkOtherFrequency; set => bulkOtherFrequency = value; }
 
         public int NumSamples()
         {
@@ -813,7 +815,7 @@ namespace WaveCraft.Synth
             }
             else
             {
-                int desired_length = (int)(tempData.Length * frequencyFactor);
+                int desired_length = (int)(tempData.Length / frequencyFactor);
                 finalData.audioData = new int[desired_length];
                 for (int i = 0; i < finalData.audioData.Length; i++)
                 {
@@ -906,14 +908,14 @@ namespace WaveCraft.Synth
             return MinFrequencyBulkCreate * Math.Pow(baseValue, graphX);
         }
 
-        public void CreateBulkWaves()
+        public void CreateBulkWaves(bool useStartFrequency = false, bool useEndFrequency = false)
         {
             for (int k = 0; k < AmountBulkCreate; k++)
             {
                 int graph_x;
-                if (AmountBulkCreate==1)
+                if (AmountBulkCreate == 1)
                 {
-                    graph_x = SHAPE_NUMPOINTS/2;
+                    graph_x = SHAPE_NUMPOINTS / 2;
                 }
                 else
                 {
@@ -927,8 +929,40 @@ namespace WaveCraft.Synth
                 if (weight > 0)
                 {
                     WaveInfo wave = CloneWave();
-                    wave.MinFrequency = wave.MaxFrequency = frequency;
-                    Shapes.Flat(wave.ShapeFrequency);
+                    if (bulkOtherFrequency >= 10 && (useStartFrequency || useEndFrequency))
+                    {
+                        if (frequency < bulkOtherFrequency)
+                        {
+                            wave.MinFrequency = frequency;
+                            wave.MaxFrequency = bulkOtherFrequency;
+                            if(useStartFrequency)
+                            {
+                                Shapes.DecreasingLineair(wave.ShapeFrequency);
+                            }
+                            else
+                            {
+                                Shapes.IncreasingLineair(wave.ShapeFrequency);
+                            }
+                        }
+                        else
+                        {
+                            wave.MinFrequency = bulkOtherFrequency;
+                            wave.MaxFrequency = frequency;
+                            if (useStartFrequency)
+                            {
+                                Shapes.IncreasingLineair(wave.ShapeFrequency);
+                            }
+                            else
+                            {
+                                Shapes.DecreasingLineair(wave.ShapeFrequency);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        wave.MinFrequency = wave.MaxFrequency = frequency;
+                        Shapes.Flat(wave.ShapeFrequency);
+                    }
                     wave.MinWeight = wave.MaxWeight = weight;
                     Shapes.Flat(wave.ShapeWeight);
                 }

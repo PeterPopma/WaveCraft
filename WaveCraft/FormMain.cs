@@ -1394,6 +1394,87 @@ namespace WaveCraft
             }
         }
 
+        private void ChangeAllWeights()
+        {
+            double weightFactor = Convert.ToDouble(textBoxChangeWeightAll.Text) / 100.0;
+            if (weightFactor <= 0)
+                return;
+
+            if (listBoxWaves.SelectedItems.Count > 1)
+            {
+                foreach (string item in listBoxWaves.SelectedItems)
+                {
+                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
+                    wave.MinWeight = (int)(wave.MinWeight * weightFactor);
+                    wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+                    if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MinWeight = SynthGenerator.MAX_WEIGHT;
+                    }
+                    if (wave.MaxWeight > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MaxWeight = SynthGenerator.MAX_WEIGHT;
+                    }
+                }
+            }
+            else
+            {
+                foreach (WaveInfo wave in synthGenerator.Waves)
+                {
+                    wave.MinWeight = (int)(wave.MinWeight * weightFactor);
+                    wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+                    if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MinWeight = SynthGenerator.MAX_WEIGHT;
+                    }
+                    if (wave.MaxWeight > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MaxWeight = SynthGenerator.MAX_WEIGHT;
+                    }
+                }
+            }
+        }
+
+        private void ChangeAllVolumes()
+        {
+            double volumeFactor = Convert.ToDouble(textBoxChangeVolumeAll.Text) / 100.0;
+            if (volumeFactor <= 0)
+                return;
+            if (listBoxWaves.SelectedItems.Count > 1)
+            {
+                foreach (string item in listBoxWaves.SelectedItems)
+                {
+                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
+                    wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
+                    wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+                    if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MinVolume = SynthGenerator.MAX_WEIGHT;
+                    }
+                    if (wave.MaxVolume > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MaxVolume = SynthGenerator.MAX_WEIGHT;
+                    }
+                }
+            }
+            else
+            {
+                foreach (WaveInfo wave in synthGenerator.Waves)
+                {
+                    wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
+                    wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+                    if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MinVolume = SynthGenerator.MAX_WEIGHT;
+                    }
+                    if (wave.MaxVolume > SynthGenerator.MAX_WEIGHT)
+                    {
+                        wave.MaxVolume = SynthGenerator.MAX_WEIGHT;
+                    }
+                }
+            }
+        }
+
         private void buttonSetAllDurations_Click(object sender, EventArgs e)
         {
             try
@@ -1547,16 +1628,29 @@ namespace WaveCraft
                     }
                 }
             }
-            if(random.Next(8)==0)
+            if(random.Next(6)==0)
             {
                 synthGenerator.AmountBulkCreate = random.Next(30) + 1;
                 synthGenerator.MinFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
                 synthGenerator.MaxFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
-                for(int k=0; k<SynthGenerator.SHAPE_NUMPOINTS; k++)
+                synthGenerator.BulkOtherFrequency = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
+                for (int k=0; k<SynthGenerator.SHAPE_NUMPOINTS; k++)
                 {
                     synthGenerator.ShapeBulkCreate[k] = random.Next(SynthGenerator.SHAPE_MAX_VALUE);
                 }
-                synthGenerator.CreateBulkWaves();
+                int rand = random.Next(2);
+                if (rand==0)
+                {
+                    synthGenerator.CreateBulkWaves();
+                }
+                else if (rand == 1)
+                {
+                    synthGenerator.CreateBulkWaves(true, false);
+                }
+                else
+                {
+                    synthGenerator.CreateBulkWaves(false, true);
+                }
             }
 
             synthGenerator.CurrentWave = synthGenerator.Waves[0];
@@ -1840,6 +1934,34 @@ namespace WaveCraft
             FormBulkCreate formBulkCreate = new FormBulkCreate();
             formBulkCreate.MyParent = this;
             formBulkCreate.ShowDialog();
+        }
+
+        private void buttonChangeAllWeights_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChangeAllWeights();
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
+        }
+
+        private void buttonChangeAllVolumes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChangeAllVolumes();
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
         }
     }
 }
