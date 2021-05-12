@@ -36,6 +36,7 @@
                   <File Id="Hihat.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Hihat.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick2.pst" Vital="no" KeyPath="no" />
+                  <File Id="KickBass.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\KickBass.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead2.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead3.pst" Vital="no" KeyPath="no" />

@@ -14,6 +14,7 @@ namespace WaveCraft
     {
         private FormMain myParent = null;
         private int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
+        private int[] WaveDataChange = new int[SynthGenerator.SHAPE_NUMPOINTS];
         bool isMouseButtonDown = false;
         Point previousPoint;
         Timer aTimer = new Timer();
@@ -57,7 +58,14 @@ namespace WaveCraft
                 {
                     mouseY = 0;
                 }
-                WaveData[e.X] = mouseY;
+                if (radioButtonSetWeight.Checked)
+                {
+                    WaveData[e.X] = mouseY;
+                }
+                else
+                {
+                    WaveDataChange[e.X] = mouseY;
+                }
                 Refresh();
                 previousPoint.X = e.X;
                 previousPoint.Y = mouseY;
@@ -136,6 +144,16 @@ namespace WaveCraft
         private void TimerEventProcessor(Object myObject,
                                            EventArgs myEventArgs)
         {
+            int[] myData;
+            if (radioButtonSetWeight.Checked)
+            {
+                myData = WaveData;
+            }
+            else
+            {
+                myData = WaveDataChange;
+            }
+
             AdjustDataWidth++;
 
             int begin_x = previousPoint.X - AdjustDataWidth;
@@ -145,14 +163,14 @@ namespace WaveCraft
             }
             int x_position = begin_x + 1;
             int end_x = previousPoint.X;
-            int begin_y = WaveData[begin_x];
+            int begin_y = myData[begin_x];
             int end_y = previousPoint.Y;
 
             // adjust all points left of mouse pointer
             while (x_position < end_x)
             {
                 int interpolated_value = (((x_position - begin_x) * end_y) + ((end_x - x_position) * begin_y)) / (end_x - begin_x);
-                WaveData[x_position] = (WaveData[x_position] + interpolated_value) / 2;
+                myData[x_position] = (myData[x_position] + interpolated_value) / 2;
                 x_position++;
             }
 
@@ -164,13 +182,13 @@ namespace WaveCraft
                 end_x = SynthGenerator.SHAPE_NUMPOINTS - 1;
             }
             begin_y = previousPoint.Y;
-            end_y = WaveData[end_x];
+            end_y = myData[end_x];
 
             // adjust all points right of mouse pointer
             while (x_position < end_x)
             {
                 int interpolated_value = (((x_position - begin_x) * end_y) + ((end_x - x_position) * begin_y)) / (end_x - begin_x);
-                WaveData[x_position] = (WaveData[x_position] + interpolated_value) / 2;
+                myData[x_position] = (myData[x_position] + interpolated_value) / 2;
                 x_position++;
             }
             Refresh();
@@ -178,10 +196,13 @@ namespace WaveCraft
 
         private void DrawGraph(PaintEventArgs e)
         {
-            Pen pen = new Pen(Color.White);
+            for (int i = 0; i < WaveDataChange.Length - 1; i++)
+            {
+                e.Graphics.DrawLine(new Pen(Color.Aquamarine), new Point(i, WaveDataChange[i]), new Point(i + 1, WaveDataChange[i + 1]));
+            }
             for (int i = 0; i < WaveData.Length - 1; i++)
             {
-                e.Graphics.DrawLine(pen, new Point(i, WaveData[i]), new Point(i + 1, WaveData[i + 1]));
+                e.Graphics.DrawLine(new Pen(Color.Yellow), new Point(i, WaveData[i]), new Point(i + 1, WaveData[i + 1]));
             }
         }
 
@@ -193,7 +214,14 @@ namespace WaveCraft
             double value = Y;
             while (position != previousPoint.X)
             {
-                WaveData[position] = (int)value;
+                if (radioButtonSetWeight.Checked)
+                {
+                    WaveData[position] = (int)value;
+                }
+                else
+                {
+                    WaveDataChange[position] = (int)value;
+                }
                 value += increment;
                 if (X > previousPoint.X)
                 {
@@ -209,6 +237,7 @@ namespace WaveCraft
         private void FormBulkCreate_Load(object sender, EventArgs e)
         {
             WaveData = myParent.SynthGenerator.ShapeBulkCreate;
+            WaveDataChange = myParent.SynthGenerator.ShapeBulkCreateChange;
 
             textBoxFrequency1.Text = myParent.SynthGenerator.MinFrequencyBulkCreate.ToString();
             textBoxFrequency2.Text = myParent.SynthGenerator.MaxFrequencyBulkCreate.ToString();
@@ -294,11 +323,13 @@ namespace WaveCraft
             if(checkBoxStartFrequency.Checked)
             {
                 textBoxTargetFrequency.Visible = true;
+                labelFrequency.Visible = true;
                 checkBoxEndFrequency.Checked = false;
             }
             if (!checkBoxStartFrequency.Checked && !checkBoxEndFrequency.Checked)
             {
                 textBoxTargetFrequency.Visible = false;
+                labelFrequency.Visible = false;
             }
         }
 
@@ -307,11 +338,13 @@ namespace WaveCraft
             if (checkBoxEndFrequency.Checked)
             {
                 textBoxTargetFrequency.Visible = true;
+                labelFrequency.Visible = true;
                 checkBoxStartFrequency.Checked = false;
             }
             if (!checkBoxStartFrequency.Checked && !checkBoxEndFrequency.Checked)
             {
                 textBoxTargetFrequency.Visible = false;
+                labelFrequency.Visible = false;
             }
         }
     }

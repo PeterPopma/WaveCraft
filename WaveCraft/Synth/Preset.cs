@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,13 @@ namespace WaveCraft.Synth
 {
     class Preset
     {
+        NumberFormatInfo providerDecimalPoint = new NumberFormatInfo();
+
+        public Preset()
+        {
+            providerDecimalPoint.NumberDecimalSeparator = ".";
+        }
+
         public void Save(SynthGenerator synthGenerator, string name)
         {
             if(name.Length==0)
@@ -19,11 +27,11 @@ namespace WaveCraft.Synth
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(@".\presets\" + name + ".pst"))
             {
-                file.WriteLine(synthGenerator.EnvelopAttack);
-                file.WriteLine(synthGenerator.EnvelopHold);
-                file.WriteLine(synthGenerator.EnvelopDecay);
-                file.WriteLine(synthGenerator.EnvelopSustain);
-                file.WriteLine(synthGenerator.EnvelopRelease);
+                file.WriteLine(synthGenerator.EnvelopAttack.ToString(providerDecimalPoint));
+                file.WriteLine(synthGenerator.EnvelopHold.ToString(providerDecimalPoint));
+                file.WriteLine(synthGenerator.EnvelopDecay.ToString(providerDecimalPoint));
+                file.WriteLine(synthGenerator.EnvelopSustain.ToString(providerDecimalPoint));
+                file.WriteLine(synthGenerator.EnvelopRelease.ToString(providerDecimalPoint));
                 file.WriteLine(synthGenerator.Waves.Count);
                 for (int i = 0; i < synthGenerator.Waves.Count; i++)
                 {
@@ -34,8 +42,8 @@ namespace WaveCraft.Synth
                     file.WriteLine(waveInfo.StartPosition);
                     file.WriteLine(waveInfo.WaveFile);
                     file.WriteLine(waveInfo.WaveForm);
-                    file.WriteLine(waveInfo.MinFrequency);
-                    file.WriteLine(waveInfo.MaxFrequency);
+                    file.WriteLine(waveInfo.MinFrequency.ToString(providerDecimalPoint));
+                    file.WriteLine(waveInfo.MaxFrequency.ToString(providerDecimalPoint));
                     file.WriteLine(waveInfo.MinVolume);
                     file.WriteLine(waveInfo.MaxVolume);
                     file.WriteLine(waveInfo.MinWeight);
@@ -85,11 +93,11 @@ namespace WaveCraft.Synth
         {
             using (StreamReader srFile = new StreamReader(@".\presets\" + name + ".pst"))
             {
-                synthGenerator.EnvelopAttack = float.Parse(srFile.ReadLine());
-                synthGenerator.EnvelopHold = float.Parse(srFile.ReadLine());
-                synthGenerator.EnvelopDecay = float.Parse(srFile.ReadLine());
-                synthGenerator.EnvelopSustain = float.Parse(srFile.ReadLine());
-                synthGenerator.EnvelopRelease = float.Parse(srFile.ReadLine());
+                synthGenerator.EnvelopAttack = float.Parse(srFile.ReadLine(), providerDecimalPoint);
+                synthGenerator.EnvelopHold = float.Parse(srFile.ReadLine(), providerDecimalPoint);
+                synthGenerator.EnvelopDecay = float.Parse(srFile.ReadLine(), providerDecimalPoint);
+                synthGenerator.EnvelopSustain = float.Parse(srFile.ReadLine(), providerDecimalPoint);
+                synthGenerator.EnvelopRelease = float.Parse(srFile.ReadLine(), providerDecimalPoint);
                 int numWaves = int.Parse(srFile.ReadLine());
                 synthGenerator.Waves.Clear();
                 for (int i = 0; i < numWaves; i++)
@@ -101,8 +109,8 @@ namespace WaveCraft.Synth
                     newWave.StartPosition = int.Parse(srFile.ReadLine());
                     newWave.WaveFile = srFile.ReadLine();
                     newWave.WaveForm = srFile.ReadLine();
-                    newWave.MinFrequency = double.Parse(srFile.ReadLine());
-                    newWave.MaxFrequency = double.Parse(srFile.ReadLine());
+                    newWave.MinFrequency = double.Parse(srFile.ReadLine(), providerDecimalPoint);
+                    newWave.MaxFrequency = double.Parse(srFile.ReadLine(), providerDecimalPoint);
                     newWave.MinVolume = int.Parse(srFile.ReadLine());
                     newWave.MaxVolume = int.Parse(srFile.ReadLine());
                     newWave.MinWeight = int.Parse(srFile.ReadLine());
@@ -144,7 +152,7 @@ namespace WaveCraft.Synth
                     {
                         newWave.ShapeWaveEnd[j] = int.Parse(srFile.ReadLine());
                     }
-
+                    newWave.UpdateDisplayName();
                     synthGenerator.Waves.Add(newWave);
                 }
 

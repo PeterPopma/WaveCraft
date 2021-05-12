@@ -10,6 +10,7 @@ namespace WaveCraft.Synth
     public class WaveInfo
     {
         string name;                // unique name
+        string displayName;         // name used in listboxes etc.
         int startPosition;          // delay in seconds * 44100 (start sample)
         double minFrequency;        // in Hz
         double maxFrequency;        // in Hz
@@ -47,6 +48,7 @@ namespace WaveCraft.Synth
         public int MaxWeight { get => maxWeight; set => maxWeight = value; }
         public int[] ShapeWeight { get => shapeWeight; set => shapeWeight = value; }
         public int[] ShapeWaveEnd { get => shapeWaveEnd; set => shapeWaveEnd = value; }
+        public string DisplayName { get => displayName; set => displayName = value; }
 
         public WaveInfo(int samplesPerSecond)
         {
@@ -69,6 +71,8 @@ namespace WaveCraft.Synth
             ArrayUtils.Populate(ShapeFrequency, SynthGenerator.SHAPE_MAX_VALUE / 2);
             ShapeWeight = new int[SynthGenerator.SHAPE_NUMPOINTS];
             ArrayUtils.Populate(ShapeWeight, SynthGenerator.SHAPE_MAX_VALUE / 2);
+
+            UpdateDisplayName();
         }
 
         public WaveInfo(string name, int numSamples, int startPosition, double minFrequency, double maxFrequency, int minVolume, int maxVolume, int minWeight, int maxWeight, int channel, string waveForm, string waveFile)
@@ -85,6 +89,8 @@ namespace WaveCraft.Synth
             this.channel = channel;
             this.waveForm = waveForm;
             this.waveFile = waveFile;
+
+            UpdateDisplayName();
         }
 
         // stereo samples are counted as one (so 1 second contains 44100 samples)
@@ -93,21 +99,20 @@ namespace WaveCraft.Synth
             return waveData.Length / 2;
         }
 
-        public string DisplayName()
+        public void UpdateDisplayName()
         {
-            string info = Name + " - " + startPosition + ":" + NumSamples();
+            displayName = Name + " - " + startPosition + ":" + NumSamples();
             if (!waveForm.Equals("Noise") && !waveForm.Equals("WavFile"))
             {
-                info += " - " + string.Format("{0:0.00}", minFrequency);
-                info += ":" + string.Format("{0:0.00}", maxFrequency);
+                displayName += " - " + string.Format("{0:0.00}", minFrequency);
+                displayName += ":" + string.Format("{0:0.00}", maxFrequency);
             }
-            info += " - " + waveForm;
+            displayName += " - " + waveForm;
 
             if (waveForm.Equals("WavFile"))
             {
-                info += " - " + Path.GetFileName(waveFile);
+                displayName += " - " + Path.GetFileName(waveFile);
             }
-            return info;
         }
 
         public void SetNumSamples(int numSamples)

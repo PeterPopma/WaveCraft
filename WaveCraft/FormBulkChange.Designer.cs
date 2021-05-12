@@ -3,7 +3,7 @@ using WaveCraft.Properties;
 
 namespace WaveCraft
 {
-    partial class FormFrequencyAll
+    partial class FormBulkChange
     {
         /// <summary>
         /// Required designer variable.
@@ -53,6 +53,8 @@ namespace WaveCraft
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new WaveCraft.CustomControls.GradientButton();
             this.buttonApply = new WaveCraft.CustomControls.GradientButton();
+            this.radioButtonChangeVolume = new System.Windows.Forms.RadioButton();
+            this.radioButtonChangeFrequency = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -84,7 +86,7 @@ namespace WaveCraft
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(517, 559);
+            this.label1.Location = new System.Drawing.Point(665, 564);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(235, 20);
             this.label1.TabIndex = 176;
@@ -117,7 +119,7 @@ namespace WaveCraft
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(514, 526);
+            this.label11.Location = new System.Drawing.Point(662, 536);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(239, 20);
             this.label11.TabIndex = 163;
@@ -127,7 +129,7 @@ namespace WaveCraft
             // 
             this.textBoxChange1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxChange1.ForeColor = System.Drawing.Color.White;
-            this.textBoxChange1.Location = new System.Drawing.Point(757, 526);
+            this.textBoxChange1.Location = new System.Drawing.Point(905, 536);
             this.textBoxChange1.Name = "textBoxChange1";
             this.textBoxChange1.Size = new System.Drawing.Size(63, 20);
             this.textBoxChange1.TabIndex = 186;
@@ -137,7 +139,7 @@ namespace WaveCraft
             // 
             this.textBoxChange2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxChange2.ForeColor = System.Drawing.Color.White;
-            this.textBoxChange2.Location = new System.Drawing.Point(757, 561);
+            this.textBoxChange2.Location = new System.Drawing.Point(905, 565);
             this.textBoxChange2.Name = "textBoxChange2";
             this.textBoxChange2.Size = new System.Drawing.Size(63, 20);
             this.textBoxChange2.TabIndex = 187;
@@ -158,7 +160,7 @@ namespace WaveCraft
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = Resources.flat;
+            this.pictureBox4.Image = global::WaveCraft.Properties.Resources.flat;
             this.pictureBox4.InitialImage = null;
             this.pictureBox4.Location = new System.Drawing.Point(13, 8);
             this.pictureBox4.Name = "pictureBox4";
@@ -171,7 +173,7 @@ namespace WaveCraft
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = Resources.inc;
+            this.pictureBox1.Image = global::WaveCraft.Properties.Resources.inc;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(13, 84);
             this.pictureBox1.Name = "pictureBox1";
@@ -184,7 +186,7 @@ namespace WaveCraft
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = Resources.dec;
+            this.pictureBox2.Image = global::WaveCraft.Properties.Resources.dec;
             this.pictureBox2.InitialImage = null;
             this.pictureBox2.Location = new System.Drawing.Point(13, 160);
             this.pictureBox2.Name = "pictureBox2";
@@ -197,7 +199,7 @@ namespace WaveCraft
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = Resources.loginc;
+            this.pictureBox3.Image = global::WaveCraft.Properties.Resources.loginc;
             this.pictureBox3.InitialImage = null;
             this.pictureBox3.Location = new System.Drawing.Point(13, 236);
             this.pictureBox3.Name = "pictureBox3";
@@ -210,7 +212,7 @@ namespace WaveCraft
             // 
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox5.Image = Resources.logdec;
+            this.pictureBox5.Image = global::WaveCraft.Properties.Resources.logdec;
             this.pictureBox5.InitialImage = null;
             this.pictureBox5.Location = new System.Drawing.Point(13, 312);
             this.pictureBox5.Name = "pictureBox5";
@@ -223,7 +225,7 @@ namespace WaveCraft
             // 
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox6.Image = Resources.incdec;
+            this.pictureBox6.Image = global::WaveCraft.Properties.Resources.incdec;
             this.pictureBox6.InitialImage = null;
             this.pictureBox6.Location = new System.Drawing.Point(89, 84);
             this.pictureBox6.Name = "pictureBox6";
@@ -236,7 +238,7 @@ namespace WaveCraft
             // 
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox7.Image = Resources.decinc;
+            this.pictureBox7.Image = global::WaveCraft.Properties.Resources.decinc;
             this.pictureBox7.InitialImage = null;
             this.pictureBox7.Location = new System.Drawing.Point(89, 160);
             this.pictureBox7.Name = "pictureBox7";
@@ -249,7 +251,7 @@ namespace WaveCraft
             // 
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox8.Image = Resources.ripples;
+            this.pictureBox8.Image = global::WaveCraft.Properties.Resources.ripples;
             this.pictureBox8.InitialImage = null;
             this.pictureBox8.Location = new System.Drawing.Point(89, 388);
             this.pictureBox8.Name = "pictureBox8";
@@ -262,7 +264,7 @@ namespace WaveCraft
             // 
             this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox9.Image = Resources.incsine;
+            this.pictureBox9.Image = global::WaveCraft.Properties.Resources.incsine;
             this.pictureBox9.InitialImage = null;
             this.pictureBox9.Location = new System.Drawing.Point(89, 236);
             this.pictureBox9.Name = "pictureBox9";
@@ -275,7 +277,7 @@ namespace WaveCraft
             // 
             this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox10.Image = Resources.decsine;
+            this.pictureBox10.Image = global::WaveCraft.Properties.Resources.decsine;
             this.pictureBox10.InitialImage = null;
             this.pictureBox10.Location = new System.Drawing.Point(89, 312);
             this.pictureBox10.Name = "pictureBox10";
@@ -288,7 +290,7 @@ namespace WaveCraft
             // 
             this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox11.Image = Resources.waves;
+            this.pictureBox11.Image = global::WaveCraft.Properties.Resources.waves;
             this.pictureBox11.InitialImage = null;
             this.pictureBox11.Location = new System.Drawing.Point(89, 8);
             this.pictureBox11.Name = "pictureBox11";
@@ -301,7 +303,7 @@ namespace WaveCraft
             // 
             this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox12.Image = Resources.sine;
+            this.pictureBox12.Image = global::WaveCraft.Properties.Resources.sine;
             this.pictureBox12.InitialImage = null;
             this.pictureBox12.Location = new System.Drawing.Point(12, 388);
             this.pictureBox12.Name = "pictureBox12";
@@ -319,7 +321,7 @@ namespace WaveCraft
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.Black;
             this.buttonCancel.HorizontalGradient = false;
-            this.buttonCancel.Location = new System.Drawing.Point(752, 622);
+            this.buttonCancel.Location = new System.Drawing.Point(752, 616);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(87, 22);
             this.buttonCancel.TabIndex = 183;
@@ -336,7 +338,7 @@ namespace WaveCraft
             this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonApply.ForeColor = System.Drawing.Color.Black;
             this.buttonApply.HorizontalGradient = false;
-            this.buttonApply.Location = new System.Drawing.Point(527, 622);
+            this.buttonApply.Location = new System.Drawing.Point(527, 616);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(87, 22);
             this.buttonApply.TabIndex = 182;
@@ -344,10 +346,40 @@ namespace WaveCraft
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
-            // FormFrequency2
+            // radioButtonChangeVolume
+            // 
+            this.radioButtonChangeVolume.AutoSize = true;
+            this.radioButtonChangeVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.radioButtonChangeVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonChangeVolume.ForeColor = System.Drawing.Color.White;
+            this.radioButtonChangeVolume.Location = new System.Drawing.Point(456, 562);
+            this.radioButtonChangeVolume.Name = "radioButtonChangeVolume";
+            this.radioButtonChangeVolume.Size = new System.Drawing.Size(134, 24);
+            this.radioButtonChangeVolume.TabIndex = 219;
+            this.radioButtonChangeVolume.Text = "change volume";
+            this.radioButtonChangeVolume.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonChangeFrequency
+            // 
+            this.radioButtonChangeFrequency.AutoSize = true;
+            this.radioButtonChangeFrequency.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.radioButtonChangeFrequency.Checked = true;
+            this.radioButtonChangeFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonChangeFrequency.ForeColor = System.Drawing.Color.White;
+            this.radioButtonChangeFrequency.Location = new System.Drawing.Point(456, 535);
+            this.radioButtonChangeFrequency.Name = "radioButtonChangeFrequency";
+            this.radioButtonChangeFrequency.Size = new System.Drawing.Size(154, 24);
+            this.radioButtonChangeFrequency.TabIndex = 218;
+            this.radioButtonChangeFrequency.TabStop = true;
+            this.radioButtonChangeFrequency.Text = "change frequency";
+            this.radioButtonChangeFrequency.UseVisualStyleBackColor = false;
+            // 
+            // FormBulkChange
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 659);
+            this.Controls.Add(this.radioButtonChangeVolume);
+            this.Controls.Add(this.radioButtonChangeFrequency);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
@@ -372,7 +404,7 @@ namespace WaveCraft
             this.Controls.Add(this.pictureBox12);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FormFrequency2";
+            this.Name = "FormBulkChange";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.FormFrequency_Load);
@@ -417,5 +449,7 @@ namespace WaveCraft
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.RadioButton radioButtonChangeVolume;
+        private System.Windows.Forms.RadioButton radioButtonChangeFrequency;
     }
 }

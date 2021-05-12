@@ -48,6 +48,7 @@ namespace WaveCraft.Synth
         double[] frequenciesRight;
 
         int[] shapeBulkCreate = new int[SHAPE_NUMPOINTS];             // shape of the bulk create. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapeBulkCreateChange = new int[SHAPE_NUMPOINTS];       // shape of the bulk create change. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
         double minFrequencyBulkCreate = 10;
         double maxFrequencyBulkCreate = 20000;
         int amountBulkCreate = 10;
@@ -62,6 +63,7 @@ namespace WaveCraft.Synth
         public SynthGenerator(FormMain parentForm)
         {
             ArrayUtils.Populate(ShapeBulkCreate, SynthGenerator.SHAPE_MAX_VALUE / 2);
+            ArrayUtils.Populate(ShapeBulkCreateChange, SynthGenerator.SHAPE_MAX_VALUE / 2);
             this.parentForm = parentForm;
         }
 
@@ -81,6 +83,7 @@ namespace WaveCraft.Synth
         public double MaxFrequencyBulkCreate { get => maxFrequencyBulkCreate; set => maxFrequencyBulkCreate = value; }
         public int AmountBulkCreate { get => amountBulkCreate; set => amountBulkCreate = value; }
         public double BulkOtherFrequency { get => bulkOtherFrequency; set => bulkOtherFrequency = value; }
+        public int[] ShapeBulkCreateChange { get => shapeBulkCreateChange; set => shapeBulkCreateChange = value; }
 
         public int NumSamples()
         {
@@ -107,7 +110,12 @@ namespace WaveCraft.Synth
             }
 
             UpdateMixedSound();
-            parentForm.UpdateWavesList();
+
+            // current wave may be deselected in listbox. it needs to be selected, because we will update it.
+            parentForm.listBoxWaves.SelectedIndex = parentForm.listBoxWaves.FindStringExact(CurrentWave.DisplayName);
+            CurrentWave.UpdateDisplayName();
+            parentForm.listBoxWaves.Items[parentForm.listBoxWaves.SelectedIndex] = CurrentWave.DisplayName;
+
             parentForm.ChangedPresetData = true;
             parentForm.pictureBoxCustomWave.Refresh();
             parentForm.pictureBoxFrequencyShape.Refresh();
@@ -963,8 +971,20 @@ namespace WaveCraft.Synth
                         wave.MinFrequency = wave.MaxFrequency = frequency;
                         Shapes.Flat(wave.ShapeFrequency);
                     }
+
                     wave.MinWeight = wave.MaxWeight = weight;
                     Shapes.Flat(wave.ShapeWeight);
+                    if (ShapeBulkCreateChange[graph_x] > SynthGenerator.SHAPE_MAX_VALUE/2)       // decrease in weight
+                    {
+                        wave.MinWeight = (int)((SynthGenerator.SHAPE_MAX_VALUE - ShapeBulkCreateChange[graph_x]) / (SynthGenerator.SHAPE_MAX_VALUE / 2.0) * wave.MaxWeight);
+                        Shapes.DecreasingLineair(wave.ShapeWeight);
+                    }
+                    else if (ShapeBulkCreateChange[graph_x] < SynthGenerator.SHAPE_MAX_VALUE / 2)       // increase in weight
+                    {
+                        wave.MinWeight = (int)(ShapeBulkCreateChange[graph_x] / (SynthGenerator.SHAPE_MAX_VALUE / 2.0) * wave.MaxWeight);
+                        Shapes.IncreasingLineair(wave.ShapeWeight);
+                    }
+
                 }
             }
         }

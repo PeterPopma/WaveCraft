@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WaveCraft
@@ -22,7 +21,11 @@ namespace WaveCraft
         double[] tempData;
         decimal maxDifference;
         decimal difference;
-        Timer timerGenerateWavesJob = new Timer();
+        private BackgroundWorker backgroundWorkerMatchingJob;
+        bool isCalculating;
+        private delegate void SafeCallDelegate(string text);
+        private delegate void SafeCallDelegateNoParams();
+        double maxAmount;
 
         private FormMain myParent = null;
 
@@ -31,17 +34,9 @@ namespace WaveCraft
         public FormFileToWaves()
         {
             InitializeComponent();
-            timerGenerateWavesJob.Interval = 50;
-            timerGenerateWavesJob.Tick += new EventHandler(TimerEventProcessor);
         }
 
-        private void TimerEventProcessor(Object myObject,
-                           EventArgs myEventArgs)
-        {
-            RunOptimization();
-        }
-
-        private void RunOptimization()
+        private void RunOptimization(BackgroundWorker backgroundWorkerPreCalculate, DoWorkEventArgs e)
         {
             string[] best_volume_shape = new string[waves.Count];
             string[] best_frequency_shape = new string[waves.Count];
@@ -88,6 +83,8 @@ namespace WaveCraft
                         improved = false;
                     }
                 }
+
+                UpdateStatus();
             }
 
             // try decreasing volume ranges
@@ -132,6 +129,8 @@ namespace WaveCraft
                         improved = false;
                     }
                 }
+
+                UpdateStatus();
             }
 
             // try decreasing frequencies
@@ -188,6 +187,8 @@ namespace WaveCraft
                     }
                     increment *= 2;
                 }
+
+                UpdateStatus();
             }
 
 
@@ -245,6 +246,8 @@ namespace WaveCraft
                     }
                     increment *= 2;
                 }
+
+                UpdateStatus();
             }
 
             // Apply best shapes
@@ -267,13 +270,51 @@ namespace WaveCraft
                 {
                     Shapes.DecreasingLineair(wave.ShapeVolume);
                 }
-            }
 
-            UpdateStatus();
+                UpdateStatus();
+            }
 
             // Done!
             buttonGenerateWaves.Text = "Generate wave data";
-            timerGenerateWavesJob.Enabled = false;
+        }
+
+        private void StartMatching()
+        {
+            isCalculating = true;
+            backgroundWorkerMatchingJob = new BackgroundWorker();
+            backgroundWorkerMatchingJob.WorkerReportsProgress = true;
+            backgroundWorkerMatchingJob.WorkerSupportsCancellation = true;
+            backgroundWorkerMatchingJob.DoWork += new System.ComponentModel.DoWorkEventHandler(backgroundWorkerMatchJob_DoWork);
+
+            backgroundWorkerMatchingJob.RunWorkerAsync();
+        }
+
+        private void StopMatching()
+        {
+            if (isCalculating)
+            {
+                if (backgroundWorkerMatchingJob.IsBusy)
+                {
+                    backgroundWorkerMatchingJob.CancelAsync();
+                }
+                System.Threading.Thread.Sleep(1000);        // Give the calculations some time to finish
+            }
+        }
+
+        private void backgroundWorkerMatchJob_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                RunOptimization(backgroundWorkerMatchingJob, e);
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine(er.Message);
+            }
+            finally
+            {
+                isCalculating = false;
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -291,27 +332,23 @@ namespace WaveCraft
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void buttonGenerateWaves_Click(object sender, EventArgs e)
         {
             if (buttonGenerateWaves.Text.Equals("Generate wave data"))
             {
-                buttonGenerateWaves.Text = "Pause matching job";
+                buttonGenerateWaves.Text = "Stop matching job";
                 if (waves == null)
                 {
                     maxDifference = (decimal)(myParent.SynthGenerator.CurrentWave.WaveData.Length * SynthGenerator.MAX_AMPLITUDE * 2.0);
                     CreateSineWaves();
+                    UpdateStatus();
                 }
-                timerGenerateWavesJob.Enabled = true;
+                StartMatching();
             }
             else
             {
                 buttonGenerateWaves.Text = "Generate wave data";
-                timerGenerateWavesJob.Enabled = false;
+                StopMatching();
             }
         }
 
@@ -327,13 +364,46 @@ namespace WaveCraft
             }
         }
 
+        private void AddGraphPointsSafe()
+        {
+            if (chartCurrent.InvokeRequired)
+            {
+                var d = new SafeCallDelegateNoParams(AddGraphPointsSafe);
+                chartCurrent.Invoke(d);
+            }
+            else
+            {
+                for (int i = 0; i < tempData.Length / 2; i++)
+                {
+                    chartCurrent.Series["Series1"].Points.AddY(tempData[i * 2]);
+                }
+            }
+        }
+
+        private void ClearGraphSafe()
+        {
+            if (chartCurrent.InvokeRequired)
+            {
+                var d = new SafeCallDelegateNoParams(ClearGraphSafe);
+                chartCurrent.Invoke(d);
+            }
+            else
+            {
+                chartCurrent.Series["Series1"].Points.Clear();
+            }
+        }
+
         private void UpdateCurrentGraph()
         {
-            chartCurrent.Series["Series1"].Points.Clear();
+            try
+            {
+                chartCurrent.Series["Series1"].Points.Clear();
+            } catch (Exception)
+            {
 
-            int numPoints = tempData.Length / 2;
+            }
 
-            for (int i = 0; i < numPoints; i++)
+            for (int i = 0; i < tempData.Length / 2; i++)
             {
                 chartCurrent.Series["Series1"].Points.AddY(tempData[i * 2]);
             }
@@ -372,6 +442,7 @@ namespace WaveCraft
                 WaveInfo newWave = new WaveInfo(myParent.SynthGenerator.SamplesPerSecond);
                 newWave.MinFrequency = frequencies[wave_number].Frequency;
                 newWave.MaxFrequency = frequencies[wave_number].Frequency;
+                newWave.MinWeight = newWave.MaxWeight = (int)(frequencies[wave_number].Amount / maxAmount * 1000);
                 newWave.WaveData = new double[myParent.SynthGenerator.CurrentWave.WaveData.Length];
                 myParent.SynthGenerator.RefreshWaveData(newWave);
                 waves.Add(newWave);
@@ -383,10 +454,23 @@ namespace WaveCraft
 
         private void UpdateStatus()
         {
+            double differencePercentage = 100 * (double)(difference / maxDifference);
+            WriteLabelDifferenceSafe("Difference (%): " + differencePercentage.ToString("0.00000"));
             UpdateCurrentGraph();
-            double differencePercentage = 100*(double)(difference / maxDifference);
-            labelDifference.Text = "Difference (%): " + differencePercentage.ToString("0.00000");
             Refresh();
+        }
+
+        private void WriteLabelDifferenceSafe(string text)
+        {
+            if (labelDifference.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(WriteLabelDifferenceSafe);
+                labelDifference.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                labelDifference.Text = text;
+            }
         }
 
         private decimal CountDifference()
@@ -399,18 +483,24 @@ namespace WaveCraft
             return difference;
         }
 
-        private double PointToFrequency(int pointNumber, int numPoints)
+        private double PointToFrequency(ulong pointNumber, ulong numPoints)
         {
-            return (22050 * pointNumber / numPoints);
+            return (22050 * pointNumber / (double)numPoints);
         }
 
         private void CreateFrequencyList()
         {
+            maxAmount = 0;
             frequencies = new List<FrequencyAmount>();
-            int numPoints = fftWindow / 2;
-            for (int i = 0; i < numPoints; i++)
+            ulong numPoints = (ulong)(fftWindow / 2);
+            for (ulong i = 0; i < numPoints; i++)
             {
-                frequencies.Add(new FrequencyAmount(PointToFrequency(i+1, numPoints), Math.Abs(frequencySpectrum[i].Real)));
+                double amount = Math.Abs(frequencySpectrum[i].Real);
+                if (amount > maxAmount)
+                {
+                    maxAmount = amount;
+                }
+                frequencies.Add(new FrequencyAmount(PointToFrequency(i+1, numPoints), amount));
             }
             frequencies = frequencies.OrderByDescending(o=>o.Amount).ToList();
         }
@@ -424,13 +514,13 @@ namespace WaveCraft
 
         private void buttonCancel_Click_1(object sender, EventArgs e)
         {
-            timerGenerateWavesJob.Enabled = false;
+            StopMatching();
             Close();
         }
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            timerGenerateWavesJob.Enabled = false;
+            StopMatching();
             if (waves != null)
             {
                 foreach (WaveInfo wave in waves)

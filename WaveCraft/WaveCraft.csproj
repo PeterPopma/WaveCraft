@@ -30,7 +30,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -120,11 +120,11 @@
     <Compile Include="FormFFTChart.Designer.cs">
       <DependentUpon>FormFFTChart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFrequencyAll.cs">
+    <Compile Include="FormBulkChange.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFrequencyAll.Designer.cs">
-      <DependentUpon>FormFrequencyAll.cs</DependentUpon>
+    <Compile Include="FormBulkChange.Designer.cs">
+      <DependentUpon>FormBulkChange.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFrequency.cs">
       <SubType>Form</SubType>
@@ -205,8 +205,8 @@
     <EmbeddedResource Include="FormFileToWaves.resx">
       <DependentUpon>FormFileToWaves.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFrequencyAll.resx">
-      <DependentUpon>FormFrequencyAll.cs</DependentUpon>
+    <EmbeddedResource Include="FormBulkChange.resx">
+      <DependentUpon>FormBulkChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFrequency.resx">
       <DependentUpon>FormFrequency.cs</DependentUpon>

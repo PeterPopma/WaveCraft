@@ -40,7 +40,7 @@ namespace WaveCraft.Custom_Controls
                     OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font, irect, i, DrawItemState.Default, this.ForeColor, this.BackColor));
                 }
             }
-            catch(ArgumentException)
+            catch(ArgumentOutOfRangeException)
             {
                 // sometime the rectangle is not defined
             }

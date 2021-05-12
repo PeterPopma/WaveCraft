@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WaveCraft
 {
-    public partial class FormFrequencyAll : Form
+    public partial class FormBulkChange : Form
     {
         private const int SHAPE_NUM_POINTS = 1000;
         private const int SHAPE_MAX_VALUE = 500;
@@ -23,7 +23,7 @@ namespace WaveCraft
         int AdjustDataWidth = 0;
         Random random = new Random();
 
-        public FormFrequencyAll()
+        public FormBulkChange()
         {
             InitializeComponent();
             aTimer.Interval = 50;
@@ -58,6 +58,11 @@ namespace WaveCraft
             return (waveInfo.MaxFrequency * waveInfo.ShapeFrequency[position] + (waveInfo.MinFrequency * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeFrequency[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
         }
 
+        private double CalculateCurrentVolume(int position, WaveInfo waveInfo)
+        {
+            return (waveInfo.MaxVolume * waveInfo.ShapeVolume[position] + (waveInfo.MinVolume * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeVolume[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
+        }
+
         private void buttonApply_Click(object sender, EventArgs e)
         {
             double MinChange = Convert.ToDouble(labelChangeMin.Text);
@@ -68,14 +73,28 @@ namespace WaveCraft
                 foreach (string item in myParent.listBoxWaves.SelectedItems)
                 {
                     WaveInfo wave = myParent.SynthGenerator.GetCurrentWaveByDisplayName(item);
-                    AdjustWaveFrequency(wave, MinChange, MaxChange);
+                    if (radioButtonChangeFrequency.Checked)
+                    {
+                        AdjustWaveFrequency(wave, MinChange, MaxChange);
+                    }
+                    else
+                    {
+                        AdjustWaveVolume(wave, MinChange, MaxChange);
+                    }
                 }
             }
             else
             {
                 foreach (WaveInfo wave in myParent.SynthGenerator.Waves)
                 {
-                    AdjustWaveFrequency(wave, MinChange, MaxChange);
+                    if (radioButtonChangeFrequency.Checked)
+                    {
+                        AdjustWaveFrequency(wave, MinChange, MaxChange);
+                    }
+                    else
+                    {
+                        AdjustWaveVolume(wave, MinChange, MaxChange);
+                    }
                 }
             }
 
@@ -110,6 +129,32 @@ namespace WaveCraft
             }
             wave.MinFrequency = new_min;
             wave.MaxFrequency = new_max;
+        }
+
+        private void AdjustWaveVolume(WaveInfo wave, double MinChange, double MaxChange)
+        {
+            int new_min = (int)(wave.MinVolume * MinChange);
+            if (new_min > SynthGenerator.MAX_VOLUME)
+            {
+                new_min = SynthGenerator.MAX_VOLUME;
+            }
+            int new_max = (int)(wave.MaxVolume * MaxChange);
+            if (new_max > SynthGenerator.MAX_VOLUME)
+            {
+                new_max = SynthGenerator.MAX_VOLUME;
+            }
+            // change the volume graph, so that it matches the desired pattern
+            for (int position = 0; position < wave.ShapeVolume.Length; position++)
+            {
+                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeVolume.Length);
+                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
+                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
+                double volume = CalculateCurrentVolume(position, wave);
+                volume *= factor;
+                wave.ShapeVolume[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((volume - new_min) / (new_max - new_min)));
+            }
+            wave.MinVolume = new_min;
+            wave.MaxVolume = new_max;
         }
 
         private void PictureBoxPaint(object sender, PaintEventArgs e)

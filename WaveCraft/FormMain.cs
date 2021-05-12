@@ -106,6 +106,11 @@ namespace WaveCraft
                 labelFileName.Text = Path.GetFileName(SynthGenerator.CurrentWave.WaveFile);
                 labelFileName.ForeColor = Color.Yellow;
             }
+            else
+            {
+                labelFileName.Text = "select .wav file";
+                labelFileName.ForeColor = Color.White;
+            }
 
             colorSliderAttack.Value = (decimal)synthGenerator.EnvelopAttack * 100;
             colorSliderHold.Value = (decimal)synthGenerator.EnvelopHold * 100;
@@ -348,7 +353,13 @@ namespace WaveCraft
         {
             ChangedPresetData = false;
             currentPreset = comboBoxPresets.Text;
-            preset.Load(synthGenerator, currentPreset);
+            try
+            {
+                preset.Load(synthGenerator, currentPreset);
+            } catch (Exception)
+            {
+
+            }
             RecreateWavesLists();
             UpdateWaveControls();
             synthGenerator.UpdateAllWaveData();
@@ -527,38 +538,26 @@ namespace WaveCraft
             listBoxWaves.Items.Clear();
             foreach (WaveInfo wave in synthGenerator.Waves)
             {
-                listBoxWaves.Items.Add(wave.DisplayName());
+                listBoxWaves.Items.Add(wave.DisplayName);
             }
-            listBoxWaves.SelectedIndex = listBoxWaves.FindStringExact(synthGenerator.CurrentWave.DisplayName());
-        }
-
-        public void UpdateWavesList()
-        {
-            listBoxWaves.Items[listBoxWaves.SelectedIndex] = synthGenerator.CurrentWave.DisplayName();
-            /*
-            for (int index=0; index<listBoxWaves.Items.Count; index++)
-            {
-                WaveInfo wave = synthGenerator.FindWaveByNamePart(listBoxWaves.Items[index].ToString());
-                listBoxWaves.Items[index] = wave.DisplayName();
-            }
-            */
+            listBoxWaves.SelectedIndex = listBoxWaves.FindStringExact(synthGenerator.CurrentWave.DisplayName);
         }
 
         private void AddToListBoxWaves(WaveInfo newWave)
         {
-            listBoxWaves.Items.Add(newWave.DisplayName());
+            listBoxWaves.Items.Add(newWave.DisplayName);
         }
 
         private void RemoveFromListBoxWaves(WaveInfo waveInfo)
         {
-            listBoxWaves.Items.RemoveAt(listBoxWaves.FindStringExact(waveInfo.DisplayName()));
+            listBoxWaves.Items.RemoveAt(listBoxWaves.FindStringExact(waveInfo.DisplayName));
         }
 
         private void buttonAddNewWave_Click(object sender, EventArgs e)
         {
             synthGenerator.CurrentWave = synthGenerator.CloneWave();
             AddToListBoxWaves(synthGenerator.CurrentWave);
-            listBoxWaves.SelectedIndex = listBoxWaves.FindStringExact(synthGenerator.CurrentWave.DisplayName());
+            listBoxWaves.SelectedIndex = listBoxWaves.FindStringExact(synthGenerator.CurrentWave.DisplayName);
             UpdateMixedSound();
         }
 
@@ -1115,19 +1114,15 @@ namespace WaveCraft
             // Note: this only works if the fundamental wave has a flat weight-shape and a max. weight of > 10
             if ((double)numericUpDownWeightChange.Value / 100.0 > 0)       // increase in weight
             {
-                int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
                 double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
                 newWave.MinWeight = (int)(factor * newWave.MaxWeight);
-                Shapes.IncreasingLineair(WaveData);
-                newWave.ShapeWeight = WaveData;
+                Shapes.IncreasingLineair(newWave.ShapeWeight);
             }
             if ((double)numericUpDownWeightChange.Value / 100.0 < 0)       // decrease in weight
             {
-                int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
                 double factor = 1 - (double)Math.Abs(numericUpDownWeightChange.Value) / 100.0;
                 newWave.MinWeight = (int)(factor * newWave.MaxWeight);
-                Shapes.DecreasingLineair(WaveData);
-                newWave.ShapeWeight = WaveData;
+                Shapes.DecreasingLineair(newWave.ShapeWeight);
             }
 
             double weightFactor = Math.Pow(((double)numericUpDownWeight.Value / 100.0), harmonic_number);
@@ -1325,7 +1320,7 @@ namespace WaveCraft
 
         private void buttonAdjustFrequencies_Click(object sender, EventArgs e)
         {
-            FormFrequencyAll formFrequency2 = new FormFrequencyAll();
+            FormBulkChange formFrequency2 = new FormBulkChange();
             formFrequency2.MyParent = this;
             formFrequency2.ShowDialog();
         }
@@ -1833,7 +1828,7 @@ namespace WaveCraft
                 listBoxWavesVault.Items.RemoveAt(listBoxWavesVault.FindStringExact(item));
                 WaveInfo wave = synthGenerator.GetVaultedWaveByDisplayName(item);
                 synthGenerator.RemoveFromVault(wave);
-                listBoxWaves.Items.Add(wave.DisplayName());
+                listBoxWaves.Items.Add(wave.DisplayName);
             }
 
             synthGenerator.UpdateAllWaveData();
