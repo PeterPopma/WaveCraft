@@ -51,7 +51,6 @@ namespace WaveCraft
             for (int pointNumber = graphPosition; pointNumber < lastPoint; pointNumber++)
             {
                 int frequency = PointToFrequency(pointNumber);
-                frequency = frequency * myParent.SynthGenerator.SamplesPerSecond / 44100;
                 if (!radioButtonChannelRight.Checked)
                 {
                     chartFFT.Series["Series1"].Points.AddXY(frequency, frequenciesLeft[pointNumber]);
@@ -68,20 +67,26 @@ namespace WaveCraft
 
         private void CalcFFT()
         {
-            numSamples = myParent.SynthGenerator.TempData.Length / 2;
+            double speedFactor = myParent.SynthGenerator.SamplesPerSecond / 44100.0;
             frequencySpectrumLeft = new Complex[fftWindow];
             frequencySpectrumRight = new Complex[fftWindow];
             for (int i = 0; i < fftWindow; i++)
             {
-                if (2 * (startSample + i) > numSamples)
+                if ((int)(speedFactor * 2 * (startSample + i)) >= myParent.SynthGenerator.TempData.Length)
                 {
                     frequencySpectrumLeft[i] = new Complex(0, 0);
+                }
+                else
+                {
+                    frequencySpectrumLeft[i] = new Complex(myParent.SynthGenerator.TempData[(int)(speedFactor * 2 * (startSample + i))], 0);
+                }
+                if ((int)(speedFactor * 2 * (startSample + i) + 1) >= myParent.SynthGenerator.TempData.Length)
+                {
                     frequencySpectrumRight[i] = new Complex(0, 0);
                 }
                 else
                 {
-                    frequencySpectrumLeft[i] = new Complex(myParent.SynthGenerator.TempData[2 * (startSample + i)], 0);
-                    frequencySpectrumRight[i] = new Complex(myParent.SynthGenerator.TempData[2 * (startSample + i) + 1], 0);
+                    frequencySpectrumRight[i] = new Complex(myParent.SynthGenerator.TempData[(int)(speedFactor * 2 * (startSample + i) + 1)], 0);
                 }
             }
 

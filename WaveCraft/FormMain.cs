@@ -1100,6 +1100,7 @@ namespace WaveCraft
                     {
                         newWave.StartPosition += (int)(newWave.NumSamples() * Convert.ToDouble(inharmonic_number * numericUpDownTimeShift.Value) / 100.0);
                     }
+                    newWave.UpdateDisplayName();
                     AddToListBoxWaves(newWave);
                 }
             }
@@ -1134,6 +1135,7 @@ namespace WaveCraft
             {
                 newWave.StartPosition += (int)(newWave.NumSamples()* Convert.ToDouble(harmonic_number*numericUpDownTimeShift.Value)/100.0);
             }
+            newWave.UpdateDisplayName();
             AddToListBoxWaves(newWave);
         }
 
@@ -1599,7 +1601,7 @@ namespace WaveCraft
                             break;
                     }
                 }
-
+                waveInfo.UpdateDisplayName();
                 synthGenerator.Waves.Add(waveInfo);
                 if (waveInfo.WaveForm != "Noise")
                 {

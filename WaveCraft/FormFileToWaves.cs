@@ -526,6 +526,7 @@ namespace WaveCraft
                 foreach (WaveInfo wave in waves)
                 {
                     wave.Name = myParent.SynthGenerator.CreateUniqueName();
+                    wave.UpdateDisplayName();
                     myParent.SynthGenerator.Waves.Add(wave);
                 }
                 myParent.UpdateWaveControls();

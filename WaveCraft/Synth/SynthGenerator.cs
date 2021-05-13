@@ -214,35 +214,27 @@ namespace WaveCraft.Synth
 
         private void CalcFFT()
         {
-            int numSamples = tempData.Length / 2;
+            double speedFactor = SamplesPerSecond / 44100.0;
             frequencySpectrumLeft = new Complex[fftWindow];
             frequencySpectrumRight = new Complex[fftWindow];
-            for (int i = 0; i < fftWindow * 2; i++)
+            for (int i = 0; i < fftWindow; i++)
             {
-                int position = i;
-                if (i%NUM_AUDIO_CHANNELS==0)
+                if((int)(speedFactor * 2 * i) >= tempData.Length)
                 {
-                    if(i >= numSamples)
-                    {
-                        frequencySpectrumLeft[i / 2] = new Complex(0, 0);
-                    }
-                    else
-                    {
-                        frequencySpectrumLeft[i / 2] = new Complex(tempData[2*i], 0);
-                    }
+                    frequencySpectrumLeft[i] = new Complex(0, 0);
                 }
                 else
                 {
-                    if (i >= numSamples)
-                    {
-                        frequencySpectrumRight[i / 2] = new Complex(0, 0);
-                    }
-                    else
-                    {
-                        frequencySpectrumRight[i / 2] = new Complex(tempData[2*i+1], 0);
-                    }
+                    frequencySpectrumLeft[i] = new Complex(tempData[(int)(speedFactor * 2 * i)], 0);
                 }
-
+                if ((int)((speedFactor * 2 * i) + 1) >= tempData.Length)
+                {
+                    frequencySpectrumRight[i] = new Complex(0, 0);
+                }
+                else
+                {
+                    frequencySpectrumRight[i] = new Complex(tempData[(int)((speedFactor * 2 * i) + 1)], 0);
+                }
             }
 
             MathUtils.FFT.Transform(frequencySpectrumLeft);
@@ -904,6 +896,7 @@ namespace WaveCraft.Synth
             newWave.ShapeVolume = currentWave.ShapeVolume.Clone() as int[];
             newWave.ShapeFrequency = currentWave.ShapeFrequency.Clone() as int[];
             newWave.ShapeWeight = currentWave.ShapeWeight.Clone() as int[];
+            newWave.UpdateDisplayName();
             Waves.Add(newWave);
             RefreshWaveData(newWave);
 
@@ -984,7 +977,7 @@ namespace WaveCraft.Synth
                         wave.MinWeight = (int)(ShapeBulkCreateChange[graph_x] / (SynthGenerator.SHAPE_MAX_VALUE / 2.0) * wave.MaxWeight);
                         Shapes.IncreasingLineair(wave.ShapeWeight);
                     }
-
+                    wave.UpdateDisplayName();
                 }
             }
         }
@@ -1025,6 +1018,7 @@ namespace WaveCraft.Synth
             if (WaveNameExists(wave.Name))
             {
                 wave.Name = CreateUniqueName();
+                wave.UpdateDisplayName();
             }
             waves.Add(wave);
         }
