@@ -17,7 +17,6 @@ namespace WaveCraft
         private FormMain myParent = null;
         int startSample = 0;
         int fftWindow = 4096;
-        int numSamples;
         Complex[] frequencySpectrumLeft;
         Complex[] frequencySpectrumRight;
         double[] frequenciesLeft;

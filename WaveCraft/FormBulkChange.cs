@@ -63,38 +63,50 @@ namespace WaveCraft
             return (waveInfo.MaxVolume * waveInfo.ShapeVolume[position] + (waveInfo.MinVolume * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeVolume[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
         }
 
-        private void buttonApply_Click(object sender, EventArgs e)
+        private double CalculateCurrentWeight(int position, WaveInfo waveInfo)
+        {
+            return (waveInfo.MaxWeight * waveInfo.ShapeWeight[position] + (waveInfo.MinWeight * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeWeight[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
+        }
+
+        private void AdjustValues(WaveInfo wave)
         {
             double MinChange = Convert.ToDouble(labelChangeMin.Text);
             double MaxChange = Convert.ToDouble(labelChangeMax.Text);
+
+            if (radioButtonChangeFrequency.Checked)
+            {
+                AdjustWaveFrequency(wave, MinChange, MaxChange);
+            }
+            else if (radioButtonChangeVolume.Checked)
+            {
+                AdjustWaveVolume(wave, MinChange, MaxChange);
+            }
+            else if (radioButtonChangeWeight.Checked)
+            {
+                AdjustWaveWeight(wave, MinChange, MaxChange);
+            }
+            else
+            {
+                AdjustWavePhase(wave, MinChange, MaxChange);
+            }
+        }
+
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
 
             if (myParent.listBoxWaves.SelectedItems.Count > 1)
             {
                 foreach (string item in myParent.listBoxWaves.SelectedItems)
                 {
                     WaveInfo wave = myParent.SynthGenerator.GetCurrentWaveByDisplayName(item);
-                    if (radioButtonChangeFrequency.Checked)
-                    {
-                        AdjustWaveFrequency(wave, MinChange, MaxChange);
-                    }
-                    else
-                    {
-                        AdjustWaveVolume(wave, MinChange, MaxChange);
-                    }
+                    AdjustValues(wave);
                 }
             }
             else
             {
                 foreach (WaveInfo wave in myParent.SynthGenerator.Waves)
                 {
-                    if (radioButtonChangeFrequency.Checked)
-                    {
-                        AdjustWaveFrequency(wave, MinChange, MaxChange);
-                    }
-                    else
-                    {
-                        AdjustWaveVolume(wave, MinChange, MaxChange);
-                    }
+                    AdjustValues(wave);
                 }
             }
 
@@ -155,6 +167,46 @@ namespace WaveCraft
             }
             wave.MinVolume = new_min;
             wave.MaxVolume = new_max;
+        }
+
+        private void AdjustWaveWeight(WaveInfo wave, double MinChange, double MaxChange)
+        {
+            int new_min = (int)(wave.MinWeight * MinChange);
+            if (new_min > SynthGenerator.MAX_WEIGHT)
+            {
+                new_min = SynthGenerator.MAX_WEIGHT;
+            }
+            int new_max = (int)(wave.MaxWeight * MaxChange);
+            if (new_max > SynthGenerator.MAX_WEIGHT)
+            {
+                new_max = SynthGenerator.MAX_WEIGHT;
+            }
+            // change the weight graph, so that it matches the desired pattern
+            for (int position = 0; position < wave.ShapeWeight.Length; position++)
+            {
+                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeWeight.Length);
+                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
+                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
+                double weight = CalculateCurrentWeight(position, wave);
+                weight *= factor;
+                wave.ShapeWeight[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((weight - new_min) / (new_max - new_min)));
+            }
+            wave.MinWeight = new_min;
+            wave.MaxWeight = new_max;
+        }
+
+        private void AdjustWavePhase(WaveInfo wave, double MinChange, double MaxChange)
+        {
+            // change the phase graph, so that it matches the desired pattern
+            for (int position = 0; position < wave.ShapePhase.Length; position++)
+            {
+                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeWeight.Length);
+                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
+                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
+                int phase = wave.ShapePhase[position];
+                phase = (int)((phase + (factor*SynthGenerator.SHAPE_MAX_VALUE)) % SynthGenerator.SHAPE_MAX_VALUE);
+                wave.ShapePhase[position] = phase;
+            }
         }
 
         private void PictureBoxPaint(object sender, PaintEventArgs e)

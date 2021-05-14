@@ -65,11 +65,15 @@ namespace WaveCraft.Synth
             }
         }
 
-        public static void Flat(int[] waveData)
+        public static void Flat(int[] waveData, int value = SynthGenerator.SHAPE_MAX_VALUE / 2)
         {
+            if (value < 0)
+                value = 0;
+            if (value > SynthGenerator.SHAPE_MAX_VALUE)
+                value = SynthGenerator.SHAPE_MAX_VALUE;
             for (int i = 0; i < waveData.Length; i++)
             {
-                waveData[i] = (int)(SynthGenerator.SHAPE_MAX_VALUE / 2.0);
+                waveData[i] = value;
             }
         }
 

@@ -247,51 +247,6 @@ namespace WaveCraft
             Refresh();
         }
 
-        private void buttonFlat_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < WaveData.Length; i++)
-            {
-                WaveData[i] = (int)(SynthGenerator.SHAPE_MAX_VALUE / 2.0);
-            }
-            Refresh();
-        }
-
-        private void gradientButton1_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < WaveData.Length; i++)
-            {
-                WaveData[i] = (int)(((int)(Math.Sin(i / (double)WaveData.Length * 4 * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
-            }
-            Refresh();
-        }
-
-        private void gradientButton2_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < WaveData.Length; i++)
-            {
-                WaveData[i] = (int)(((int)(Math.Sin(i / (double)WaveData.Length * 6 * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
-            }
-            Refresh();
-        }
-
-        private void buttonIncreasing_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < WaveData.Length; i++)
-            {
-                WaveData[i] = (int)((SynthGenerator.SHAPE_NUMPOINTS - i) / (double)SynthGenerator.SHAPE_NUMPOINTS * SynthGenerator.SHAPE_MAX_VALUE);
-            }
-            Refresh();
-        }
-
-        private void buttonDecreasing_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < WaveData.Length; i++)
-            {
-                WaveData[i] = (int)(i / (double)SynthGenerator.SHAPE_NUMPOINTS * SynthGenerator.SHAPE_MAX_VALUE);
-            }
-            Refresh();
-        }
-
         private void buttonVolumeMinus1_Click(object sender, EventArgs e)
         {
             if (colorSliderVolume1.Value > 0)

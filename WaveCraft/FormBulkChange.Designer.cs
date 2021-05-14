@@ -55,6 +55,8 @@ namespace WaveCraft
             this.buttonApply = new WaveCraft.CustomControls.GradientButton();
             this.radioButtonChangeVolume = new System.Windows.Forms.RadioButton();
             this.radioButtonChangeFrequency = new System.Windows.Forms.RadioButton();
+            this.radioButtonChangeWeight = new System.Windows.Forms.RadioButton();
+            this.radioButtonChangePhase = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -86,7 +88,7 @@ namespace WaveCraft
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(665, 564);
+            this.label1.Location = new System.Drawing.Point(709, 564);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(235, 20);
             this.label1.TabIndex = 176;
@@ -119,7 +121,7 @@ namespace WaveCraft
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(662, 536);
+            this.label11.Location = new System.Drawing.Point(706, 536);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(239, 20);
             this.label11.TabIndex = 163;
@@ -129,7 +131,7 @@ namespace WaveCraft
             // 
             this.textBoxChange1.BackColor = System.Drawing.Color.DimGray;
             this.textBoxChange1.ForeColor = System.Drawing.Color.White;
-            this.textBoxChange1.Location = new System.Drawing.Point(905, 536);
+            this.textBoxChange1.Location = new System.Drawing.Point(949, 536);
             this.textBoxChange1.Name = "textBoxChange1";
             this.textBoxChange1.Size = new System.Drawing.Size(63, 20);
             this.textBoxChange1.TabIndex = 186;
@@ -139,7 +141,7 @@ namespace WaveCraft
             // 
             this.textBoxChange2.BackColor = System.Drawing.Color.DimGray;
             this.textBoxChange2.ForeColor = System.Drawing.Color.White;
-            this.textBoxChange2.Location = new System.Drawing.Point(905, 565);
+            this.textBoxChange2.Location = new System.Drawing.Point(949, 565);
             this.textBoxChange2.Name = "textBoxChange2";
             this.textBoxChange2.Size = new System.Drawing.Size(63, 20);
             this.textBoxChange2.TabIndex = 187;
@@ -352,7 +354,7 @@ namespace WaveCraft
             this.radioButtonChangeVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.radioButtonChangeVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonChangeVolume.ForeColor = System.Drawing.Color.White;
-            this.radioButtonChangeVolume.Location = new System.Drawing.Point(456, 562);
+            this.radioButtonChangeVolume.Location = new System.Drawing.Point(267, 560);
             this.radioButtonChangeVolume.Name = "radioButtonChangeVolume";
             this.radioButtonChangeVolume.Size = new System.Drawing.Size(134, 24);
             this.radioButtonChangeVolume.TabIndex = 219;
@@ -366,18 +368,45 @@ namespace WaveCraft
             this.radioButtonChangeFrequency.Checked = true;
             this.radioButtonChangeFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButtonChangeFrequency.ForeColor = System.Drawing.Color.White;
-            this.radioButtonChangeFrequency.Location = new System.Drawing.Point(456, 535);
+            this.radioButtonChangeFrequency.Location = new System.Drawing.Point(267, 533);
             this.radioButtonChangeFrequency.Name = "radioButtonChangeFrequency";
             this.radioButtonChangeFrequency.Size = new System.Drawing.Size(154, 24);
             this.radioButtonChangeFrequency.TabIndex = 218;
-            this.radioButtonChangeFrequency.TabStop = true;
             this.radioButtonChangeFrequency.Text = "change frequency";
             this.radioButtonChangeFrequency.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonChangeWeight
+            // 
+            this.radioButtonChangeWeight.AutoSize = true;
+            this.radioButtonChangeWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.radioButtonChangeWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonChangeWeight.ForeColor = System.Drawing.Color.White;
+            this.radioButtonChangeWeight.Location = new System.Drawing.Point(474, 535);
+            this.radioButtonChangeWeight.Name = "radioButtonChangeWeight";
+            this.radioButtonChangeWeight.Size = new System.Drawing.Size(130, 24);
+            this.radioButtonChangeWeight.TabIndex = 220;
+            this.radioButtonChangeWeight.Text = "change weight";
+            this.radioButtonChangeWeight.UseVisualStyleBackColor = false;
+            // 
+            // radioButtonChangePhase
+            // 
+            this.radioButtonChangePhase.AutoSize = true;
+            this.radioButtonChangePhase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.radioButtonChangePhase.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonChangePhase.ForeColor = System.Drawing.Color.White;
+            this.radioButtonChangePhase.Location = new System.Drawing.Point(474, 561);
+            this.radioButtonChangePhase.Name = "radioButtonChangePhase";
+            this.radioButtonChangePhase.Size = new System.Drawing.Size(128, 24);
+            this.radioButtonChangePhase.TabIndex = 221;
+            this.radioButtonChangePhase.Text = "change phase";
+            this.radioButtonChangePhase.UseVisualStyleBackColor = false;
             // 
             // FormBulkChange
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 659);
+            this.Controls.Add(this.radioButtonChangePhase);
+            this.Controls.Add(this.radioButtonChangeWeight);
             this.Controls.Add(this.radioButtonChangeVolume);
             this.Controls.Add(this.radioButtonChangeFrequency);
             this.Controls.Add(this.pictureBox11);
@@ -449,7 +478,9 @@ namespace WaveCraft
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.RadioButton radioButtonChangeVolume;
         private System.Windows.Forms.RadioButton radioButtonChangeFrequency;
+        private System.Windows.Forms.RadioButton radioButtonChangeWeight;
+        private System.Windows.Forms.RadioButton radioButtonChangePhase;
+        private System.Windows.Forms.RadioButton radioButtonChangeVolume;
     }
 }

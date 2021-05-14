@@ -376,27 +376,27 @@ namespace WaveCraft
         {
             if (synthGenerator.CurrentWave.WaveForm.Equals("WavFile") || synthGenerator.CurrentWave.WaveForm.Equals("Noise"))
             {
+                buttonCreatePartials.Enabled = false;
                 labelFrequencyMax.Visible = false;
                 labelFrequencyMin.Visible = false;
-                buttonCreatePartials.Enabled = false;
                 labelFrequencyTitle.Visible = false;
                 pictureBoxFrequencyShape.Visible = false;
-                labelFreqMaxTitle.Visible = false;
-                labelFreqMinTitle.Visible = false;
-                labelFrequencyMax.Visible = false;
-                labelFrequencyMin.Visible = false;
+                labelPhaseMax.Visible = false;
+                labelPhaseMin.Visible = false;
+                labelPhaseTitle.Visible = false;
+                pictureBoxPhaseShape.Visible = false;
             }
             else
             {
+                buttonCreatePartials.Enabled = true;
                 labelFrequencyMax.Visible = true;
                 labelFrequencyMin.Visible = true;
-                buttonCreatePartials.Enabled = true;
                 labelFrequencyTitle.Visible = true;
                 pictureBoxFrequencyShape.Visible = true;
-                labelFreqMaxTitle.Visible = true;
-                labelFreqMinTitle.Visible = true;
-                labelFrequencyMax.Visible = true;
-                labelFrequencyMin.Visible = true;
+                labelPhaseMax.Visible = true;
+                labelPhaseMin.Visible = true;
+                labelPhaseTitle.Visible = true;
+                pictureBoxPhaseShape.Visible = true;
             }
             if (synthGenerator.CurrentWave.WaveForm.Equals("WavFile"))
             {
@@ -423,12 +423,12 @@ namespace WaveCraft
             }
             if (synthGenerator.CurrentWave.WaveForm.Equals("CustomBeginEnd"))
             {
-                pictureBoxCustomWave.Width = 178;
+                buttonChange.Left = 530;
                 pictureBoxCustomWaveEnd.Visible = true;
             }
             else
             {
-                pictureBoxCustomWave.Width = 360;
+                buttonChange.Left = 316;
                 pictureBoxCustomWaveEnd.Visible = false;
             }
         }
@@ -606,7 +606,7 @@ namespace WaveCraft
             }
             double widthPercentage = synthGenerator.CurrentWave.NumSamples() / (double)synthGenerator.NumSamples();
             double startPercentage = synthGenerator.CurrentWave.StartPosition / (double)synthGenerator.NumSamples();
-            Rectangle rect = new Rectangle(29 + (int)(346 * startPercentage), 4, (int)(346 * widthPercentage), 110);
+            Rectangle rect = new Rectangle(12 + (int)(374 * startPercentage), 4, (int)(374 * widthPercentage), 110);
             Pen myBrush = new Pen(Color.White);
             e.Graphics.DrawRectangle(myBrush, rect);
         }
@@ -619,7 +619,7 @@ namespace WaveCraft
             }
             double withPercentage = synthGenerator.CurrentWave.NumSamples() / (double)synthGenerator.NumSamples();
             double startPercentage = synthGenerator.CurrentWave.StartPosition / (double)synthGenerator.NumSamples();
-            Rectangle rect = new Rectangle(29 + (int)(346 * startPercentage), 4, (int)(346 * withPercentage), 110);
+            Rectangle rect = new Rectangle(12 + (int)(374 * startPercentage), 4, (int)(374 * withPercentage), 110);
             System.Drawing.Pen myBrush = new System.Drawing.Pen(System.Drawing.Color.White);
             e.Graphics.DrawRectangle(myBrush, rect);
         }
@@ -1131,9 +1131,14 @@ namespace WaveCraft
             newWave.MaxWeight = (int)(newWave.MaxWeight * weightFactor);
 
             newWave.SetNumSamples((int)(newWave.NumSamples() * durationFactor));
-            if(numericUpDownTimeShift.Value>0)
+            if (numericUpDownTimeShift.Value>0)
             {
-                newWave.StartPosition += (int)(newWave.NumSamples()* Convert.ToDouble(harmonic_number*numericUpDownTimeShift.Value)/100.0);
+                newWave.StartPosition += (int)(newWave.NumSamples() * Convert.ToDouble(harmonic_number*numericUpDownTimeShift.Value) / 100.0);
+            }
+            if (numericUpDownPhaseShift.Value > 0)
+            {
+                double phase = (Convert.ToDouble(harmonic_number * numericUpDownPhaseShift.Value) / 100.0) % 100;
+                Shapes.Flat(newWave.ShapePhase, (int)(phase * SynthGenerator.SHAPE_MAX_VALUE));
             }
             newWave.UpdateDisplayName();
             AddToListBoxWaves(newWave);
@@ -1225,6 +1230,7 @@ namespace WaveCraft
                 pictureBoxFrequencyShape.Refresh();
                 pictureBoxVolumeShape.Refresh();
                 pictureBoxWeightShape.Refresh();
+                pictureBoxPhaseShape.Refresh();
                 chartResultLeft.Refresh();
                 chartResultRight.Refresh();
                 UpdateWaveControls();
@@ -1264,15 +1270,21 @@ namespace WaveCraft
 
         private void ChangePartialsVisibility()
         {
-            if (radioButtonEvenHarmonics.Checked || radioButtonOddHarmonics.Checked)
+            if (radioButtonEvenHarmonics.Checked || radioButtonOddHarmonics.Checked || radioButtonEvenOddHarmonics.Checked)
             {
-                numericUpDownSpread.Enabled = false;
-                checkBoxRandomFrequency.Enabled = false;
+                numericUpDownSpread.Visible = false;
+                checkBoxRandomFrequency.Visible = false;
+                labelMaxSpreadHelp.Visible = false;
+                labelRandomFrequencyHelp.Visible = false;
+                labelMaxSpread.Visible = false;
             }
             else
             {
-                numericUpDownSpread.Enabled = true;
-                checkBoxRandomFrequency.Enabled = true;
+                numericUpDownSpread.Visible = true;
+                checkBoxRandomFrequency.Visible = true;
+                labelMaxSpreadHelp.Visible = true;
+                labelRandomFrequencyHelp.Visible = true;
+                labelMaxSpread.Visible = true;
             }
         }
 
@@ -1561,6 +1573,26 @@ namespace WaveCraft
                 waveInfo.ShapeVolume = RandomShape();
                 waveInfo.ShapeFrequency = RandomShape();
                 waveInfo.ShapeWeight = RandomShape();
+                if(random.Next(5)==0)       // change phase
+                {
+                    rand = random.Next(4);
+                    switch (rand)
+                    {
+                        default:
+                        case 0:
+                            Shapes.Sines(waveInfo.ShapePhase, random.Next(19)+1);
+                            break;
+                        case 1:
+                            Shapes.IncSines(waveInfo.ShapePhase, random.Next(5) + 1);
+                            break;
+                        case 2:
+                            Shapes.DecSines(waveInfo.ShapePhase, random.Next(5) + 1);
+                            break;
+                        case 3:
+                            Shapes.RandomWaves(waveInfo.ShapePhase);
+                            break;
+                    }
+                }
                 if(waveInfo.WaveForm.Equals("Custom") || waveInfo.WaveForm.Equals("CustomBeginEnd"))
                 {
                     rand = random.Next(4);
@@ -1605,6 +1637,7 @@ namespace WaveCraft
                 synthGenerator.Waves.Add(waveInfo);
                 if (waveInfo.WaveForm != "Noise")
                 {
+                    synthGenerator.CurrentWave = waveInfo;          // harmonics use current wave
                     if (random.Next(10) < 2)
                     {
                         RandomToneMode();
@@ -1630,7 +1663,7 @@ namespace WaveCraft
                 synthGenerator.AmountBulkCreate = random.Next(30) + 1;
                 synthGenerator.MinFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
                 synthGenerator.MaxFrequencyBulkCreate = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
-                synthGenerator.BulkOtherFrequency = 10 * Math.Pow(1.0076298626466613, random.Next(999));        // 10 .. 20000
+                synthGenerator.BulkOtherFrequency = 10 * Math.Pow(1.0076298626466613, random.Next(999));            // 10 .. 20000
                 for (int k=0; k<SynthGenerator.SHAPE_NUMPOINTS; k++)
                 {
                     synthGenerator.ShapeBulkCreate[k] = random.Next(SynthGenerator.SHAPE_MAX_VALUE);
@@ -1959,6 +1992,48 @@ namespace WaveCraft
             {
 
             }
+        }
+
+        private void pictureBoxPhaseShape_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxPhaseShape.Cursor = new Cursor(Properties.Resources.pencil.Handle);
+        }
+
+        private void pictureBoxPhaseShape_Paint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.FromArgb(150, 87, 195),
+                                                                       Color.FromArgb(0, 0, 15),
+                                                                       90F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+            }
+
+            Pen pen = new Pen(Color.White);
+
+            if (synthGenerator.CurrentWave.ShapePhase.Length == SynthGenerator.SHAPE_NUMPOINTS)
+            {
+                for (int x = 0; x < pictureBoxPhaseShape.Width; x++)
+                {
+                    int position = (int)(x / (double)pictureBoxPhaseShape.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    int next_position = (int)((x + 1) / (double)pictureBoxPhaseShape.Width * SynthGenerator.SHAPE_NUMPOINTS);
+                    if (next_position < SynthGenerator.SHAPE_NUMPOINTS)
+                    {
+                        int value1 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapePhase[position]) * ((pictureBoxPhaseShape.Height-4) / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        int value2 = (int)((SynthGenerator.SHAPE_MAX_VALUE - synthGenerator.CurrentWave.ShapePhase[next_position]) * ((pictureBoxPhaseShape.Height-4) / (double)SynthGenerator.SHAPE_MAX_VALUE));
+                        e.Graphics.DrawLine(pen, new Point(x, value1), new Point(x + 1, value2));
+                    }
+                }
+            }
+        }
+
+        private void pictureBoxPhaseShape_Click(object sender, EventArgs e)
+        {
+            FormPhase formPhase = new FormPhase();
+            formPhase.MyParent = this;
+            formPhase.ShowDialog();
         }
     }
 }

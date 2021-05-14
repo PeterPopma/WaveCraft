@@ -68,6 +68,11 @@ namespace WaveCraft.Synth
                     {
                         file.WriteLine(waveInfo.ShapeWeight[j]);
                     }
+                    file.WriteLine(waveInfo.ShapePhase.Length);
+                    for (int j = 0; j < waveInfo.ShapePhase.Length; j++)
+                    {
+                        file.WriteLine(waveInfo.ShapePhase[j]);
+                    }
                     file.WriteLine(waveInfo.WaveFileData.Length);
                     for (int j = 0; j < waveInfo.WaveFileData.Length; j++)
                     {
@@ -139,6 +144,12 @@ namespace WaveCraft.Synth
                     for (int j = 0; j < length; j++)
                     {
                         newWave.ShapeWeight[j] = int.Parse(srFile.ReadLine());
+                    }
+                    length = int.Parse(srFile.ReadLine());
+                    newWave.ShapePhase = new int[length];
+                    for (int j = 0; j < length; j++)
+                    {
+                        newWave.ShapePhase[j] = int.Parse(srFile.ReadLine());
                     }
                     length = int.Parse(srFile.ReadLine());
                     newWave.WaveFileData = new int[length];

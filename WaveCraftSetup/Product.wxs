@@ -25,29 +25,32 @@
                 <Component Id="Presets" Guid="51f7ff50-aa86-4783-8885-f9295d4a51bc">
                   <File Id="Bass.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass.pst" Vital="no" KeyPath="no" />
                   <File Id="Bass2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass2.pst" Vital="no" KeyPath="no" />
-                  <File Id="Bass3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bass3.pst" Vital="no" KeyPath="no" />
                   <File Id="Bassdrum.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bassdrum.pst" Vital="no" KeyPath="no" />
                   <File Id="Bell.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell.pst" Vital="no" KeyPath="no" />
                   <File Id="Bell2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Bell3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Bell3.pst" Vital="no" KeyPath="no" />
                   <File Id="Chime.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Chime.pst" Vital="no" KeyPath="no" />
+                  <File Id="CryOrgan.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\CryOrgan.pst" Vital="no" KeyPath="no" />
+                  <File Id="Cymbal.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Cymbal.pst" Vital="no" KeyPath="no" />
                   <File Id="ElectricGuitar.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\ElectricGuitar.pst" Vital="no" KeyPath="no" />
+                  <File Id="ElectroSnare.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\ElectroSnare.pst" Vital="no" KeyPath="no" />
                   <File Id="Flute.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute.pst" Vital="no" KeyPath="no" />
                   <File Id="Flute2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Flute2.pst" Vital="no" KeyPath="no" />
                   <File Id="Hihat.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Hihat.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick.pst" Vital="no" KeyPath="no" />
                   <File Id="Kick2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Kick2.pst" Vital="no" KeyPath="no" />
-                  <File Id="KickBass.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\KickBass.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead2.pst" Vital="no" KeyPath="no" />
                   <File Id="Lead3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead3.pst" Vital="no" KeyPath="no" />
-                  <File Id="Lead4.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Lead4.pst" Vital="no" KeyPath="no" />
                   <File Id="Organ.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Organ.pst" Vital="no" KeyPath="no" />
+                  <File Id="Organ2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Organ2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Pad.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Pad.pst" Vital="no" KeyPath="no" />
                   <File Id="Piano.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano.pst" Vital="no" KeyPath="no" />
-                  <File Id="Piano2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Piano2.pst" Vital="no" KeyPath="no" />
+                  <File Id="Pulse.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Pulse.pst" Vital="no" KeyPath="no" />
                   <File Id="Shaker.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Shaker.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare.pst" Vital="no" KeyPath="no" />
                   <File Id="Snare2.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare2.pst" Vital="no" KeyPath="no" />
-                  <File Id="Snare3.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Snare3.pst" Vital="no" KeyPath="no" />
+                  <File Id="Thunder.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Thunder.pst" Vital="no" KeyPath="no" />
                   <File Id="Toms.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Toms.pst" Vital="no" KeyPath="no" />
                   <File Id="Violin.pst" Source="$(var.WaveCraft.TargetDir)\..\..\..\presets\Violin.pst" Vital="no" KeyPath="no" />
                 </Component>  			

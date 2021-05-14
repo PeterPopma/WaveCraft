@@ -45,11 +45,13 @@ namespace WaveCraft
             System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelPhaseMin = new System.Windows.Forms.Label();
+            this.labelPhaseMax = new System.Windows.Forms.Label();
+            this.labelPhaseTitle = new System.Windows.Forms.Label();
+            this.pictureBoxPhaseShape = new System.Windows.Forms.PictureBox();
             this.labelChannel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBoxCustomWaveEnd = new System.Windows.Forms.PictureBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.labelWeightMax = new System.Windows.Forms.Label();
             this.labelWeightMin = new System.Windows.Forms.Label();
             this.pictureBoxWeightShape = new System.Windows.Forms.PictureBox();
@@ -59,10 +61,6 @@ namespace WaveCraft
             this.textBoxDuration = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.labelFrequencyTitle = new System.Windows.Forms.Label();
-            this.labelFreqMaxTitle = new System.Windows.Forms.Label();
-            this.labelFreqMinTitle = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.pictureBoxFrequencyShape = new System.Windows.Forms.PictureBox();
             this.pictureBoxVolumeShape = new System.Windows.Forms.PictureBox();
             this.buttonPlayWave = new System.Windows.Forms.Button();
@@ -120,14 +118,18 @@ namespace WaveCraft
             this.comboBoxPresets = new System.Windows.Forms.ComboBox();
             this.checkBoxRandomFrequency = new System.Windows.Forms.CheckBox();
             this.numericUpDownSpread = new System.Windows.Forms.NumericUpDown();
-            this.label50 = new System.Windows.Forms.Label();
+            this.labelMaxSpread = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label25 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownWeightChange = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownPhaseShift = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.labelMaxSpreadHelp = new System.Windows.Forms.Label();
+            this.labelRandomFrequencyHelp = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -146,7 +148,6 @@ namespace WaveCraft
             this.numericUpDownDuration = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDownWeightChange = new System.Windows.Forms.NumericUpDown();
             this.label45 = new System.Windows.Forms.Label();
             this.numericUpDownAmount = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -200,6 +201,7 @@ namespace WaveCraft
             this.colorSliderDelay = new ColorSlider.ColorSlider();
             this.colorSliderDuration = new ColorSlider.ColorSlider();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhaseShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWaveEnd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWeightShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).BeginInit();
@@ -218,12 +220,13 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpread)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeightChange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPhaseShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeShift)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeightChange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -234,11 +237,13 @@ namespace WaveCraft
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.labelPhaseMin);
+            this.groupBox1.Controls.Add(this.labelPhaseMax);
+            this.groupBox1.Controls.Add(this.labelPhaseTitle);
+            this.groupBox1.Controls.Add(this.pictureBoxPhaseShape);
             this.groupBox1.Controls.Add(this.labelChannel);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.pictureBoxCustomWaveEnd);
-            this.groupBox1.Controls.Add(this.label19);
-            this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.labelWeightMax);
             this.groupBox1.Controls.Add(this.labelWeightMin);
             this.groupBox1.Controls.Add(this.pictureBoxWeightShape);
@@ -259,10 +264,6 @@ namespace WaveCraft
             this.groupBox1.Controls.Add(this.colorSliderDuration);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.labelFrequencyTitle);
-            this.groupBox1.Controls.Add(this.labelFreqMaxTitle);
-            this.groupBox1.Controls.Add(this.labelFreqMinTitle);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.pictureBoxFrequencyShape);
             this.groupBox1.Controls.Add(this.pictureBoxVolumeShape);
             this.groupBox1.Controls.Add(this.buttonPlayWave);
@@ -280,16 +281,59 @@ namespace WaveCraft
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(343, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 604);
+            this.groupBox1.Size = new System.Drawing.Size(721, 563);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            // 
+            // labelPhaseMin
+            // 
+            this.labelPhaseMin.AutoSize = true;
+            this.labelPhaseMin.ForeColor = System.Drawing.Color.Gray;
+            this.labelPhaseMin.Location = new System.Drawing.Point(641, 169);
+            this.labelPhaseMin.Name = "labelPhaseMin";
+            this.labelPhaseMin.Size = new System.Drawing.Size(13, 13);
+            this.labelPhaseMin.TabIndex = 168;
+            this.labelPhaseMin.Text = "0";
+            // 
+            // labelPhaseMax
+            // 
+            this.labelPhaseMax.AutoSize = true;
+            this.labelPhaseMax.ForeColor = System.Drawing.Color.Gray;
+            this.labelPhaseMax.Location = new System.Drawing.Point(642, 105);
+            this.labelPhaseMax.Name = "labelPhaseMax";
+            this.labelPhaseMax.Size = new System.Drawing.Size(22, 13);
+            this.labelPhaseMax.TabIndex = 167;
+            this.labelPhaseMax.Text = "2 π";
+            // 
+            // labelPhaseTitle
+            // 
+            this.labelPhaseTitle.AutoSize = true;
+            this.labelPhaseTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPhaseTitle.Location = new System.Drawing.Point(379, 125);
+            this.labelPhaseTitle.Name = "labelPhaseTitle";
+            this.labelPhaseTitle.Size = new System.Drawing.Size(53, 20);
+            this.labelPhaseTitle.TabIndex = 166;
+            this.labelPhaseTitle.Text = "phase";
+            // 
+            // pictureBoxPhaseShape
+            // 
+            this.pictureBoxPhaseShape.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxPhaseShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPhaseShape.Location = new System.Drawing.Point(440, 103);
+            this.pictureBoxPhaseShape.Name = "pictureBoxPhaseShape";
+            this.pictureBoxPhaseShape.Size = new System.Drawing.Size(200, 82);
+            this.pictureBoxPhaseShape.TabIndex = 165;
+            this.pictureBoxPhaseShape.TabStop = false;
+            this.pictureBoxPhaseShape.Click += new System.EventHandler(this.pictureBoxPhaseShape_Click);
+            this.pictureBoxPhaseShape.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxPhaseShape_Paint);
+            this.pictureBoxPhaseShape.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPhaseShape_MouseMove);
             // 
             // labelChannel
             // 
             this.labelChannel.AutoSize = true;
             this.labelChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelChannel.ForeColor = System.Drawing.Color.Gold;
-            this.labelChannel.Location = new System.Drawing.Point(595, 13);
+            this.labelChannel.Location = new System.Drawing.Point(669, 9);
             this.labelChannel.Name = "labelChannel";
             this.labelChannel.Size = new System.Drawing.Size(41, 18);
             this.labelChannel.TabIndex = 50;
@@ -300,7 +344,7 @@ namespace WaveCraft
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(531, 14);
+            this.label5.Location = new System.Drawing.Point(605, 10);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 17);
             this.label5.TabIndex = 20;
@@ -310,37 +354,20 @@ namespace WaveCraft
             // 
             this.pictureBoxCustomWaveEnd.BackColor = System.Drawing.Color.Black;
             this.pictureBoxCustomWaveEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxCustomWaveEnd.Location = new System.Drawing.Point(304, 12);
+            this.pictureBoxCustomWaveEnd.Location = new System.Drawing.Point(318, 13);
             this.pictureBoxCustomWaveEnd.Name = "pictureBoxCustomWaveEnd";
-            this.pictureBoxCustomWaveEnd.Size = new System.Drawing.Size(178, 82);
+            this.pictureBoxCustomWaveEnd.Size = new System.Drawing.Size(200, 82);
             this.pictureBoxCustomWaveEnd.TabIndex = 164;
             this.pictureBoxCustomWaveEnd.TabStop = false;
             this.pictureBoxCustomWaveEnd.Click += new System.EventHandler(this.pictureBoxCustomWaveEnd_Click);
             this.pictureBoxCustomWaveEnd.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxCustomWaveEnd_Paint);
             this.pictureBoxCustomWaveEnd.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxCustomWaveEnd_MouseMove);
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(487, 290);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 13);
-            this.label19.TabIndex = 163;
-            this.label19.Text = "max. :";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(487, 313);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(32, 13);
-            this.label24.TabIndex = 162;
-            this.label24.Text = "min. :";
-            // 
             // labelWeightMax
             // 
             this.labelWeightMax.AutoSize = true;
-            this.labelWeightMax.Location = new System.Drawing.Point(525, 290);
+            this.labelWeightMax.ForeColor = System.Drawing.Color.Gray;
+            this.labelWeightMax.Location = new System.Drawing.Point(643, 201);
             this.labelWeightMax.Name = "labelWeightMax";
             this.labelWeightMax.Size = new System.Drawing.Size(25, 13);
             this.labelWeightMax.TabIndex = 161;
@@ -349,7 +376,8 @@ namespace WaveCraft
             // labelWeightMin
             // 
             this.labelWeightMin.AutoSize = true;
-            this.labelWeightMin.Location = new System.Drawing.Point(525, 313);
+            this.labelWeightMin.ForeColor = System.Drawing.Color.Gray;
+            this.labelWeightMin.Location = new System.Drawing.Point(642, 263);
             this.labelWeightMin.Name = "labelWeightMin";
             this.labelWeightMin.Size = new System.Drawing.Size(25, 13);
             this.labelWeightMin.TabIndex = 160;
@@ -359,9 +387,9 @@ namespace WaveCraft
             // 
             this.pictureBoxWeightShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxWeightShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxWeightShape.Location = new System.Drawing.Point(122, 274);
+            this.pictureBoxWeightShape.Location = new System.Drawing.Point(440, 197);
             this.pictureBoxWeightShape.Name = "pictureBoxWeightShape";
-            this.pictureBoxWeightShape.Size = new System.Drawing.Size(360, 82);
+            this.pictureBoxWeightShape.Size = new System.Drawing.Size(200, 82);
             this.pictureBoxWeightShape.TabIndex = 159;
             this.pictureBoxWeightShape.TabStop = false;
             this.pictureBoxWeightShape.Click += new System.EventHandler(this.pictureBoxWeightShape_Click);
@@ -372,9 +400,9 @@ namespace WaveCraft
             // 
             this.pictureBoxCustomWave.BackColor = System.Drawing.Color.Black;
             this.pictureBoxCustomWave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxCustomWave.Location = new System.Drawing.Point(122, 12);
+            this.pictureBoxCustomWave.Location = new System.Drawing.Point(101, 12);
             this.pictureBoxCustomWave.Name = "pictureBoxCustomWave";
-            this.pictureBoxCustomWave.Size = new System.Drawing.Size(178, 82);
+            this.pictureBoxCustomWave.Size = new System.Drawing.Size(200, 82);
             this.pictureBoxCustomWave.TabIndex = 106;
             this.pictureBoxCustomWave.TabStop = false;
             this.pictureBoxCustomWave.Click += new System.EventHandler(this.pictureBoxCustomWave_Click);
@@ -386,7 +414,7 @@ namespace WaveCraft
             this.buttonChange.FlatAppearance.BorderSize = 0;
             this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChange.Image = global::WaveCraft.Properties.Resources.change;
-            this.buttonChange.Location = new System.Drawing.Point(490, 24);
+            this.buttonChange.Location = new System.Drawing.Point(316, 22);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(52, 55);
             this.buttonChange.TabIndex = 147;
@@ -397,7 +425,7 @@ namespace WaveCraft
             // 
             this.textBoxDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxDelay.ForeColor = System.Drawing.Color.White;
-            this.textBoxDelay.Location = new System.Drawing.Point(523, 439);
+            this.textBoxDelay.Location = new System.Drawing.Point(541, 377);
             this.textBoxDelay.Name = "textBoxDelay";
             this.textBoxDelay.Size = new System.Drawing.Size(56, 20);
             this.textBoxDelay.TabIndex = 73;
@@ -407,7 +435,7 @@ namespace WaveCraft
             // 
             this.textBoxDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxDuration.ForeColor = System.Drawing.Color.White;
-            this.textBoxDuration.Location = new System.Drawing.Point(523, 374);
+            this.textBoxDuration.Location = new System.Drawing.Point(541, 312);
             this.textBoxDuration.Name = "textBoxDuration";
             this.textBoxDuration.Size = new System.Drawing.Size(56, 20);
             this.textBoxDuration.TabIndex = 72;
@@ -417,65 +445,29 @@ namespace WaveCraft
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(30, 38);
+            this.label14.Location = new System.Drawing.Point(39, 38);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(93, 20);
+            this.label14.Size = new System.Drawing.Size(53, 20);
             this.label14.TabIndex = 143;
-            this.label14.Text = "wave shape";
+            this.label14.Text = "shape";
             // 
             // labelFrequencyTitle
             // 
             this.labelFrequencyTitle.AutoSize = true;
             this.labelFrequencyTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFrequencyTitle.Location = new System.Drawing.Point(30, 127);
+            this.labelFrequencyTitle.Location = new System.Drawing.Point(18, 131);
             this.labelFrequencyTitle.Name = "labelFrequencyTitle";
             this.labelFrequencyTitle.Size = new System.Drawing.Size(79, 20);
             this.labelFrequencyTitle.TabIndex = 142;
             this.labelFrequencyTitle.Text = "frequency";
             // 
-            // labelFreqMaxTitle
-            // 
-            this.labelFreqMaxTitle.AutoSize = true;
-            this.labelFreqMaxTitle.Location = new System.Drawing.Point(488, 121);
-            this.labelFreqMaxTitle.Name = "labelFreqMaxTitle";
-            this.labelFreqMaxTitle.Size = new System.Drawing.Size(35, 13);
-            this.labelFreqMaxTitle.TabIndex = 141;
-            this.labelFreqMaxTitle.Text = "max. :";
-            // 
-            // labelFreqMinTitle
-            // 
-            this.labelFreqMinTitle.AutoSize = true;
-            this.labelFreqMinTitle.Location = new System.Drawing.Point(488, 144);
-            this.labelFreqMinTitle.Name = "labelFreqMinTitle";
-            this.labelFreqMinTitle.Size = new System.Drawing.Size(32, 13);
-            this.labelFreqMinTitle.TabIndex = 140;
-            this.labelFreqMinTitle.Text = "min. :";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(487, 205);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 139;
-            this.label4.Text = "max. :";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(487, 228);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
-            this.label2.TabIndex = 138;
-            this.label2.Text = "min. :";
-            // 
             // pictureBoxFrequencyShape
             // 
             this.pictureBoxFrequencyShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxFrequencyShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxFrequencyShape.Location = new System.Drawing.Point(122, 99);
+            this.pictureBoxFrequencyShape.Location = new System.Drawing.Point(101, 103);
             this.pictureBoxFrequencyShape.Name = "pictureBoxFrequencyShape";
-            this.pictureBoxFrequencyShape.Size = new System.Drawing.Size(360, 82);
+            this.pictureBoxFrequencyShape.Size = new System.Drawing.Size(200, 82);
             this.pictureBoxFrequencyShape.TabIndex = 137;
             this.pictureBoxFrequencyShape.TabStop = false;
             this.pictureBoxFrequencyShape.Click += new System.EventHandler(this.pictureBoxFrequencyShape_Click);
@@ -486,9 +478,9 @@ namespace WaveCraft
             // 
             this.pictureBoxVolumeShape.BackColor = System.Drawing.Color.Black;
             this.pictureBoxVolumeShape.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxVolumeShape.Location = new System.Drawing.Point(122, 186);
+            this.pictureBoxVolumeShape.Location = new System.Drawing.Point(101, 197);
             this.pictureBoxVolumeShape.Name = "pictureBoxVolumeShape";
-            this.pictureBoxVolumeShape.Size = new System.Drawing.Size(360, 82);
+            this.pictureBoxVolumeShape.Size = new System.Drawing.Size(200, 82);
             this.pictureBoxVolumeShape.TabIndex = 136;
             this.pictureBoxVolumeShape.TabStop = false;
             this.pictureBoxVolumeShape.Click += new System.EventHandler(this.pictureBoxVolumeShape_Click);
@@ -501,7 +493,7 @@ namespace WaveCraft
             this.buttonPlayWave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlayWave.ForeColor = System.Drawing.Color.Transparent;
             this.buttonPlayWave.Image = global::WaveCraft.Properties.Resources.playbutton;
-            this.buttonPlayWave.Location = new System.Drawing.Point(523, 523);
+            this.buttonPlayWave.Location = new System.Drawing.Point(525, 464);
             this.buttonPlayWave.Name = "buttonPlayWave";
             this.buttonPlayWave.Size = new System.Drawing.Size(56, 56);
             this.buttonPlayWave.TabIndex = 119;
@@ -513,7 +505,7 @@ namespace WaveCraft
             this.labelFileName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFileName.ForeColor = System.Drawing.Color.White;
-            this.labelFileName.Location = new System.Drawing.Point(248, 40);
+            this.labelFileName.Location = new System.Drawing.Point(242, 40);
             this.labelFileName.Name = "labelFileName";
             this.labelFileName.Size = new System.Drawing.Size(148, 24);
             this.labelFileName.TabIndex = 94;
@@ -525,7 +517,7 @@ namespace WaveCraft
             this.pictureBoxWaveForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxWaveForm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxWaveForm.InitialImage = null;
-            this.pictureBoxWaveForm.Location = new System.Drawing.Point(139, 14);
+            this.pictureBoxWaveForm.Location = new System.Drawing.Point(125, 14);
             this.pictureBoxWaveForm.Name = "pictureBoxWaveForm";
             this.pictureBoxWaveForm.Size = new System.Drawing.Size(70, 70);
             this.pictureBoxWaveForm.TabIndex = 91;
@@ -538,7 +530,7 @@ namespace WaveCraft
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(54, 296);
+            this.label1.Location = new System.Drawing.Point(379, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 58;
@@ -560,7 +552,7 @@ namespace WaveCraft
             chartArea1.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             chartArea1.Name = "ChartArea1";
             this.chartCurrentWave.ChartAreas.Add(chartArea1);
-            this.chartCurrentWave.Location = new System.Drawing.Point(112, 501);
+            this.chartCurrentWave.Location = new System.Drawing.Point(114, 442);
             this.chartCurrentWave.Name = "chartCurrentWave";
             series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
             series1.ChartArea = "ChartArea1";
@@ -576,7 +568,7 @@ namespace WaveCraft
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(59, 445);
+            this.label42.Location = new System.Drawing.Point(85, 383);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(68, 20);
             this.label42.TabIndex = 40;
@@ -585,7 +577,8 @@ namespace WaveCraft
             // labelFrequencyMin
             // 
             this.labelFrequencyMin.AutoSize = true;
-            this.labelFrequencyMin.Location = new System.Drawing.Point(525, 146);
+            this.labelFrequencyMin.ForeColor = System.Drawing.Color.Gray;
+            this.labelFrequencyMin.Location = new System.Drawing.Point(303, 170);
             this.labelFrequencyMin.Name = "labelFrequencyMin";
             this.labelFrequencyMin.Size = new System.Drawing.Size(52, 13);
             this.labelFrequencyMin.TabIndex = 39;
@@ -594,7 +587,8 @@ namespace WaveCraft
             // labelFrequencyMax
             // 
             this.labelFrequencyMax.AutoSize = true;
-            this.labelFrequencyMax.Location = new System.Drawing.Point(525, 122);
+            this.labelFrequencyMax.ForeColor = System.Drawing.Color.Gray;
+            this.labelFrequencyMax.Location = new System.Drawing.Point(303, 107);
             this.labelFrequencyMax.Name = "labelFrequencyMax";
             this.labelFrequencyMax.Size = new System.Drawing.Size(52, 13);
             this.labelFrequencyMax.TabIndex = 38;
@@ -603,7 +597,8 @@ namespace WaveCraft
             // labelVolumeMax
             // 
             this.labelVolumeMax.AutoSize = true;
-            this.labelVolumeMax.Location = new System.Drawing.Point(525, 205);
+            this.labelVolumeMax.ForeColor = System.Drawing.Color.Gray;
+            this.labelVolumeMax.Location = new System.Drawing.Point(303, 201);
             this.labelVolumeMax.Name = "labelVolumeMax";
             this.labelVolumeMax.Size = new System.Drawing.Size(25, 13);
             this.labelVolumeMax.TabIndex = 33;
@@ -612,7 +607,8 @@ namespace WaveCraft
             // labelVolumeMin
             // 
             this.labelVolumeMin.AutoSize = true;
-            this.labelVolumeMin.Location = new System.Drawing.Point(525, 228);
+            this.labelVolumeMin.ForeColor = System.Drawing.Color.Gray;
+            this.labelVolumeMin.Location = new System.Drawing.Point(303, 263);
             this.labelVolumeMin.Name = "labelVolumeMin";
             this.labelVolumeMin.Size = new System.Drawing.Size(25, 13);
             this.labelVolumeMin.TabIndex = 31;
@@ -622,7 +618,7 @@ namespace WaveCraft
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(50, 209);
+            this.label11.Location = new System.Drawing.Point(33, 223);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 20);
             this.label11.TabIndex = 24;
@@ -632,7 +628,7 @@ namespace WaveCraft
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(43, 372);
+            this.label3.Location = new System.Drawing.Point(67, 310);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 15;
@@ -667,9 +663,9 @@ namespace WaveCraft
             this.groupBox5.Controls.Add(this.panel1);
             this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox5.ForeColor = System.Drawing.Color.White;
-            this.groupBox5.Location = new System.Drawing.Point(3, 612);
+            this.groupBox5.Location = new System.Drawing.Point(3, 571);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1387, 260);
+            this.groupBox5.Size = new System.Drawing.Size(1531, 270);
             this.groupBox5.TabIndex = 65;
             this.groupBox5.TabStop = false;
             // 
@@ -677,7 +673,7 @@ namespace WaveCraft
             // 
             this.buttonPlayD4Sharp.BackColor = System.Drawing.Color.Black;
             this.buttonPlayD4Sharp.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayD4Sharp.Location = new System.Drawing.Point(1125, 129);
+            this.buttonPlayD4Sharp.Location = new System.Drawing.Point(1236, 134);
             this.buttonPlayD4Sharp.Name = "buttonPlayD4Sharp";
             this.buttonPlayD4Sharp.Size = new System.Drawing.Size(29, 58);
             this.buttonPlayD4Sharp.TabIndex = 123;
@@ -688,7 +684,7 @@ namespace WaveCraft
             // 
             this.buttonPlayD4.BackColor = System.Drawing.Color.White;
             this.buttonPlayD4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayD4.Location = new System.Drawing.Point(1109, 129);
+            this.buttonPlayD4.Location = new System.Drawing.Point(1220, 134);
             this.buttonPlayD4.Name = "buttonPlayD4";
             this.buttonPlayD4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayD4.TabIndex = 122;
@@ -699,7 +695,7 @@ namespace WaveCraft
             // 
             this.buttonPlayD5Sharp.BackColor = System.Drawing.Color.Black;
             this.buttonPlayD5Sharp.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayD5Sharp.Location = new System.Drawing.Point(1336, 129);
+            this.buttonPlayD5Sharp.Location = new System.Drawing.Point(1447, 134);
             this.buttonPlayD5Sharp.Name = "buttonPlayD5Sharp";
             this.buttonPlayD5Sharp.Size = new System.Drawing.Size(29, 57);
             this.buttonPlayD5Sharp.TabIndex = 121;
@@ -710,7 +706,7 @@ namespace WaveCraft
             // 
             this.buttonPlayE5.BackColor = System.Drawing.Color.White;
             this.buttonPlayE5.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayE5.Location = new System.Drawing.Point(1349, 129);
+            this.buttonPlayE5.Location = new System.Drawing.Point(1460, 134);
             this.buttonPlayE5.Name = "buttonPlayE5";
             this.buttonPlayE5.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayE5.TabIndex = 120;
@@ -721,7 +717,7 @@ namespace WaveCraft
             // 
             this.buttonPlayC5Sharp.BackColor = System.Drawing.Color.Black;
             this.buttonPlayC5Sharp.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayC5Sharp.Location = new System.Drawing.Point(1305, 129);
+            this.buttonPlayC5Sharp.Location = new System.Drawing.Point(1416, 134);
             this.buttonPlayC5Sharp.Name = "buttonPlayC5Sharp";
             this.buttonPlayC5Sharp.Size = new System.Drawing.Size(29, 57);
             this.buttonPlayC5Sharp.TabIndex = 117;
@@ -731,7 +727,7 @@ namespace WaveCraft
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1236, 223);
+            this.label9.Location = new System.Drawing.Point(1347, 228);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(19, 13);
             this.label9.TabIndex = 116;
@@ -744,7 +740,7 @@ namespace WaveCraft
             this.buttonSave.ForeColor = System.Drawing.Color.Transparent;
             this.buttonSave.Image = global::WaveCraft.Properties.Resources.buttonsave;
             this.buttonSave.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonSave.Location = new System.Drawing.Point(1275, 31);
+            this.buttonSave.Location = new System.Drawing.Point(1386, 36);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(65, 65);
             this.buttonSave.TabIndex = 119;
@@ -755,7 +751,7 @@ namespace WaveCraft
             // 
             this.buttonPlayE4.BackColor = System.Drawing.Color.White;
             this.buttonPlayE4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayE4.Location = new System.Drawing.Point(1139, 129);
+            this.buttonPlayE4.Location = new System.Drawing.Point(1250, 134);
             this.buttonPlayE4.Name = "buttonPlayE4";
             this.buttonPlayE4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayE4.TabIndex = 115;
@@ -768,7 +764,7 @@ namespace WaveCraft
             this.buttonPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlay.ForeColor = System.Drawing.Color.Transparent;
             this.buttonPlay.Image = global::WaveCraft.Properties.Resources.playbutton;
-            this.buttonPlay.Location = new System.Drawing.Point(1161, 31);
+            this.buttonPlay.Location = new System.Drawing.Point(1272, 36);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(56, 56);
             this.buttonPlay.TabIndex = 118;
@@ -779,7 +775,7 @@ namespace WaveCraft
             // 
             this.buttonPlayF4Sharp.BackColor = System.Drawing.Color.Black;
             this.buttonPlayF4Sharp.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayF4Sharp.Location = new System.Drawing.Point(1184, 129);
+            this.buttonPlayF4Sharp.Location = new System.Drawing.Point(1295, 134);
             this.buttonPlayF4Sharp.Name = "buttonPlayF4Sharp";
             this.buttonPlayF4Sharp.Size = new System.Drawing.Size(29, 58);
             this.buttonPlayF4Sharp.TabIndex = 114;
@@ -790,7 +786,7 @@ namespace WaveCraft
             // 
             this.buttonPlayB4Flat.BackColor = System.Drawing.Color.Black;
             this.buttonPlayB4Flat.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayB4Flat.Location = new System.Drawing.Point(1246, 129);
+            this.buttonPlayB4Flat.Location = new System.Drawing.Point(1357, 134);
             this.buttonPlayB4Flat.Name = "buttonPlayB4Flat";
             this.buttonPlayB4Flat.Size = new System.Drawing.Size(29, 58);
             this.buttonPlayB4Flat.TabIndex = 113;
@@ -801,7 +797,7 @@ namespace WaveCraft
             // 
             this.buttonPlayG4Sharp.BackColor = System.Drawing.Color.Black;
             this.buttonPlayG4Sharp.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayG4Sharp.Location = new System.Drawing.Point(1215, 129);
+            this.buttonPlayG4Sharp.Location = new System.Drawing.Point(1326, 134);
             this.buttonPlayG4Sharp.Name = "buttonPlayG4Sharp";
             this.buttonPlayG4Sharp.Size = new System.Drawing.Size(29, 58);
             this.buttonPlayG4Sharp.TabIndex = 112;
@@ -812,7 +808,7 @@ namespace WaveCraft
             // 
             this.buttonPlayD5.BackColor = System.Drawing.Color.White;
             this.buttonPlayD5.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayD5.Location = new System.Drawing.Point(1319, 129);
+            this.buttonPlayD5.Location = new System.Drawing.Point(1430, 134);
             this.buttonPlayD5.Name = "buttonPlayD5";
             this.buttonPlayD5.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayD5.TabIndex = 111;
@@ -823,7 +819,7 @@ namespace WaveCraft
             // 
             this.buttonPlayF4.BackColor = System.Drawing.Color.White;
             this.buttonPlayF4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayF4.Location = new System.Drawing.Point(1169, 129);
+            this.buttonPlayF4.Location = new System.Drawing.Point(1280, 134);
             this.buttonPlayF4.Name = "buttonPlayF4";
             this.buttonPlayF4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayF4.TabIndex = 110;
@@ -834,7 +830,7 @@ namespace WaveCraft
             // 
             this.buttonPlayC5.BackColor = System.Drawing.Color.White;
             this.buttonPlayC5.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayC5.Location = new System.Drawing.Point(1289, 129);
+            this.buttonPlayC5.Location = new System.Drawing.Point(1400, 134);
             this.buttonPlayC5.Name = "buttonPlayC5";
             this.buttonPlayC5.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayC5.TabIndex = 109;
@@ -845,7 +841,7 @@ namespace WaveCraft
             // 
             this.buttonPlayB4.BackColor = System.Drawing.Color.White;
             this.buttonPlayB4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayB4.Location = new System.Drawing.Point(1259, 129);
+            this.buttonPlayB4.Location = new System.Drawing.Point(1370, 134);
             this.buttonPlayB4.Name = "buttonPlayB4";
             this.buttonPlayB4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayB4.TabIndex = 108;
@@ -856,7 +852,7 @@ namespace WaveCraft
             // 
             this.buttonPlayG4.BackColor = System.Drawing.Color.White;
             this.buttonPlayG4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayG4.Location = new System.Drawing.Point(1199, 129);
+            this.buttonPlayG4.Location = new System.Drawing.Point(1310, 134);
             this.buttonPlayG4.Name = "buttonPlayG4";
             this.buttonPlayG4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayG4.TabIndex = 107;
@@ -867,7 +863,7 @@ namespace WaveCraft
             // 
             this.buttonPlayA4.BackColor = System.Drawing.Color.White;
             this.buttonPlayA4.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayA4.Location = new System.Drawing.Point(1229, 129);
+            this.buttonPlayA4.Location = new System.Drawing.Point(1340, 134);
             this.buttonPlayA4.Name = "buttonPlayA4";
             this.buttonPlayA4.Size = new System.Drawing.Size(29, 87);
             this.buttonPlayA4.TabIndex = 106;
@@ -890,13 +886,13 @@ namespace WaveCraft
             chartArea2.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             chartArea2.Name = "ChartArea1";
             this.chartFFTRight.ChartAreas.Add(chartArea2);
-            this.chartFFTRight.Location = new System.Drawing.Point(350, 134);
+            this.chartFFTRight.Location = new System.Drawing.Point(369, 134);
             this.chartFFTRight.Name = "chartFFTRight";
             series2.ChartArea = "ChartArea1";
             series2.Color = System.Drawing.Color.Blue;
             series2.Name = "Series1";
             this.chartFFTRight.Series.Add(series2);
-            this.chartFFTRight.Size = new System.Drawing.Size(388, 120);
+            this.chartFFTRight.Size = new System.Drawing.Size(400, 120);
             this.chartFFTRight.TabIndex = 77;
             this.chartFFTRight.Text = "chart1";
             this.chartFFTRight.Click += new System.EventHandler(this.chartFFTRight_Click);
@@ -920,13 +916,13 @@ namespace WaveCraft
             chartArea3.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             chartArea3.Name = "ChartArea1";
             this.chartFFTLeft.ChartAreas.Add(chartArea3);
-            this.chartFFTLeft.Location = new System.Drawing.Point(350, 12);
+            this.chartFFTLeft.Location = new System.Drawing.Point(369, 12);
             this.chartFFTLeft.Name = "chartFFTLeft";
             series3.ChartArea = "ChartArea1";
             series3.Color = System.Drawing.Color.Blue;
             series3.Name = "Series1";
             this.chartFFTLeft.Series.Add(series3);
-            this.chartFFTLeft.Size = new System.Drawing.Size(388, 120);
+            this.chartFFTLeft.Size = new System.Drawing.Size(400, 120);
             this.chartFFTLeft.TabIndex = 76;
             this.chartFFTLeft.Text = "chart1";
             this.chartFFTLeft.Click += new System.EventHandler(this.chartFFTLeft_Click);
@@ -935,7 +931,7 @@ namespace WaveCraft
             // labelDuration
             // 
             this.labelDuration.AutoSize = true;
-            this.labelDuration.Location = new System.Drawing.Point(1096, 241);
+            this.labelDuration.Location = new System.Drawing.Point(1176, 241);
             this.labelDuration.Name = "labelDuration";
             this.labelDuration.Size = new System.Drawing.Size(13, 13);
             this.labelDuration.TabIndex = 74;
@@ -957,14 +953,14 @@ namespace WaveCraft
             chartArea4.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             chartArea4.Name = "ChartArea1";
             this.chartResultRight.ChartAreas.Add(chartArea4);
-            this.chartResultRight.Location = new System.Drawing.Point(711, 134);
+            this.chartResultRight.Location = new System.Drawing.Point(775, 134);
             this.chartResultRight.Name = "chartResultRight";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series4.Color = System.Drawing.Color.Yellow;
             series4.Name = "Series1";
             this.chartResultRight.Series.Add(series4);
-            this.chartResultRight.Size = new System.Drawing.Size(388, 120);
+            this.chartResultRight.Size = new System.Drawing.Size(400, 120);
             this.chartResultRight.TabIndex = 73;
             this.chartResultRight.Text = "chart1";
             this.chartResultRight.Click += new System.EventHandler(this.chartResultRight_Click);
@@ -989,14 +985,14 @@ namespace WaveCraft
             chartArea5.BackSecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             chartArea5.Name = "ChartArea1";
             this.chartResultLeft.ChartAreas.Add(chartArea5);
-            this.chartResultLeft.Location = new System.Drawing.Point(711, 12);
+            this.chartResultLeft.Location = new System.Drawing.Point(775, 12);
             this.chartResultLeft.Name = "chartResultLeft";
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series5.Color = System.Drawing.Color.Yellow;
             series5.Name = "Series1";
             this.chartResultLeft.Series.Add(series5);
-            this.chartResultLeft.Size = new System.Drawing.Size(388, 120);
+            this.chartResultLeft.Size = new System.Drawing.Size(400, 120);
             this.chartResultLeft.TabIndex = 72;
             this.chartResultLeft.Text = "chart1";
             this.chartResultLeft.Click += new System.EventHandler(this.chartResultLeft_Click);
@@ -1026,7 +1022,7 @@ namespace WaveCraft
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(8, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(337, 247);
+            this.panel1.Size = new System.Drawing.Size(337, 257);
             this.panel1.TabIndex = 71;
             // 
             // labelHold
@@ -1071,7 +1067,7 @@ namespace WaveCraft
             series6.MarkerSize = 10;
             series6.Name = "Series1";
             this.chartAHDSR.Series.Add(series6);
-            this.chartAHDSR.Size = new System.Drawing.Size(190, 71);
+            this.chartAHDSR.Size = new System.Drawing.Size(190, 77);
             this.chartAHDSR.TabIndex = 83;
             this.chartAHDSR.Text = "chartADSR";
             // 
@@ -1150,9 +1146,9 @@ namespace WaveCraft
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(65, 160);
+            this.panel3.Location = new System.Drawing.Point(65, 166);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(196, 79);
+            this.panel3.Size = new System.Drawing.Size(196, 82);
             this.panel3.TabIndex = 87;
             // 
             // groupBox6
@@ -1187,7 +1183,7 @@ namespace WaveCraft
             // 
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(91, 20);
+            this.label48.Location = new System.Drawing.Point(91, 16);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(54, 20);
             this.label48.TabIndex = 48;
@@ -1200,7 +1196,7 @@ namespace WaveCraft
             this.comboBoxPresets.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPresets.ForeColor = System.Drawing.Color.White;
             this.comboBoxPresets.FormattingEnabled = true;
-            this.comboBoxPresets.Location = new System.Drawing.Point(153, 17);
+            this.comboBoxPresets.Location = new System.Drawing.Point(153, 13);
             this.comboBoxPresets.Name = "comboBoxPresets";
             this.comboBoxPresets.Size = new System.Drawing.Size(158, 28);
             this.comboBoxPresets.Sorted = true;
@@ -1213,25 +1209,24 @@ namespace WaveCraft
             // 
             this.checkBoxRandomFrequency.AutoSize = true;
             this.checkBoxRandomFrequency.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxRandomFrequency.Enabled = false;
-            this.checkBoxRandomFrequency.Location = new System.Drawing.Point(39, 300);
+            this.checkBoxRandomFrequency.Location = new System.Drawing.Point(11, 296);
             this.checkBoxRandomFrequency.Name = "checkBoxRandomFrequency";
             this.checkBoxRandomFrequency.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxRandomFrequency.Size = new System.Drawing.Size(111, 17);
             this.checkBoxRandomFrequency.TabIndex = 98;
             this.checkBoxRandomFrequency.Text = "random frequency";
             this.checkBoxRandomFrequency.UseVisualStyleBackColor = false;
+            this.checkBoxRandomFrequency.Visible = false;
             // 
             // numericUpDownSpread
             // 
             this.numericUpDownSpread.DecimalPlaces = 2;
-            this.numericUpDownSpread.Enabled = false;
             this.numericUpDownSpread.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.numericUpDownSpread.Location = new System.Drawing.Point(291, 305);
+            this.numericUpDownSpread.Location = new System.Drawing.Point(388, 217);
             this.numericUpDownSpread.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1250,16 +1245,18 @@ namespace WaveCraft
             0,
             0,
             0});
+            this.numericUpDownSpread.Visible = false;
             // 
-            // label50
+            // labelMaxSpread
             // 
-            this.label50.AutoSize = true;
-            this.label50.BackColor = System.Drawing.Color.Transparent;
-            this.label50.Location = new System.Drawing.Point(209, 307);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(75, 13);
-            this.label50.TabIndex = 94;
-            this.label50.Text = "max. spread %";
+            this.labelMaxSpread.AutoSize = true;
+            this.labelMaxSpread.BackColor = System.Drawing.Color.Transparent;
+            this.labelMaxSpread.Location = new System.Drawing.Point(309, 220);
+            this.labelMaxSpread.Name = "labelMaxSpread";
+            this.labelMaxSpread.Size = new System.Drawing.Size(75, 13);
+            this.labelMaxSpread.TabIndex = 94;
+            this.labelMaxSpread.Text = "max. spread %";
+            this.labelMaxSpread.Visible = false;
             // 
             // groupBox3
             // 
@@ -1272,9 +1269,9 @@ namespace WaveCraft
             this.groupBox3.Controls.Add(this.ButtonDeleteAll);
             this.groupBox3.Controls.Add(this.buttonDelete);
             this.groupBox3.Controls.Add(this.buttonAdd);
-            this.groupBox3.Location = new System.Drawing.Point(3, 99);
+            this.groupBox3.Location = new System.Drawing.Point(3, 100);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(336, 509);
+            this.groupBox3.Size = new System.Drawing.Size(336, 467);
             this.groupBox3.TabIndex = 70;
             this.groupBox3.TabStop = false;
             // 
@@ -1284,7 +1281,7 @@ namespace WaveCraft
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(13, 371);
+            this.label25.Location = new System.Drawing.Point(13, 329);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(42, 20);
             this.label25.TabIndex = 150;
@@ -1292,10 +1289,15 @@ namespace WaveCraft
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.numericUpDownSpread);
+            this.groupBox4.Controls.Add(this.numericUpDownWeightChange);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.numericUpDownPhaseShift);
             this.groupBox4.Controls.Add(this.label23);
             this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.labelMaxSpreadHelp);
+            this.groupBox4.Controls.Add(this.labelRandomFrequencyHelp);
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.label12);
@@ -1307,26 +1309,74 @@ namespace WaveCraft
             this.groupBox4.Controls.Add(this.checkBoxRandomFrequency);
             this.groupBox4.Controls.Add(this.numericUpDownWeight);
             this.groupBox4.Controls.Add(this.numericUpDownDuration);
-            this.groupBox4.Controls.Add(this.label50);
-            this.groupBox4.Controls.Add(this.numericUpDownSpread);
+            this.groupBox4.Controls.Add(this.labelMaxSpread);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.numericUpDownWeightChange);
             this.groupBox4.Controls.Add(this.label45);
             this.groupBox4.Controls.Add(this.numericUpDownAmount);
             this.groupBox4.Controls.Add(this.label17);
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(992, 4);
+            this.groupBox4.Location = new System.Drawing.Point(1068, 4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(398, 433);
+            this.groupBox4.Size = new System.Drawing.Size(466, 391);
             this.groupBox4.TabIndex = 71;
             this.groupBox4.TabStop = false;
+            // 
+            // numericUpDownWeightChange
+            // 
+            this.numericUpDownWeightChange.Location = new System.Drawing.Point(105, 217);
+            this.numericUpDownWeightChange.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownWeightChange.Name = "numericUpDownWeightChange";
+            this.numericUpDownWeightChange.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownWeightChange.TabIndex = 103;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(321, 156);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(136, 40);
+            this.label2.TabIndex = 158;
+            this.label2.Text = "phase shift between each subsequent harmonic (0..99)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(320, 135);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 157;
+            this.label4.Text = "phase shift %";
+            // 
+            // numericUpDownPhaseShift
+            // 
+            this.numericUpDownPhaseShift.DecimalPlaces = 2;
+            this.numericUpDownPhaseShift.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDownPhaseShift.Location = new System.Drawing.Point(394, 132);
+            this.numericUpDownPhaseShift.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numericUpDownPhaseShift.Name = "numericUpDownPhaseShift";
+            this.numericUpDownPhaseShift.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDownPhaseShift.TabIndex = 156;
             // 
             // label23
             // 
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.ForeColor = System.Drawing.Color.Gray;
-            this.label23.Location = new System.Drawing.Point(212, 190);
+            this.label23.Location = new System.Drawing.Point(159, 156);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(151, 40);
             this.label23.TabIndex = 155;
@@ -1336,40 +1386,42 @@ namespace WaveCraft
             // 
             this.label22.BackColor = System.Drawing.Color.Transparent;
             this.label22.ForeColor = System.Drawing.Color.Gray;
-            this.label22.Location = new System.Drawing.Point(209, 263);
+            this.label22.Location = new System.Drawing.Point(183, 241);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(173, 40);
+            this.label22.Size = new System.Drawing.Size(113, 40);
             this.label22.TabIndex = 154;
             this.label22.Text = "the duration of each subsequent harmonic compared to the previous (1..200)";
             // 
-            // label21
+            // labelMaxSpreadHelp
             // 
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.ForeColor = System.Drawing.Color.Gray;
-            this.label21.Location = new System.Drawing.Point(209, 329);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(140, 49);
-            this.label21.TabIndex = 153;
-            this.label21.Text = "the difference between the fundamental and last harmonic (0.01..10000)";
+            this.labelMaxSpreadHelp.BackColor = System.Drawing.Color.Transparent;
+            this.labelMaxSpreadHelp.ForeColor = System.Drawing.Color.Gray;
+            this.labelMaxSpreadHelp.Location = new System.Drawing.Point(317, 241);
+            this.labelMaxSpreadHelp.Name = "labelMaxSpreadHelp";
+            this.labelMaxSpreadHelp.Size = new System.Drawing.Size(122, 60);
+            this.labelMaxSpreadHelp.TabIndex = 153;
+            this.labelMaxSpreadHelp.Text = "the difference between the fundamental and last harmonic (0.01..10000)";
+            this.labelMaxSpreadHelp.Visible = false;
             // 
-            // label20
+            // labelRandomFrequencyHelp
             // 
-            this.label20.BackColor = System.Drawing.Color.Transparent;
-            this.label20.ForeColor = System.Drawing.Color.Gray;
-            this.label20.Location = new System.Drawing.Point(38, 320);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(140, 55);
-            this.label20.TabIndex = 152;
-            this.label20.Text = "indicates that the frequency is not stable, but somewhere between last and next h" +
-    "armonic.";
+            this.labelRandomFrequencyHelp.BackColor = System.Drawing.Color.Transparent;
+            this.labelRandomFrequencyHelp.ForeColor = System.Drawing.Color.Gray;
+            this.labelRandomFrequencyHelp.Location = new System.Drawing.Point(11, 317);
+            this.labelRandomFrequencyHelp.Name = "labelRandomFrequencyHelp";
+            this.labelRandomFrequencyHelp.Size = new System.Drawing.Size(140, 55);
+            this.labelRandomFrequencyHelp.TabIndex = 152;
+            this.labelRandomFrequencyHelp.Text = "indicates that the frequency is not stable, but somewhere between last and next p" +
+    "artial";
+            this.labelRandomFrequencyHelp.Visible = false;
             // 
             // label18
             // 
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.ForeColor = System.Drawing.Color.Gray;
-            this.label18.Location = new System.Drawing.Point(38, 264);
+            this.label18.Location = new System.Drawing.Point(13, 241);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(165, 31);
+            this.label18.Size = new System.Drawing.Size(140, 42);
             this.label18.TabIndex = 150;
             this.label18.Text = "the % the weight increases or decreases over time (-100..100)";
             // 
@@ -1377,9 +1429,9 @@ namespace WaveCraft
             // 
             this.label16.BackColor = System.Drawing.Color.Transparent;
             this.label16.ForeColor = System.Drawing.Color.Gray;
-            this.label16.Location = new System.Drawing.Point(38, 199);
+            this.label16.Location = new System.Drawing.Point(17, 156);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(168, 31);
+            this.label16.Size = new System.Drawing.Size(113, 43);
             this.label16.TabIndex = 149;
             this.label16.Text = "the % of weight for each subsequent harmonic (1..200).";
             // 
@@ -1387,7 +1439,7 @@ namespace WaveCraft
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Location = new System.Drawing.Point(213, 171);
+            this.label12.Location = new System.Drawing.Point(161, 135);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 13);
             this.label12.TabIndex = 148;
@@ -1396,7 +1448,7 @@ namespace WaveCraft
             // numericUpDownTimeShift
             // 
             this.numericUpDownTimeShift.DecimalPlaces = 2;
-            this.numericUpDownTimeShift.Location = new System.Drawing.Point(275, 168);
+            this.numericUpDownTimeShift.Location = new System.Drawing.Point(226, 132);
             this.numericUpDownTimeShift.Maximum = new decimal(new int[] {
             99,
             0,
@@ -1424,7 +1476,7 @@ namespace WaveCraft
             this.panel5.Controls.Add(this.radioButtonInharmonics);
             this.panel5.Controls.Add(this.radioButtonOddHarmonics);
             this.panel5.Controls.Add(this.radioButtonEvenHarmonics);
-            this.panel5.Location = new System.Drawing.Point(50, 68);
+            this.panel5.Location = new System.Drawing.Point(172, 19);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(132, 85);
             this.panel5.TabIndex = 115;
@@ -1484,7 +1536,7 @@ namespace WaveCraft
             this.panel4.Controls.Add(this.radioButtonOverTones);
             this.panel4.Controls.Add(this.radioButtonUnderTones);
             this.panel4.Controls.Add(this.radioButtonBothTones);
-            this.panel4.Location = new System.Drawing.Point(207, 70);
+            this.panel4.Location = new System.Drawing.Point(347, 25);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(86, 65);
             this.panel4.TabIndex = 114;
@@ -1526,7 +1578,7 @@ namespace WaveCraft
             // 
             // numericUpDownWeight
             // 
-            this.numericUpDownWeight.Location = new System.Drawing.Point(94, 174);
+            this.numericUpDownWeight.Location = new System.Drawing.Point(74, 132);
             this.numericUpDownWeight.Maximum = new decimal(new int[] {
             200,
             0,
@@ -1548,7 +1600,7 @@ namespace WaveCraft
             // 
             // numericUpDownDuration
             // 
-            this.numericUpDownDuration.Location = new System.Drawing.Point(270, 239);
+            this.numericUpDownDuration.Location = new System.Drawing.Point(242, 217);
             this.numericUpDownDuration.Maximum = new decimal(new int[] {
             200,
             0,
@@ -1572,7 +1624,7 @@ namespace WaveCraft
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(37, 178);
+            this.label7.Location = new System.Drawing.Point(18, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 106;
@@ -1582,29 +1634,17 @@ namespace WaveCraft
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(210, 241);
+            this.label6.Location = new System.Drawing.Point(182, 220);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 105;
             this.label6.Text = "duration %";
             // 
-            // numericUpDownWeightChange
-            // 
-            this.numericUpDownWeightChange.Location = new System.Drawing.Point(130, 240);
-            this.numericUpDownWeightChange.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownWeightChange.Name = "numericUpDownWeightChange";
-            this.numericUpDownWeightChange.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDownWeightChange.TabIndex = 103;
-            // 
             // label45
             // 
             this.label45.AutoSize = true;
             this.label45.BackColor = System.Drawing.Color.Transparent;
-            this.label45.Location = new System.Drawing.Point(37, 244);
+            this.label45.Location = new System.Drawing.Point(14, 219);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(88, 13);
             this.label45.TabIndex = 102;
@@ -1613,7 +1653,7 @@ namespace WaveCraft
             // numericUpDownAmount
             // 
             this.numericUpDownAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownAmount.Location = new System.Drawing.Point(310, 22);
+            this.numericUpDownAmount.Location = new System.Drawing.Point(272, 340);
             this.numericUpDownAmount.Maximum = new decimal(new int[] {
             50,
             0,
@@ -1638,7 +1678,7 @@ namespace WaveCraft
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(239, 23);
+            this.label17.Location = new System.Drawing.Point(198, 342);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(63, 20);
             this.label17.TabIndex = 101;
@@ -1661,9 +1701,9 @@ namespace WaveCraft
             this.groupBox2.Controls.Add(this.labelBulkEdit);
             this.groupBox2.Controls.Add(this.buttonAdjustFrequencies);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(992, 440);
+            this.groupBox2.Location = new System.Drawing.Point(1068, 399);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(275, 168);
+            this.groupBox2.Size = new System.Drawing.Size(334, 168);
             this.groupBox2.TabIndex = 72;
             this.groupBox2.TabStop = false;
             // 
@@ -1672,7 +1712,7 @@ namespace WaveCraft
             this.label29.AutoSize = true;
             this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(51, 129);
+            this.label29.Location = new System.Drawing.Point(66, 129);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(79, 17);
             this.label29.TabIndex = 158;
@@ -1682,7 +1722,7 @@ namespace WaveCraft
             // 
             this.textBoxChangeVolumeAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxChangeVolumeAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxChangeVolumeAll.Location = new System.Drawing.Point(133, 129);
+            this.textBoxChangeVolumeAll.Location = new System.Drawing.Point(148, 129);
             this.textBoxChangeVolumeAll.Name = "textBoxChangeVolumeAll";
             this.textBoxChangeVolumeAll.Size = new System.Drawing.Size(56, 20);
             this.textBoxChangeVolumeAll.TabIndex = 157;
@@ -1692,7 +1732,7 @@ namespace WaveCraft
             this.label28.AutoSize = true;
             this.label28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(57, 105);
+            this.label28.Location = new System.Drawing.Point(72, 105);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(74, 17);
             this.label28.TabIndex = 155;
@@ -1702,7 +1742,7 @@ namespace WaveCraft
             // 
             this.textBoxChangeWeightAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxChangeWeightAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxChangeWeightAll.Location = new System.Drawing.Point(133, 105);
+            this.textBoxChangeWeightAll.Location = new System.Drawing.Point(148, 105);
             this.textBoxChangeWeightAll.Name = "textBoxChangeWeightAll";
             this.textBoxChangeWeightAll.Size = new System.Drawing.Size(56, 20);
             this.textBoxChangeWeightAll.TabIndex = 154;
@@ -1711,7 +1751,7 @@ namespace WaveCraft
             // 
             this.textBoxDurationAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxDurationAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxDurationAll.Location = new System.Drawing.Point(133, 57);
+            this.textBoxDurationAll.Location = new System.Drawing.Point(148, 57);
             this.textBoxDurationAll.Name = "textBoxDurationAll";
             this.textBoxDurationAll.Size = new System.Drawing.Size(56, 20);
             this.textBoxDurationAll.TabIndex = 152;
@@ -1721,7 +1761,7 @@ namespace WaveCraft
             this.label26.AutoSize = true;
             this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(50, 57);
+            this.label26.Location = new System.Drawing.Point(65, 57);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(81, 17);
             this.label26.TabIndex = 151;
@@ -1732,7 +1772,7 @@ namespace WaveCraft
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(67, 81);
+            this.label15.Location = new System.Drawing.Point(82, 81);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(63, 17);
             this.label15.TabIndex = 150;
@@ -1742,7 +1782,7 @@ namespace WaveCraft
             // 
             this.textBoxDelayAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxDelayAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxDelayAll.Location = new System.Drawing.Point(133, 81);
+            this.textBoxDelayAll.Location = new System.Drawing.Point(148, 81);
             this.textBoxDelayAll.Name = "textBoxDelayAll";
             this.textBoxDelayAll.Size = new System.Drawing.Size(56, 20);
             this.textBoxDelayAll.TabIndex = 149;
@@ -1752,7 +1792,7 @@ namespace WaveCraft
             this.labelBulkEdit.AutoSize = true;
             this.labelBulkEdit.BackColor = System.Drawing.Color.Transparent;
             this.labelBulkEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBulkEdit.Location = new System.Drawing.Point(5, 9);
+            this.labelBulkEdit.Location = new System.Drawing.Point(6, 14);
             this.labelBulkEdit.Name = "labelBulkEdit";
             this.labelBulkEdit.Size = new System.Drawing.Size(89, 20);
             this.labelBulkEdit.TabIndex = 146;
@@ -1762,9 +1802,9 @@ namespace WaveCraft
             // 
             this.groupBox7.Controls.Add(this.panel6);
             this.groupBox7.Controls.Add(this.label13);
-            this.groupBox7.Location = new System.Drawing.Point(1271, 512);
+            this.groupBox7.Location = new System.Drawing.Point(1406, 471);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(119, 96);
+            this.groupBox7.Size = new System.Drawing.Size(128, 96);
             this.groupBox7.TabIndex = 73;
             this.groupBox7.TabStop = false;
             // 
@@ -1774,7 +1814,7 @@ namespace WaveCraft
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.buttonLuckyPick);
             this.panel6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel6.Location = new System.Drawing.Point(32, 35);
+            this.panel6.Location = new System.Drawing.Point(35, 36);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(52, 52);
             this.panel6.TabIndex = 152;
@@ -1798,7 +1838,7 @@ namespace WaveCraft
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(6, 10);
+            this.label13.Location = new System.Drawing.Point(5, 10);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(83, 20);
             this.label13.TabIndex = 149;
@@ -1808,9 +1848,9 @@ namespace WaveCraft
             // 
             this.groupBox8.Controls.Add(this.buttonBulkCreate);
             this.groupBox8.Controls.Add(this.label27);
-            this.groupBox8.Location = new System.Drawing.Point(1271, 440);
+            this.groupBox8.Location = new System.Drawing.Point(1406, 399);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(119, 69);
+            this.groupBox8.Size = new System.Drawing.Size(128, 69);
             this.groupBox8.TabIndex = 74;
             this.groupBox8.TabStop = false;
             // 
@@ -1820,7 +1860,7 @@ namespace WaveCraft
             this.label27.BackColor = System.Drawing.Color.Transparent;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(6, 10);
+            this.label27.Location = new System.Drawing.Point(5, 10);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(89, 20);
             this.label27.TabIndex = 149;
@@ -1834,7 +1874,7 @@ namespace WaveCraft
             this.buttonBulkCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBulkCreate.ForeColor = System.Drawing.Color.Black;
             this.buttonBulkCreate.HorizontalGradient = false;
-            this.buttonBulkCreate.Location = new System.Drawing.Point(25, 36);
+            this.buttonBulkCreate.Location = new System.Drawing.Point(31, 36);
             this.buttonBulkCreate.Name = "buttonBulkCreate";
             this.buttonBulkCreate.Size = new System.Drawing.Size(66, 24);
             this.buttonBulkCreate.TabIndex = 150;
@@ -1850,7 +1890,7 @@ namespace WaveCraft
             this.buttonChangeAllVolumes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonChangeAllVolumes.ForeColor = System.Drawing.Color.Black;
             this.buttonChangeAllVolumes.HorizontalGradient = false;
-            this.buttonChangeAllVolumes.Location = new System.Drawing.Point(197, 129);
+            this.buttonChangeAllVolumes.Location = new System.Drawing.Point(212, 129);
             this.buttonChangeAllVolumes.Name = "buttonChangeAllVolumes";
             this.buttonChangeAllVolumes.Size = new System.Drawing.Size(59, 20);
             this.buttonChangeAllVolumes.TabIndex = 156;
@@ -1866,7 +1906,7 @@ namespace WaveCraft
             this.buttonChangeAllWeights.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonChangeAllWeights.ForeColor = System.Drawing.Color.Black;
             this.buttonChangeAllWeights.HorizontalGradient = false;
-            this.buttonChangeAllWeights.Location = new System.Drawing.Point(197, 105);
+            this.buttonChangeAllWeights.Location = new System.Drawing.Point(212, 105);
             this.buttonChangeAllWeights.Name = "buttonChangeAllWeights";
             this.buttonChangeAllWeights.Size = new System.Drawing.Size(59, 20);
             this.buttonChangeAllWeights.TabIndex = 153;
@@ -1882,7 +1922,7 @@ namespace WaveCraft
             this.buttonSetAllDelays.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetAllDelays.ForeColor = System.Drawing.Color.Black;
             this.buttonSetAllDelays.HorizontalGradient = false;
-            this.buttonSetAllDelays.Location = new System.Drawing.Point(197, 81);
+            this.buttonSetAllDelays.Location = new System.Drawing.Point(212, 81);
             this.buttonSetAllDelays.Name = "buttonSetAllDelays";
             this.buttonSetAllDelays.Size = new System.Drawing.Size(59, 20);
             this.buttonSetAllDelays.TabIndex = 148;
@@ -1898,7 +1938,7 @@ namespace WaveCraft
             this.buttonSetAllDurations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetAllDurations.ForeColor = System.Drawing.Color.Black;
             this.buttonSetAllDurations.HorizontalGradient = false;
-            this.buttonSetAllDurations.Location = new System.Drawing.Point(197, 57);
+            this.buttonSetAllDurations.Location = new System.Drawing.Point(212, 57);
             this.buttonSetAllDurations.Name = "buttonSetAllDurations";
             this.buttonSetAllDurations.Size = new System.Drawing.Size(59, 20);
             this.buttonSetAllDurations.TabIndex = 147;
@@ -1914,11 +1954,11 @@ namespace WaveCraft
             this.buttonAdjustFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdjustFrequencies.ForeColor = System.Drawing.Color.Black;
             this.buttonAdjustFrequencies.HorizontalGradient = false;
-            this.buttonAdjustFrequencies.Location = new System.Drawing.Point(136, 23);
+            this.buttonAdjustFrequencies.Location = new System.Drawing.Point(151, 23);
             this.buttonAdjustFrequencies.Name = "buttonAdjustFrequencies";
             this.buttonAdjustFrequencies.Size = new System.Drawing.Size(121, 24);
             this.buttonAdjustFrequencies.TabIndex = 145;
-            this.buttonAdjustFrequencies.Text = "frequency / volume";
+            this.buttonAdjustFrequencies.Text = "edit shape";
             this.buttonAdjustFrequencies.UseVisualStyleBackColor = true;
             this.buttonAdjustFrequencies.Click += new System.EventHandler(this.buttonAdjustFrequencies_Click);
             // 
@@ -1930,7 +1970,7 @@ namespace WaveCraft
             this.buttonCreatePartials.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCreatePartials.ForeColor = System.Drawing.Color.Black;
             this.buttonCreatePartials.HorizontalGradient = false;
-            this.buttonCreatePartials.Location = new System.Drawing.Point(284, 393);
+            this.buttonCreatePartials.Location = new System.Drawing.Point(353, 342);
             this.buttonCreatePartials.Name = "buttonCreatePartials";
             this.buttonCreatePartials.Size = new System.Drawing.Size(93, 24);
             this.buttonCreatePartials.TabIndex = 145;
@@ -1943,7 +1983,7 @@ namespace WaveCraft
             this.listBoxWavesVault.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBoxWavesVault.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBoxWavesVault.FormattingEnabled = true;
-            this.listBoxWavesVault.Location = new System.Drawing.Point(7, 395);
+            this.listBoxWavesVault.Location = new System.Drawing.Point(6, 350);
             this.listBoxWavesVault.Name = "listBoxWavesVault";
             this.listBoxWavesVault.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxWavesVault.Size = new System.Drawing.Size(323, 106);
@@ -1954,10 +1994,10 @@ namespace WaveCraft
             this.listBoxWaves.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBoxWaves.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBoxWaves.FormattingEnabled = true;
-            this.listBoxWaves.Location = new System.Drawing.Point(7, 53);
+            this.listBoxWaves.Location = new System.Drawing.Point(7, 46);
             this.listBoxWaves.Name = "listBoxWaves";
             this.listBoxWaves.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxWaves.Size = new System.Drawing.Size(323, 301);
+            this.listBoxWaves.Size = new System.Drawing.Size(323, 275);
             this.listBoxWaves.TabIndex = 164;
             this.listBoxWaves.TabStop = false;
             this.listBoxWaves.SelectedIndexChanged += new System.EventHandler(this.listBoxWaves_SelectedIndexChanged);
@@ -1972,7 +2012,7 @@ namespace WaveCraft
             this.buttonAddToVault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAddToVault.ForeColor = System.Drawing.Color.Black;
             this.buttonAddToVault.HorizontalGradient = true;
-            this.buttonAddToVault.Location = new System.Drawing.Point(180, 365);
+            this.buttonAddToVault.Location = new System.Drawing.Point(180, 325);
             this.buttonAddToVault.Name = "buttonAddToVault";
             this.buttonAddToVault.Size = new System.Drawing.Size(41, 22);
             this.buttonAddToVault.TabIndex = 158;
@@ -1988,7 +2028,7 @@ namespace WaveCraft
             this.buttonRemoveFromVault.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRemoveFromVault.ForeColor = System.Drawing.Color.Black;
             this.buttonRemoveFromVault.HorizontalGradient = true;
-            this.buttonRemoveFromVault.Location = new System.Drawing.Point(115, 365);
+            this.buttonRemoveFromVault.Location = new System.Drawing.Point(115, 325);
             this.buttonRemoveFromVault.Name = "buttonRemoveFromVault";
             this.buttonRemoveFromVault.Size = new System.Drawing.Size(41, 22);
             this.buttonRemoveFromVault.TabIndex = 157;
@@ -2004,7 +2044,7 @@ namespace WaveCraft
             this.ButtonDeleteAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonDeleteAll.ForeColor = System.Drawing.Color.Black;
             this.ButtonDeleteAll.HorizontalGradient = false;
-            this.ButtonDeleteAll.Location = new System.Drawing.Point(207, 19);
+            this.ButtonDeleteAll.Location = new System.Drawing.Point(207, 16);
             this.ButtonDeleteAll.Name = "ButtonDeleteAll";
             this.ButtonDeleteAll.Size = new System.Drawing.Size(70, 22);
             this.ButtonDeleteAll.TabIndex = 148;
@@ -2020,7 +2060,7 @@ namespace WaveCraft
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.Black;
             this.buttonDelete.HorizontalGradient = false;
-            this.buttonDelete.Location = new System.Drawing.Point(127, 19);
+            this.buttonDelete.Location = new System.Drawing.Point(127, 16);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(70, 22);
             this.buttonDelete.TabIndex = 147;
@@ -2036,7 +2076,7 @@ namespace WaveCraft
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.Black;
             this.buttonAdd.HorizontalGradient = false;
-            this.buttonAdd.Location = new System.Drawing.Point(13, 19);
+            this.buttonAdd.Location = new System.Drawing.Point(13, 16);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(70, 22);
             this.buttonAdd.TabIndex = 146;
@@ -2052,7 +2092,7 @@ namespace WaveCraft
             this.buttonAddPreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAddPreset.ForeColor = System.Drawing.Color.Black;
             this.buttonAddPreset.HorizontalGradient = false;
-            this.buttonAddPreset.Location = new System.Drawing.Point(187, 63);
+            this.buttonAddPreset.Location = new System.Drawing.Point(187, 53);
             this.buttonAddPreset.Name = "buttonAddPreset";
             this.buttonAddPreset.Size = new System.Drawing.Size(60, 22);
             this.buttonAddPreset.TabIndex = 147;
@@ -2068,7 +2108,7 @@ namespace WaveCraft
             this.buttonDeletePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDeletePreset.ForeColor = System.Drawing.Color.Black;
             this.buttonDeletePreset.HorizontalGradient = false;
-            this.buttonDeletePreset.Location = new System.Drawing.Point(257, 63);
+            this.buttonDeletePreset.Location = new System.Drawing.Point(257, 53);
             this.buttonDeletePreset.Name = "buttonDeletePreset";
             this.buttonDeletePreset.Size = new System.Drawing.Size(60, 22);
             this.buttonDeletePreset.TabIndex = 148;
@@ -2084,7 +2124,7 @@ namespace WaveCraft
             this.buttonSavePreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSavePreset.ForeColor = System.Drawing.Color.Black;
             this.buttonSavePreset.HorizontalGradient = false;
-            this.buttonSavePreset.Location = new System.Drawing.Point(116, 63);
+            this.buttonSavePreset.Location = new System.Drawing.Point(116, 53);
             this.buttonSavePreset.Name = "buttonSavePreset";
             this.buttonSavePreset.Size = new System.Drawing.Size(60, 22);
             this.buttonSavePreset.TabIndex = 147;
@@ -2415,7 +2455,7 @@ namespace WaveCraft
             this.buttonConvertToWaves.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonConvertToWaves.ForeColor = System.Drawing.Color.Black;
             this.buttonConvertToWaves.HorizontalGradient = false;
-            this.buttonConvertToWaves.Location = new System.Drawing.Point(296, 86);
+            this.buttonConvertToWaves.Location = new System.Drawing.Point(290, 67);
             this.buttonConvertToWaves.Name = "buttonConvertToWaves";
             this.buttonConvertToWaves.Size = new System.Drawing.Size(110, 23);
             this.buttonConvertToWaves.TabIndex = 158;
@@ -2431,7 +2471,7 @@ namespace WaveCraft
             this.buttonDelayMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelayMinus10.ForeColor = System.Drawing.Color.Black;
             this.buttonDelayMinus10.HorizontalGradient = true;
-            this.buttonDelayMinus10.Location = new System.Drawing.Point(224, 461);
+            this.buttonDelayMinus10.Location = new System.Drawing.Point(242, 399);
             this.buttonDelayMinus10.Name = "buttonDelayMinus10";
             this.buttonDelayMinus10.Size = new System.Drawing.Size(41, 22);
             this.buttonDelayMinus10.TabIndex = 156;
@@ -2447,7 +2487,7 @@ namespace WaveCraft
             this.buttonDelayMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelayMinus1.ForeColor = System.Drawing.Color.Black;
             this.buttonDelayMinus1.HorizontalGradient = true;
-            this.buttonDelayMinus1.Location = new System.Drawing.Point(264, 461);
+            this.buttonDelayMinus1.Location = new System.Drawing.Point(282, 399);
             this.buttonDelayMinus1.Name = "buttonDelayMinus1";
             this.buttonDelayMinus1.Size = new System.Drawing.Size(41, 22);
             this.buttonDelayMinus1.TabIndex = 155;
@@ -2463,7 +2503,7 @@ namespace WaveCraft
             this.buttonDelayPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelayPlus10.ForeColor = System.Drawing.Color.Black;
             this.buttonDelayPlus10.HorizontalGradient = true;
-            this.buttonDelayPlus10.Location = new System.Drawing.Point(371, 461);
+            this.buttonDelayPlus10.Location = new System.Drawing.Point(389, 399);
             this.buttonDelayPlus10.Name = "buttonDelayPlus10";
             this.buttonDelayPlus10.Size = new System.Drawing.Size(41, 22);
             this.buttonDelayPlus10.TabIndex = 154;
@@ -2479,7 +2519,7 @@ namespace WaveCraft
             this.buttonDelayPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelayPlus1.ForeColor = System.Drawing.Color.Black;
             this.buttonDelayPlus1.HorizontalGradient = true;
-            this.buttonDelayPlus1.Location = new System.Drawing.Point(331, 461);
+            this.buttonDelayPlus1.Location = new System.Drawing.Point(349, 399);
             this.buttonDelayPlus1.Name = "buttonDelayPlus1";
             this.buttonDelayPlus1.Size = new System.Drawing.Size(41, 22);
             this.buttonDelayPlus1.TabIndex = 153;
@@ -2495,7 +2535,7 @@ namespace WaveCraft
             this.buttonDurationMinus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDurationMinus10.ForeColor = System.Drawing.Color.Black;
             this.buttonDurationMinus10.HorizontalGradient = true;
-            this.buttonDurationMinus10.Location = new System.Drawing.Point(224, 395);
+            this.buttonDurationMinus10.Location = new System.Drawing.Point(242, 333);
             this.buttonDurationMinus10.Name = "buttonDurationMinus10";
             this.buttonDurationMinus10.Size = new System.Drawing.Size(41, 22);
             this.buttonDurationMinus10.TabIndex = 152;
@@ -2511,7 +2551,7 @@ namespace WaveCraft
             this.buttonDurationMinus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDurationMinus1.ForeColor = System.Drawing.Color.Black;
             this.buttonDurationMinus1.HorizontalGradient = true;
-            this.buttonDurationMinus1.Location = new System.Drawing.Point(264, 395);
+            this.buttonDurationMinus1.Location = new System.Drawing.Point(282, 333);
             this.buttonDurationMinus1.Name = "buttonDurationMinus1";
             this.buttonDurationMinus1.Size = new System.Drawing.Size(41, 22);
             this.buttonDurationMinus1.TabIndex = 151;
@@ -2527,7 +2567,7 @@ namespace WaveCraft
             this.buttonDurationPlus10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDurationPlus10.ForeColor = System.Drawing.Color.Black;
             this.buttonDurationPlus10.HorizontalGradient = true;
-            this.buttonDurationPlus10.Location = new System.Drawing.Point(371, 395);
+            this.buttonDurationPlus10.Location = new System.Drawing.Point(389, 333);
             this.buttonDurationPlus10.Name = "buttonDurationPlus10";
             this.buttonDurationPlus10.Size = new System.Drawing.Size(41, 22);
             this.buttonDurationPlus10.TabIndex = 150;
@@ -2543,7 +2583,7 @@ namespace WaveCraft
             this.buttonDurationPlus1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDurationPlus1.ForeColor = System.Drawing.Color.Black;
             this.buttonDurationPlus1.HorizontalGradient = true;
-            this.buttonDurationPlus1.Location = new System.Drawing.Point(331, 395);
+            this.buttonDurationPlus1.Location = new System.Drawing.Point(349, 333);
             this.buttonDurationPlus1.Name = "buttonDurationPlus1";
             this.buttonDurationPlus1.Size = new System.Drawing.Size(41, 22);
             this.buttonDurationPlus1.TabIndex = 149;
@@ -2567,7 +2607,7 @@ namespace WaveCraft
             0,
             0,
             0});
-            this.colorSliderDelay.Location = new System.Drawing.Point(160, 434);
+            this.colorSliderDelay.Location = new System.Drawing.Point(178, 372);
             this.colorSliderDelay.Maximum = new decimal(new int[] {
             200000,
             0,
@@ -2629,7 +2669,7 @@ namespace WaveCraft
             0,
             0,
             0});
-            this.colorSliderDuration.Location = new System.Drawing.Point(155, 368);
+            this.colorSliderDuration.Location = new System.Drawing.Point(173, 306);
             this.colorSliderDuration.Maximum = new decimal(new int[] {
             200000,
             0,
@@ -2680,7 +2720,7 @@ namespace WaveCraft
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(77)))), ((int)(((byte)(95)))));
-            this.ClientSize = new System.Drawing.Size(1394, 876);
+            this.ClientSize = new System.Drawing.Size(1538, 845);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox2);
@@ -2702,6 +2742,7 @@ namespace WaveCraft
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPhaseShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWaveEnd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWeightShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).EndInit();
@@ -2725,6 +2766,8 @@ namespace WaveCraft
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeightChange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPhaseShift)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeShift)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -2732,7 +2775,6 @@ namespace WaveCraft
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDuration)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeightChange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmount)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -2774,12 +2816,11 @@ namespace WaveCraft
         public System.Windows.Forms.DataVisualization.Charting.Chart chartAHDSR;
         internal System.Windows.Forms.Label labelDuration;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label labelHold;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown numericUpDownSpread;
-        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label labelMaxSpread;
         private System.Windows.Forms.PictureBox pictureBoxWaveForm;
         public System.Windows.Forms.DataVisualization.Charting.Chart chartFFTRight;
         public System.Windows.Forms.DataVisualization.Charting.Chart chartFFTLeft;
@@ -2817,11 +2858,7 @@ namespace WaveCraft
         private System.Windows.Forms.Button buttonPlayE5;
         internal System.Windows.Forms.PictureBox pictureBoxFrequencyShape;
         internal System.Windows.Forms.PictureBox pictureBoxVolumeShape;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelFrequencyTitle;
-        private System.Windows.Forms.Label labelFreqMaxTitle;
-        private System.Windows.Forms.Label labelFreqMinTitle;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxDuration;
         private System.Windows.Forms.TextBox textBoxDelay;
@@ -2873,10 +2910,8 @@ namespace WaveCraft
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label labelMaxSpreadHelp;
+        private System.Windows.Forms.Label labelRandomFrequencyHelp;
         private System.Windows.Forms.Label labelWeightMax;
         private System.Windows.Forms.Label labelWeightMin;
         internal System.Windows.Forms.PictureBox pictureBoxWeightShape;
@@ -2889,7 +2924,6 @@ namespace WaveCraft
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBoxDelayAll;
         private CustomControls.GradientButton buttonRemoveFromVault;
-        internal System.Windows.Forms.ComboBox comboBoxPresets;
         private Custom_Controls.GradientListBox listBoxWavesVault;
         internal Custom_Controls.GradientListBox listBoxWaves;
         internal System.Windows.Forms.PictureBox pictureBoxCustomWaveEnd;
@@ -2902,6 +2936,15 @@ namespace WaveCraft
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox textBoxChangeWeightAll;
         private CustomControls.GradientButton buttonChangeAllWeights;
+        internal System.Windows.Forms.PictureBox pictureBoxPhaseShape;
+        private System.Windows.Forms.Label labelPhaseMin;
+        private System.Windows.Forms.Label labelPhaseMax;
+        private System.Windows.Forms.Label labelPhaseTitle;
+        private System.Windows.Forms.Label label48;
+        internal System.Windows.Forms.ComboBox comboBoxPresets;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownPhaseShift;
     }
 }
 

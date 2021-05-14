@@ -18,6 +18,7 @@ namespace WaveCraft.Synth
         public const int SHAPE_MAX_VALUE = 500;
         public const int MAX_VOLUME = 1000;
         public const int MAX_WEIGHT = 1000;
+        public const double MAX_PHASE = Math.PI * 2;
         public const int MAX_FREQUENCY = 22387;
         public const int MAX_AMPLITUDE = 32767;     // Max amplitude for 16-bit audio
         private const int GRAPH_POINTS_PLOTTED = 300;
@@ -154,6 +155,7 @@ namespace WaveCraft.Synth
             parentForm.pictureBoxFrequencyShape.Refresh();
             parentForm.pictureBoxVolumeShape.Refresh();
             parentForm.pictureBoxWeightShape.Refresh();
+            parentForm.pictureBoxPhaseShape.Refresh();
         }
 
         public void UpdateMixedSound()
@@ -310,6 +312,16 @@ namespace WaveCraft.Synth
 
             // a value of 0 means max. volume, a value of SHAPE_VOLUME_MAX_VALUE means min. volume.
             return (waveInfo.MaxVolume * waveInfo.ShapeVolume[position] + (waveInfo.MinVolume * (SHAPE_MAX_VALUE - waveInfo.ShapeVolume[position]))) / (double)(SHAPE_MAX_VALUE * MAX_VOLUME);
+        }
+
+        // Calculates the current phase
+        // currentPosition = current sample position regardless the number of channels
+        // returns the phase as a value between 0 and 2*PI
+        private double CalculateCurrentPhase(uint currentPosition, WaveInfo waveInfo)
+        {
+            int position = (int)(currentPosition / (double)waveInfo.NumSamples() * SHAPE_NUMPOINTS);
+
+            return 2* Math.PI * waveInfo.ShapePhase[position] / SynthGenerator.SHAPE_MAX_VALUE;
         }
 
         // Calculates the current weight
@@ -587,12 +599,15 @@ namespace WaveCraft.Synth
             }
             // The period of the wave.
             double deltaT = (Math.PI * 2 * frequency) / samplesPerSecond;
+            double phase = wavePhase + deltaT;
+            phase += CalculateCurrentPhase(current_sample, waveInfo);
+            phase = phase % (2 * Math.PI);
 
             for (int channel = 0; channel < NUM_AUDIO_CHANNELS; channel++)
             {
                 if (waveInfo.Channel == 2 || waveInfo.Channel == channel)
                 {
-                    waveInfo.WaveData[current_sample * 2 + channel] = Convert.ToDouble(MAX_AMPLITUDE * WaveFunction(waveInfo, (wavePhase + deltaT)%(2*Math.PI), frequency, current_sample));
+                    waveInfo.WaveData[current_sample * 2 + channel] = Convert.ToDouble(MAX_AMPLITUDE * WaveFunction(waveInfo, phase, frequency, current_sample));
                 }
             }
             wavePhase += deltaT;
@@ -896,6 +911,7 @@ namespace WaveCraft.Synth
             newWave.ShapeVolume = currentWave.ShapeVolume.Clone() as int[];
             newWave.ShapeFrequency = currentWave.ShapeFrequency.Clone() as int[];
             newWave.ShapeWeight = currentWave.ShapeWeight.Clone() as int[];
+            newWave.ShapePhase = currentWave.ShapePhase.Clone() as int[];
             newWave.UpdateDisplayName();
             Waves.Add(newWave);
             RefreshWaveData(newWave);

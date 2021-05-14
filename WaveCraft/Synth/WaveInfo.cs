@@ -28,6 +28,7 @@ namespace WaveCraft.Synth
         int[] shapeFrequency = new int[0];          // shape of the frequency. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
         int[] shapeVolume = new int[0];             // shape of the volume. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
         int[] shapeWeight = new int[0];             // shape of the weight. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
+        int[] shapePhase = new int[0];              // shape of the phase. this consists of 1000 items with value between 0 and SHAPE_MAX_VALUE
 
         public double MinFrequency { get => minFrequency; set => minFrequency = value; }
         public double MaxFrequency { get => maxFrequency; set => maxFrequency = value; }
@@ -49,6 +50,7 @@ namespace WaveCraft.Synth
         public int[] ShapeWeight { get => shapeWeight; set => shapeWeight = value; }
         public int[] ShapeWaveEnd { get => shapeWaveEnd; set => shapeWaveEnd = value; }
         public string DisplayName { get => displayName; set => displayName = value; }
+        public int[] ShapePhase { get => shapePhase; set => shapePhase = value; }
 
         public WaveInfo(int samplesPerSecond)
         {
@@ -71,6 +73,8 @@ namespace WaveCraft.Synth
             ArrayUtils.Populate(ShapeFrequency, SynthGenerator.SHAPE_MAX_VALUE / 2);
             ShapeWeight = new int[SynthGenerator.SHAPE_NUMPOINTS];
             ArrayUtils.Populate(ShapeWeight, SynthGenerator.SHAPE_MAX_VALUE / 2);
+            ShapePhase = new int[SynthGenerator.SHAPE_NUMPOINTS];
+            ArrayUtils.Populate(ShapePhase, 0);
 
             UpdateDisplayName();
         }
