@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WaveCraft
 {
-    public partial class FormBulkChange : Form
+    public partial class FormBulkChangeByFrequency : Form
     {
         private const int SHAPE_NUM_POINTS = 1000;
         private const int SHAPE_MAX_VALUE = 500;
@@ -22,8 +22,10 @@ namespace WaveCraft
         Timer aTimer = new Timer();
         int AdjustDataWidth = 0;
         Random random = new Random();
+        double minFrequency = 10;
+        double maxFrequency = 20000;
 
-        public FormBulkChange()
+        public FormBulkChangeByFrequency()
         {
             InitializeComponent();
             aTimer.Interval = 50;
@@ -53,11 +55,6 @@ namespace WaveCraft
             return (MaxChange * (SHAPE_MAX_VALUE-waveData[position]) + MinChange * waveData[position]) / SHAPE_MAX_VALUE;
         }
 
-        private double CalculateCurrentFrequency(int position, WaveInfo waveInfo)
-        {
-            return (waveInfo.MaxFrequency * waveInfo.ShapeFrequency[position] + (waveInfo.MinFrequency * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeFrequency[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
-        }
-
         private double CalculateCurrentVolume(int position, WaveInfo waveInfo)
         {
             return (waveInfo.MaxVolume * waveInfo.ShapeVolume[position] + (waveInfo.MinVolume * (SynthGenerator.SHAPE_MAX_VALUE - waveInfo.ShapeVolume[position]))) / (double)SynthGenerator.SHAPE_MAX_VALUE;
@@ -70,24 +67,28 @@ namespace WaveCraft
 
         private void AdjustValues(WaveInfo wave)
         {
+            double waveFrequency = (wave.MinFrequency + wave.MaxFrequency) / 2;
+            if(waveFrequency<minFrequency || waveFrequency>maxFrequency)
+            {
+                return;
+            }
+
             double MinChange = Convert.ToDouble(labelChangeMin.Text);
             double MaxChange = Convert.ToDouble(labelChangeMax.Text);
 
-            if (radioButtonChangeFrequency.Checked)
+            double factor = CalculateCurrentFactor(FrequencyToGraphPos(waveFrequency), MinChange, MaxChange );
+
+            if (radioButtonChangeVolume.Checked)
             {
-                AdjustWaveFrequency(wave, MinChange, MaxChange);
-            }
-            else if (radioButtonChangeVolume.Checked)
-            {
-                AdjustWaveVolume(wave, MinChange, MaxChange);
+                AdjustWaveVolume(wave, factor);
             }
             else if (radioButtonChangeWeight.Checked)
             {
-                AdjustWaveWeight(wave, MinChange, MaxChange);
+                AdjustWaveWeight(wave, factor);
             }
             else
             {
-                AdjustWavePhase(wave, MinChange, MaxChange);
+                AdjustWavePhase(wave, factor);
             }
         }
 
@@ -117,40 +118,14 @@ namespace WaveCraft
             Close();
         }
 
-        private void AdjustWaveFrequency(WaveInfo wave, double MinChange, double MaxChange)
+        private void AdjustWaveVolume(WaveInfo wave, double factor)
         {
-            double new_min = wave.MinFrequency * MinChange;
-            if (new_min > SynthGenerator.MAX_FREQUENCY)
-            {
-                new_min = SynthGenerator.MAX_FREQUENCY;
-            }
-            double new_max = wave.MaxFrequency * MaxChange;
-            if (new_max > SynthGenerator.MAX_FREQUENCY)
-            {
-                new_max = SynthGenerator.MAX_FREQUENCY;
-            }
-            // change the freq. graph, so that it matches the desired pattern
-            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
-            {
-                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeFrequency.Length);
-                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
-                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
-                double freq = CalculateCurrentFrequency(position, wave);
-                freq *= factor;
-                wave.ShapeFrequency[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((freq - new_min) / (new_max - new_min)));
-            }
-            wave.MinFrequency = new_min;
-            wave.MaxFrequency = new_max;
-        }
-
-        private void AdjustWaveVolume(WaveInfo wave, double MinChange, double MaxChange)
-        {
-            int new_min = (int)(wave.MinVolume * MinChange);
+            int new_min = (int)(wave.MinVolume * factor);
             if (new_min > SynthGenerator.MAX_VOLUME)
             {
                 new_min = SynthGenerator.MAX_VOLUME;
             }
-            int new_max = (int)(wave.MaxVolume * MaxChange);
+            int new_max = (int)(wave.MaxVolume * factor);
             if (new_max > SynthGenerator.MAX_VOLUME)
             {
                 new_max = SynthGenerator.MAX_VOLUME;
@@ -158,9 +133,6 @@ namespace WaveCraft
             // change the volume graph, so that it matches the desired pattern
             for (int position = 0; position < wave.ShapeVolume.Length; position++)
             {
-                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeVolume.Length);
-                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
-                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
                 double volume = CalculateCurrentVolume(position, wave);
                 volume *= factor;
                 wave.ShapeVolume[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((volume - new_min) / (new_max - new_min)));
@@ -169,14 +141,14 @@ namespace WaveCraft
             wave.MaxVolume = new_max;
         }
 
-        private void AdjustWaveWeight(WaveInfo wave, double MinChange, double MaxChange)
+        private void AdjustWaveWeight(WaveInfo wave, double factor)
         {
-            int new_min = (int)(wave.MinWeight * MinChange);
+            int new_min = (int)(wave.MinWeight * factor);
             if (new_min > SynthGenerator.MAX_WEIGHT)
             {
                 new_min = SynthGenerator.MAX_WEIGHT;
             }
-            int new_max = (int)(wave.MaxWeight * MaxChange);
+            int new_max = (int)(wave.MaxWeight * factor);
             if (new_max > SynthGenerator.MAX_WEIGHT)
             {
                 new_max = SynthGenerator.MAX_WEIGHT;
@@ -184,9 +156,6 @@ namespace WaveCraft
             // change the weight graph, so that it matches the desired pattern
             for (int position = 0; position < wave.ShapeWeight.Length; position++)
             {
-                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeWeight.Length);
-                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
-                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
                 double weight = CalculateCurrentWeight(position, wave);
                 weight *= factor;
                 wave.ShapeWeight[position] = (int)(SynthGenerator.SHAPE_MAX_VALUE * ((weight - new_min) / (new_max - new_min)));
@@ -195,14 +164,13 @@ namespace WaveCraft
             wave.MaxWeight = new_max;
         }
 
-        private void AdjustWavePhase(WaveInfo wave, double MinChange, double MaxChange)
+        private void AdjustWavePhase(WaveInfo wave, double factor)
         {
             // change the phase graph, so that it matches the desired pattern
             for (int position = 0; position < wave.ShapePhase.Length; position++)
             {
                 int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeWeight.Length);
                 int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
-                double factor = CalculateCurrentFactor(desired_pattern_position, MinChange, MaxChange);
                 int phase = wave.ShapePhase[position];
                 phase = (int)((phase + (factor*SynthGenerator.SHAPE_MAX_VALUE)) % SynthGenerator.SHAPE_MAX_VALUE);
                 wave.ShapePhase[position] = phase;
@@ -303,15 +271,19 @@ namespace WaveCraft
             Refresh();
         }
 
-        private void FormFrequency_Load(object sender, EventArgs e)
+        private void FormBulkChangeByFrequency_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < waveData.Length; i++)
             {
                 waveData[i] = 250;
             }
-
+            minFrequency = myParent.SynthGenerator.FindMinFrequency();
+            maxFrequency = myParent.SynthGenerator.FindMaxFrequency();
+            textBoxFrequency1.Text = minFrequency.ToString();
+            textBoxFrequency2.Text = maxFrequency.ToString();
             textBoxChange1.Text = labelChangeMin.Text = "1.000";
             textBoxChange2.Text = labelChangeMax.Text = "1.500";
+            UpdateFrequencyLabels();
 
             pictureBoxFrequencyShape.Paint += new PaintEventHandler(PictureBoxPaint);
             pictureBoxFrequencyShape.Refresh();
@@ -367,7 +339,6 @@ namespace WaveCraft
                 aTimer.Enabled = false;
             }
         }
-
 
         private void textBoxFrequency1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -493,80 +464,6 @@ namespace WaveCraft
             Refresh();
         }
 
-        private void pictureBox12_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                for (int i = 0; i < waveData.Length; i++)
-                {
-                    waveData[i] = (int)(((int)(Math.Sin(i / (double)waveData.Length * 2 * Convert.ToInt32(textBoxNumSines.Text) * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
-                }
-            }
-            catch (Exception)
-            {
-                // probably bad input from textbox; ignore
-            }
-            Refresh();
-        }
-
-        private void pictureBox9_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < waveData.Length; i++)
-            {
-                double factor = Math.Pow(1.003, i);   // between 1 and 20
-                waveData[i] = (int)(((int)(Math.Sin(i / (double)waveData.Length * factor * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
-            }
-            Refresh();
-        }
-
-        private void pictureBox10_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < waveData.Length; i++)
-            {
-                double factor = Math.Pow(1.003, i);   // between 1 and 20
-                waveData[waveData.Length - 1 - i] = (int)(((int)(Math.Sin(i / (double)waveData.Length * factor * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
-            }
-            Refresh();
-        }
-
-        private void pictureBox11_Click(object sender, EventArgs e)
-        {
-            int amplitude = random.Next(SynthGenerator.SHAPE_MAX_VALUE / 2);
-            int period = random.Next(50) + 5;
-            bool amplitude_increasing = false;
-            for (int i = 0; i < waveData.Length; i++)
-            {
-                if (random.Next(20) == 3)
-                {
-                    amplitude_increasing = !amplitude_increasing;
-                }
-                if (amplitude_increasing)
-                {
-                    if (amplitude < SynthGenerator.SHAPE_MAX_VALUE / 2)
-                    {
-                        amplitude++;
-                    }
-                    else
-                    {
-                        amplitude_increasing = false;
-                    }
-                }
-                else
-                {
-                    if (amplitude > 0)
-                    {
-                        amplitude--;
-                    }
-                    else
-                    {
-                        amplitude_increasing = true;
-                    }
-                }
-                waveData[i] = (int)((Math.Sin(i / (double)waveData.Length * period * Math.PI) * amplitude) + (SynthGenerator.SHAPE_MAX_VALUE / 2.0));
-            }
-            Refresh();
-        }
-
         private void textBoxChange2_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -583,6 +480,73 @@ namespace WaveCraft
                         labelChangeMax.Text = change.ToString("0.000");
                     }
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public double GraphToFrequency(int graphX)
+        {
+            double baseValue = Math.Pow(maxFrequency / minFrequency, 1 / (double)SynthGenerator.SHAPE_NUMPOINTS);
+
+            return minFrequency * Math.Pow(baseValue, graphX);
+        }
+
+        private int FrequencyToGraphPos(double frequency)
+        {
+            int graphPos = 0;
+            while(GraphToFrequency(graphPos)<frequency && graphPos<SHAPE_NUM_POINTS-1)
+            {
+                graphPos++;
+            }
+
+            return graphPos;
+        }
+
+        private void UpdateFrequencyLabels()
+        {
+            double freq1 = Convert.ToDouble(textBoxFrequency1.Text);
+            double freq2 = Convert.ToDouble(textBoxFrequency2.Text);
+            if (freq1 > freq2)
+            {
+                minFrequency = freq2;
+                maxFrequency = freq1;
+            }
+            else
+            {
+                minFrequency = freq1;
+                maxFrequency = freq2;
+            }
+            labelXAxis1.Text = minFrequency.ToString("0");
+            labelXAxis2.Text = GraphToFrequency(100).ToString("0");
+            labelXAxis3.Text = GraphToFrequency(200).ToString("0");
+            labelXAxis4.Text = GraphToFrequency(300).ToString("0");
+            labelXAxis5.Text = GraphToFrequency(400).ToString("0");
+            labelXAxis6.Text = GraphToFrequency(500).ToString("0");
+            labelXAxis7.Text = GraphToFrequency(600).ToString("0");
+            labelXAxis8.Text = GraphToFrequency(700).ToString("0");
+            labelXAxis9.Text = GraphToFrequency(800).ToString("0");
+            labelXAxis10.Text = GraphToFrequency(900).ToString("0");
+            labelXAxis11.Text = maxFrequency.ToString("0");
+        }
+
+        private void textBoxFrequency1_KeyUp_1(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                UpdateFrequencyLabels();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFrequency2_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                UpdateFrequencyLabels();
             }
             catch (Exception)
             {

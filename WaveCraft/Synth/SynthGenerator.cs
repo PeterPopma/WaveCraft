@@ -925,6 +925,34 @@ namespace WaveCraft.Synth
             return MinFrequencyBulkCreate * Math.Pow(baseValue, graphX);
         }
 
+        public double FindMaxFrequency()
+        {
+            double max_frequency = 0;
+            foreach(WaveInfo wave in Waves)
+            {
+                if (wave.MaxFrequency>max_frequency)
+                {
+                    max_frequency = wave.MaxFrequency;
+                }
+            }
+
+            return max_frequency;
+        }
+
+        public double FindMinFrequency()
+        {
+            double min_frequency = MAX_FREQUENCY;
+            foreach (WaveInfo wave in Waves)
+            {
+                if (wave.MinFrequency < min_frequency)
+                {
+                    min_frequency = wave.MinFrequency;
+                }
+            }
+
+            return min_frequency;
+        }
+
         public void CreateBulkWaves(bool useStartFrequency = false, bool useEndFrequency = false)
         {
             for (int k = 0; k < AmountBulkCreate; k++)

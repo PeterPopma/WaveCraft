@@ -351,6 +351,7 @@ namespace WaveCraft
 
         private void comboBoxPresets_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             ChangedPresetData = false;
             currentPreset = comboBoxPresets.Text;
             try
@@ -363,6 +364,7 @@ namespace WaveCraft
             RecreateWavesLists();
             UpdateWaveControls();
             synthGenerator.UpdateAllWaveData();
+            Cursor = Cursors.Default;
         }
 
         private void colorSliderHold_ValueChanged(object sender, EventArgs e)
@@ -1056,13 +1058,19 @@ namespace WaveCraft
             {
                 double durationFactor = Math.Pow(((double)numericUpDownDuration.Value / 100.0), inharmonic_number);
                 double deviation = inharmonic_number / (double)numericUpDownAmount.Value * (double)numericUpDownSpread.Value / 100.0;
-                if (checkBoxRandomFrequency.Checked)
+                if (radioButtonSpreadRandom.Checked)
                 {
                     // choose a random spot between this and the previous deviation
                     double previous_deviation = (inharmonic_number - 1) / (double)numericUpDownAmount.Value * (double)numericUpDownSpread.Value / 100.0;
                     double place = random.Next(1000) / 1000.0;
                     deviation = (previous_deviation * place) + (deviation * (1 - place));
                 }
+                if (radioButtonSpreadLogaritmic.Checked)
+                {
+                    double base_number = Math.Pow(((double)numericUpDownSpread.Value * 1000), (1 / (double)numericUpDownAmount.Value));
+                    deviation = Math.Pow(base_number, inharmonic_number) / 100000.0;
+                }
+
                 double frequency_factor = 1 + deviation;
                 if (undertones)
                 {
@@ -1273,7 +1281,9 @@ namespace WaveCraft
             if (radioButtonEvenHarmonics.Checked || radioButtonOddHarmonics.Checked || radioButtonEvenOddHarmonics.Checked)
             {
                 numericUpDownSpread.Visible = false;
-                checkBoxRandomFrequency.Visible = false;
+                radioButtonSpreadEvenly.Visible = false;
+                radioButtonSpreadRandom.Visible = false;
+                radioButtonSpreadLogaritmic.Visible = false;
                 labelMaxSpreadHelp.Visible = false;
                 labelRandomFrequencyHelp.Visible = false;
                 labelMaxSpread.Visible = false;
@@ -1281,7 +1291,9 @@ namespace WaveCraft
             else
             {
                 numericUpDownSpread.Visible = true;
-                checkBoxRandomFrequency.Visible = true;
+                radioButtonSpreadEvenly.Visible = true;
+                radioButtonSpreadRandom.Visible = true;
+                radioButtonSpreadLogaritmic.Visible = true;
                 labelMaxSpreadHelp.Visible = true;
                 labelRandomFrequencyHelp.Visible = true;
                 labelMaxSpread.Visible = true;
@@ -1334,7 +1346,7 @@ namespace WaveCraft
 
         private void buttonAdjustFrequencies_Click(object sender, EventArgs e)
         {
-            FormBulkChange formFrequency2 = new FormBulkChange();
+            FormBulkChangeOverTime formFrequency2 = new FormBulkChangeOverTime();
             formFrequency2.MyParent = this;
             formFrequency2.ShowDialog();
         }
@@ -2034,6 +2046,13 @@ namespace WaveCraft
             FormPhase formPhase = new FormPhase();
             formPhase.MyParent = this;
             formPhase.ShowDialog();
+        }
+
+        private void buttonBulkEditByFrequency_Click(object sender, EventArgs e)
+        {
+            FormBulkChangeByFrequency formBulkChange = new FormBulkChangeByFrequency();
+            formBulkChange.MyParent = this;
+            formBulkChange.ShowDialog();
         }
     }
 }
