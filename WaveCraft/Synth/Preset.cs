@@ -17,16 +17,18 @@ namespace WaveCraft.Synth
             providerDecimalPoint.NumberDecimalSeparator = ".";
         }
 
-        public void Save(SynthGenerator synthGenerator, string name)
+        public void Save(SynthGenerator synthGenerator, PresetItem presetItem)
         {
-            if(name.Length==0)
+            if (presetItem.Name.Length==0)
             {
-                name = "default";
-//                throw new Exception("preset name not set!");
+                presetItem.Name = "default";
+                presetItem.Category = "[default]";
+                //                throw new Exception("preset name not set!");
             }
             using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(@".\presets\" + name + ".pst"))
+                new System.IO.StreamWriter(@".\presets\" + presetItem.Name + ".pst"))
             {
+                file.WriteLine(presetItem.Category);
                 file.WriteLine(synthGenerator.EnvelopAttack.ToString(providerDecimalPoint));
                 file.WriteLine(synthGenerator.EnvelopHold.ToString(providerDecimalPoint));
                 file.WriteLine(synthGenerator.EnvelopDecay.ToString(providerDecimalPoint));
@@ -94,10 +96,19 @@ namespace WaveCraft.Synth
             }
         }
 
+        public string ReadCategory(string name)
+        {
+            using (StreamReader srFile = new StreamReader(@".\presets\" + name + ".pst"))
+            {
+                return srFile.ReadLine();      // category
+            }
+        }
+
         public void Load(SynthGenerator synthGenerator, string name)
         {
             using (StreamReader srFile = new StreamReader(@".\presets\" + name + ".pst"))
             {
+                srFile.ReadLine();      // category we already know
                 synthGenerator.EnvelopAttack = float.Parse(srFile.ReadLine(), providerDecimalPoint);
                 synthGenerator.EnvelopHold = float.Parse(srFile.ReadLine(), providerDecimalPoint);
                 synthGenerator.EnvelopDecay = float.Parse(srFile.ReadLine(), providerDecimalPoint);

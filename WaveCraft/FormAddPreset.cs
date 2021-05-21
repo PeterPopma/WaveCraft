@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
+using WaveCraft.Synth;
 
 namespace WaveCraft
 {
@@ -36,12 +37,23 @@ namespace WaveCraft
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            if (textBoxPresetName.Text.Length > 0 && !myParent.comboBoxPresets.Items.Contains(textBoxPresetName.Text))
+            if (myParent.FindPresetByName(textBoxPresetName.Text)!=null)
             {
-                myParent.Preset.Save(myParent.SynthGenerator, textBoxPresetName.Text);
-                myParent.comboBoxPresets.Items.Add(textBoxPresetName.Text);
-                myParent.comboBoxPresets.SelectedIndex = myParent.comboBoxPresets.FindStringExact(textBoxPresetName.Text);
-                myParent.CurrentPreset = myParent.comboBoxPresets.Text;
+                MessageBox.Show("Preset does already exist!");
+            }
+            string category = comboBoxCategories.Text;
+            if (category.Length==0)
+            {
+                category = "[default]";
+            }
+            if (textBoxPresetName.Text.Length > 0)
+            {
+                PresetItem presetItem = new PresetItem(textBoxPresetName.Text, category);
+                myParent.Presets.Add(presetItem);
+                myParent.CurrentPreset = presetItem;
+                myParent.labelPreset.Text = presetItem.Name;
+                myParent.Preset.Save(myParent.SynthGenerator, presetItem);
+
                 textBoxPresetName.Text = "";
             }
             Close();
@@ -50,6 +62,13 @@ namespace WaveCraft
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FormAddPreset_Load(object sender, EventArgs e)
+        {
+            comboBoxCategories.Items.Clear();
+            List<string> categories = myParent.GetAllCategories();
+            comboBoxCategories.Items.AddRange(categories.ToArray());
         }
     }
 }

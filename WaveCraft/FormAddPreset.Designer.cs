@@ -33,6 +33,8 @@ namespace WaveCraft
             this.label47 = new System.Windows.Forms.Label();
             this.buttonCancel = new WaveCraft.CustomControls.GradientButton();
             this.buttonApply = new WaveCraft.CustomControls.GradientButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxCategories = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxPresetName
@@ -40,9 +42,9 @@ namespace WaveCraft
             this.textBoxPresetName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxPresetName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPresetName.ForeColor = System.Drawing.Color.White;
-            this.textBoxPresetName.Location = new System.Drawing.Point(94, 35);
+            this.textBoxPresetName.Location = new System.Drawing.Point(94, 15);
             this.textBoxPresetName.Name = "textBoxPresetName";
-            this.textBoxPresetName.Size = new System.Drawing.Size(140, 23);
+            this.textBoxPresetName.Size = new System.Drawing.Size(158, 23);
             this.textBoxPresetName.TabIndex = 52;
             // 
             // label47
@@ -51,7 +53,7 @@ namespace WaveCraft
             this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(45, 37);
+            this.label47.Location = new System.Drawing.Point(45, 17);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(43, 17);
             this.label47.TabIndex = 51;
@@ -66,7 +68,7 @@ namespace WaveCraft
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.Black;
             this.buttonCancel.HorizontalGradient = false;
-            this.buttonCancel.Location = new System.Drawing.Point(176, 98);
+            this.buttonCancel.Location = new System.Drawing.Point(176, 113);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(87, 22);
             this.buttonCancel.TabIndex = 164;
@@ -83,7 +85,7 @@ namespace WaveCraft
             this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonApply.ForeColor = System.Drawing.Color.Black;
             this.buttonApply.HorizontalGradient = false;
-            this.buttonApply.Location = new System.Drawing.Point(49, 98);
+            this.buttonApply.Location = new System.Drawing.Point(49, 113);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(87, 22);
             this.buttonApply.TabIndex = 163;
@@ -91,9 +93,36 @@ namespace WaveCraft
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(26, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 17);
+            this.label1.TabIndex = 165;
+            this.label1.Text = "category";
+            // 
+            // comboBoxCategories
+            // 
+            this.comboBoxCategories.BackColor = System.Drawing.Color.DimGray;
+            this.comboBoxCategories.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxCategories.ForeColor = System.Drawing.Color.White;
+            this.comboBoxCategories.FormattingEnabled = true;
+            this.comboBoxCategories.Location = new System.Drawing.Point(94, 49);
+            this.comboBoxCategories.Name = "comboBoxCategories";
+            this.comboBoxCategories.Size = new System.Drawing.Size(158, 24);
+            this.comboBoxCategories.Sorted = true;
+            this.comboBoxCategories.TabIndex = 167;
+            this.comboBoxCategories.TabStop = false;
+            // 
             // FormAddPreset
             // 
-            this.ClientSize = new System.Drawing.Size(320, 141);
+            this.ClientSize = new System.Drawing.Size(320, 157);
+            this.Controls.Add(this.comboBoxCategories);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.textBoxPresetName);
@@ -106,6 +135,7 @@ namespace WaveCraft
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Preset";
+            this.Load += new System.EventHandler(this.FormAddPreset_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +147,7 @@ namespace WaveCraft
         private System.Windows.Forms.Label label47;
         private CustomControls.GradientButton buttonCancel;
         private CustomControls.GradientButton buttonApply;
+        private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.ComboBox comboBoxCategories;
     }
 }

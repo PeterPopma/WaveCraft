@@ -14,17 +14,19 @@ namespace WaveCraft
         bool generatorEnabled = false;
         bool changedPresetData = false;
         bool isPlaying = false;
-//        private int[] waveData;
+        //        private int[] waveData;
 
         Random random = new Random();
         SynthGenerator synthGenerator;
         Preset preset = new Preset();
-        string currentPreset = "";
+        List<PresetItem> presets = new List<PresetItem>();
+        PresetItem currentPreset;
 
         internal SynthGenerator SynthGenerator { get => synthGenerator; set => synthGenerator = value; }
         public bool ChangedPresetData { get => changedPresetData; set => changedPresetData = value; }
         internal Preset Preset { get => preset; set => preset = value; }
-        public string CurrentPreset { get => currentPreset; set => currentPreset = value; }
+        public PresetItem CurrentPreset { get => currentPreset; set => currentPreset = value; }
+        public List<PresetItem> Presets { get => presets; set => presets = value; }
 
         public FormMain()
         {
@@ -60,6 +62,20 @@ namespace WaveCraft
             }
         }
 
+        private void GroupBoxPaint2(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.Black,
+                                                                       Color.FromArgb(70, 77, 95),
+                                                                       0F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+            }
+        }
+
         public void UpdateWaveFormPicture()
         {
             switch (synthGenerator.CurrentWave.WaveForm)
@@ -89,6 +105,20 @@ namespace WaveCraft
                     pictureBoxWaveForm.Image = Properties.Resources.custom2;
                     break;
             }
+        }
+
+        public List<string> GetAllCategories()
+        {
+            List<string> categories = new List<string>();
+            foreach (PresetItem presetItem in Presets)
+            {
+                if (!categories.Contains(presetItem.Category))
+                {
+                    categories.Add(presetItem.Category);
+                }
+            }
+
+            return categories;
         }
         public void UpdateWaveControls()
         {
@@ -132,14 +162,14 @@ namespace WaveCraft
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-//            waveData = new int[pictureBoxCustomWave.Width];
+            //            waveData = new int[pictureBoxCustomWave.Width];
 
             groupBox1.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox1.Refresh();
 
             groupBox2.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox2.Refresh();
-            
+
             groupBox3.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox3.Refresh();
 
@@ -157,7 +187,10 @@ namespace WaveCraft
 
             groupBox8.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox8.Refresh();
-            
+
+            groupBox9.Paint += new PaintEventHandler(GroupBoxPaint2);
+            groupBox9.Refresh();
+
             synthGenerator = new SynthGenerator(this);
 
             // Init generators
@@ -187,18 +220,20 @@ namespace WaveCraft
                 {
                     if (fileName.EndsWith(".pst"))
                     {
-                        comboBoxPresets.Items.Add(fileName.Substring(8, fileName.Length - 12));
+                        string name = fileName.Substring(8, fileName.Length - 12);
+                        string category = Preset.ReadCategory(name);
+                        PresetItem presetItem = new PresetItem(name, category);
+                        presets.Add(presetItem);
+                        if (currentPreset == null)        // set first preset
+                        {
+                            currentPreset = presetItem;
+                        }
                     }
                 }
             }
             catch (System.IO.DirectoryNotFoundException)
             {
                 Directory.CreateDirectory("presets");
-            }
-            if (comboBoxPresets.Items.Count > 0)
-            {
-                comboBoxPresets.SelectedIndex = 0;
-                currentPreset = comboBoxPresets.Items[0].ToString();
             }
 
             RecreateWavesLists();
@@ -349,22 +384,9 @@ namespace WaveCraft
             synthGenerator.UpdateCurrentWaveData();
         }
 
-        private void comboBoxPresets_SelectedIndexChanged(object sender, EventArgs e)
+        public PresetItem FindPresetByName(string name)
         {
-            Cursor = Cursors.WaitCursor;
-            ChangedPresetData = false;
-            currentPreset = comboBoxPresets.Text;
-            try
-            {
-                preset.Load(synthGenerator, currentPreset);
-            } catch (Exception)
-            {
-
-            }
-            RecreateWavesLists();
-            UpdateWaveControls();
-            synthGenerator.UpdateAllWaveData();
-            Cursor = Cursors.Default;
+            return Presets.Find(x => x.Name.Equals(name));
         }
 
         private void colorSliderHold_ValueChanged(object sender, EventArgs e)
@@ -521,10 +543,10 @@ namespace WaveCraft
 
         private void buttonSavePreset2_Click(object sender, EventArgs e)
         {
-            if (currentPreset.Length > 0)
+            if (CurrentPreset!=null && CurrentPreset.Name.Length > 0)
             {
                 ChangedPresetData = false;
-                preset.Save(synthGenerator, currentPreset);
+                preset.Save(synthGenerator, CurrentPreset);
             }
         }
 
@@ -633,7 +655,7 @@ namespace WaveCraft
                 DialogResult dialogResult = MessageBox.Show("You made changes to the Preset. Do you want to save them?", "Save Changes", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    preset.Save(synthGenerator, currentPreset);
+                    preset.Save(synthGenerator, CurrentPreset);
                 }
             }
         }
@@ -694,11 +716,13 @@ namespace WaveCraft
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this Preset?", "Delete Preset", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                preset.Delete(comboBoxPresets.Text);
-                comboBoxPresets.Items.RemoveAt(comboBoxPresets.SelectedIndex);
-                if (comboBoxPresets.Items.Count > 0)
+                preset.Delete(labelPreset.Text);
+                Presets.Remove(FindPresetByName(labelPreset.Text));
+                if (Presets.Count>0)
                 {
-                    comboBoxPresets.SelectedIndex = 0;
+                    Preset.Load(synthGenerator, Presets[0].Name);
+                    synthGenerator.UpdateAllWaveData();
+                    labelPreset.Text = Presets[0].Name;
                 }
             }
         }
@@ -1415,7 +1439,7 @@ namespace WaveCraft
             }
         }
 
-        private void ChangeAllWeights()
+        private void ChangeAllWeights(bool setWeights = false)
         {
             double weightFactor = Convert.ToDouble(textBoxChangeWeightAll.Text) / 100.0;
             if (weightFactor <= 0)
@@ -1426,8 +1450,18 @@ namespace WaveCraft
                 foreach (string item in listBoxWaves.SelectedItems)
                 {
                     WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
-                    wave.MinWeight = (int)(wave.MinWeight * weightFactor);
-                    wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+
+                    if (setWeights)
+                    {
+                        wave.MinWeight = wave.MaxWeight = (int)(weightFactor * 100);
+                        Shapes.Flat(wave.ShapeWeight);
+                    }
+                    else
+                    {
+                        wave.MinWeight = (int)(wave.MinWeight * weightFactor);
+                        wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+                    }
+
                     if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
                     {
                         wave.MinWeight = SynthGenerator.MAX_WEIGHT;
@@ -1442,8 +1476,16 @@ namespace WaveCraft
             {
                 foreach (WaveInfo wave in synthGenerator.Waves)
                 {
-                    wave.MinWeight = (int)(wave.MinWeight * weightFactor);
-                    wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+                    if (setWeights)
+                    {
+                        wave.MinWeight = wave.MaxWeight = (int)(weightFactor * 100);
+                        Shapes.Flat(wave.ShapeWeight);
+                    }
+                    else
+                    {
+                        wave.MinWeight = (int)(wave.MinWeight * weightFactor);
+                        wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
+                    }
                     if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
                     {
                         wave.MinWeight = SynthGenerator.MAX_WEIGHT;
@@ -1456,7 +1498,7 @@ namespace WaveCraft
             }
         }
 
-        private void ChangeAllVolumes()
+        private void ChangeAllVolumes(bool setVolumes = false)
         {
             double volumeFactor = Convert.ToDouble(textBoxChangeVolumeAll.Text) / 100.0;
             if (volumeFactor <= 0)
@@ -1466,8 +1508,18 @@ namespace WaveCraft
                 foreach (string item in listBoxWaves.SelectedItems)
                 {
                     WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
-                    wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
-                    wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+
+                    if (setVolumes)
+                    {
+                        wave.MinVolume = wave.MaxVolume = (int)(volumeFactor * 100);
+                        Shapes.Flat(wave.ShapeVolume);
+                    }
+                    else
+                    {
+                        wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
+                        wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+                    }
+
                     if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
                     {
                         wave.MinVolume = SynthGenerator.MAX_WEIGHT;
@@ -1482,8 +1534,16 @@ namespace WaveCraft
             {
                 foreach (WaveInfo wave in synthGenerator.Waves)
                 {
-                    wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
-                    wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+                    if (setVolumes)
+                    {
+                        wave.MinVolume = wave.MaxVolume = (int)(volumeFactor * 100);
+                        Shapes.Flat(wave.ShapeVolume);
+                    }
+                    else
+                    {
+                        wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
+                        wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
+                    }
                     if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
                     {
                         wave.MinVolume = SynthGenerator.MAX_WEIGHT;
@@ -2053,6 +2113,90 @@ namespace WaveCraft
             FormBulkChangeByFrequency formBulkChange = new FormBulkChangeByFrequency();
             formBulkChange.MyParent = this;
             formBulkChange.ShowDialog();
+        }
+
+        private void buttonShapesToCurrent_Click(object sender, EventArgs e)
+        {
+            if (listBoxWaves.SelectedItems.Count > 1)
+            {
+                foreach (string item in listBoxWaves.SelectedItems)
+                {
+                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
+                    wave.WaveForm = synthGenerator.CurrentWave.WaveForm;
+                    if (wave.WaveForm.Equals("Custom") || wave.WaveForm.Equals("CustomBeginEnd"))
+                    {
+                        wave.ShapeWave = synthGenerator.CurrentWave.ShapeWave;
+                    }
+                    if (wave.WaveForm.Equals("CustomBeginEnd"))
+                    {
+                        wave.ShapeWaveEnd = synthGenerator.CurrentWave.ShapeWaveEnd;
+                    }
+                    wave.UpdateDisplayName();
+                }
+            }
+            else
+            {
+                foreach (WaveInfo wave in synthGenerator.Waves)
+                {
+                    wave.WaveForm = synthGenerator.CurrentWave.WaveForm;
+                    if (wave.WaveForm.Equals("Custom") || wave.WaveForm.Equals("CustomBeginEnd"))
+                    {
+                        wave.ShapeWave = synthGenerator.CurrentWave.ShapeWave;
+                    }
+                    if (wave.WaveForm.Equals("CustomBeginEnd"))
+                    {
+                        wave.ShapeWaveEnd = synthGenerator.CurrentWave.ShapeWaveEnd;
+                    }
+                    wave.UpdateDisplayName();
+                }
+            }
+            synthGenerator.UpdateAllWaveData();
+            UpdateWaveControls();
+        }
+
+        private void labelPreset_Click(object sender, EventArgs e)
+        {
+            if(presets==null || presets.Count==0)
+            {
+                return;         // no presets to select
+            }
+            FormPreset formPreset = new FormPreset();
+            formPreset.MyParent = this;
+            formPreset.Location = new Point(this.Location.X + 200, this.Location.Y + 50);
+            formPreset.ShowDialog();
+        }
+
+        private void labelPreset_MouseMove(object sender, MouseEventArgs e)
+        {
+            labelPreset.Cursor = Cursors.Hand;
+        }
+
+        private void buttonSetAllWeights_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChangeAllWeights(true);
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
+        }
+
+        private void buttonSetAllVolumes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChangeAllVolumes(true);
+                synthGenerator.UpdateAllWaveData();
+                UpdateWaveControls();
+            }
+            catch (System.FormatException)
+            {
+
+            }
         }
     }
 }

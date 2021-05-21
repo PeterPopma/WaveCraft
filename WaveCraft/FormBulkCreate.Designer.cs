@@ -546,6 +546,7 @@ namespace WaveCraft
             this.Name = "FormBulkCreate";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Create multiple waves";
             this.Load += new System.EventHandler(this.FormBulkCreate_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).EndInit();
             this.ResumeLayout(false);
