@@ -92,6 +92,20 @@ namespace WaveCraft
             }
         }
 
+        private void GroupBoxPaint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.Black,
+                                                                       Color.FromArgb(70, 77, 95),
+                                                                       90F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+            }
+        }
+
         private void buttonApply_Click(object sender, EventArgs e)
         {
 
@@ -169,8 +183,6 @@ namespace WaveCraft
             // change the phase graph, so that it matches the desired pattern
             for (int position = 0; position < wave.ShapePhase.Length; position++)
             {
-                int position_in_wavedata = (wave.NumSamples() * position / wave.ShapeWeight.Length);
-                int desired_pattern_position = SHAPE_NUM_POINTS * (wave.StartPosition + position_in_wavedata) / myParent.SynthGenerator.NumSamples();
                 int phase = wave.ShapePhase[position];
                 phase = (int)((phase + (factor*SynthGenerator.SHAPE_MAX_VALUE)) % SynthGenerator.SHAPE_MAX_VALUE);
                 wave.ShapePhase[position] = phase;
@@ -273,6 +285,18 @@ namespace WaveCraft
 
         private void FormBulkChangeByFrequency_Load(object sender, EventArgs e)
         {
+            groupBox1.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox1.Refresh();
+
+            groupBox2.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox2.Refresh();
+
+            groupBox3.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox3.Refresh();
+
+            groupBox4.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox4.Refresh();
+
             for (int i = 0; i < waveData.Length; i++)
             {
                 waveData[i] = 250;
@@ -281,8 +305,8 @@ namespace WaveCraft
             maxFrequency = myParent.SynthGenerator.FindMaxFrequency();
             textBoxFrequency1.Text = minFrequency.ToString();
             textBoxFrequency2.Text = maxFrequency.ToString();
-            textBoxChange1.Text = labelChangeMin.Text = "1.000";
-            textBoxChange2.Text = labelChangeMax.Text = "1.500";
+            textBoxValue1.Text = labelChangeMin.Text = "1.000";
+            textBoxValue2.Text = labelChangeMax.Text = "1.500";
             UpdateFrequencyLabels();
 
             pictureBoxFrequencyShape.Paint += new PaintEventHandler(PictureBoxPaint);
@@ -344,10 +368,10 @@ namespace WaveCraft
         {
             try
             {
-                double change = Convert.ToDouble(textBoxChange1.Text);
+                double change = Convert.ToDouble(textBoxValue1.Text);
                 if (change>0 && change<=1000)
                 {
-                    if (change<Convert.ToDouble(textBoxChange2.Text))
+                    if (change<Convert.ToDouble(textBoxValue2.Text))
                     {
                         labelChangeMin.Text = change.ToString("0.000");
                     }
@@ -468,10 +492,10 @@ namespace WaveCraft
         {
             try
             {
-                double change = Convert.ToDouble(textBoxChange2.Text);
+                double change = Convert.ToDouble(textBoxValue2.Text);
                 if (change > 0 && change <= 1000)
                 {
-                    if (change < Convert.ToDouble(textBoxChange1.Text))
+                    if (change < Convert.ToDouble(textBoxValue1.Text))
                     {
                         labelChangeMin.Text = change.ToString("0.000");
                     }

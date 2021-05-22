@@ -227,6 +227,8 @@ namespace WaveCraft
                         if (currentPreset == null)        // set first preset
                         {
                             currentPreset = presetItem;
+                            labelPreset.Text = name;
+                            Preset.Load(SynthGenerator, name);
                         }
                     }
                 }
@@ -1439,123 +1441,6 @@ namespace WaveCraft
             }
         }
 
-        private void ChangeAllWeights(bool setWeights = false)
-        {
-            double weightFactor = Convert.ToDouble(textBoxChangeWeightAll.Text) / 100.0;
-            if (weightFactor <= 0)
-                return;
-
-            if (listBoxWaves.SelectedItems.Count > 1)
-            {
-                foreach (string item in listBoxWaves.SelectedItems)
-                {
-                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
-
-                    if (setWeights)
-                    {
-                        wave.MinWeight = wave.MaxWeight = (int)(weightFactor * 100);
-                        Shapes.Flat(wave.ShapeWeight);
-                    }
-                    else
-                    {
-                        wave.MinWeight = (int)(wave.MinWeight * weightFactor);
-                        wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
-                    }
-
-                    if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MinWeight = SynthGenerator.MAX_WEIGHT;
-                    }
-                    if (wave.MaxWeight > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MaxWeight = SynthGenerator.MAX_WEIGHT;
-                    }
-                }
-            }
-            else
-            {
-                foreach (WaveInfo wave in synthGenerator.Waves)
-                {
-                    if (setWeights)
-                    {
-                        wave.MinWeight = wave.MaxWeight = (int)(weightFactor * 100);
-                        Shapes.Flat(wave.ShapeWeight);
-                    }
-                    else
-                    {
-                        wave.MinWeight = (int)(wave.MinWeight * weightFactor);
-                        wave.MaxWeight = (int)(wave.MaxWeight * weightFactor);
-                    }
-                    if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MinWeight = SynthGenerator.MAX_WEIGHT;
-                    }
-                    if (wave.MaxWeight > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MaxWeight = SynthGenerator.MAX_WEIGHT;
-                    }
-                }
-            }
-        }
-
-        private void ChangeAllVolumes(bool setVolumes = false)
-        {
-            double volumeFactor = Convert.ToDouble(textBoxChangeVolumeAll.Text) / 100.0;
-            if (volumeFactor <= 0)
-                return;
-            if (listBoxWaves.SelectedItems.Count > 1)
-            {
-                foreach (string item in listBoxWaves.SelectedItems)
-                {
-                    WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
-
-                    if (setVolumes)
-                    {
-                        wave.MinVolume = wave.MaxVolume = (int)(volumeFactor * 100);
-                        Shapes.Flat(wave.ShapeVolume);
-                    }
-                    else
-                    {
-                        wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
-                        wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
-                    }
-
-                    if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MinVolume = SynthGenerator.MAX_WEIGHT;
-                    }
-                    if (wave.MaxVolume > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MaxVolume = SynthGenerator.MAX_WEIGHT;
-                    }
-                }
-            }
-            else
-            {
-                foreach (WaveInfo wave in synthGenerator.Waves)
-                {
-                    if (setVolumes)
-                    {
-                        wave.MinVolume = wave.MaxVolume = (int)(volumeFactor * 100);
-                        Shapes.Flat(wave.ShapeVolume);
-                    }
-                    else
-                    {
-                        wave.MinVolume = (int)(wave.MinVolume * volumeFactor);
-                        wave.MaxVolume = (int)(wave.MaxVolume * volumeFactor);
-                    }
-                    if (wave.MinVolume > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MinVolume = SynthGenerator.MAX_WEIGHT;
-                    }
-                    if (wave.MaxVolume > SynthGenerator.MAX_WEIGHT)
-                    {
-                        wave.MaxVolume = SynthGenerator.MAX_WEIGHT;
-                    }
-                }
-            }
-        }
-
         private void buttonSetAllDurations_Click(object sender, EventArgs e)
         {
             try
@@ -2038,34 +1923,6 @@ namespace WaveCraft
             formBulkCreate.ShowDialog();
         }
 
-        private void buttonChangeAllWeights_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ChangeAllWeights();
-                synthGenerator.UpdateAllWaveData();
-                UpdateWaveControls();
-            }
-            catch (System.FormatException)
-            {
-
-            }
-        }
-
-        private void buttonChangeAllVolumes_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ChangeAllVolumes();
-                synthGenerator.UpdateAllWaveData();
-                UpdateWaveControls();
-            }
-            catch (System.FormatException)
-            {
-
-            }
-        }
-
         private void pictureBoxPhaseShape_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxPhaseShape.Cursor = new Cursor(Properties.Resources.pencil.Handle);
@@ -2171,32 +2028,5 @@ namespace WaveCraft
             labelPreset.Cursor = Cursors.Hand;
         }
 
-        private void buttonSetAllWeights_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ChangeAllWeights(true);
-                synthGenerator.UpdateAllWaveData();
-                UpdateWaveControls();
-            }
-            catch (System.FormatException)
-            {
-
-            }
-        }
-
-        private void buttonSetAllVolumes_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ChangeAllVolumes(true);
-                synthGenerator.UpdateAllWaveData();
-                UpdateWaveControls();
-            }
-            catch (System.FormatException)
-            {
-
-            }
-        }
     }
 }

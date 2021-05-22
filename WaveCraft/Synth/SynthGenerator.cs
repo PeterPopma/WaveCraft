@@ -19,6 +19,7 @@ namespace WaveCraft.Synth
         public const int MAX_VOLUME = 1000;
         public const int MAX_WEIGHT = 1000;
         public const double MAX_PHASE = Math.PI * 2;
+        public const int MIN_FREQUENCY = 20;
         public const int MAX_FREQUENCY = 22387;
         public const int MAX_AMPLITUDE = 32767;     // Max amplitude for 16-bit audio
         private const int GRAPH_POINTS_PLOTTED = 300;

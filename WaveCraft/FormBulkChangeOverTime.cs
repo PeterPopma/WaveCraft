@@ -22,6 +22,7 @@ namespace WaveCraft
         Timer aTimer = new Timer();
         int AdjustDataWidth = 0;
         Random random = new Random();
+        double value1, value2;
 
         public FormBulkChangeOverTime()
         {
@@ -44,6 +45,20 @@ namespace WaveCraft
                                                                        90F))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+
+        private void GroupBoxPaint(object sender, PaintEventArgs e)
+        {
+            Control control = (Control)sender;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(control.ClientRectangle,
+                                                                       Color.Black,
+                                                                       Color.FromArgb(70, 77, 95),
+                                                                       90F))
+            {
+                e.Graphics.FillRectangle(brush, control.ClientRectangle);
+                ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
             }
         }
 
@@ -75,19 +90,47 @@ namespace WaveCraft
 
             if (radioButtonChangeFrequency.Checked)
             {
-                AdjustWaveFrequency(wave, MinChange, MaxChange);
+                if (radioButtonSetValue.Checked)
+                {
+                    SetWaveFrequency(wave, MinChange, MaxChange);
+                }
+                else
+                {
+                    AdjustWaveFrequency(wave, MinChange, MaxChange);
+                }
             }
             else if (radioButtonChangeVolume.Checked)
             {
-                AdjustWaveVolume(wave, MinChange, MaxChange);
+                if (radioButtonSetValue.Checked)
+                {
+                    SetWaveVolume(wave, MinChange, MaxChange);
+                }
+                else
+                {
+                    AdjustWaveVolume(wave, MinChange, MaxChange);
+                }
             }
             else if (radioButtonChangeWeight.Checked)
             {
-                AdjustWaveWeight(wave, MinChange, MaxChange);
+                if (radioButtonSetValue.Checked)
+                {
+                    SetWaveWeight(wave, MinChange, MaxChange);
+                }
+                else
+                {
+                    AdjustWaveWeight(wave, MinChange, MaxChange);
+                }
             }
             else
             {
-                AdjustWavePhase(wave, MinChange, MaxChange);
+                if (radioButtonSetValue.Checked)
+                {
+                    SetWavePhase(wave);
+                }
+                else
+                {
+                    AdjustWavePhase(wave, MinChange, MaxChange);
+                }
             }
         }
 
@@ -120,11 +163,19 @@ namespace WaveCraft
         private void AdjustWaveFrequency(WaveInfo wave, double MinChange, double MaxChange)
         {
             double new_min = wave.MinFrequency * MinChange;
+            double new_max = wave.MaxFrequency * MaxChange;
+            if (new_min < SynthGenerator.MIN_FREQUENCY)
+            {
+                new_min = SynthGenerator.MIN_FREQUENCY;
+            }
+            if (new_max < SynthGenerator.MIN_FREQUENCY)
+            {
+                new_max = SynthGenerator.MIN_FREQUENCY;
+            }
             if (new_min > SynthGenerator.MAX_FREQUENCY)
             {
                 new_min = SynthGenerator.MAX_FREQUENCY;
             }
-            double new_max = wave.MaxFrequency * MaxChange;
             if (new_max > SynthGenerator.MAX_FREQUENCY)
             {
                 new_max = SynthGenerator.MAX_FREQUENCY;
@@ -143,14 +194,50 @@ namespace WaveCraft
             wave.MaxFrequency = new_max;
         }
 
+        private void SetWaveFrequency(WaveInfo wave, double MinValue, double MaxValue)
+        {
+            wave.MinFrequency = MinValue;
+            wave.MaxFrequency = MaxValue;
+            if (wave.MinFrequency < SynthGenerator.MIN_FREQUENCY)
+            {
+                wave.MinFrequency = SynthGenerator.MIN_FREQUENCY;
+            }
+            if (wave.MaxFrequency < SynthGenerator.MIN_FREQUENCY)
+            {
+                wave.MaxFrequency = SynthGenerator.MIN_FREQUENCY;
+            }
+            if (wave.MinFrequency > SynthGenerator.MAX_FREQUENCY)
+            {
+                wave.MinFrequency = SynthGenerator.MAX_FREQUENCY;
+            }
+            if (wave.MaxFrequency > SynthGenerator.MAX_FREQUENCY)
+            {
+                wave.MaxFrequency = SynthGenerator.MAX_FREQUENCY;
+            }
+
+            // copy the shape
+            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
+            {
+                wave.ShapeFrequency[position] = SynthGenerator.SHAPE_MAX_VALUE - waveData[position];
+            }
+        }
+
         private void AdjustWaveVolume(WaveInfo wave, double MinChange, double MaxChange)
         {
             int new_min = (int)(wave.MinVolume * MinChange);
+            int new_max = (int)(wave.MaxVolume * MaxChange);
+            if (new_min < 0)
+            {
+                new_min = 0;
+            }
+            if (new_max < 0)
+            {
+                new_max = 0;
+            }
             if (new_min > SynthGenerator.MAX_VOLUME)
             {
                 new_min = SynthGenerator.MAX_VOLUME;
             }
-            int new_max = (int)(wave.MaxVolume * MaxChange);
             if (new_max > SynthGenerator.MAX_VOLUME)
             {
                 new_max = SynthGenerator.MAX_VOLUME;
@@ -169,14 +256,50 @@ namespace WaveCraft
             wave.MaxVolume = new_max;
         }
 
+        private void SetWaveVolume(WaveInfo wave, double MinValue, double MaxValue)
+        {
+            wave.MinVolume = (int)MinValue;
+            wave.MaxVolume = (int)MaxValue;
+            if (wave.MinVolume < 0)
+            {
+                wave.MinVolume = 0;
+            }
+            if (wave.MaxVolume < 0)
+            {
+                wave.MaxVolume = 0;
+            }
+            if (wave.MinVolume > SynthGenerator.MAX_VOLUME)
+            {
+                wave.MinVolume = SynthGenerator.MAX_VOLUME;
+            }
+            if (wave.MaxVolume > SynthGenerator.MAX_VOLUME)
+            {
+                wave.MaxVolume = SynthGenerator.MAX_VOLUME;
+            }
+
+            // copy the shape
+            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
+            {
+                wave.ShapeVolume[position] = SynthGenerator.SHAPE_MAX_VALUE - waveData[position];
+            }
+        }
+
         private void AdjustWaveWeight(WaveInfo wave, double MinChange, double MaxChange)
         {
             int new_min = (int)(wave.MinWeight * MinChange);
+            int new_max = (int)(wave.MaxWeight * MaxChange);
+            if (new_min < 0)
+            {
+                new_min = 0;
+            }
+            if (new_max < 0)
+            {
+                new_max = 0;
+            }
             if (new_min > SynthGenerator.MAX_WEIGHT)
             {
                 new_min = SynthGenerator.MAX_WEIGHT;
             }
-            int new_max = (int)(wave.MaxWeight * MaxChange);
             if (new_max > SynthGenerator.MAX_WEIGHT)
             {
                 new_max = SynthGenerator.MAX_WEIGHT;
@@ -195,6 +318,34 @@ namespace WaveCraft
             wave.MaxWeight = new_max;
         }
 
+        private void SetWaveWeight(WaveInfo wave, double MinValue, double MaxValue)
+        {
+            wave.MinWeight = (int)MinValue;
+            wave.MaxWeight = (int)MaxValue;
+            if (wave.MinWeight < 0)
+            {
+                wave.MinWeight = 0;
+            }
+            if (wave.MaxWeight < 0)
+            {
+                wave.MaxWeight = 0;
+            }
+            if (wave.MinWeight > SynthGenerator.MAX_WEIGHT)
+            {
+                wave.MinWeight = SynthGenerator.MAX_WEIGHT;
+            }
+            if (wave.MaxWeight > SynthGenerator.MAX_WEIGHT)
+            {
+                wave.MaxWeight = SynthGenerator.MAX_WEIGHT;
+            }
+
+            // copy the shape
+            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
+            {
+                wave.ShapeWeight[position] = SynthGenerator.SHAPE_MAX_VALUE - waveData[position];
+            }
+        }
+
         private void AdjustWavePhase(WaveInfo wave, double MinChange, double MaxChange)
         {
             // change the phase graph, so that it matches the desired pattern
@@ -206,6 +357,15 @@ namespace WaveCraft
                 int phase = wave.ShapePhase[position];
                 phase = (int)((phase + (factor*SynthGenerator.SHAPE_MAX_VALUE)) % SynthGenerator.SHAPE_MAX_VALUE);
                 wave.ShapePhase[position] = phase;
+            }
+        }
+
+        private void SetWavePhase(WaveInfo wave)
+        {
+            // copy the shape
+            for (int position = 0; position < wave.ShapeFrequency.Length; position++)
+            {
+                wave.ShapeWeight[position] = SynthGenerator.SHAPE_MAX_VALUE - waveData[position];
             }
         }
 
@@ -305,13 +465,24 @@ namespace WaveCraft
 
         private void FormFrequency_Load(object sender, EventArgs e)
         {
+            groupBox1.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox1.Refresh();
+
+            groupBox2.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox2.Refresh();
+
+            groupBox3.Paint += new PaintEventHandler(GroupBoxPaint);
+            groupBox3.Refresh();
+
             for (int i = 0; i < waveData.Length; i++)
             {
                 waveData[i] = 250;
             }
 
-            textBoxChange1.Text = labelChangeMin.Text = "1.000";
-            textBoxChange2.Text = labelChangeMax.Text = "1.500";
+            value1 = 1;
+            value2 = 1.5;
+            textBoxValue1.Text = labelChangeMin.Text = value1.ToString("0.000");
+            textBoxValue2.Text = labelChangeMax.Text = value2.ToString("0.000");
 
             pictureBoxFrequencyShape.Paint += new PaintEventHandler(PictureBoxPaint);
             pictureBoxFrequencyShape.Refresh();
@@ -368,26 +539,33 @@ namespace WaveCraft
             }
         }
 
-
-        private void textBoxFrequency1_KeyUp(object sender, KeyEventArgs e)
+        private void textBoxValue1_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
-                double change = Convert.ToDouble(textBoxChange1.Text);
-                if (change>0 && change<=1000)
+                double change = Convert.ToDouble(textBoxValue1.Text);
+                if (change>0 && change<=SynthGenerator.MAX_FREQUENCY)
                 {
-                    if (change<Convert.ToDouble(textBoxChange2.Text))
-                    {
-                        labelChangeMin.Text = change.ToString("0.000");
-                    }
-                    else
-                    {
-                        labelChangeMax.Text = change.ToString("0.000");
-                    }
+                    value1 = change;
+                    UpdateMinMaxLabels();
                 }
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void UpdateMinMaxLabels()
+        {
+            if (value1 > value2)
+            {
+                labelChangeMin.Text = value2.ToString("0.000");
+                labelChangeMax.Text = value1.ToString("0.000");
+            }
+            else
+            {
+                labelChangeMin.Text = value1.ToString("0.000");
+                labelChangeMax.Text = value2.ToString("0.000");
             }
         }
 
@@ -567,25 +745,44 @@ namespace WaveCraft
             Refresh();
         }
 
-        private void textBoxChange2_KeyUp(object sender, KeyEventArgs e)
+        private void textBoxValue2_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
-                double change = Convert.ToDouble(textBoxChange2.Text);
-                if (change > 0 && change <= 1000)
+                double change = Convert.ToDouble(textBoxValue2.Text);
+                if (change > 0 && change <= SynthGenerator.MAX_FREQUENCY)
                 {
-                    if (change < Convert.ToDouble(textBoxChange1.Text))
-                    {
-                        labelChangeMin.Text = change.ToString("0.000");
-                    }
-                    else
-                    {
-                        labelChangeMax.Text = change.ToString("0.000");
-                    }
+                    value2 = change;
+                    UpdateMinMaxLabels();
                 }
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void radioButtonChangeValue_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxValue1.Text = labelChangeMin.Text = "1.000";
+            textBoxValue2.Text = labelChangeMax.Text = "1.500";
+        }
+
+        private void radioButtonSetValue_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButtonChangeFrequency.Checked)
+            {
+                textBoxValue1.Text = labelChangeMin.Text = "20";
+                textBoxValue2.Text = labelChangeMax.Text = "20000";
+            }
+            else if(radioButtonChangePhase.Checked)
+            {
+                textBoxValue1.Text = labelChangeMin.Text = "0";
+                textBoxValue2.Text = labelChangeMax.Text = (2 * Math.PI).ToString("##.###");
+            }
+            else
+            {
+                textBoxValue1.Text = labelChangeMin.Text = "0";
+                textBoxValue2.Text = labelChangeMax.Text = "1000";
             }
         }
     }
