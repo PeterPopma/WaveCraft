@@ -24,7 +24,7 @@ namespace WaveCraft
         public FormBulkCreate()
         {
             InitializeComponent();
-            aTimer.Interval = 50;
+            aTimer.Interval = 100;
             aTimer.Tick += new EventHandler(TimerEventProcessor);
         }
 

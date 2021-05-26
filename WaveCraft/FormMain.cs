@@ -191,6 +191,8 @@ namespace WaveCraft
             groupBox9.Paint += new PaintEventHandler(GroupBoxPaint2);
             groupBox9.Refresh();
 
+            comboBoxCopyType.SelectedIndex = 0;
+
             synthGenerator = new SynthGenerator(this);
 
             // Init generators
@@ -1255,7 +1257,7 @@ namespace WaveCraft
 
         private void UpdateSelectedWave()
         {
-            if (listBoxWaves.SelectedItem != null && generatorEnabled)
+            if (listBoxWaves.SelectedItem != null && listBoxWaves.SelectedItems.Count<2 && generatorEnabled)
             {
                 synthGenerator.SetCurrentWaveByDisplayName(listBoxWaves.SelectedItem.ToString());
                 synthGenerator.UpdateWaveGraph();
@@ -1672,14 +1674,14 @@ namespace WaveCraft
         {
             int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
 
-            int rand = random.Next(16);
+            int rand = random.Next(18);
             switch (rand)
             {
                 case 0:
-                case 15:
-                case 12:
                 case 14:
-                case 13:
+                case 15:
+                case 16:
+                case 17:
                     Shapes.Flat(WaveData);
                     break;
                 case 1:
@@ -1714,6 +1716,12 @@ namespace WaveCraft
                     break;
                 case 11:
                     Shapes.Spikes(WaveData);
+                    break;
+                case 12:
+                    Shapes.Sines(WaveData, random.Next(20) + 1, true);
+                    break;
+                case 13:
+                    Shapes.Sines(WaveData, random.Next(20) + 1, false, true);
                     break;
             }
 
@@ -1979,15 +1987,7 @@ namespace WaveCraft
                 foreach (string item in listBoxWaves.SelectedItems)
                 {
                     WaveInfo wave = synthGenerator.GetCurrentWaveByDisplayName(item);
-                    wave.WaveForm = synthGenerator.CurrentWave.WaveForm;
-                    if (wave.WaveForm.Equals("Custom") || wave.WaveForm.Equals("CustomBeginEnd"))
-                    {
-                        wave.ShapeWave = synthGenerator.CurrentWave.ShapeWave;
-                    }
-                    if (wave.WaveForm.Equals("CustomBeginEnd"))
-                    {
-                        wave.ShapeWaveEnd = synthGenerator.CurrentWave.ShapeWaveEnd;
-                    }
+                    CopyWaveProperty(wave);
                     wave.UpdateDisplayName();
                 }
             }
@@ -1995,20 +1995,73 @@ namespace WaveCraft
             {
                 foreach (WaveInfo wave in synthGenerator.Waves)
                 {
-                    wave.WaveForm = synthGenerator.CurrentWave.WaveForm;
-                    if (wave.WaveForm.Equals("Custom") || wave.WaveForm.Equals("CustomBeginEnd"))
-                    {
-                        wave.ShapeWave = synthGenerator.CurrentWave.ShapeWave;
-                    }
-                    if (wave.WaveForm.Equals("CustomBeginEnd"))
-                    {
-                        wave.ShapeWaveEnd = synthGenerator.CurrentWave.ShapeWaveEnd;
-                    }
+                    CopyWaveProperty(wave);
                     wave.UpdateDisplayName();
                 }
             }
             synthGenerator.UpdateAllWaveData();
             UpdateWaveControls();
+        }
+
+        private void CopyWaveProperty(WaveInfo waveInfo)
+        {
+            switch(comboBoxCopyType.Text)
+            {
+                case "Shape":
+                    CopyWaveForm(waveInfo);
+                    break;
+                case "Frequency":
+                    CopyWaveFrequency(waveInfo);
+                    break;
+                case "Volume":
+                    CopyWaveVolume(waveInfo);
+                    break;
+                case "Weight":
+                    CopyWaveWeight(waveInfo);
+                    break;
+                case "Phase":
+                    CopyWavePhase(waveInfo);
+                    break;
+            }
+        }
+
+        private void CopyWaveForm(WaveInfo waveInfo)
+        {
+            waveInfo.WaveForm = synthGenerator.CurrentWave.WaveForm;
+            if (waveInfo.WaveForm.Equals("Custom") || waveInfo.WaveForm.Equals("CustomBeginEnd"))
+            {
+                waveInfo.ShapeWave = synthGenerator.CurrentWave.ShapeWave;
+            }
+            if (waveInfo.WaveForm.Equals("CustomBeginEnd"))
+            {
+                waveInfo.ShapeWaveEnd = synthGenerator.CurrentWave.ShapeWaveEnd;
+            }
+        }
+
+        private void CopyWaveFrequency(WaveInfo waveInfo)
+        {
+            waveInfo.ShapeFrequency = synthGenerator.CurrentWave.ShapeFrequency;
+            waveInfo.MinFrequency = synthGenerator.CurrentWave.MinFrequency;
+            waveInfo.MaxFrequency = synthGenerator.CurrentWave.MaxFrequency;
+        }
+
+        private void CopyWaveVolume(WaveInfo waveInfo)
+        {
+            waveInfo.ShapeVolume = synthGenerator.CurrentWave.ShapeVolume;
+            waveInfo.MinVolume = synthGenerator.CurrentWave.MinVolume;
+            waveInfo.MaxVolume = synthGenerator.CurrentWave.MaxVolume;
+        }
+
+        private void CopyWaveWeight(WaveInfo waveInfo)
+        {
+            waveInfo.ShapeWeight = synthGenerator.CurrentWave.ShapeWeight;
+            waveInfo.MinWeight = synthGenerator.CurrentWave.MinWeight;
+            waveInfo.MaxWeight = synthGenerator.CurrentWave.MaxWeight;
+        }
+
+        private void CopyWavePhase(WaveInfo waveInfo)
+        {
+            waveInfo.ShapePhase = synthGenerator.CurrentWave.ShapePhase;
         }
 
         private void labelPreset_Click(object sender, EventArgs e)

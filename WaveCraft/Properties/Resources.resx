@@ -142,6 +142,12 @@
   <data name="decsine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\decsine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="fadeinsine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\fadeinsine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fadeoutsine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\fadeoutsine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

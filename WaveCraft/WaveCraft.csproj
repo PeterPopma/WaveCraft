@@ -30,7 +30,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -83,6 +83,9 @@
     </Compile>
     <Compile Include="Custom Controls\ColorSlider2.Designer.cs">
       <DependentUpon>ColorSlider2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\GradientButton2.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Custom Controls\GradientButton.cs">
       <SubType>Component</SubType>
@@ -309,6 +312,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\pencil.ico" />
+    <None Include="Images\fadeinsine.png" />
+    <None Include="Images\fadeoutsine.png" />
     <None Include="Images\custom2.png" />
     <None Include="Images\luckypick.png" />
     <None Include="Images\decinc.png" />

@@ -22,7 +22,7 @@ namespace WaveCraft
         public FormFrequency()
         {
             InitializeComponent();
-            aTimer.Interval = 50;
+            aTimer.Interval = 100;
             aTimer.Tick += new EventHandler(TimerEventProcessor);
         }
 
@@ -475,6 +475,34 @@ namespace WaveCraft
         private void pictureBox11_Click(object sender, EventArgs e)
         {
             Shapes.RandomWaves(WaveData);
+            Refresh();
+        }
+
+        private void pictureBoxFadeInSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(WaveData, Convert.ToInt32(textBoxFadeInSines.Text), true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
+            Refresh();
+        }
+
+        private void pictureBoxFadeOutSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(WaveData, Convert.ToInt32(textBoxFadeOutSines.Text), false, true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
             Refresh();
         }
     }

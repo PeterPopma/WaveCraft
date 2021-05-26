@@ -32,7 +32,6 @@ namespace WaveCraft
         private void InitializeComponent()
         {
             this.pictureBoxFrequencyShape = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.labelChangeMin = new System.Windows.Forms.Label();
             this.labelChangeMax = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -57,11 +56,13 @@ namespace WaveCraft
             this.radioButtonChangeFrequency = new System.Windows.Forms.RadioButton();
             this.radioButtonChangeWeight = new System.Windows.Forms.RadioButton();
             this.radioButtonChangePhase = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButtonSetValue = new System.Windows.Forms.RadioButton();
-            this.radioButtonChangeValue = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxFadeOutSines = new System.Windows.Forms.TextBox();
+            this.textBoxFadeInSines = new System.Windows.Forms.TextBox();
+            this.pictureBoxFadeOutSines = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFadeInSines = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -75,9 +76,10 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxFrequencyShape
@@ -90,17 +92,6 @@ namespace WaveCraft
             this.pictureBoxFrequencyShape.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFrequencyShape_MouseDown);
             this.pictureBoxFrequencyShape.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFrequencyShape_MouseMove);
             this.pictureBoxFrequencyShape.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFrequencyShape_MouseUp);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
-            this.label1.TabIndex = 176;
-            this.label1.Text = "value2";
             // 
             // labelChangeMin
             // 
@@ -129,18 +120,18 @@ namespace WaveCraft
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(32, 14);
+            this.label11.Location = new System.Drawing.Point(20, 15);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 20);
+            this.label11.Size = new System.Drawing.Size(158, 20);
             this.label11.TabIndex = 163;
-            this.label11.Text = "value1";
+            this.label11.Text = "factor 1 (0.001-1000)";
             // 
             // textBoxValue1
             // 
             this.textBoxValue1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxValue1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxValue1.ForeColor = System.Drawing.Color.White;
-            this.textBoxValue1.Location = new System.Drawing.Point(95, 10);
+            this.textBoxValue1.Location = new System.Drawing.Point(183, 12);
             this.textBoxValue1.Name = "textBoxValue1";
             this.textBoxValue1.Size = new System.Drawing.Size(76, 26);
             this.textBoxValue1.TabIndex = 186;
@@ -151,7 +142,7 @@ namespace WaveCraft
             this.textBoxValue2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxValue2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxValue2.ForeColor = System.Drawing.Color.White;
-            this.textBoxValue2.Location = new System.Drawing.Point(95, 39);
+            this.textBoxValue2.Location = new System.Drawing.Point(183, 41);
             this.textBoxValue2.Name = "textBoxValue2";
             this.textBoxValue2.Size = new System.Drawing.Size(76, 26);
             this.textBoxValue2.TabIndex = 187;
@@ -412,53 +403,13 @@ namespace WaveCraft
             this.radioButtonChangePhase.Text = "change phase";
             this.radioButtonChangePhase.UseVisualStyleBackColor = false;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButtonSetValue);
-            this.groupBox1.Controls.Add(this.radioButtonChangeValue);
-            this.groupBox1.Location = new System.Drawing.Point(435, 519);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(280, 74);
-            this.groupBox1.TabIndex = 226;
-            this.groupBox1.TabStop = false;
-            // 
-            // radioButtonSetValue
-            // 
-            this.radioButtonSetValue.AutoSize = true;
-            this.radioButtonSetValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.radioButtonSetValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonSetValue.ForeColor = System.Drawing.Color.White;
-            this.radioButtonSetValue.Location = new System.Drawing.Point(20, 39);
-            this.radioButtonSetValue.Name = "radioButtonSetValue";
-            this.radioButtonSetValue.Size = new System.Drawing.Size(108, 24);
-            this.radioButtonSetValue.TabIndex = 226;
-            this.radioButtonSetValue.Text = "set to value";
-            this.radioButtonSetValue.UseVisualStyleBackColor = false;
-            this.radioButtonSetValue.CheckedChanged += new System.EventHandler(this.radioButtonSetValue_CheckedChanged);
-            // 
-            // radioButtonChangeValue
-            // 
-            this.radioButtonChangeValue.AutoSize = true;
-            this.radioButtonChangeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.radioButtonChangeValue.Checked = true;
-            this.radioButtonChangeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonChangeValue.ForeColor = System.Drawing.Color.White;
-            this.radioButtonChangeValue.Location = new System.Drawing.Point(20, 13);
-            this.radioButtonChangeValue.Name = "radioButtonChangeValue";
-            this.radioButtonChangeValue.Size = new System.Drawing.Size(240, 24);
-            this.radioButtonChangeValue.TabIndex = 225;
-            this.radioButtonChangeValue.TabStop = true;
-            this.radioButtonChangeValue.Text = "change by factor (0.001-1000)";
-            this.radioButtonChangeValue.UseVisualStyleBackColor = false;
-            this.radioButtonChangeValue.CheckedChanged += new System.EventHandler(this.radioButtonChangeValue_CheckedChanged);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.radioButtonChangePhase);
             this.groupBox2.Controls.Add(this.radioButtonChangeWeight);
             this.groupBox2.Controls.Add(this.radioButtonChangeVolume);
             this.groupBox2.Controls.Add(this.radioButtonChangeFrequency);
-            this.groupBox2.Location = new System.Drawing.Point(747, 519);
+            this.groupBox2.Location = new System.Drawing.Point(633, 519);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(397, 74);
             this.groupBox2.TabIndex = 227;
@@ -466,23 +417,85 @@ namespace WaveCraft
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.textBoxValue2);
             this.groupBox3.Controls.Add(this.textBoxValue1);
-            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Location = new System.Drawing.Point(200, 519);
+            this.groupBox3.Location = new System.Drawing.Point(328, 519);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(199, 74);
+            this.groupBox3.Size = new System.Drawing.Size(265, 74);
             this.groupBox3.TabIndex = 228;
             this.groupBox3.TabStop = false;
+            // 
+            // textBoxFadeOutSines
+            // 
+            this.textBoxFadeOutSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeOutSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeOutSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeOutSines.Location = new System.Drawing.Point(134, 511);
+            this.textBoxFadeOutSines.Name = "textBoxFadeOutSines";
+            this.textBoxFadeOutSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeOutSines.TabIndex = 241;
+            this.textBoxFadeOutSines.Text = "1";
+            // 
+            // textBoxFadeInSines
+            // 
+            this.textBoxFadeInSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeInSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeInSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeInSines.Location = new System.Drawing.Point(58, 511);
+            this.textBoxFadeInSines.Name = "textBoxFadeInSines";
+            this.textBoxFadeInSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeInSines.TabIndex = 240;
+            this.textBoxFadeInSines.Text = "1";
+            // 
+            // pictureBoxFadeOutSines
+            // 
+            this.pictureBoxFadeOutSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeOutSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeOutSines.Image = global::WaveCraft.Properties.Resources.fadeoutsine;
+            this.pictureBoxFadeOutSines.InitialImage = null;
+            this.pictureBoxFadeOutSines.Location = new System.Drawing.Point(88, 464);
+            this.pictureBoxFadeOutSines.Name = "pictureBoxFadeOutSines";
+            this.pictureBoxFadeOutSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeOutSines.TabIndex = 239;
+            this.pictureBoxFadeOutSines.TabStop = false;
+            this.pictureBoxFadeOutSines.Click += new System.EventHandler(this.pictureBoxFadeOutSines_Click);
+            // 
+            // pictureBoxFadeInSines
+            // 
+            this.pictureBoxFadeInSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeInSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeInSines.Image = global::WaveCraft.Properties.Resources.fadeinsine;
+            this.pictureBoxFadeInSines.InitialImage = null;
+            this.pictureBoxFadeInSines.Location = new System.Drawing.Point(12, 464);
+            this.pictureBoxFadeInSines.Name = "pictureBoxFadeInSines";
+            this.pictureBoxFadeInSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeInSines.TabIndex = 238;
+            this.pictureBoxFadeInSines.TabStop = false;
+            this.pictureBoxFadeInSines.Click += new System.EventHandler(this.pictureBoxFadeInSines_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 20);
+            this.label1.TabIndex = 188;
+            this.label1.Text = "factor 2 (0.001-1000)";
             // 
             // FormBulkChangeOverTime
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 671);
+            this.Controls.Add(this.textBoxFadeOutSines);
+            this.Controls.Add(this.textBoxFadeInSines);
+            this.Controls.Add(this.pictureBoxFadeOutSines);
+            this.Controls.Add(this.pictureBoxFadeInSines);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
@@ -521,12 +534,12 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,7 +549,6 @@ namespace WaveCraft
         private CustomControls.GradientButton buttonCancel;
         private CustomControls.GradientButton buttonApply;
         private System.Windows.Forms.PictureBox pictureBoxFrequencyShape;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelChangeMin;
         private System.Windows.Forms.Label labelChangeMax;
         private System.Windows.Forms.Label label11;
@@ -559,10 +571,12 @@ namespace WaveCraft
         private System.Windows.Forms.RadioButton radioButtonChangeWeight;
         private System.Windows.Forms.RadioButton radioButtonChangePhase;
         private System.Windows.Forms.RadioButton radioButtonChangeVolume;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButtonSetValue;
-        private System.Windows.Forms.RadioButton radioButtonChangeValue;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBoxFadeOutSines;
+        private System.Windows.Forms.TextBox textBoxFadeInSines;
+        private System.Windows.Forms.PictureBox pictureBoxFadeOutSines;
+        private System.Windows.Forms.PictureBox pictureBoxFadeInSines;
+        private System.Windows.Forms.Label label1;
     }
 }

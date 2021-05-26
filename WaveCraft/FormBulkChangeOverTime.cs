@@ -27,7 +27,7 @@ namespace WaveCraft
         public FormBulkChangeOverTime()
         {
             InitializeComponent();
-            aTimer.Interval = 50;
+            aTimer.Interval = 100;
             aTimer.Tick += new EventHandler(TimerEventProcessor);
         }
 
@@ -90,47 +90,19 @@ namespace WaveCraft
 
             if (radioButtonChangeFrequency.Checked)
             {
-                if (radioButtonSetValue.Checked)
-                {
-                    SetWaveFrequency(wave, MinChange, MaxChange);
-                }
-                else
-                {
-                    AdjustWaveFrequency(wave, MinChange, MaxChange);
-                }
+                AdjustWaveFrequency(wave, MinChange, MaxChange);
             }
             else if (radioButtonChangeVolume.Checked)
             {
-                if (radioButtonSetValue.Checked)
-                {
-                    SetWaveVolume(wave, MinChange, MaxChange);
-                }
-                else
-                {
-                    AdjustWaveVolume(wave, MinChange, MaxChange);
-                }
+                AdjustWaveVolume(wave, MinChange, MaxChange);
             }
             else if (radioButtonChangeWeight.Checked)
             {
-                if (radioButtonSetValue.Checked)
-                {
-                    SetWaveWeight(wave, MinChange, MaxChange);
-                }
-                else
-                {
-                    AdjustWaveWeight(wave, MinChange, MaxChange);
-                }
+                AdjustWaveWeight(wave, MinChange, MaxChange);
             }
             else
             {
-                if (radioButtonSetValue.Checked)
-                {
-                    SetWavePhase(wave);
-                }
-                else
-                {
-                    AdjustWavePhase(wave, MinChange, MaxChange);
-                }
+                AdjustWavePhase(wave, MinChange, MaxChange);
             }
         }
 
@@ -360,12 +332,12 @@ namespace WaveCraft
             }
         }
 
-        private void SetWavePhase(WaveInfo wave)
+        private void SetWavePhase(WaveInfo wave, double MinValue, double MaxValue)
         {
-            // copy the shape
             for (int position = 0; position < wave.ShapeFrequency.Length; position++)
             {
-                wave.ShapeWeight[position] = SynthGenerator.SHAPE_MAX_VALUE - waveData[position];
+                double current_value = (waveData[position] * MinValue + (SynthGenerator.SHAPE_MAX_VALUE - waveData[position]) * MaxValue) / SynthGenerator.SHAPE_MAX_VALUE;
+                wave.ShapePhase[position] = (int)(current_value%(2*Math.PI) * SynthGenerator.SHAPE_MAX_VALUE / (2 * Math.PI));
             }
         }
 
@@ -465,9 +437,6 @@ namespace WaveCraft
 
         private void FormFrequency_Load(object sender, EventArgs e)
         {
-            groupBox1.Paint += new PaintEventHandler(GroupBoxPaint);
-            groupBox1.Refresh();
-
             groupBox2.Paint += new PaintEventHandler(GroupBoxPaint);
             groupBox2.Refresh();
 
@@ -544,7 +513,7 @@ namespace WaveCraft
             try
             {
                 double change = Convert.ToDouble(textBoxValue1.Text);
-                if (change>0 && change<=SynthGenerator.MAX_FREQUENCY)
+                if (change>=0 && change<=SynthGenerator.MAX_FREQUENCY)
                 {
                     value1 = change;
                     UpdateMinMaxLabels();
@@ -750,7 +719,7 @@ namespace WaveCraft
             try
             {
                 double change = Convert.ToDouble(textBoxValue2.Text);
-                if (change > 0 && change <= SynthGenerator.MAX_FREQUENCY)
+                if (change >= 0 && change <= SynthGenerator.MAX_FREQUENCY)
                 {
                     value2 = change;
                     UpdateMinMaxLabels();
@@ -765,6 +734,34 @@ namespace WaveCraft
         {
             textBoxValue1.Text = labelChangeMin.Text = "1.000";
             textBoxValue2.Text = labelChangeMax.Text = "1.500";
+        }
+
+        private void pictureBoxFadeInSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(waveData, Convert.ToInt32(textBoxFadeInSines.Text), true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
+            Refresh();
+        }
+
+        private void pictureBoxFadeOutSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(waveData, Convert.ToInt32(textBoxFadeOutSines.Text), false, true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
+            Refresh();
         }
 
         private void radioButtonSetValue_CheckedChanged(object sender, EventArgs e)

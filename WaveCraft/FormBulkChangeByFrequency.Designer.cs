@@ -502,6 +502,7 @@ namespace WaveCraft
             this.radioButtonSetValue.TabIndex = 226;
             this.radioButtonSetValue.Text = "set to value";
             this.radioButtonSetValue.UseVisualStyleBackColor = false;
+            this.radioButtonSetValue.CheckedChanged += new System.EventHandler(this.radioButtonSetValue_CheckedChanged);
             // 
             // radioButtonChangeValue
             // 
@@ -517,6 +518,7 @@ namespace WaveCraft
             this.radioButtonChangeValue.TabStop = true;
             this.radioButtonChangeValue.Text = "change by factor (0.001-1000)";
             this.radioButtonChangeValue.UseVisualStyleBackColor = false;
+            this.radioButtonChangeValue.CheckedChanged += new System.EventHandler(this.radioButtonChangeValue_CheckedChanged);
             // 
             // groupBox2
             // 

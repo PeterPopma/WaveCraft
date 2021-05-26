@@ -16,7 +16,6 @@ namespace WaveCraft
         private int[] WaveData = new int[SynthGenerator.SHAPE_NUMPOINTS];
         bool isMouseButtonDown = false;
         Point previousPoint;
-        Random random = new Random();
         Timer aTimer = new Timer();
         int AdjustDataWidth = 0;
 
@@ -24,7 +23,7 @@ namespace WaveCraft
         public FormCustomShape()
         {
             InitializeComponent();
-            aTimer.Interval = 50;
+            aTimer.Interval = 100;
             aTimer.Tick += new EventHandler(TimerEventProcessor);
         }
 

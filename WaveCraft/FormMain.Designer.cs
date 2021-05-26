@@ -157,21 +157,22 @@ namespace WaveCraft
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxDurationAll = new System.Windows.Forms.TextBox();
+            this.labelBulkEdit = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxDelayAll = new System.Windows.Forms.TextBox();
-            this.labelBulkEdit = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.buttonLuckyPick = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.comboBoxCopyType = new System.Windows.Forms.ComboBox();
             this.buttonBulkCreate = new WaveCraft.CustomControls.GradientButton();
             this.buttonBulkEditByFrequency = new WaveCraft.CustomControls.GradientButton();
-            this.buttonShapesToCurrent = new WaveCraft.CustomControls.GradientButton();
-            this.buttonSetAllDelays = new WaveCraft.CustomControls.GradientButton();
             this.buttonSetAllDurations = new WaveCraft.CustomControls.GradientButton();
+            this.buttonCopyShape = new WaveCraft.CustomControls.GradientButton();
+            this.buttonSetAllDelays = new WaveCraft.CustomControls.GradientButton();
             this.buttonBulkEditOverTime = new WaveCraft.CustomControls.GradientButton();
             this.buttonCreatePartials = new WaveCraft.CustomControls.GradientButton();
             this.listBoxWavesVault = new WaveCraft.Custom_Controls.GradientListBox();
@@ -630,6 +631,7 @@ namespace WaveCraft
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(67, 310);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 20);
@@ -1183,7 +1185,8 @@ namespace WaveCraft
             this.labelPreset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.labelPreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelPreset.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPreset.Location = new System.Drawing.Point(1, 3);
+            this.labelPreset.ForeColor = System.Drawing.Color.White;
+            this.labelPreset.Location = new System.Drawing.Point(2, 3);
             this.labelPreset.Name = "labelPreset";
             this.labelPreset.Size = new System.Drawing.Size(191, 30);
             this.labelPreset.TabIndex = 150;
@@ -1729,15 +1732,16 @@ namespace WaveCraft
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.buttonBulkEditByFrequency);
-            this.groupBox2.Controls.Add(this.buttonShapesToCurrent);
+            this.groupBox2.Controls.Add(this.comboBoxCopyType);
             this.groupBox2.Controls.Add(this.textBoxDurationAll);
-            this.groupBox2.Controls.Add(this.label26);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.textBoxDelayAll);
-            this.groupBox2.Controls.Add(this.buttonSetAllDelays);
-            this.groupBox2.Controls.Add(this.buttonSetAllDurations);
             this.groupBox2.Controls.Add(this.labelBulkEdit);
+            this.groupBox2.Controls.Add(this.buttonBulkEditByFrequency);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Controls.Add(this.buttonSetAllDurations);
+            this.groupBox2.Controls.Add(this.buttonCopyShape);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.buttonSetAllDelays);
+            this.groupBox2.Controls.Add(this.textBoxDelayAll);
             this.groupBox2.Controls.Add(this.buttonBulkEditOverTime);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(1068, 363);
@@ -1750,41 +1754,10 @@ namespace WaveCraft
             // 
             this.textBoxDurationAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxDurationAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxDurationAll.Location = new System.Drawing.Point(146, 142);
+            this.textBoxDurationAll.Location = new System.Drawing.Point(188, 130);
             this.textBoxDurationAll.Name = "textBoxDurationAll";
             this.textBoxDurationAll.Size = new System.Drawing.Size(50, 20);
             this.textBoxDurationAll.TabIndex = 152;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(83, 142);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(60, 17);
-            this.label26.TabIndex = 151;
-            this.label26.Text = "duration";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(101, 169);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 17);
-            this.label15.TabIndex = 150;
-            this.label15.Text = "delay";
-            // 
-            // textBoxDelayAll
-            // 
-            this.textBoxDelayAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBoxDelayAll.ForeColor = System.Drawing.Color.White;
-            this.textBoxDelayAll.Location = new System.Drawing.Point(146, 169);
-            this.textBoxDelayAll.Name = "textBoxDelayAll";
-            this.textBoxDelayAll.Size = new System.Drawing.Size(50, 20);
-            this.textBoxDelayAll.TabIndex = 149;
             // 
             // labelBulkEdit
             // 
@@ -1796,6 +1769,37 @@ namespace WaveCraft
             this.labelBulkEdit.Size = new System.Drawing.Size(89, 20);
             this.labelBulkEdit.TabIndex = 146;
             this.labelBulkEdit.Text = "Bulk edit all";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(125, 130);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(60, 17);
+            this.label26.TabIndex = 151;
+            this.label26.Text = "duration";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(143, 157);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 17);
+            this.label15.TabIndex = 150;
+            this.label15.Text = "delay";
+            // 
+            // textBoxDelayAll
+            // 
+            this.textBoxDelayAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxDelayAll.ForeColor = System.Drawing.Color.White;
+            this.textBoxDelayAll.Location = new System.Drawing.Point(188, 157);
+            this.textBoxDelayAll.Name = "textBoxDelayAll";
+            this.textBoxDelayAll.Size = new System.Drawing.Size(50, 20);
+            this.textBoxDelayAll.TabIndex = 149;
             // 
             // groupBox7
             // 
@@ -1865,6 +1869,21 @@ namespace WaveCraft
             this.label27.TabIndex = 149;
             this.label27.Text = "Bulk create";
             // 
+            // comboBoxCopyType
+            // 
+            this.comboBoxCopyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopyType.FormattingEnabled = true;
+            this.comboBoxCopyType.Items.AddRange(new object[] {
+            "Shape",
+            "Frequency",
+            "Volume",
+            "Weight",
+            "Phase"});
+            this.comboBoxCopyType.Location = new System.Drawing.Point(179, 93);
+            this.comboBoxCopyType.Name = "comboBoxCopyType";
+            this.comboBoxCopyType.Size = new System.Drawing.Size(122, 21);
+            this.comboBoxCopyType.TabIndex = 166;
+            // 
             // buttonBulkCreate
             // 
             this.buttonBulkCreate.Active = false;
@@ -1889,45 +1908,13 @@ namespace WaveCraft
             this.buttonBulkEditByFrequency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBulkEditByFrequency.ForeColor = System.Drawing.Color.Black;
             this.buttonBulkEditByFrequency.HorizontalGradient = false;
-            this.buttonBulkEditByFrequency.Location = new System.Drawing.Point(132, 73);
+            this.buttonBulkEditByFrequency.Location = new System.Drawing.Point(177, 56);
             this.buttonBulkEditByFrequency.Name = "buttonBulkEditByFrequency";
-            this.buttonBulkEditByFrequency.Size = new System.Drawing.Size(124, 24);
+            this.buttonBulkEditByFrequency.Size = new System.Drawing.Size(126, 24);
             this.buttonBulkEditByFrequency.TabIndex = 159;
             this.buttonBulkEditByFrequency.Text = "edit by frequency";
             this.buttonBulkEditByFrequency.UseVisualStyleBackColor = true;
             this.buttonBulkEditByFrequency.Click += new System.EventHandler(this.buttonBulkEditByFrequency_Click);
-            // 
-            // buttonShapesToCurrent
-            // 
-            this.buttonShapesToCurrent.Active = false;
-            this.buttonShapesToCurrent.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonShapesToCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonShapesToCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonShapesToCurrent.ForeColor = System.Drawing.Color.Black;
-            this.buttonShapesToCurrent.HorizontalGradient = false;
-            this.buttonShapesToCurrent.Location = new System.Drawing.Point(132, 107);
-            this.buttonShapesToCurrent.Name = "buttonShapesToCurrent";
-            this.buttonShapesToCurrent.Size = new System.Drawing.Size(124, 24);
-            this.buttonShapesToCurrent.TabIndex = 160;
-            this.buttonShapesToCurrent.Text = "set shape to current";
-            this.buttonShapesToCurrent.UseVisualStyleBackColor = true;
-            this.buttonShapesToCurrent.Click += new System.EventHandler(this.buttonShapesToCurrent_Click);
-            // 
-            // buttonSetAllDelays
-            // 
-            this.buttonSetAllDelays.Active = false;
-            this.buttonSetAllDelays.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSetAllDelays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSetAllDelays.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetAllDelays.ForeColor = System.Drawing.Color.Black;
-            this.buttonSetAllDelays.HorizontalGradient = false;
-            this.buttonSetAllDelays.Location = new System.Drawing.Point(202, 169);
-            this.buttonSetAllDelays.Name = "buttonSetAllDelays";
-            this.buttonSetAllDelays.Size = new System.Drawing.Size(54, 20);
-            this.buttonSetAllDelays.TabIndex = 148;
-            this.buttonSetAllDelays.Text = "set";
-            this.buttonSetAllDelays.UseVisualStyleBackColor = true;
-            this.buttonSetAllDelays.Click += new System.EventHandler(this.buttonSetAllDelays_Click);
             // 
             // buttonSetAllDurations
             // 
@@ -1937,13 +1924,45 @@ namespace WaveCraft
             this.buttonSetAllDurations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetAllDurations.ForeColor = System.Drawing.Color.Black;
             this.buttonSetAllDurations.HorizontalGradient = false;
-            this.buttonSetAllDurations.Location = new System.Drawing.Point(202, 142);
+            this.buttonSetAllDurations.Location = new System.Drawing.Point(244, 130);
             this.buttonSetAllDurations.Name = "buttonSetAllDurations";
             this.buttonSetAllDurations.Size = new System.Drawing.Size(54, 20);
             this.buttonSetAllDurations.TabIndex = 147;
             this.buttonSetAllDurations.Text = "set";
             this.buttonSetAllDurations.UseVisualStyleBackColor = true;
             this.buttonSetAllDurations.Click += new System.EventHandler(this.buttonSetAllDurations_Click);
+            // 
+            // buttonCopyShape
+            // 
+            this.buttonCopyShape.Active = false;
+            this.buttonCopyShape.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonCopyShape.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCopyShape.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCopyShape.ForeColor = System.Drawing.Color.Black;
+            this.buttonCopyShape.HorizontalGradient = false;
+            this.buttonCopyShape.Location = new System.Drawing.Point(88, 92);
+            this.buttonCopyShape.Name = "buttonCopyShape";
+            this.buttonCopyShape.Size = new System.Drawing.Size(78, 24);
+            this.buttonCopyShape.TabIndex = 160;
+            this.buttonCopyShape.Text = "copy current:";
+            this.buttonCopyShape.UseVisualStyleBackColor = true;
+            this.buttonCopyShape.Click += new System.EventHandler(this.buttonShapesToCurrent_Click);
+            // 
+            // buttonSetAllDelays
+            // 
+            this.buttonSetAllDelays.Active = false;
+            this.buttonSetAllDelays.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSetAllDelays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetAllDelays.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetAllDelays.ForeColor = System.Drawing.Color.Black;
+            this.buttonSetAllDelays.HorizontalGradient = false;
+            this.buttonSetAllDelays.Location = new System.Drawing.Point(244, 157);
+            this.buttonSetAllDelays.Name = "buttonSetAllDelays";
+            this.buttonSetAllDelays.Size = new System.Drawing.Size(54, 20);
+            this.buttonSetAllDelays.TabIndex = 148;
+            this.buttonSetAllDelays.Text = "set";
+            this.buttonSetAllDelays.UseVisualStyleBackColor = true;
+            this.buttonSetAllDelays.Click += new System.EventHandler(this.buttonSetAllDelays_Click);
             // 
             // buttonBulkEditOverTime
             // 
@@ -1953,11 +1972,11 @@ namespace WaveCraft
             this.buttonBulkEditOverTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBulkEditOverTime.ForeColor = System.Drawing.Color.Black;
             this.buttonBulkEditOverTime.HorizontalGradient = false;
-            this.buttonBulkEditOverTime.Location = new System.Drawing.Point(132, 40);
+            this.buttonBulkEditOverTime.Location = new System.Drawing.Point(177, 24);
             this.buttonBulkEditOverTime.Name = "buttonBulkEditOverTime";
-            this.buttonBulkEditOverTime.Size = new System.Drawing.Size(124, 24);
+            this.buttonBulkEditOverTime.Size = new System.Drawing.Size(126, 24);
             this.buttonBulkEditOverTime.TabIndex = 145;
-            this.buttonBulkEditOverTime.Text = "edit shapes";
+            this.buttonBulkEditOverTime.Text = "modify shapes";
             this.buttonBulkEditOverTime.UseVisualStyleBackColor = true;
             this.buttonBulkEditOverTime.Click += new System.EventHandler(this.buttonAdjustFrequencies_Click);
             // 
@@ -2943,10 +2962,11 @@ namespace WaveCraft
         private System.Windows.Forms.RadioButton radioButtonSpreadRandom;
         private System.Windows.Forms.RadioButton radioButtonSpreadLogaritmic;
         private CustomControls.GradientButton buttonBulkEditByFrequency;
-        private CustomControls.GradientButton buttonShapesToCurrent;
+        private CustomControls.GradientButton buttonCopyShape;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Label label14;
         internal System.Windows.Forms.Label labelPreset;
+        private System.Windows.Forms.ComboBox comboBoxCopyType;
     }
 }
 

@@ -48,7 +48,7 @@ namespace WaveCraft
 
         private void presetbutton_Click(object sender, EventArgs e)
         {
-            GradientButton myButton = (GradientButton)sender;
+            GradientButton2 myButton = (GradientButton2)sender;
             Cursor = Cursors.WaitCursor;
             myParent.ChangedPresetData = false;
             myParent.CurrentPreset = myParent.FindPresetByName(myButton.Text);
@@ -78,7 +78,7 @@ namespace WaveCraft
                 int x_offset = i%2 * (Width / 2);
                 Label label = new Label();
                 label.BackColor = Color.FromArgb(0, 0, 0, 0);
-                label.ForeColor = Color.White;
+                label.ForeColor = Color.FromArgb(192, 192, 255);
                 label.Font = new Font("Serif", 16, FontStyle.Bold);
                 label.Text = category;
                 label.Left = x + x_offset;
@@ -93,16 +93,17 @@ namespace WaveCraft
                     {
                         if (x > Width / 2 - 150)       // next row of presets
                         {
-                            y[i % 2] += 40;
+                            y[i % 2] += 30;
                             x = 20;
                         }
-                        GradientButton button = new GradientButton();
+                        GradientButton2 button = new GradientButton2();
                         button.Left = x + x_offset;
                         button.Top = y[i % 2];
                         button.Text = presetItem.Name;
-                        button.Width = 120;
+                        button.Width = 120; 
+                        button.ForeColor = Color.White;
                         button.Font = new Font("Serif", 8.25f, FontStyle.Bold);
-                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatStyle = FlatStyle.Standard;
                         button.Click += new EventHandler(presetbutton_Click);
                         Controls.Add(button);
                         x += button.Width + 8;

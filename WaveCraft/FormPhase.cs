@@ -370,5 +370,33 @@ namespace WaveCraft
             Shapes.Spikes(WaveData);
             Refresh();
         }
+
+        private void pictureBoxFadeInSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(WaveData, Convert.ToInt32(textBoxFadeInSines.Text), true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
+            Refresh();
+        }
+
+        private void pictureBoxFadeOutSines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Shapes.Sines(WaveData, Convert.ToInt32(textBoxFadeOutSines.Text), false, true);
+            }
+            catch (Exception)
+            {
+                // probably bad input from textbox; ignore
+            }
+
+            Refresh();
+        }
     }
 }

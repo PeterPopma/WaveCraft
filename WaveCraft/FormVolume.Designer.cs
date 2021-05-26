@@ -65,6 +65,10 @@ namespace WaveCraft
             this.colorSliderVolume2 = new ColorSlider.ColorSlider();
             this.colorSliderVolume1 = new ColorSlider.ColorSlider();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFadeInSines = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFadeOutSines = new System.Windows.Forms.PictureBox();
+            this.textBoxFadeInSines = new System.Windows.Forms.TextBox();
+            this.textBoxFadeOutSines = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -78,6 +82,8 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).BeginInit();
             this.SuspendLayout();
             // 
             // labelVolumeMin
@@ -640,10 +646,64 @@ namespace WaveCraft
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
             // 
+            // pictureBoxFadeInSines
+            // 
+            this.pictureBoxFadeInSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeInSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeInSines.Image = global::WaveCraft.Properties.Resources.fadeinsine;
+            this.pictureBoxFadeInSines.InitialImage = null;
+            this.pictureBoxFadeInSines.Location = new System.Drawing.Point(12, 464);
+            this.pictureBoxFadeInSines.Name = "pictureBoxFadeInSines";
+            this.pictureBoxFadeInSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeInSines.TabIndex = 234;
+            this.pictureBoxFadeInSines.TabStop = false;
+            this.pictureBoxFadeInSines.Click += new System.EventHandler(this.pictureBoxFadeInSines_Click);
+            // 
+            // pictureBoxFadeOutSines
+            // 
+            this.pictureBoxFadeOutSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeOutSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeOutSines.Image = global::WaveCraft.Properties.Resources.fadeoutsine;
+            this.pictureBoxFadeOutSines.InitialImage = null;
+            this.pictureBoxFadeOutSines.Location = new System.Drawing.Point(88, 464);
+            this.pictureBoxFadeOutSines.Name = "pictureBoxFadeOutSines";
+            this.pictureBoxFadeOutSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeOutSines.TabIndex = 235;
+            this.pictureBoxFadeOutSines.TabStop = false;
+            this.pictureBoxFadeOutSines.Click += new System.EventHandler(this.pictureBoxFadeOutSines_Click);
+            // 
+            // textBoxFadeInSines
+            // 
+            this.textBoxFadeInSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeInSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeInSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeInSines.Location = new System.Drawing.Point(58, 511);
+            this.textBoxFadeInSines.Name = "textBoxFadeInSines";
+            this.textBoxFadeInSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeInSines.TabIndex = 236;
+            this.textBoxFadeInSines.Text = "1";
+            this.textBoxFadeInSines.TextChanged += new System.EventHandler(this.textBoxFadeInSines_TextChanged);
+            // 
+            // textBoxFadeOutSines
+            // 
+            this.textBoxFadeOutSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeOutSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeOutSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeOutSines.Location = new System.Drawing.Point(134, 511);
+            this.textBoxFadeOutSines.Name = "textBoxFadeOutSines";
+            this.textBoxFadeOutSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeOutSines.TabIndex = 237;
+            this.textBoxFadeOutSines.Text = "1";
+            this.textBoxFadeOutSines.TextChanged += new System.EventHandler(this.textBoxFadeOutSines_TextChanged);
+            // 
             // FormVolume
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1254, 686);
+            this.Controls.Add(this.textBoxFadeOutSines);
+            this.Controls.Add(this.textBoxFadeInSines);
+            this.Controls.Add(this.pictureBoxFadeOutSines);
+            this.Controls.Add(this.pictureBoxFadeInSines);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.textBoxNumDecSines);
             this.Controls.Add(this.textBoxNumIncSines);
@@ -699,6 +759,8 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -740,5 +802,9 @@ namespace WaveCraft
         private System.Windows.Forms.TextBox textBoxNumIncSines;
         private System.Windows.Forms.TextBox textBoxNumDecSines;
         private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBoxFadeInSines;
+        private System.Windows.Forms.PictureBox pictureBoxFadeOutSines;
+        private System.Windows.Forms.TextBox textBoxFadeOutSines;
+        private System.Windows.Forms.TextBox textBoxFadeInSines;
     }
 }

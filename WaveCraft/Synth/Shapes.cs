@@ -57,11 +57,20 @@ namespace WaveCraft.Synth
             }
         }
 
-        public static void Sines(int[] waveData, int numSines = 1)
+        public static void Sines(int[] waveData, int numSines = 1, bool fadein=false, bool fadeout=false)
         {
             for (int i = 0; i < waveData.Length; i++)
             {
-                waveData[i] = (int)(((int)(Math.Sin(i / (double)waveData.Length * 2 * numSines * Math.PI) * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
+                double factor = 1;
+                if(fadein)
+                {
+                    factor = i / (double)(waveData.Length - 1);
+                }
+                if (fadeout)
+                {
+                    factor = (waveData.Length-i) / (double)(waveData.Length - 1);
+                }
+                waveData[i] = (int)(((int)(Math.Sin(i / (double)waveData.Length * 2 * numSines * Math.PI) * factor * SynthGenerator.SHAPE_MAX_VALUE + SynthGenerator.SHAPE_MAX_VALUE)) / 2.0);
             }
         }
 

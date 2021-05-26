@@ -65,6 +65,10 @@ namespace WaveCraft
             this.colorSliderFrequency1 = new ColorSlider.ColorSlider();
             this.textBoxNumIncSines = new System.Windows.Forms.TextBox();
             this.textBoxNumDecSines = new System.Windows.Forms.TextBox();
+            this.pictureBoxFadeOutSines = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFadeInSines = new System.Windows.Forms.PictureBox();
+            this.textBoxFadeInSines = new System.Windows.Forms.TextBox();
+            this.textBoxFadeOutSines = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFrequencyShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,6 +82,8 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxFrequencyShape
@@ -170,7 +176,7 @@ namespace WaveCraft
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = Resources.flat;
+            this.pictureBox4.Image = global::WaveCraft.Properties.Resources.flat;
             this.pictureBox4.InitialImage = null;
             this.pictureBox4.Location = new System.Drawing.Point(13, 8);
             this.pictureBox4.Name = "pictureBox4";
@@ -183,7 +189,7 @@ namespace WaveCraft
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = Resources.inc;
+            this.pictureBox1.Image = global::WaveCraft.Properties.Resources.inc;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(13, 84);
             this.pictureBox1.Name = "pictureBox1";
@@ -196,7 +202,7 @@ namespace WaveCraft
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = Resources.dec;
+            this.pictureBox2.Image = global::WaveCraft.Properties.Resources.dec;
             this.pictureBox2.InitialImage = null;
             this.pictureBox2.Location = new System.Drawing.Point(13, 160);
             this.pictureBox2.Name = "pictureBox2";
@@ -209,7 +215,7 @@ namespace WaveCraft
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = Resources.loginc;
+            this.pictureBox3.Image = global::WaveCraft.Properties.Resources.loginc;
             this.pictureBox3.InitialImage = null;
             this.pictureBox3.Location = new System.Drawing.Point(13, 236);
             this.pictureBox3.Name = "pictureBox3";
@@ -222,7 +228,7 @@ namespace WaveCraft
             // 
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox5.Image = Resources.logdec;
+            this.pictureBox5.Image = global::WaveCraft.Properties.Resources.logdec;
             this.pictureBox5.InitialImage = null;
             this.pictureBox5.Location = new System.Drawing.Point(13, 312);
             this.pictureBox5.Name = "pictureBox5";
@@ -235,7 +241,7 @@ namespace WaveCraft
             // 
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox6.Image = Resources.incdec;
+            this.pictureBox6.Image = global::WaveCraft.Properties.Resources.incdec;
             this.pictureBox6.InitialImage = null;
             this.pictureBox6.Location = new System.Drawing.Point(89, 84);
             this.pictureBox6.Name = "pictureBox6";
@@ -248,7 +254,7 @@ namespace WaveCraft
             // 
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox7.Image = Resources.decinc;
+            this.pictureBox7.Image = global::WaveCraft.Properties.Resources.decinc;
             this.pictureBox7.InitialImage = null;
             this.pictureBox7.Location = new System.Drawing.Point(89, 160);
             this.pictureBox7.Name = "pictureBox7";
@@ -261,7 +267,7 @@ namespace WaveCraft
             // 
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox8.Image = Resources.ripples;
+            this.pictureBox8.Image = global::WaveCraft.Properties.Resources.ripples;
             this.pictureBox8.InitialImage = null;
             this.pictureBox8.Location = new System.Drawing.Point(89, 388);
             this.pictureBox8.Name = "pictureBox8";
@@ -274,7 +280,7 @@ namespace WaveCraft
             // 
             this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox9.Image = Resources.incsine;
+            this.pictureBox9.Image = global::WaveCraft.Properties.Resources.incsine;
             this.pictureBox9.InitialImage = null;
             this.pictureBox9.Location = new System.Drawing.Point(89, 236);
             this.pictureBox9.Name = "pictureBox9";
@@ -287,7 +293,7 @@ namespace WaveCraft
             // 
             this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox10.Image = Resources.decsine;
+            this.pictureBox10.Image = global::WaveCraft.Properties.Resources.decsine;
             this.pictureBox10.InitialImage = null;
             this.pictureBox10.Location = new System.Drawing.Point(89, 312);
             this.pictureBox10.Name = "pictureBox10";
@@ -300,7 +306,7 @@ namespace WaveCraft
             // 
             this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox11.Image = Resources.waves;
+            this.pictureBox11.Image = global::WaveCraft.Properties.Resources.waves;
             this.pictureBox11.InitialImage = null;
             this.pictureBox11.Location = new System.Drawing.Point(89, 8);
             this.pictureBox11.Name = "pictureBox11";
@@ -313,7 +319,7 @@ namespace WaveCraft
             // 
             this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox12.Image = Resources.sine;
+            this.pictureBox12.Image = global::WaveCraft.Properties.Resources.sine;
             this.pictureBox12.InitialImage = null;
             this.pictureBox12.Location = new System.Drawing.Point(13, 388);
             this.pictureBox12.Name = "pictureBox12";
@@ -640,10 +646,62 @@ namespace WaveCraft
             this.textBoxNumDecSines.TabIndex = 219;
             this.textBoxNumDecSines.Text = "1";
             // 
+            // pictureBoxFadeOutSines
+            // 
+            this.pictureBoxFadeOutSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeOutSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeOutSines.Image = global::WaveCraft.Properties.Resources.fadeoutsine;
+            this.pictureBoxFadeOutSines.InitialImage = null;
+            this.pictureBoxFadeOutSines.Location = new System.Drawing.Point(89, 464);
+            this.pictureBoxFadeOutSines.Name = "pictureBoxFadeOutSines";
+            this.pictureBoxFadeOutSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeOutSines.TabIndex = 237;
+            this.pictureBoxFadeOutSines.TabStop = false;
+            this.pictureBoxFadeOutSines.Click += new System.EventHandler(this.pictureBoxFadeOutSines_Click);
+            // 
+            // pictureBoxFadeInSines
+            // 
+            this.pictureBoxFadeInSines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFadeInSines.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFadeInSines.Image = global::WaveCraft.Properties.Resources.fadeinsine;
+            this.pictureBoxFadeInSines.InitialImage = null;
+            this.pictureBoxFadeInSines.Location = new System.Drawing.Point(13, 464);
+            this.pictureBoxFadeInSines.Name = "pictureBoxFadeInSines";
+            this.pictureBoxFadeInSines.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFadeInSines.TabIndex = 236;
+            this.pictureBoxFadeInSines.TabStop = false;
+            this.pictureBoxFadeInSines.Click += new System.EventHandler(this.pictureBoxFadeInSines_Click);
+            // 
+            // textBoxFadeInSines
+            // 
+            this.textBoxFadeInSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeInSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeInSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeInSines.Location = new System.Drawing.Point(59, 511);
+            this.textBoxFadeInSines.Name = "textBoxFadeInSines";
+            this.textBoxFadeInSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeInSines.TabIndex = 238;
+            this.textBoxFadeInSines.Text = "1";
+            // 
+            // textBoxFadeOutSines
+            // 
+            this.textBoxFadeOutSines.BackColor = System.Drawing.Color.Black;
+            this.textBoxFadeOutSines.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFadeOutSines.ForeColor = System.Drawing.Color.White;
+            this.textBoxFadeOutSines.Location = new System.Drawing.Point(135, 511);
+            this.textBoxFadeOutSines.Name = "textBoxFadeOutSines";
+            this.textBoxFadeOutSines.Size = new System.Drawing.Size(24, 23);
+            this.textBoxFadeOutSines.TabIndex = 239;
+            this.textBoxFadeOutSines.Text = "1";
+            // 
             // FormFrequency
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1300, 669);
+            this.Controls.Add(this.textBoxFadeOutSines);
+            this.Controls.Add(this.textBoxFadeInSines);
+            this.Controls.Add(this.pictureBoxFadeOutSines);
+            this.Controls.Add(this.pictureBoxFadeInSines);
             this.Controls.Add(this.textBoxNumDecSines);
             this.Controls.Add(this.textBoxNumIncSines);
             this.Controls.Add(this.pictureBox11);
@@ -697,6 +755,8 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeOutSines)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFadeInSines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -737,5 +797,9 @@ namespace WaveCraft
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.TextBox textBoxNumIncSines;
         private System.Windows.Forms.TextBox textBoxNumDecSines;
+        private System.Windows.Forms.PictureBox pictureBoxFadeOutSines;
+        private System.Windows.Forms.PictureBox pictureBoxFadeInSines;
+        private System.Windows.Forms.TextBox textBoxFadeInSines;
+        private System.Windows.Forms.TextBox textBoxFadeOutSines;
     }
 }
