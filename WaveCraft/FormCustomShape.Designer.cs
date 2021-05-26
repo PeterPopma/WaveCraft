@@ -36,20 +36,22 @@ namespace WaveCraft
             this.pictureBoxSquare = new System.Windows.Forms.PictureBox();
             this.pictureBoxTriangle = new System.Windows.Forms.PictureBox();
             this.pictureBoxSawtooth = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFlat = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCopyFromBegin = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new WaveCraft.CustomControls.GradientButton();
             this.buttonApply = new WaveCraft.CustomControls.GradientButton();
-            this.pictureBoxFlat = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCustomWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSquare)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTriangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSawtooth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFlat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCopyFromBegin)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxCustomWave
             // 
-            this.pictureBoxCustomWave.Location = new System.Drawing.Point(96, 15);
+            this.pictureBoxCustomWave.Location = new System.Drawing.Point(88, 12);
             this.pictureBoxCustomWave.Name = "pictureBoxCustomWave";
             this.pictureBoxCustomWave.Size = new System.Drawing.Size(1000, 500);
             this.pictureBoxCustomWave.TabIndex = 0;
@@ -110,6 +112,32 @@ namespace WaveCraft
             this.pictureBoxSawtooth.TabStop = false;
             this.pictureBoxSawtooth.Click += new System.EventHandler(this.pictureBoxSawtooth_Click);
             // 
+            // pictureBoxFlat
+            // 
+            this.pictureBoxFlat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFlat.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxFlat.Image = global::WaveCraft.Properties.Resources.flat;
+            this.pictureBoxFlat.InitialImage = null;
+            this.pictureBoxFlat.Location = new System.Drawing.Point(12, 369);
+            this.pictureBoxFlat.Name = "pictureBoxFlat";
+            this.pictureBoxFlat.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxFlat.TabIndex = 205;
+            this.pictureBoxFlat.TabStop = false;
+            this.pictureBoxFlat.Click += new System.EventHandler(this.pictureBoxFlat_Click);
+            // 
+            // pictureBoxCopyFromBegin
+            // 
+            this.pictureBoxCopyFromBegin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxCopyFromBegin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCopyFromBegin.Image = global::WaveCraft.Properties.Resources.copybegin;
+            this.pictureBoxCopyFromBegin.InitialImage = null;
+            this.pictureBoxCopyFromBegin.Location = new System.Drawing.Point(12, 454);
+            this.pictureBoxCopyFromBegin.Name = "pictureBoxCopyFromBegin";
+            this.pictureBoxCopyFromBegin.Size = new System.Drawing.Size(70, 70);
+            this.pictureBoxCopyFromBegin.TabIndex = 206;
+            this.pictureBoxCopyFromBegin.TabStop = false;
+            this.pictureBoxCopyFromBegin.Click += new System.EventHandler(this.pictureBoxCopyFromBegin_Click);
+            // 
             // buttonCancel
             // 
             this.buttonCancel.Active = false;
@@ -136,7 +164,7 @@ namespace WaveCraft
             this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonApply.ForeColor = System.Drawing.Color.Black;
             this.buttonApply.HorizontalGradient = false;
-            this.buttonApply.Location = new System.Drawing.Point(389, 534);
+            this.buttonApply.Location = new System.Drawing.Point(384, 534);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(87, 22);
             this.buttonApply.TabIndex = 102;
@@ -144,22 +172,10 @@ namespace WaveCraft
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
-            // pictureBoxFlat
-            // 
-            this.pictureBoxFlat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxFlat.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxFlat.Image = global::WaveCraft.Properties.Resources.flat;
-            this.pictureBoxFlat.InitialImage = null;
-            this.pictureBoxFlat.Location = new System.Drawing.Point(12, 369);
-            this.pictureBoxFlat.Name = "pictureBoxFlat";
-            this.pictureBoxFlat.Size = new System.Drawing.Size(70, 70);
-            this.pictureBoxFlat.TabIndex = 205;
-            this.pictureBoxFlat.TabStop = false;
-            this.pictureBoxFlat.Click += new System.EventHandler(this.pictureBoxFlat_Click);
-            // 
             // FormCustomShape
             // 
             this.ClientSize = new System.Drawing.Size(1111, 583);
+            this.Controls.Add(this.pictureBoxCopyFromBegin);
             this.Controls.Add(this.pictureBoxFlat);
             this.Controls.Add(this.pictureBoxSawtooth);
             this.Controls.Add(this.pictureBoxTriangle);
@@ -182,6 +198,7 @@ namespace WaveCraft
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTriangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSawtooth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFlat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCopyFromBegin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -196,5 +213,6 @@ namespace WaveCraft
         private System.Windows.Forms.PictureBox pictureBoxTriangle;
         private System.Windows.Forms.PictureBox pictureBoxSawtooth;
         private System.Windows.Forms.PictureBox pictureBoxFlat;
+        private System.Windows.Forms.PictureBox pictureBoxCopyFromBegin;
     }
 }

@@ -118,6 +118,11 @@ namespace WaveCraft
             if (Text.Equals("Wave Shape End"))
             {
                 shape = myParent.SynthGenerator.CurrentWave.ShapeWaveEnd;
+                pictureBoxCopyFromBegin.Visible = true;
+            }
+            else
+            {
+                pictureBoxCopyFromBegin.Visible = false;
             }
 
             if (shape.Length < SynthGenerator.SHAPE_NUMPOINTS)
@@ -268,6 +273,15 @@ namespace WaveCraft
             for (int i = 0; i < WaveData.Length; i++)
             {
                 WaveData[i] = SynthGenerator.SHAPE_MAX_VALUE / 2;
+            }
+            Refresh();
+        }
+
+        private void pictureBoxCopyFromBegin_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < myParent.SynthGenerator.CurrentWave.ShapeWave.Length; i++)
+            {
+                WaveData[i] = SynthGenerator.SHAPE_MAX_VALUE - myParent.SynthGenerator.CurrentWave.ShapeWave[i];
             }
             Refresh();
         }
